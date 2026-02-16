@@ -84,8 +84,9 @@ describe('ArticlesWithTrending', () => {
   test('has proper section structure with ARIA labels', () => {
     render(<ArticlesWithTrending />);
     
-    const articlesSection = screen.getByRole('region', { name: /featured-articles-section/i });
-    const newsletterSection = screen.getByRole('region', { name: /newsletter/i });
+    // Sections use aria-labelledby; verify they exist by finding the labelling elements
+    const articlesSection = document.querySelector('[aria-labelledby="featured-articles-section"]');
+    const newsletterSection = document.querySelector('[aria-labelledby="newsletter-heading"]');
     
     expect(articlesSection).toBeInTheDocument();
     expect(newsletterSection).toBeInTheDocument();

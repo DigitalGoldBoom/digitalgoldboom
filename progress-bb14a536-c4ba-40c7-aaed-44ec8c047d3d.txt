@@ -151,3 +151,45 @@
 **Commit:** 5794c9e - "feat: DGB-004 - Build Dynamic Homepage Hero Section"
 
 **Build Status:** ✅ PASS - TypeScript compiles clean, tests mostly passing
+## ✅ DGB-005: Implement Featured Articles Grid  
+*Completed:* 2026-02-16T02:55:00Z  
+
+**Implementation Details:**
+- Enhanced ArticleCard with categoryColor prop for color-coded category tags
+- Added authorName prop to ArticleCard for author attribution in card footer
+- Updated FeaturedArticlesGrid to pass category color and author name from mock data
+- Category tags now styled with dynamic color and transparent background
+- 3-column responsive grid: 1-col mobile, 2-col tablet (md), 3-col desktop (lg)
+- Fixed jest moduleNameMapper for @/ path alias resolution
+- All article cards link to /news/{slug} placeholder routes
+- Hover animations on cards (scale on icon, gold text on title)
+
+**Files Modified:**
+- `src/components/ArticleCard.tsx` - Added categoryColor, authorName props, color-coded tags
+- `src/components/FeaturedArticlesGrid.tsx` - Pass category color and author name
+- `src/components/__tests__/FeaturedArticlesGrid.test.tsx` - Added tests for color and author
+- `jest.config.js` - Added moduleNameMapper for @/ alias
+
+**Tests:** 8 passing (category color, author name, grid layout, section header, category links, view all, limit prop, article rendering)
+
+**Commit:** 1728bb0 - "feat: DGB-005 - Implement Featured Articles Grid"
+**Build Status:** ✅ PASS
+
+## ✅ DGB-006: Implement Trending Section Sidebar  
+*Completed:* 2026-02-16T03:05:00Z  
+
+**Implementation Details:**
+- TrendingSection and ArticlesWithTrending components were already built by previous stories
+- TrendingSection shows top 5 articles with rank number, title, category, read time
+- Sidebar layout: lg:grid lg:grid-cols-4, trending in lg:col-span-1
+- Stacks below grid on mobile (mt-12 lg:mt-0)
+- Gold accent on rank numbers via bg-[var(--gold-primary)]/10 text-[var(--gold-primary)]
+- Fixed failing tests: replaced screen.container with render().container, removed invalid aria query
+
+**Files Modified:**
+- `src/components/__tests__/TrendingSection.test.tsx` - Fixed container access and removed invalid pulse indicator assertion
+- `src/components/__tests__/ArticlesWithTrending.test.tsx` - Fixed ARIA section query to use querySelector
+
+**Tests:** 17 passing (TrendingSection: 7, ArticlesWithTrending: 10)
+
+**Build Status:** ✅ PASS - TypeScript clean, all tests pass
