@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 interface ArticleCardProps {
   category: string;
+  categoryColor?: string;
   title: string;
   excerpt: string;
   date: string;
@@ -9,9 +10,15 @@ interface ArticleCardProps {
   readTime?: string;
   featured?: boolean;
   imageUrl?: string;
+  authorName?: string;
 }
 
 const categoryIcons: Record<string, string> = {
+  'Gold': '🪙',
+  'Crypto': '🔗',
+  'NatGold': '⛏️',
+  'Research': '📊',
+  'Opinion': '💬',
   'Digital Gold': '🪙',
   'Tokenization': '🔗',
   'Market Analysis': '📊',
@@ -22,6 +29,7 @@ const categoryIcons: Record<string, string> = {
 
 export default function ArticleCard({ 
   category, 
+  categoryColor,
   title, 
   excerpt, 
   date, 
@@ -29,6 +37,7 @@ export default function ArticleCard({
   readTime = '5 min read',
   featured = false,
   imageUrl,
+  authorName,
 }: ArticleCardProps) {
   const icon = categoryIcons[category] || '📰';
 
@@ -57,7 +66,13 @@ export default function ArticleCard({
       <div className="p-5">
         {/* Category & Read time */}
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-overline">
+          <span 
+            className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded"
+            style={categoryColor ? { 
+              color: categoryColor, 
+              backgroundColor: `${categoryColor}18` 
+            } : undefined}
+          >
             {category}
           </span>
           <span className="text-[var(--text-disabled)]">·</span>
@@ -78,9 +93,17 @@ export default function ArticleCard({
 
         {/* Footer */}
         <div className="flex items-center justify-between">
-          <time className="text-[var(--text-tertiary)] text-xs" dateTime={date}>
-            {date}
-          </time>
+          <div className="flex items-center gap-2">
+            {authorName && (
+              <>
+                <span className="text-[var(--text-secondary)] text-xs font-medium">{authorName}</span>
+                <span className="text-[var(--text-disabled)]">·</span>
+              </>
+            )}
+            <time className="text-[var(--text-tertiary)] text-xs" dateTime={date}>
+              {date}
+            </time>
+          </div>
           <Link 
             href={`/news/${slug}`}
             className="text-[var(--gold-primary)] text-sm font-medium hover:text-[var(--gold-light)] transition-colors"
