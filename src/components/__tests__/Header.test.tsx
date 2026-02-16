@@ -25,21 +25,34 @@ describe('Header', () => {
     expect(screen.getByText('Boom')).toBeInTheDocument()
   })
 
-  it('renders all navigation links', () => {
+  it('renders all category navigation links', () => {
     render(<Header />)
     
-    // Check for navigation links
-    expect(screen.getByText('Prices')).toBeInTheDocument()
-    expect(screen.getByText('News')).toBeInTheDocument()
-    expect(screen.getByText('Book')).toBeInTheDocument()
-    expect(screen.getByText('Newsletter')).toBeInTheDocument()
-    expect(screen.getByText('About')).toBeInTheDocument()
+    // Check for the 5 category navigation links as per PRD
+    expect(screen.getByText('Gold')).toBeInTheDocument()
+    expect(screen.getByText('Crypto')).toBeInTheDocument()
+    expect(screen.getByText('NatGold')).toBeInTheDocument()
+    expect(screen.getByText('Research')).toBeInTheDocument()
+    expect(screen.getByText('Opinion')).toBeInTheDocument()
   })
 
-  it('renders CTA button', () => {
+  it('renders CTA buttons', () => {
     render(<Header />)
     
-    expect(screen.getByText('Get the Free Book →')).toBeInTheDocument()
+    // Check for book CTA
+    expect(screen.getByText('Free Book →')).toBeInTheDocument()
+    
+    // Check for newsletter CTA (desktop - may not be visible on mobile)
+    expect(screen.getByText('Newsletter')).toBeInTheDocument()
+  })
+
+  it('renders search functionality', () => {
+    render(<Header />)
+    
+    // Check for search button (should have search icon)
+    const searchButton = screen.getByRole('button', { name: /search/i })
+    expect(searchButton).toBeInTheDocument()
+    expect(searchButton).toHaveAttribute('title', 'Search (coming soon)')
   })
 
   it('toggles mobile menu when menu button is clicked', () => {
@@ -65,6 +78,28 @@ describe('Header', () => {
     expect(logoLink).toHaveAttribute('href', '/')
   })
 
+  it('renders mobile navigation with all elements when opened', () => {
+    render(<Header />)
+    
+    // Open mobile menu
+    const menuButton = screen.getByRole('button', { name: /open menu/i })
+    fireEvent.click(menuButton)
+    
+    // Check mobile navigation contains search
+    expect(screen.getByText('Search')).toBeInTheDocument()
+    
+    // Check mobile navigation contains all categories
+    expect(screen.getAllByText('Gold')).toHaveLength(2) // Desktop + mobile
+    expect(screen.getAllByText('Crypto')).toHaveLength(2)
+    expect(screen.getAllByText('NatGold')).toHaveLength(2)
+    expect(screen.getAllByText('Research')).toHaveLength(2)
+    expect(screen.getAllByText('Opinion')).toHaveLength(2)
+    
+    // Check mobile CTAs
+    expect(screen.getByText('Subscribe to Newsletter')).toBeInTheDocument()
+    expect(screen.getByText('Get the Free Book →')).toBeInTheDocument()
+  })
+
   it('has proper accessibility attributes', () => {
     render(<Header />)
     
@@ -73,7 +108,7 @@ describe('Header', () => {
     expect(nav).toHaveAttribute('aria-label', 'Main navigation')
     
     // Check mobile menu button has proper aria attributes
-    const menuButton = screen.getByRole('button')
+    const menuButton = screen.getByRole('button', { name: /open menu/i })
     expect(menuButton).toHaveAttribute('aria-expanded', 'false')
     expect(menuButton).toHaveAttribute('aria-controls', 'mobile-menu')
     expect(menuButton).toHaveAttribute('aria-label', 'Open menu')
