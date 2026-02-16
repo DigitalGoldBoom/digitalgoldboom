@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import PriceWidget from "@/components/PriceWidget";
 import BookCTA from "@/components/BookCTA";
 import ArticlesWithTrending from "@/components/ArticlesWithTrending";
+import NewsletterSignupSection from "@/components/NewsletterSignupSection";
 import Link from "next/link";
 
 export default function Home() {
@@ -60,6 +61,9 @@ export default function Home() {
 
       {/* Featured Articles Grid with Trending Section */}
       <ArticlesWithTrending />
+
+      {/* Newsletter Signup Section */}
+      <NewsletterSignupSection />
 
       {/* Book CTA Section */}
       <BookCTA />
