@@ -48,7 +48,7 @@ describe('Hero Component - DGB-004 Requirements', () => {
     
     // Check for loading skeleton elements
     expect(document.querySelector('section')).toBeInTheDocument();
-    expect(document.querySelectorAll('.animate-pulse')).toHaveLength(7); // Expected number of skeleton elements
+    expect(document.querySelectorAll('.animate-pulse')).toHaveLength(8); // Expected number of skeleton elements
   });
 
   it('displays featured article with large image after loading', async () => {

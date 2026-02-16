@@ -193,3 +193,26 @@
 **Tests:** 17 passing (TrendingSection: 7, ArticlesWithTrending: 10)
 
 **Build Status:** ✅ PASS - TypeScript clean, all tests pass
+
+## ✅ DGB-007: Implement Newsletter Signup Section  
+*Completed:* 2026-02-16T03:20:00Z  
+
+**Implementation Details:**
+- Created NewsletterSignupSection component wrapping existing NewsletterForm (inline variant)
+- Gold gradient accent line and gradient text on heading
+- Compelling copy referencing Digital Gold Boom book and upcoming newsletter
+- Social proof quote at bottom
+- Responsive: max-w-2xl centered, scales well on all breakpoints
+- Integrated into homepage after ArticlesWithTrending, before BookCTA
+
+**Files Created:**
+- `src/components/NewsletterSignupSection.tsx` - Section wrapper with copy and form
+- `src/components/__tests__/NewsletterSignupSection.test.tsx` - 6 tests
+
+**Files Modified:**
+- `src/app/page.tsx` - Added NewsletterSignupSection import and placement
+
+**Tests:** 6 passing (heading, email input + button, book reference, aria-labelledby, success state, gold accent)
+
+**Commit:** d618e41 - "feat: DGB-007 - Implement Newsletter Signup Section"
+**Build Status:** ✅ PASS
