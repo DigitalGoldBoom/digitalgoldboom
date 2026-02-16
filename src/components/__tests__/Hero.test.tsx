@@ -1,19 +1,35 @@
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import Hero from '../Hero';
 
 // Mock Next.js components
 jest.mock('next/link', () => {
-  return function MockedLink({ children, href, ...props }: any) {
+  const MockedLink = ({ children, href, ...props }: { children: React.ReactNode; href: string; [key: string]: unknown }) => {
     return <a href={href} {...props}>{children}</a>;
   };
+  MockedLink.displayName = 'MockedLink';
+  return MockedLink;
 });
 
 jest.mock('next/image', () => {
-  return function MockedImage({ src, alt, width, height, className, priority, fill, sizes, ...props }: any) {
+  const MockedImage = ({ src, alt, width, height, className, ...props }: { 
+    src: string; 
+    alt: string; 
+    width?: number; 
+    height?: number; 
+    className?: string;
+    priority?: boolean;
+    fill?: boolean;
+    sizes?: string;
+    [key: string]: unknown;
+  }) => {
     // Filter out Next.js specific props that are not valid HTML attributes
-    const { priority: _, fill: __, sizes: ___, ...validProps } = props;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { priority, fill, sizes, ...validProps } = props;
     return <img src={src} alt={alt} width={width} height={height} className={className} {...validProps} />;
   };
+  MockedImage.displayName = 'MockedImage';
+  return MockedImage;
 });
 
 describe('Hero Component - DGB-004 Requirements', () => {
