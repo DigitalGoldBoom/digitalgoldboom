@@ -44,7 +44,7 @@ export interface Tag {
 // Rich text block content type
 export interface BlockContent {
   _type: string;
-  children?: any[];
+  children?: Array<{ _type: string; text: string; [key: string]: unknown }>;
   style?: string;
   level?: number;
 }

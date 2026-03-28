@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { mockCategories } from '@/data/mockCategories';
 
-const navigation = [
-  { name: 'Prices', href: '/prices' },
-  { name: 'News', href: '/news' },
-  { name: 'Book', href: '/book' },
-  { name: 'Newsletter', href: '/newsletter' },
-  { name: 'About', href: '/about' },
-];
+// Primary navigation categories from PRD
+const navigation = mockCategories.map(category => ({
+  name: category.name,
+  href: `/category/${category.slug}`,
+  slug: category.slug,
+}));
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,31 +45,50 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors text-[15px] font-medium"
+                className="px-4 py-2 text-[var(--text-secondary)] hover:text-[var(--gold-primary)] hover:bg-[var(--bg-tertiary)] rounded-lg transition-all duration-200 text-[15px] font-medium"
               >
                 {item.name}
               </Link>
             ))}
+            
+            {/* Search Icon */}
+            <button 
+              className="p-2 ml-2 text-[var(--text-secondary)] hover:text-[var(--gold-primary)] hover:bg-[var(--bg-tertiary)] rounded-lg transition-all duration-200"
+              aria-label="Search"
+              title="Search (coming soon)"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex items-center gap-3">
-            {/* Desktop CTA */}
+          <div className="flex items-center gap-2">
+            {/* Newsletter CTA - Prominent */}
+            <Link
+              href="/newsletter"
+              className="hidden md:flex items-center px-4 py-2 text-[var(--gold-primary)] border border-[var(--gold-primary)] hover:bg-[var(--gold-primary)] hover:text-[var(--text-inverse)] rounded-lg transition-all duration-200 text-sm font-semibold"
+            >
+              Newsletter
+            </Link>
+            
+            {/* Book CTA - Desktop */}
             <Link
               href="/book"
               className="btn btn-primary btn-sm hidden sm:flex"
             >
-              Get the Free Book →
+              Free Book →
             </Link>
 
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              className="lg:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--gold-primary)] transition-colors ml-1"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
@@ -92,20 +111,44 @@ export default function Header() {
         {mobileMenuOpen && (
           <div 
             id="mobile-menu"
-            className="lg:hidden absolute top-16 left-0 right-0 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)] animate-fadeIn"
+            className="lg:hidden absolute top-16 left-0 right-0 bg-[var(--bg-primary)]/95 backdrop-blur-xl border-b border-[var(--border-subtle)] animate-fadeIn"
           >
             <div className="container py-4 space-y-1">
+              {/* Search in mobile */}
+              <div className="px-4 pb-2">
+                <button 
+                  className="flex items-center gap-3 w-full py-3 px-4 text-[var(--text-secondary)] hover:text-[var(--gold-primary)] hover:bg-[var(--bg-tertiary)] rounded-lg transition-all duration-200 font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
+                  title="Search (coming soon)"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  Search
+                </button>
+              </div>
+              
+              {/* Category Navigation */}
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block py-3 px-4 text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] rounded-lg transition-colors font-medium"
+                  className="block py-3 px-4 text-[var(--text-primary)] hover:text-[var(--gold-primary)] hover:bg-[var(--bg-tertiary)] rounded-lg transition-all duration-200 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-3 px-4 pb-2">
+              
+              {/* Mobile CTAs */}
+              <div className="pt-3 px-4 space-y-2">
+                <Link
+                  href="/newsletter"
+                  className="block w-full py-3 px-4 text-center text-[var(--gold-primary)] border border-[var(--gold-primary)] hover:bg-[var(--gold-primary)] hover:text-[var(--text-inverse)] rounded-lg transition-all duration-200 font-semibold"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Subscribe to Newsletter
+                </Link>
                 <Link
                   href="/book"
                   className="btn btn-primary w-full justify-center"
