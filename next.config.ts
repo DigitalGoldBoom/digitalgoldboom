@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Allow all origins in dev (Tailscale access)
-  allowedDevOrigins: ["*"],
+  /* config options here */
 };
 
 export default nextConfig;

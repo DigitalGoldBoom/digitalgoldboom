@@ -1,63 +1,31 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import JsonLd from "@/components/JsonLd";
-import { generateOrganizationSchema, generateWebsiteSchema } from "@/lib/seo";
 
-const inter = Inter({ subsets: ["latin"] });
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Digital Gold Boom | The Future of Gold Is Here",
-  description: "Live gold prices, tokenization news, and the definitive guide to digital gold. Track PAXG, XAUT, and discover the $200B revolution in gold tokenization.",
-  keywords: ["digital gold", "tokenized gold", "NatGold", "gold tokenization", "PAXG", "XAUT", "gold investment", "crypto gold", "BIV", "gold prices"],
-  authors: [{ name: "Digital Gold Boom" }],
-  creator: "Digital Gold Boom",
-  publisher: "Digital Gold Boom",
-  metadataBase: new URL("https://digitalgoldboom.com"),
-  alternates: {
-    canonical: "https://digitalgoldboom.com",
-  },
+  title: "Digital Gold Boom — Gold Without the Mine",
+  description:
+    "$22 trillion in verified gold sits underground doing nothing. Digital gold mining turns it into a tradeable asset — without extraction, without destruction, without compromise. Discover the model that attracted $469M from 162 countries.",
   openGraph: {
-    title: "Digital Gold Boom | The Future of Gold Is Here",
-    description: "Live gold prices, tokenization news, and the definitive guide to digital gold.",
-    url: "https://digitalgoldboom.com",
-    siteName: "Digital Gold Boom",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Digital Gold Boom - The Future of Gold Is Here",
-      },
-    ],
-    locale: "en_US",
+    title: "Digital Gold Boom — Gold Without the Mine",
+    description:
+      "$22 trillion in verified gold sits underground doing nothing. Digital gold mining turns it into a tradeable asset — without extraction, without destruction, without compromise.",
     type: "website",
+    url: "https://digitalgoldboom.com",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Digital Gold Boom | The Future of Gold Is Here",
-    description: "Live gold prices, tokenization news, and the definitive guide to digital gold.",
-    images: ["/og-image.jpg"],
-    creator: "@digitalgoldboom",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
-  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -66,17 +34,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <head>
-        <JsonLd data={generateOrganizationSchema()} />
-        <JsonLd data={generateWebsiteSchema()} />
-      </head>
-      <body className={`${inter.className} antialiased min-h-screen flex flex-col`}>
-        <Header />
-        <main className="flex-grow" role="main">
-          {children}
-        </main>
-        <Footer />
+    <html
+      lang="en"
+      className={`${jakarta.variable} ${geistMono.variable} dark`}
+    >
+      <body>
+        {children}
+        <Analytics />
       </body>
     </html>
   );
