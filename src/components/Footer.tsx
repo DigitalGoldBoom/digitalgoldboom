@@ -1,147 +1,105 @@
-'use client';
+import Link from "next/link";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import NewsletterForm from './NewsletterForm';
-
-const footerLinks = {
-  explore: [
-    { name: 'Home', href: '/' },
-    { name: 'Prices', href: '/prices' },
-    { name: 'News', href: '/news' },
-    { name: 'Book', href: '/book' },
-    { name: 'Newsletter', href: '/newsletter' },
-    { name: 'About', href: '/about' },
-  ],
-  resources: [
-    { name: 'What is PAXG?', href: '/news/paxg-vs-xaut-comparison' },
-    { name: 'What is BIV?', href: '/prices#biv' },
-    { name: 'Gold vs. Digital Gold', href: '/news/traditional-mining-obsolete' },
-    { name: 'S.P.I.R.A.L. Thesis', href: '/book' },
-  ],
-  legal: [
-    { name: 'Privacy Policy', href: '/privacy' },
-    { name: 'Terms of Service', href: '/terms' },
-    { name: 'Disclaimer', href: '/disclaimer' },
-  ],
-};
+const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] = [
+  {
+    heading: "BOOK",
+    links: [
+      { label: "Overview", href: "#playbook" },
+      { label: "Chapter Previews", href: "/previews" },
+      { label: "Press Kit", href: "/press-kit" },
+      { label: "Waitlist", href: "#playbook" },
+    ],
+  },
+  {
+    heading: "RESEARCH",
+    links: [
+      { label: "Pipeline Scorecards", href: "/pipeline" },
+      { label: "NatGold Model", href: "/model" },
+      { label: "Methodology", href: "/methodology" },
+      { label: "Sources", href: "/sources" },
+    ],
+  },
+  {
+    heading: "COMPANY",
+    links: [
+      { label: "Author", href: "/author" },
+      { label: "Contact", href: "/contact" },
+      { label: "Press", href: "/press" },
+    ],
+  },
+  {
+    heading: "LEGAL",
+    links: [
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+      { label: "Disclaimer", href: "/disclaimer" },
+    ],
+  },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-[var(--bg-secondary)] border-t border-[var(--border-subtle)] mt-20">
-      {/* Newsletter Section */}
-      <div className="bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-secondary)] py-12">
-        <div className="container text-center">
-          <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-2">
-            Stay Updated
-          </h2>
-          <p className="text-[var(--text-secondary)] mb-6 max-w-md mx-auto">
-            Get weekly insights on digital gold and tokenization.
-          </p>
-          <div className="max-w-md mx-auto">
-            <NewsletterForm variant="inline" />
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer Content */}
-      <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <div className="w-8 h-8 rounded-lg gold-gradient flex items-center justify-center">
-                <span className="text-[var(--text-inverse)] font-bold text-lg">G</span>
-              </div>
-              <span className="text-xl font-bold">
-                <span className="gold-text">Digital Gold</span>
-                <span className="text-[var(--text-tertiary)] font-normal ml-1">Boom</span>
-              </span>
-            </Link>
-            <p className="text-[var(--text-tertiary)] text-sm mb-4 leading-relaxed">
-              Making sense of tokenized gold since 2026.
+    <footer
+      className="relative z-10 mt-32 border-t border-white/10"
+      style={{ backgroundColor: "#0A0A0F" }}
+    >
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_2fr] gap-16 lg:gap-24">
+          <div>
+            <p className="text-white font-extrabold tracking-tight text-2xl mb-4">
+              Digital Gold Boom
             </p>
-            <div className="flex gap-4">
-              <a 
-                href="https://twitter.com/digitalgoldboom" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors text-lg"
-                aria-label="Twitter"
-              >
-                𝕏
-              </a>
-              <a 
-                href="mailto:hello@digitalgoldboom.com"
-                className="text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors"
-                aria-label="Email"
-              >
-                ✉️
-              </a>
-            </div>
+            <p
+              className="leading-[1.7] mb-6 max-w-[36ch]"
+              style={{ color: "#C6C6CC", fontSize: "14px" }}
+            >
+              The complete map of a new asset class. Not a pitch.
+            </p>
+            <p style={{ color: "#9A9AA0", fontSize: "11px" }}>
+              © {new Date().getFullYear()} Andrew Fletcher. Digital Gold Boom™.
+            </p>
           </div>
 
-          {/* Explore Links */}
-          <div>
-            <h3 className="text-overline mb-4">Explore</h3>
-            <ul className="space-y-3">
-              {footerLinks.explore.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href} 
-                    className="text-[var(--text-secondary)] hover:text-[var(--gold-primary)] transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources Links */}
-          <div>
-            <h3 className="text-overline mb-4">Resources</h3>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href} 
-                    className="text-[var(--text-secondary)] hover:text-[var(--gold-primary)] transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div>
-            <h3 className="text-overline mb-4">Legal</h3>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href} 
-                    className="text-[var(--text-secondary)] hover:text-[var(--gold-primary)] transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <nav
+            aria-label="Footer"
+            className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-12"
+          >
+            {COLUMNS.map((col) => (
+              <div key={col.heading}>
+                <p
+                  className="font-semibold mb-5"
+                  style={{ color: "#D4A843", fontSize: "10px", letterSpacing: "0.22em" }}
+                >
+                  {col.heading}
+                </p>
+                <ul className="space-y-3">
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="hover:text-white transition-colors duration-300 block"
+                        style={{ color: "#C6C6CC", fontSize: "13px" }}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </nav>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-[var(--border-subtle)]">
-        <div className="container py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[var(--text-tertiary)] text-sm">
-            © 2026 Digital Gold Boom. Not financial advice. Do your own research.
-          </p>
-          <p className="text-[var(--text-disabled)] text-xs">
-            A PixelShovel Production
+      <div className="border-t border-white/10">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-8">
+          <p
+            className="leading-[1.7] max-w-[80ch]"
+            style={{ color: "#9A9AA0", fontSize: "11px" }}
+          >
+            Digital Gold Boom is an educational book about a new asset class.
+            Nothing on this site constitutes financial, investment, or tax
+            advice. Always conduct your own research.
           </p>
         </div>
       </div>
