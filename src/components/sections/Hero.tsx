@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
-import Image from "next/image";
 import { track } from "@vercel/analytics";
 import Book3D from "@/components/Book3D";
 import { gsap } from "gsap";
@@ -107,10 +106,7 @@ export default function Hero() {
           </div>
 
           <div ref={imageRef} className="relative flex items-center justify-center">
-            <div className="hidden lg:block"><Book3D /></div>
-            <div className="lg:hidden">
-              <Image src="/images/Digital Gold Boom Cover (1).png" alt="Digital Gold Boom book cover" width={280} height={392} priority className="w-[220px] h-auto md:w-[280px] shadow-2xl" />
-            </div>
+            <Book3D />
           </div>
         </div>
       </div>
