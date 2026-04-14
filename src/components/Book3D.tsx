@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { track } from "@vercel/analytics";
 
@@ -26,14 +26,12 @@ const LERP = 0.12;
 export default function Book3D() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
+  const sheenRef = useRef<HTMLDivElement>(null);
   const interactedRef = useRef(false);
 
   const targetRef = useRef({ ry: REST_ROT_Y, rx: REST_ROT_X });
   const currentRef = useRef({ ry: REST_ROT_Y, rx: REST_ROT_X });
   const rafRef = useRef<number | null>(null);
-
-  const sheenRef = useRef({ x: 50, y: 50 });
-  const [sheen, setSheen] = useState({ x: 50, y: 50 });
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -57,15 +55,13 @@ export default function Book3D() {
       targetRef.current.ry = REST_ROT_Y + nx * MAX_ROT_Y;
       targetRef.current.rx = REST_ROT_X - ny * MAX_ROT_X;
 
-      const el = boxRef.current;
-      if (el) {
-        const r = el.getBoundingClientRect();
+      const sheen = sheenRef.current;
+      const box = boxRef.current;
+      if (sheen && box) {
+        const r = box.getBoundingClientRect();
         const sx = ((e.clientX - r.left) / r.width) * 100;
         const sy = ((e.clientY - r.top) / r.height) * 100;
-        sheenRef.current = {
-          x: Math.max(0, Math.min(100, sx)),
-          y: Math.max(0, Math.min(100, sy)),
-        };
+        sheen.style.background = `radial-gradient(circle at ${Math.max(0, Math.min(100, sx))}% ${Math.max(0, Math.min(100, sy))}%, rgba(255,255,255,0.18) 0%, transparent 55%)`;
       }
 
       if (!interactedRef.current) {
@@ -77,7 +73,10 @@ export default function Book3D() {
     function onLeave() {
       targetRef.current.ry = REST_ROT_Y;
       targetRef.current.rx = REST_ROT_X;
-      sheenRef.current = { x: 50, y: 50 };
+      const sheen = sheenRef.current;
+      if (sheen) {
+        sheen.style.background = "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10) 0%, transparent 55%)";
+      }
     }
 
     function tick() {
@@ -89,7 +88,6 @@ export default function Book3D() {
       if (el) {
         el.style.transform = `rotateY(${c.ry.toFixed(2)}deg) rotateX(${c.rx.toFixed(2)}deg)`;
       }
-      setSheen({ ...sheenRef.current });
       rafRef.current = requestAnimationFrame(tick);
     }
 
@@ -122,7 +120,6 @@ export default function Book3D() {
         ref={boxRef}
         style={{
           transformStyle: "preserve-3d",
-          transform: `rotateY(${REST_ROT_Y}deg) rotateX(${REST_ROT_X}deg)`,
           willChange: "transform",
           filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.7))",
         }}
@@ -138,13 +135,21 @@ export default function Book3D() {
           {/* FRONT */}
           <div style={{ ...abs, width: W, height: H, top: 0, left: 0, transform: `translateZ(${D / 2}px)` }}>
             <Image src={FRONT} alt="Book cover" fill style={{ objectFit: "cover" }} priority sizes="320px" />
-            <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(circle at ${sheen.x}% ${sheen.y}%, rgba(255,255,255,0.18) 0%, transparent 55%)` }} />
+            <div
+              ref={sheenRef}
+              style={{
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+                background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10) 0%, transparent 55%)",
+              }}
+            />
           </div>
           {/* BACK */}
           <div style={{ ...abs, width: W, height: H, top: 0, left: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }}>
             <Image src={BACK} alt="Back cover" fill style={{ objectFit: "cover" }} sizes="320px" />
           </div>
-          {/* SPINE (LEFT) — uses contain so the full spine image is visible */}
+          {/* SPINE (LEFT) */}
           <div style={{ ...abs, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(-90deg) translateZ(${W / 2}px)`, background: "#0E0E14" }}>
             <Image src={SPINE} alt="Spine" fill style={{ objectFit: "cover" }} sizes="70px" />
           </div>
