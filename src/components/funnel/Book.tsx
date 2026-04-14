@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import SectionImage from "@/components/SectionImage";
 import Book3D from "@/components/Book3D";
 
 const SECTIONS = [
@@ -17,47 +16,127 @@ export default function Book() {
   useScrollReveal(sectionRef);
 
   return (
-    <section ref={sectionRef} className="relative py-14 md:py-[88px] overflow-hidden">
-      <SectionImage
-        src="/images/earth-cubes/earth-cube-regeneration.png"
-        alt=""
-        position="corner-tl"
-        opacity={0.14}
-        parallax={0.32}
-        maxWidth={720}
-      />
-      <div className="max-w-[1100px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-14 items-center">
+    <section ref={sectionRef} className="section section-canvas relative overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-12 relative z-10">
+        {/* Top split — Book3D + byline */}
+        <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-20 items-center">
           <div data-reveal className="flex justify-center order-2 lg:order-1">
             <Book3D />
           </div>
           <div className="text-center lg:text-left max-w-[640px] mx-auto lg:mx-0 order-1 lg:order-2">
-            <p data-reveal className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gold mb-6">THE BOOK</p>
-            <h2 data-reveal className="text-tp font-extrabold tracking-[-0.035em] leading-[1.3]" style={{ fontSize: "clamp(2.2rem, 4.8vw, 3.75rem)" }}>Digital Gold Boom.</h2>
-            <p data-reveal className="mt-6 text-gold font-extrabold tracking-[0.05em] uppercase" style={{ fontSize: "clamp(1rem, 1.6vw, 1.35rem)" }}>Tell all. Nothing held back.</p>
-            <p data-reveal className="mt-8 text-ts leading-[1.7]" style={{ fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)" }}>
+            <p data-reveal className="eyebrow mb-6">The book</p>
+            <h2
+              data-reveal
+              className="display-xl text-tp"
+              style={{ maxWidth: "14ch" }}
+            >
+              Digital Gold Boom.
+            </h2>
+            <p
+              data-reveal
+              className="mt-5"
+              style={{
+                color: "var(--accent-gold)",
+                fontSize: "clamp(1rem, 1.4vw, 1.25rem)",
+                fontWeight: 500,
+                letterSpacing: "0.02em",
+              }}
+            >
+              Tell all. Nothing held back.
+            </p>
+            <p
+              data-reveal
+              className="mt-10 text-ts"
+              style={{ fontSize: "1.0625rem", lineHeight: 1.7 }}
+            >
               Written by <span className="text-tp font-semibold">Andrew Fletcher</span> — former President of Great Eagle Gold Corp, now NatBridge Resources, which signed the first NatGold supply agreement.
             </p>
-            <p data-reveal className="mt-6 text-tp font-semibold" style={{ fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)" }}>
-              Once you see it, you can&rsquo;t unsee it. <span className="text-gold">It just makes sense.</span>
+            <p
+              data-reveal
+              className="mt-6 italic font-light text-tp"
+              style={{
+                fontSize: "clamp(1.0625rem, 1.5vw, 1.25rem)",
+                lineHeight: 1.55,
+                letterSpacing: "-0.005em",
+              }}
+            >
+              Once you see it, you can&rsquo;t unsee it. <span style={{ color: "var(--accent-gold)", fontStyle: "normal", fontWeight: 500 }}>It just makes sense.</span>
             </p>
           </div>
         </div>
-        <div className="mt-20">
-          <p data-reveal className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gold mb-4 text-center">FOUR SECTIONS · 23 CHAPTERS</p>
-          <h3 data-reveal className="text-tp font-bold tracking-[-0.025em] leading-[1.15] text-center max-w-[24ch] mx-auto" style={{ fontSize: "clamp(1.4rem, 2.6vw, 2rem)" }}>One complete case, end to end.</h3>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {SECTIONS.map((s) => (
-              <div key={s.n} data-reveal className="border border-border rounded-lg p-8 md:p-10 bg-[#0E0E14]">
-                <div className="flex items-baseline justify-between gap-4 mb-4">
-                  <span className="font-mono text-gold text-sm tracking-[0.1em]">SECTION {s.n}</span>
-                  <span className="font-mono text-tt text-[10px] tracking-[0.1em] uppercase">{s.chapters}</span>
-                </div>
-                <h4 className="text-tp font-bold tracking-[-0.02em] leading-[1.15]" style={{ fontSize: "clamp(1.15rem, 1.85vw, 1.5rem)" }}>{s.title}</h4>
-                <p className="mt-4 text-ts leading-[1.65] text-[0.95rem]">{s.body}</p>
+
+        {/* Section divider */}
+        <div
+          className="my-20 relative"
+          style={{
+            height: 1,
+            background: "linear-gradient(90deg, transparent, var(--border-base), transparent)",
+          }}
+        />
+
+        {/* Chapter breakdown */}
+        <div className="text-center mb-14">
+          <p data-reveal className="eyebrow mb-5">Four sections · 23 chapters</p>
+          <h3
+            data-reveal
+            className="display-md text-tp"
+            style={{ maxWidth: "26ch", margin: "0 auto", fontWeight: 300 }}
+          >
+            One complete case, end to end.
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {SECTIONS.map((s) => (
+            <article
+              key={s.n}
+              data-reveal
+              style={{
+                background: "var(--bg-surface)",
+                border: "1px solid var(--border-base)",
+                borderRadius: "var(--r-xl)",
+                padding: "36px 32px",
+                boxShadow: "var(--shadow-sm)",
+                transition: "transform 240ms, box-shadow 240ms, border-color 240ms",
+              }}
+            >
+              <div className="flex items-baseline justify-between gap-4 mb-5">
+                <span
+                  className="font-mono"
+                  style={{
+                    color: "var(--accent-gold)",
+                    fontSize: "11px",
+                    letterSpacing: "0.18em",
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Section {s.n}
+                </span>
+                <span
+                  className="font-mono text-tt"
+                  style={{ fontSize: "10px", letterSpacing: "0.08em" }}
+                >
+                  {s.chapters}
+                </span>
               </div>
-            ))}
-          </div>
+              <h4
+                className="text-tp"
+                style={{
+                  fontSize: "clamp(1.25rem, 1.8vw, 1.5rem)",
+                  fontWeight: 500,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.2,
+                  marginBottom: 16,
+                }}
+              >
+                {s.title}
+              </h4>
+              <p className="text-ts" style={{ fontSize: "0.9375rem", lineHeight: 1.65 }}>
+                {s.body}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

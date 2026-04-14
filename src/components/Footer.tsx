@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
-    heading: "BOOK",
+    heading: "Book",
     links: [
       { label: "Overview", href: "#playbook" },
       { label: "Chapter Previews", href: "/previews" },
@@ -11,7 +11,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
     ],
   },
   {
-    heading: "RESEARCH",
+    heading: "Research",
     links: [
       { label: "Pipeline Scorecards", href: "/pipeline" },
       { label: "NatGold Model", href: "/model" },
@@ -20,7 +20,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
     ],
   },
   {
-    heading: "COMPANY",
+    heading: "Company",
     links: [
       { label: "Author", href: "/author" },
       { label: "Contact", href: "/contact" },
@@ -28,7 +28,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
     ],
   },
   {
-    heading: "LEGAL",
+    heading: "Legal",
     links: [
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
@@ -40,23 +40,43 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
 export default function Footer() {
   return (
     <footer
-      className="relative z-10 mt-32 border-t border-white/10"
-      style={{ backgroundColor: "#0A0A0F" }}
+      className="relative z-10"
+      style={{
+        background: "var(--bg-contrast-deep)",
+        color: "var(--text-on-dark-secondary)",
+        borderTop: "1px solid var(--border-on-dark)",
+      }}
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_2fr] gap-16 lg:gap-24">
           <div>
-            <p className="text-white font-extrabold tracking-tight text-2xl mb-4">
+            <p
+              style={{
+                color: "var(--text-on-dark-primary)",
+                fontSize: "1.375rem",
+                fontWeight: 500,
+                letterSpacing: "-0.01em",
+                marginBottom: 16,
+              }}
+            >
               Digital Gold Boom
             </p>
             <p
-              className="leading-[1.7] mb-6 max-w-[36ch]"
-              style={{ color: "#C6C6CC", fontSize: "14px" }}
+              style={{
+                color: "var(--text-on-dark-secondary)",
+                fontSize: "14px",
+                lineHeight: 1.7,
+                maxWidth: "36ch",
+                marginBottom: 24,
+              }}
             >
               The complete map of a new asset class. Not a pitch.
             </p>
-            <p style={{ color: "#9A9AA0", fontSize: "11px" }}>
-              © {new Date().getFullYear()} Andrew Fletcher. Digital Gold Boom™.
+            <p
+              className="font-mono"
+              style={{ color: "var(--text-on-dark-tertiary)", fontSize: "11px", letterSpacing: "0.02em" }}
+            >
+              © {new Date().getFullYear()} Andrew Fletcher · Digital Gold Boom™
             </p>
           </div>
 
@@ -67,8 +87,15 @@ export default function Footer() {
             {COLUMNS.map((col) => (
               <div key={col.heading}>
                 <p
-                  className="font-semibold mb-5"
-                  style={{ color: "#D4A843", fontSize: "10px", letterSpacing: "0.22em" }}
+                  className="font-mono"
+                  style={{
+                    color: "var(--accent-gold)",
+                    fontSize: "10px",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    fontWeight: 600,
+                    marginBottom: 20,
+                  }}
                 >
                   {col.heading}
                 </p>
@@ -77,8 +104,8 @@ export default function Footer() {
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="hover:text-white transition-colors duration-300 block"
-                        style={{ color: "#C6C6CC", fontSize: "13px" }}
+                        className="block transition-colors duration-200"
+                        style={{ color: "var(--text-on-dark-secondary)", fontSize: "13.5px" }}
                       >
                         {link.label}
                       </Link>
@@ -91,15 +118,17 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
+      <div style={{ borderTop: "1px solid var(--border-on-dark)" }}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-8">
           <p
-            className="leading-[1.7] max-w-[80ch]"
-            style={{ color: "#9A9AA0", fontSize: "11px" }}
+            style={{
+              color: "var(--text-on-dark-tertiary)",
+              fontSize: "11px",
+              lineHeight: 1.7,
+              maxWidth: "80ch",
+            }}
           >
-            Digital Gold Boom is an educational book about a new asset class.
-            Nothing on this site constitutes financial, investment, or tax
-            advice. Always conduct your own research.
+            Digital Gold Boom is an educational book about a new asset class. Nothing on this site constitutes financial, investment, or tax advice. Always conduct your own research.
           </p>
         </div>
       </div>

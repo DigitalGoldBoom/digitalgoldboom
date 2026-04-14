@@ -2,12 +2,26 @@
 
 import { useRef } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import SectionImage from "@/components/SectionImage";
 
 const FORCES = [
-  { n: "01", title: "Gold is having its moment.", body: "Central banks are buying. Retail is rediscovering it. The oldest store of value is quietly back at the centre of the conversation." },
-  { n: "02", title: "Blockchain finally grew up.", body: "Real-world asset tokenization moved from crypto fantasy to where the institutional trillions are actually going." },
-  { n: "03", title: "A new generation wants in — without the guilt.", body: "For the first time, gold is available without the extraction, displacement, and environmental cost that locked younger investors out." },
+  {
+    n: "01",
+    scale: "$13T",
+    title: "Gold is having its moment.",
+    body: "Central banks are buying. Retail is rediscovering it. The oldest store of value is quietly back at the centre of the conversation.",
+  },
+  {
+    n: "02",
+    scale: "$2T",
+    title: "Blockchain finally grew up.",
+    body: "Real-world asset tokenization moved from crypto fantasy to where the institutional trillions are actually going.",
+  },
+  {
+    n: "03",
+    scale: "1.8B",
+    title: "A new generation wants in — without the guilt.",
+    body: "For the first time, gold is available without the extraction, displacement, and environmental cost that locked younger investors out.",
+  },
 ];
 
 export default function Convergence() {
@@ -15,34 +29,126 @@ export default function Convergence() {
   useScrollReveal(sectionRef);
 
   return (
-    <section ref={sectionRef} className="relative py-14 md:py-[88px] overflow-hidden">
-      <SectionImage
-        src="/images/earth-cubes/earth-cube-global-field.png"
-        alt=""
-        position="full"
-        opacity={0.12}
-        parallax={0.4}
+    <section ref={sectionRef} className="section section-deep relative overflow-hidden">
+      {/* Atmospheric wash */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(1200px 800px at 50% 0%, rgba(202,138,4,0.08), transparent 50%)",
+        }}
       />
-      <div className="max-w-[1100px] mx-auto px-6 md:px-12 relative z-10">
-        <p data-reveal className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gold mb-6 text-center">THE HALLEY&rsquo;S COMET ALIGNMENT</p>
-        <h2 data-reveal className="text-tp font-extrabold tracking-[-0.03em] leading-[1.3] text-center mx-auto" style={{ fontSize: "clamp(2rem, 4.2vw, 3.25rem)" }}>
-          Three forces.<br />
-          <span className="text-gold">Same window.</span>
-        </h2>
-        <p data-reveal className="mt-8 text-ts leading-[1.7] text-center max-w-[56ch] mx-auto">
-          For the first time in history, three trillion-dollar forces are aligning at once. Most people only see one of them. Until it&rsquo;s too late.
-        </p>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-stretch">
+
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
+        <div className="text-center max-w-[760px] mx-auto">
+          <p data-reveal className="eyebrow mb-6" style={{ color: "var(--accent-gold)" }}>
+            The Halley&rsquo;s Comet alignment
+          </p>
+          <h2
+            data-reveal
+            className="display-xl"
+            style={{ color: "var(--text-on-dark-primary)", maxWidth: "14ch", margin: "0 auto" }}
+          >
+            Three forces.
+            <br />
+            <span style={{ color: "var(--accent-gold)" }}>Same window.</span>
+          </h2>
+          <p
+            data-reveal
+            className="mt-8"
+            style={{
+              color: "var(--text-on-dark-secondary)",
+              fontSize: "1.0625rem",
+              lineHeight: 1.7,
+              maxWidth: "58ch",
+              margin: "32px auto 0",
+            }}
+          >
+            For the first time in history, three trillion-dollar forces are aligning at once. Most people only see one of them. Until it&rsquo;s too late.
+          </p>
+        </div>
+
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {FORCES.map((f) => (
-            <div key={f.n} data-reveal className="border-t border-border pt-8 flex flex-col h-full">
-              <span className="font-mono text-gold text-sm tracking-[0.1em]">{f.n}</span>
-              <h3 className="mt-4 text-tp font-bold tracking-[-0.015em] leading-[1.2] min-h-[3.2em]" style={{ fontSize: "clamp(1.1rem, 1.6vw, 1.35rem)" }}>{f.title}</h3>
-              <p className="mt-3 text-ts leading-[1.65] text-[0.95rem]">{f.body}</p>
-            </div>
+            <article
+              key={f.n}
+              data-reveal
+              className="relative flex flex-col h-full"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                backdropFilter: "blur(16px)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "var(--r-2xl)",
+                padding: "40px 32px",
+                boxShadow: "0 12px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06)",
+              }}
+            >
+              <div
+                className="font-mono mb-4"
+                style={{
+                  fontSize: "11px",
+                  letterSpacing: "0.18em",
+                  color: "var(--accent-gold)",
+                  fontWeight: 600,
+                }}
+              >
+                FORCE {f.n}
+              </div>
+              <div
+                className="font-mono tabular-nums mb-6"
+                style={{
+                  fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
+                  fontWeight: 300,
+                  color: "var(--accent-gold)",
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                {f.scale}
+              </div>
+              <h3
+                style={{
+                  color: "var(--text-on-dark-primary)",
+                  fontSize: "clamp(1.125rem, 1.6vw, 1.375rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.25,
+                  letterSpacing: "-0.01em",
+                  marginBottom: 16,
+                }}
+              >
+                {f.title}
+              </h3>
+              <p
+                style={{
+                  color: "var(--text-on-dark-secondary)",
+                  fontSize: "0.9375rem",
+                  lineHeight: 1.65,
+                }}
+              >
+                {f.body}
+              </p>
+            </article>
           ))}
         </div>
-        <p data-reveal className="mt-16 text-center text-tp font-semibold max-w-[58ch] mx-auto leading-[1.55]" style={{ fontSize: "clamp(1.05rem, 1.4vw, 1.2rem)" }}>
-          When three <span className="text-gold">trillion-dollar</span> forces converge like this — gold, blockchain, and a generation that refuses to trade the planet for their portfolio — the window to <em className="text-gold not-italic">understand</em> it closes faster than the window to act on it.
+
+        <p
+          data-reveal
+          className="mt-20 text-center mx-auto"
+          style={{
+            color: "var(--text-on-dark-primary)",
+            fontSize: "clamp(1.125rem, 1.6vw, 1.375rem)",
+            lineHeight: 1.55,
+            maxWidth: "62ch",
+            fontWeight: 300,
+          }}
+        >
+          When three{" "}
+          <span style={{ color: "var(--accent-gold)", fontWeight: 500 }}>trillion-dollar</span> forces converge like this, the window to{" "}
+          <em className="italic" style={{ color: "var(--accent-gold)" }}>
+            understand
+          </em>{" "}
+          it closes faster than the window to act on it.
         </p>
       </div>
     </section>

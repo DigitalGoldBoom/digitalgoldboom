@@ -1,76 +1,341 @@
 @import "tailwindcss";
 
+/* ================================================================
+   DGB Design System — Luxury Financial (Board D)
+   Generated from ui-ux-pro-max skill:
+   Style: Liquid Glass · Font: IBM Plex Sans
+   Colors: #1C1917 primary · #CA8A04 CTA · #FAFAF9 canvas · #0C0A09 text
+   Pattern: Funnel 3-Step Conversion
+   ================================================================ */
 :root {
-  --bg-void: #0A0A0F;
-  --bg-surface: #111118;
-  --bg-surface-active: #1A1A24;
-  --text-primary: #F5F5F7;
-  --text-secondary: #C6C6CC;
-  --text-tertiary: #9A9AA0;
-  --accent-gold: #D4A843;
-  --accent-gold-wash: rgba(212, 168, 67, 0.10);
-  --accent-green: #30D158;
-  --border-base: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.16);
-  --glass: rgba(255, 255, 255, 0.04);
-  --btn-primary-bg: #F5F5F7;
-  --btn-primary-text: #0A0A0F;
-  --row-alt: rgba(255, 255, 255, 0.02);
+  /* Surfaces */
+  --bg-canvas: #FAFAF9;          /* warm stone primary canvas */
+  --bg-surface: #FFFFFF;         /* card/panel */
+  --bg-surface-elevated: #F5F5F4; /* hover/active surface */
+  --bg-contrast: #1C1917;        /* dark section / contrast block */
+  --bg-contrast-deep: #0C0A09;   /* deepest dark for dramatic sections */
+
+  /* Text — on light */
+  --text-primary: #0C0A09;       /* near-black heads */
+  --text-secondary: #292524;     /* body */
+  --text-tertiary: #57534E;      /* meta/captions */
+  --text-muted: #A8A29E;         /* disabled/tertiary */
+
+  /* Text — on dark sections */
+  --text-on-dark-primary: #FAFAF9;
+  --text-on-dark-secondary: #D6D3D1;
+  --text-on-dark-tertiary: #A8A29E;
+
+  /* Brand accent — warm gold */
+  --accent-gold: #CA8A04;        /* primary CTA */
+  --accent-gold-hover: #A16207;  /* hover */
+  --accent-gold-active: #854D0E; /* active */
+  --accent-gold-wash: rgba(202, 138, 4, 0.08);
+  --accent-gold-ring: rgba(202, 138, 4, 0.24);
+
+  /* Borders */
+  --border-base: rgba(12, 10, 9, 0.08);
+  --border-hover: rgba(12, 10, 9, 0.16);
+  --border-gold: rgba(202, 138, 4, 0.3);
+  --border-on-dark: rgba(250, 250, 249, 0.12);
+
+  /* Glass (Liquid Glass effect) */
+  --glass-light: rgba(255, 255, 255, 0.6);
+  --glass-dark: rgba(28, 25, 23, 0.6);
+  --glass-blur: 16px;
+
+  /* Shadow ladder — restrained on light, dramatic on dark */
+  --shadow-sm: 0 1px 2px rgba(12, 10, 9, 0.04);
+  --shadow-md: 0 4px 12px rgba(12, 10, 9, 0.06);
+  --shadow-lg: 0 12px 32px rgba(12, 10, 9, 0.10);
+  --shadow-xl: 0 24px 60px rgba(12, 10, 9, 0.14);
+  --shadow-gold-ring: 0 0 0 3px rgba(202, 138, 4, 0.18);
+
+  /* Buttons */
+  --btn-primary-bg: #CA8A04;
+  --btn-primary-text: #FAFAF9;
+  --btn-primary-bg-hover: #A16207;
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: #1C1917;
+  --btn-secondary-border: #1C1917;
+
+  /* Radii — 8-step scale */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 24px;
+  --r-3xl: 32px;
+  --r-pill: 999px;
+
+  /* Motion tokens — skill specified 150-300ms, Liquid Glass 400-600ms on morphing */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.83, 0, 0.17, 1);
+  --dur-fast: 180ms;
+  --dur-base: 240ms;
+  --dur-slow: 400ms;
+  --dur-morph: 600ms;
 }
 
+/* ================================================================
+   TAILWIND THEME TOKENS
+   ================================================================ */
 @theme inline {
-  --color-void: var(--bg-void);
+  /* Surfaces */
+  --color-canvas: var(--bg-canvas);
   --color-surface: var(--bg-surface);
-  --color-surface-active: var(--bg-surface-active);
+  --color-surface-elev: var(--bg-surface-elevated);
+  --color-contrast: var(--bg-contrast);
+  --color-contrast-deep: var(--bg-contrast-deep);
+
+  /* Text */
   --color-tp: var(--text-primary);
   --color-ts: var(--text-secondary);
   --color-tt: var(--text-tertiary);
+  --color-tm: var(--text-muted);
+  --color-tp-dark: var(--text-on-dark-primary);
+  --color-ts-dark: var(--text-on-dark-secondary);
+  --color-tt-dark: var(--text-on-dark-tertiary);
+
+  /* Accents */
   --color-gold: var(--accent-gold);
+  --color-gold-hover: var(--accent-gold-hover);
+  --color-gold-active: var(--accent-gold-active);
   --color-gold-wash: var(--accent-gold-wash);
-  --color-green: var(--accent-green);
+
+  /* Borders */
   --color-border: var(--border-base);
   --color-border-hover: var(--border-hover);
-  --color-glass: var(--glass);
+  --color-border-gold: var(--border-gold);
+  --color-border-on-dark: var(--border-on-dark);
+
+  /* Buttons (legacy aliases used in existing components) */
   --color-btn-bg: var(--btn-primary-bg);
   --color-btn-text: var(--btn-primary-text);
-  --color-row-alt: var(--row-alt);
-  --font-sans: var(--font-jakarta);
-  --font-mono: var(--font-geist-mono);
+
+  /* Fonts */
+  --font-sans: var(--font-plex);
+  --font-display: var(--font-plex);
+  --font-mono: var(--font-plex-mono);
 }
 
+/* ================================================================
+   BASE
+   ================================================================ */
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  background: var(--bg-void);
+  background: var(--bg-canvas);
   color: var(--text-secondary);
   font-family: var(--font-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 300ms ease, color 300ms ease;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.015;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-  transition: opacity 300ms ease;
-}
-
+/* ================================================================
+   SELECTION
+   ================================================================ */
 ::selection {
   background: var(--accent-gold);
-  color: #000;
+  color: var(--text-on-dark-primary);
 }
 
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-base); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-canvas); }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ================================================================
+   DISPLAY TYPOGRAPHY — IBM Plex Sans weight 300/400 at display scale
+   Quiet-authority voice inspired by PlayStation's SST-300 move
+   ================================================================ */
+.display-xl { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.025em; }
+.display-lg { font-size: clamp(2rem, 4.8vw, 3.5rem); font-weight: 300; line-height: 1.1;  letter-spacing: -0.02em; }
+.display-md { font-size: clamp(1.75rem, 3.8vw, 2.75rem); font-weight: 400; line-height: 1.15; letter-spacing: -0.015em; }
+.display-sm { font-size: clamp(1.375rem, 2.6vw, 1.875rem); font-weight: 500; line-height: 1.25; letter-spacing: -0.01em; }
+
+.eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+}
+
+/* ================================================================
+   BUTTONS — Liquid Glass with smooth morph transitions
+   ================================================================ */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent-gold);
+  color: var(--text-on-dark-primary);
+  padding: 14px 28px;
+  border-radius: var(--r-pill);
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+  box-shadow: var(--shadow-md);
+}
+.btn-primary:hover {
+  background: var(--accent-gold-hover);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg), var(--shadow-gold-ring);
+}
+.btn-primary:active {
+  background: var(--accent-gold-active);
+  transform: translateY(0) scale(0.99);
+}
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-lg), 0 0 0 4px rgba(202, 138, 4, 0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--text-primary);
+  padding: 13px 26px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--text-primary);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.btn-secondary:hover {
+  background: var(--text-primary);
+  color: var(--bg-canvas);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 10px 18px;
+  border-radius: var(--r-md);
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.btn-ghost:hover { color: var(--text-primary); }
+
+/* ================================================================
+   CARDS — layered lift with Liquid Glass edges
+   ================================================================ */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-base);
+  border-radius: var(--r-xl);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-hover);
+}
+
+.card-feature {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--r-2xl);
+  padding: 40px;
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.6);
+  position: relative;
+}
+
+.card-dark {
+  background: var(--bg-contrast);
+  color: var(--text-on-dark-primary);
+  border-radius: var(--r-2xl);
+  padding: 48px;
+  box-shadow: var(--shadow-xl);
+}
+
+/* ================================================================
+   INPUTS
+   ================================================================ */
+.input {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-base);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  font-size: 16px;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.input::placeholder { color: var(--text-muted); }
+.input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: var(--shadow-gold-ring);
+}
+
+/* ================================================================
+   LIQUID GLASS — morphing blur layer for hero / section transitions
+   ================================================================ */
+.glass {
+  background: var(--glass-light);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  border: 1px solid var(--border-base);
+}
+.glass-dark {
+  background: var(--glass-dark);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  border: 1px solid var(--border-on-dark);
+}
+
+/* ================================================================
+   SECTION RHYTHM — alternating tonal surfaces (Funnel 3-Step acts)
+   ================================================================ */
+.section { padding: clamp(72px, 12vw, 144px) 0; position: relative; }
+.section-canvas { background: var(--bg-canvas); color: var(--text-primary); }
+.section-surface { background: var(--bg-surface); color: var(--text-primary); }
+.section-dark { background: var(--bg-contrast); color: var(--text-on-dark-primary); }
+.section-deep { background: var(--bg-contrast-deep); color: var(--text-on-dark-primary); }
+
+/* ================================================================
+   UTILITY — gold underline draw for emphasis
+   ================================================================ */
+.gold-underline {
+  background-image: linear-gradient(90deg, var(--accent-gold), var(--accent-gold));
+  background-size: 100% 3px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  padding-bottom: 3px;
+}
+
+/* ================================================================
+   REDUCED MOTION
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
