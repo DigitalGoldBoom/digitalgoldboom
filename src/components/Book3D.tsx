@@ -1,15 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { track } from "@vercel/analytics";
-
-const FRONT = "/images/Digital Gold Boom Cover (1).png";
-const SPINE = "/images/DGB Spine.png";
-const BACK = "/images/book-edges/back-cover.png";
-const EDGE_RIGHT = "/images/book-edges/edge-right.png";
-const EDGE_TOP = "/images/book-edges/edge-top.png";
-const EDGE_BOTTOM = "/images/book-edges/edge-bottom.png";
 
 const W = 320;
 const H = 480;
@@ -26,7 +18,6 @@ const LERP = 0.12;
 export default function Book3D() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
-  const sheenRef = useRef<HTMLDivElement>(null);
   const interactedRef = useRef(false);
 
   const targetRef = useRef({ ry: REST_ROT_Y, rx: REST_ROT_X });
@@ -48,22 +39,10 @@ export default function Book3D() {
       const { cx, cy } = getBookCenter();
       const dx = e.clientX - cx;
       const dy = e.clientY - cy;
-
       const nx = Math.max(-1, Math.min(1, dx / SENSITIVITY_X));
       const ny = Math.max(-1, Math.min(1, dy / SENSITIVITY_Y));
-
       targetRef.current.ry = REST_ROT_Y + nx * MAX_ROT_Y;
       targetRef.current.rx = REST_ROT_X - ny * MAX_ROT_X;
-
-      const sheen = sheenRef.current;
-      const box = boxRef.current;
-      if (sheen && box) {
-        const r = box.getBoundingClientRect();
-        const sx = ((e.clientX - r.left) / r.width) * 100;
-        const sy = ((e.clientY - r.top) / r.height) * 100;
-        sheen.style.background = `radial-gradient(circle at ${Math.max(0, Math.min(100, sx))}% ${Math.max(0, Math.min(100, sy))}%, rgba(255,255,255,0.18) 0%, transparent 55%)`;
-      }
-
       if (!interactedRef.current) {
         interactedRef.current = true;
         track("book3d_interaction");
@@ -73,10 +52,6 @@ export default function Book3D() {
     function onLeave() {
       targetRef.current.ry = REST_ROT_Y;
       targetRef.current.rx = REST_ROT_X;
-      const sheen = sheenRef.current;
-      if (sheen) {
-        sheen.style.background = "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10) 0%, transparent 55%)";
-      }
     }
 
     function tick() {
@@ -103,7 +78,22 @@ export default function Book3D() {
     };
   }, []);
 
-  const abs: React.CSSProperties = { position: "absolute", overflow: "hidden" };
+  // DIAGNOSTIC VERSION — bright solid colors per face, no images.
+  // Goal: find out which faces are being rendered so we know if the
+  // bug is "face missing from DOM" vs "face occluded" vs "image broken".
+  const face = (color: string): React.CSSProperties => ({
+    position: "absolute",
+    overflow: "hidden",
+    background: color,
+    border: "2px solid white",
+    color: "white",
+    fontFamily: "monospace",
+    fontSize: 14,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+  });
 
   return (
     <div
@@ -132,39 +122,18 @@ export default function Book3D() {
             transformStyle: "preserve-3d",
           }}
         >
-          {/* FRONT */}
-          <div style={{ ...abs, width: W, height: H, top: 0, left: 0, transform: `translateZ(${D / 2}px)` }}>
-            <Image src={FRONT} alt="Book cover" fill style={{ objectFit: "cover" }} priority sizes="320px" />
-            <div
-              ref={sheenRef}
-              style={{
-                position: "absolute",
-                inset: 0,
-                pointerEvents: "none",
-                background: "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10) 0%, transparent 55%)",
-              }}
-            />
-          </div>
-          {/* BACK */}
-          <div style={{ ...abs, width: W, height: H, top: 0, left: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }}>
-            <Image src={BACK} alt="Back cover" fill style={{ objectFit: "cover" }} sizes="320px" />
-          </div>
-          {/* SPINE (LEFT) */}
-          <div style={{ ...abs, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(-90deg) translateZ(${W / 2}px)`, background: "#0E0E14" }}>
-            <Image src={SPINE} alt="Spine" fill style={{ objectFit: "cover" }} sizes="70px" />
-          </div>
-          {/* PAGES RIGHT */}
-          <div style={{ ...abs, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(90deg) translateZ(${W / 2}px)`, background: "#1A1A24" }}>
-            <Image src={EDGE_RIGHT} alt="Page edges" fill style={{ objectFit: "cover" }} sizes="70px" />
-          </div>
-          {/* PAGES TOP */}
-          <div style={{ ...abs, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(90deg) translateZ(${H / 2}px)`, background: "#1A1A24" }}>
-            <Image src={EDGE_TOP} alt="Top pages" fill style={{ objectFit: "cover" }} sizes="320px" />
-          </div>
-          {/* PAGES BOTTOM */}
-          <div style={{ ...abs, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(-90deg) translateZ(${H / 2}px)`, background: "#1A1A24" }}>
-            <Image src={EDGE_BOTTOM} alt="Bottom pages" fill style={{ objectFit: "cover" }} sizes="320px" />
-          </div>
+          {/* FRONT — RED */}
+          <div style={{ ...face("#E63946"), width: W, height: H, top: 0, left: 0, transform: `translateZ(${D / 2}px)` }}>FRONT</div>
+          {/* BACK — GREEN */}
+          <div style={{ ...face("#2A9D8F"), width: W, height: H, top: 0, left: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }}>BACK</div>
+          {/* SPINE — BLUE */}
+          <div style={{ ...face("#1E40AF"), width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }}>SPINE</div>
+          {/* PAGES RIGHT — YELLOW */}
+          <div style={{ ...face("#EAB308"), width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(90deg) translateZ(${W / 2}px)` }}>EDGE</div>
+          {/* PAGES TOP — MAGENTA */}
+          <div style={{ ...face("#D946EF"), width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(90deg) translateZ(${H / 2}px)` }}>TOP</div>
+          {/* PAGES BOTTOM — CYAN */}
+          <div style={{ ...face("#06B6D4"), width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(-90deg) translateZ(${H / 2}px)` }}>BOTTOM</div>
         </div>
       </div>
     </div>
