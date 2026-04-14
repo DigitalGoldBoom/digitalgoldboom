@@ -1,164 +1,122 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { track } from "@vercel/analytics";
 
 const FRONT = "/images/Digital Gold Boom Cover (1).png";
-const SPINE = "/images/DGB Spine.png";
-const BACK = "/images/book-edges/back-cover.png";
-const EDGE_RIGHT = "/images/book-edges/edge-right.png";
-const EDGE_TOP = "/images/book-edges/edge-top.png";
-const EDGE_BOTTOM = "/images/book-edges/edge-bottom.png";
-
-const W = 354;
-const H = 538;
-const D = 50;
-
-const MAX_ROT_Y = 26;
-const MAX_ROT_X = 20;
-const REST_ROT_Y = 0;
-const REST_ROT_X = 0;
-const SENSITIVITY_X = 480;
-const SENSITIVITY_Y = 360;
-const LERP = 0.12;
+const W = 320;
+const H = 484;
+const SPINE_W = 24;
+const TOP_H = 8;
 
 export default function Book3D() {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const boxRef = useRef<HTMLDivElement>(null);
   const interactedRef = useRef(false);
 
-  const targetRef = useRef({ ry: REST_ROT_Y, rx: REST_ROT_X });
-  const currentRef = useRef({ ry: REST_ROT_Y, rx: REST_ROT_X });
-  const rafRef = useRef<number | null>(null);
-
-  const sheenRef = useRef({ x: 50, y: 50 });
-  const [sheen, setSheen] = useState({ x: 50, y: 50 });
-
-  useEffect(() => {
-    const wrap = wrapRef.current;
-    if (!wrap) return;
-
-    function getBookCenter() {
-      const el = boxRef.current;
-      if (!el) return { cx: 0, cy: 0 };
-      const r = el.getBoundingClientRect();
-      return { cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
-    }
-
-    function onMove(e: MouseEvent) {
-      const { cx, cy } = getBookCenter();
-      const dx = e.clientX - cx;
-      const dy = e.clientY - cy;
-
-      const nx = Math.max(-1, Math.min(1, dx / SENSITIVITY_X));
-      const ny = Math.max(-1, Math.min(1, dy / SENSITIVITY_Y));
-
-      targetRef.current.ry = REST_ROT_Y + nx * MAX_ROT_Y;
-      targetRef.current.rx = REST_ROT_X - ny * MAX_ROT_X;
-
-      const el = boxRef.current;
-      if (el) {
-        const r = el.getBoundingClientRect();
-        const sx = ((e.clientX - r.left) / r.width) * 100;
-        const sy = ((e.clientY - r.top) / r.height) * 100;
-        sheenRef.current = {
-          x: Math.max(0, Math.min(100, sx)),
-          y: Math.max(0, Math.min(100, sy)),
-        };
-      }
-
-      if (!interactedRef.current) {
-        interactedRef.current = true;
-        track("book3d_interaction");
-      }
-    }
-
-    function onLeave() {
-      targetRef.current.ry = REST_ROT_Y;
-      targetRef.current.rx = REST_ROT_X;
-      sheenRef.current = { x: 50, y: 50 };
-    }
-
-    function tick() {
-      const c = currentRef.current;
-      const t = targetRef.current;
-      c.ry += (t.ry - c.ry) * LERP;
-      c.rx += (t.rx - c.rx) * LERP;
-      const el = boxRef.current;
-      if (el) {
-        el.style.transform = `rotateY(${c.ry.toFixed(2)}deg) rotateX(${c.rx.toFixed(2)}deg)`;
-      }
-      setSheen({ ...sheenRef.current });
-      rafRef.current = requestAnimationFrame(tick);
-    }
-
-    const hero = wrap.closest("section") ?? document.body;
-    hero.addEventListener("mousemove", onMove as EventListener);
-    hero.addEventListener("mouseleave", onLeave);
-    rafRef.current = requestAnimationFrame(tick);
-
-    return () => {
-      hero.removeEventListener("mousemove", onMove as EventListener);
-      hero.removeEventListener("mouseleave", onLeave);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  // Subtle gold border on every face — makes the cuboid silhouette readable
-  const faceBorder: React.CSSProperties = {
-    position: "absolute",
-    overflow: "hidden",
-    boxShadow: "inset 0 0 0 1px rgba(212, 168, 67, 0.35)",
-  };
+  function onMove() {
+    if (interactedRef.current) return;
+    interactedRef.current = true;
+    track("book3d_interaction");
+  }
 
   return (
     <div
-      ref={wrapRef}
+      onMouseMove={onMove}
       style={{
-        perspective: 1600,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "60px 50px",
+        padding: "40px 30px",
       }}
     >
       <div
-        ref={boxRef}
         style={{
-          transformStyle: "preserve-3d",
-          transform: `rotateY(${REST_ROT_Y}deg) rotateX(${REST_ROT_X}deg)`,
-          willChange: "transform",
+          position: "relative",
+          width: W + SPINE_W,
+          height: H + TOP_H,
           filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.7))",
         }}
       >
+        {/* Top page edges — thin horizontal strip above the cover */}
         <div
           style={{
+            position: "absolute",
+            top: 0,
+            left: SPINE_W,
             width: W,
+            height: TOP_H,
+            background:
+              "repeating-linear-gradient(90deg, #1F1F26 0px, #0E0E14 1px, #1F1F26 2px)",
+            transform: "skewX(-45deg)",
+            transformOrigin: "bottom left",
+            borderTop: "1px solid rgba(212, 168, 67, 0.35)",
+          }}
+        />
+        {/* Spine — vertical gradient strip on the left of the cover */}
+        <div
+          style={{
+            position: "absolute",
+            top: TOP_H,
+            left: 0,
+            width: SPINE_W,
             height: H,
-            position: "relative",
-            transformStyle: "preserve-3d",
+            background:
+              "linear-gradient(90deg, #050508 0%, #1A1A22 35%, #2A2A33 65%, #0A0A10 100%)",
+            transform: "skewY(-30deg)",
+            transformOrigin: "bottom right",
+            borderLeft: "1px solid rgba(212, 168, 67, 0.35)",
+            boxShadow: "inset -2px 0 4px rgba(0,0,0,0.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <div style={{ ...faceBorder, width: W, height: H, top: 0, left: 0, transform: `translateZ(${D / 2}px)` }}>
-            <Image src={FRONT} alt="Book cover" fill style={{ objectFit: "cover" }} priority />
-            <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(circle at ${sheen.x}% ${sheen.y}%, rgba(255,255,255,0.18) 0%, transparent 55%)` }} />
+          <div
+            style={{
+              transform: "rotate(-90deg)",
+              whiteSpace: "nowrap",
+              fontFamily: "var(--font-jakarta), sans-serif",
+              fontSize: "11px",
+              fontWeight: 800,
+              letterSpacing: "0.2em",
+              color: "#D4A843",
+              textShadow: "0 0 6px rgba(212, 168, 67, 0.4)",
+            }}
+          >
+            DIGITAL GOLD BOOM
           </div>
-          <div style={{ ...faceBorder, width: W, height: H, top: 0, left: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }}>
-            <Image src={BACK} alt="Back cover" fill style={{ objectFit: "cover" }} />
-          </div>
-          <div style={{ ...faceBorder, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(-90deg) translateZ(${W / 2}px)`, background: "#0E0E14" }}>
-            <Image src={SPINE} alt="Spine" fill style={{ objectFit: "cover" }} />
-          </div>
-          <div style={{ ...faceBorder, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(90deg) translateZ(${W / 2}px)`, background: "#1A1A24" }}>
-            <Image src={EDGE_RIGHT} alt="Page edges" fill style={{ objectFit: "cover" }} />
-          </div>
-          <div style={{ ...faceBorder, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(90deg) translateZ(${H / 2}px)`, background: "#1A1A24" }}>
-            <Image src={EDGE_TOP} alt="Top pages" fill style={{ objectFit: "cover" }} />
-          </div>
-          <div style={{ ...faceBorder, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(-90deg) translateZ(${H / 2}px)`, background: "#1A1A24" }}>
-            <Image src={EDGE_BOTTOM} alt="Bottom pages" fill style={{ objectFit: "cover" }} />
-          </div>
+        </div>
+        {/* Front cover */}
+        <div
+          style={{
+            position: "absolute",
+            top: TOP_H,
+            left: SPINE_W,
+            width: W,
+            height: H,
+            overflow: "hidden",
+            boxShadow:
+              "inset 0 0 0 1px rgba(212, 168, 67, 0.35), 0 0 60px rgba(212, 168, 67, 0.08)",
+          }}
+        >
+          <Image
+            src={FRONT}
+            alt="Digital Gold Boom — Book Cover"
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            sizes="320px"
+          />
+          {/* Subtle sheen — top to bottom highlight */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              pointerEvents: "none",
+              background:
+                "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.15) 100%)",
+            }}
+          />
         </div>
       </div>
     </div>
