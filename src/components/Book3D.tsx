@@ -13,12 +13,12 @@ const EDGE_BOTTOM = "/images/book-edges/edge-bottom.png";
 
 const W = 354;
 const H = 538;
-const D = 46;
+const D = 50;
 
 const MAX_ROT_Y = 26;
 const MAX_ROT_X = 20;
-const REST_ROT_Y = 28;
-const REST_ROT_X = -10;
+const REST_ROT_Y = 42;
+const REST_ROT_X = -12;
 const SENSITIVITY_X = 480;
 const SENSITIVITY_Y = 360;
 const LERP = 0.12;
@@ -105,17 +105,22 @@ export default function Book3D() {
     };
   }, []);
 
-  const abs: React.CSSProperties = { position: "absolute", overflow: "hidden" };
+  // Subtle gold border on every face — makes the cuboid silhouette readable
+  const faceBorder: React.CSSProperties = {
+    position: "absolute",
+    overflow: "hidden",
+    boxShadow: "inset 0 0 0 1px rgba(212, 168, 67, 0.35)",
+  };
 
   return (
     <div
       ref={wrapRef}
       style={{
-        perspective: 1400,
+        perspective: 1600,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "40px",
+        padding: "60px 50px",
       }}
     >
       <div
@@ -124,7 +129,7 @@ export default function Book3D() {
           transformStyle: "preserve-3d",
           transform: `rotateY(${REST_ROT_Y}deg) rotateX(${REST_ROT_X}deg)`,
           willChange: "transform",
-          filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.6))",
+          filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.7))",
         }}
       >
         <div
@@ -135,23 +140,23 @@ export default function Book3D() {
             transformStyle: "preserve-3d",
           }}
         >
-          <div style={{ ...abs, width: W, height: H, top: 0, left: 0, transform: `translateZ(${D / 2}px)` }}>
+          <div style={{ ...faceBorder, width: W, height: H, top: 0, left: 0, transform: `translateZ(${D / 2}px)` }}>
             <Image src={FRONT} alt="Book cover" fill style={{ objectFit: "cover" }} priority />
             <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(circle at ${sheen.x}% ${sheen.y}%, rgba(255,255,255,0.18) 0%, transparent 55%)` }} />
           </div>
-          <div style={{ ...abs, width: W, height: H, top: 0, left: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }}>
+          <div style={{ ...faceBorder, width: W, height: H, top: 0, left: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }}>
             <Image src={BACK} alt="Back cover" fill style={{ objectFit: "cover" }} />
           </div>
-          <div style={{ ...abs, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }}>
+          <div style={{ ...faceBorder, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(-90deg) translateZ(${W / 2}px)`, background: "#0E0E14" }}>
             <Image src={SPINE} alt="Spine" fill style={{ objectFit: "cover" }} />
           </div>
-          <div style={{ ...abs, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(90deg) translateZ(${W / 2}px)` }}>
+          <div style={{ ...faceBorder, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(90deg) translateZ(${W / 2}px)`, background: "#1A1A24" }}>
             <Image src={EDGE_RIGHT} alt="Page edges" fill style={{ objectFit: "cover" }} />
           </div>
-          <div style={{ ...abs, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(90deg) translateZ(${H / 2}px)` }}>
+          <div style={{ ...faceBorder, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(90deg) translateZ(${H / 2}px)`, background: "#1A1A24" }}>
             <Image src={EDGE_TOP} alt="Top pages" fill style={{ objectFit: "cover" }} />
           </div>
-          <div style={{ ...abs, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(-90deg) translateZ(${H / 2}px)` }}>
+          <div style={{ ...faceBorder, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(-90deg) translateZ(${H / 2}px)`, background: "#1A1A24" }}>
             <Image src={EDGE_BOTTOM} alt="Bottom pages" fill style={{ objectFit: "cover" }} />
           </div>
         </div>
