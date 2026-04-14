@@ -1,7 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { track } from "@vercel/analytics";
+
+const FRONT = "/images/Digital Gold Boom Cover (1).png";
+const SPINE = "/images/DGB Spine.png";
+const BACK = "/images/book-edges/back-cover.png";
+const EDGE_RIGHT = "/images/book-edges/edge-right.png";
+const EDGE_TOP = "/images/book-edges/edge-top.png";
+const EDGE_BOTTOM = "/images/book-edges/edge-bottom.png";
 
 const W = 354;
 const H = 538;
@@ -99,20 +107,6 @@ export default function Book3D() {
 
   const abs: React.CSSProperties = { position: "absolute", overflow: "hidden" };
 
-  // Face styles — CSS-only, no image dependencies
-  const darkFace: React.CSSProperties = {
-    background: "linear-gradient(135deg, #0A0A0F 0%, #1A1A24 100%)",
-    border: "1px solid rgba(212, 168, 67, 0.25)",
-  };
-  const edgeFace: React.CSSProperties = {
-    background: "linear-gradient(180deg, #0E0E14 0%, #05050A 100%)",
-    border: "1px solid rgba(255, 255, 255, 0.05)",
-  };
-  const pageEdge: React.CSSProperties = {
-    background:
-      "repeating-linear-gradient(90deg, #1F1F26 0px, #0E0E14 1px, #1F1F26 2px)",
-  };
-
   return (
     <div
       ref={wrapRef}
@@ -141,174 +135,25 @@ export default function Book3D() {
             transformStyle: "preserve-3d",
           }}
         >
-          {/* FRONT — typographic cover */}
-          <div
-            style={{
-              ...abs,
-              ...darkFace,
-              width: W,
-              height: H,
-              top: 0,
-              left: 0,
-              transform: `translateZ(${D / 2}px)`,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              padding: "48px 40px",
-            }}
-          >
-            {/* Top eyebrow */}
-            <div
-              style={{
-                fontSize: "10px",
-                letterSpacing: "0.2em",
-                fontWeight: 600,
-                color: "#D4A843",
-                fontFamily: "var(--font-geist-mono), monospace",
-              }}
-            >
-              NATGOLD DIGITAL
-            </div>
-
-            {/* Title stack */}
-            <div>
-              <div
-                style={{
-                  fontSize: "clamp(32px, 5vw, 48px)",
-                  fontWeight: 800,
-                  color: "#F5F5F7",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 1.0,
-                  fontFamily: "var(--font-jakarta), sans-serif",
-                }}
-              >
-                DIGITAL
-              </div>
-              <div
-                style={{
-                  fontSize: "clamp(42px, 6.5vw, 68px)",
-                  fontWeight: 800,
-                  color: "#D4A843",
-                  letterSpacing: "-0.05em",
-                  lineHeight: 1.0,
-                  marginTop: "4px",
-                  fontFamily: "var(--font-jakarta), sans-serif",
-                }}
-              >
-                GOLD
-              </div>
-              <div
-                style={{
-                  fontSize: "clamp(32px, 5vw, 48px)",
-                  fontWeight: 800,
-                  color: "#F5F5F7",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 1.0,
-                  marginTop: "4px",
-                  fontFamily: "var(--font-jakarta), sans-serif",
-                }}
-              >
-                BOOM
-              </div>
-              {/* Gold underline */}
-              <div
-                style={{
-                  width: "60%",
-                  height: "2px",
-                  background: "#D4A843",
-                  marginTop: "16px",
-                }}
-              />
-            </div>
-
-            {/* Bottom byline */}
-            <div
-              style={{
-                fontSize: "11px",
-                letterSpacing: "0.15em",
-                color: "#9A9AA0",
-                textTransform: "uppercase",
-                fontFamily: "var(--font-geist-mono), monospace",
-              }}
-            >
-              Andrew Fletcher
-            </div>
-
-            {/* Sheen overlay */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                pointerEvents: "none",
-                background: `radial-gradient(circle at ${sheen.x}% ${sheen.y}%, rgba(255,255,255,0.08) 0%, transparent 55%)`,
-              }}
-            />
+          <div style={{ ...abs, width: W, height: H, top: 0, left: 0, transform: `translateZ(${D / 2}px)` }}>
+            <Image src={FRONT} alt="Book cover" fill style={{ objectFit: "cover" }} priority />
+            <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: `radial-gradient(circle at ${sheen.x}% ${sheen.y}%, rgba(255,255,255,0.18) 0%, transparent 55%)` }} />
           </div>
-
-          {/* BACK */}
-          <div
-            style={{
-              ...abs,
-              ...darkFace,
-              width: W,
-              height: H,
-              top: 0,
-              left: 0,
-              transform: `rotateY(180deg) translateZ(${D / 2}px)`,
-            }}
-          />
-
-          {/* SPINE (LEFT) */}
-          <div
-            style={{
-              ...abs,
-              ...edgeFace,
-              width: D,
-              height: H,
-              top: 0,
-              left: (W - D) / 2,
-              transform: `rotateY(-90deg) translateZ(${W / 2}px)`,
-            }}
-          />
-
-          {/* PAGES RIGHT */}
-          <div
-            style={{
-              ...abs,
-              ...pageEdge,
-              width: D,
-              height: H,
-              top: 0,
-              left: (W - D) / 2,
-              transform: `rotateY(90deg) translateZ(${W / 2}px)`,
-            }}
-          />
-
-          {/* PAGES TOP */}
-          <div
-            style={{
-              ...abs,
-              ...pageEdge,
-              width: W,
-              height: D,
-              top: (H - D) / 2,
-              left: 0,
-              transform: `rotateX(90deg) translateZ(${H / 2}px)`,
-            }}
-          />
-
-          {/* PAGES BOTTOM */}
-          <div
-            style={{
-              ...abs,
-              ...pageEdge,
-              width: W,
-              height: D,
-              top: (H - D) / 2,
-              left: 0,
-              transform: `rotateX(-90deg) translateZ(${H / 2}px)`,
-            }}
-          />
+          <div style={{ ...abs, width: W, height: H, top: 0, left: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)` }}>
+            <Image src={BACK} alt="Back cover" fill style={{ objectFit: "cover" }} />
+          </div>
+          <div style={{ ...abs, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(-90deg) translateZ(${W / 2}px)` }}>
+            <Image src={SPINE} alt="Spine" fill style={{ objectFit: "cover" }} />
+          </div>
+          <div style={{ ...abs, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(90deg) translateZ(${W / 2}px)` }}>
+            <Image src={EDGE_RIGHT} alt="Page edges" fill style={{ objectFit: "cover" }} />
+          </div>
+          <div style={{ ...abs, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(90deg) translateZ(${H / 2}px)` }}>
+            <Image src={EDGE_TOP} alt="Top pages" fill style={{ objectFit: "cover" }} />
+          </div>
+          <div style={{ ...abs, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(-90deg) translateZ(${H / 2}px)` }}>
+            <Image src={EDGE_BOTTOM} alt="Bottom pages" fill style={{ objectFit: "cover" }} />
+          </div>
         </div>
       </div>
     </div>
