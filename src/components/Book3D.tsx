@@ -17,8 +17,8 @@ const D = 50;
 
 const MAX_ROT_Y = 26;
 const MAX_ROT_X = 20;
-const REST_ROT_Y = 42;
-const REST_ROT_X = -12;
+const REST_ROT_Y = 0;
+const REST_ROT_X = 0;
 const SENSITIVITY_X = 480;
 const SENSITIVITY_Y = 360;
 const LERP = 0.12;
