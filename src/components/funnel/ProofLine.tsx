@@ -1,3 +1,9 @@
+"use client";
+
+import { useRef } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+import SectionImage from "@/components/SectionImage";
+
 const STATS = [
   { v: "$469M", l: "RESERVED", c: "Pre-market token reservations before a single public listing." },
   { v: "17,466", l: "INVESTORS", c: "Real people who put real capital behind the model." },
@@ -7,15 +13,25 @@ const STATS = [
 ];
 
 export default function ProofLine() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useScrollReveal(sectionRef);
+
   return (
-    <section className="relative py-14 md:py-[88px]">
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12">
-        <p className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gold mb-5 text-center">PRE-MARKET TOKEN RESERVATIONS &amp; MILESTONES</p>
-        <h2 className="text-tp font-extrabold tracking-[-0.025em] leading-[1.15] text-center max-w-[30ch] mx-auto" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>
+    <section ref={sectionRef} className="relative py-14 md:py-[88px] overflow-hidden">
+      <SectionImage
+        src="/images/earth-cubes/earth-cube-playbook-monolith.png"
+        alt=""
+        position="full"
+        opacity={0.1}
+        parallax={0.3}
+      />
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
+        <p data-reveal className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gold mb-5 text-center">PRE-MARKET TOKEN RESERVATIONS &amp; MILESTONES</p>
+        <h2 data-reveal className="text-tp font-extrabold tracking-[-0.025em] leading-[1.15] text-center max-w-[30ch] mx-auto" style={{ fontSize: "clamp(1.6rem, 3vw, 2.4rem)" }}>
           The numbers behind a category<br />
           that hasn&rsquo;t gone public yet.
         </h2>
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-0 md:divide-x divide-border border-t border-b border-border py-10 md:py-12">
+        <div data-reveal className="mt-16 grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-0 md:divide-x divide-border border-t border-b border-border py-10 md:py-12">
           {STATS.map((s) => (
             <div key={s.l} className="flex flex-col justify-between gap-4 px-4 md:px-6">
               <div>

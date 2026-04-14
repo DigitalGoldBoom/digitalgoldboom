@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import GSAPProvider from "@/components/GSAPProvider";
 import FallingGold from "@/components/FallingGold";
 import ScrollTracker from "@/components/ScrollTracker";
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/sections/Hero";
+import HeroSelector from "@/components/sections/HeroSelector";
+import HeroV1 from "@/components/sections/HeroV1";
 import PersonalStake from "@/components/funnel/PersonalStake";
 import Problem from "@/components/funnel/Problem";
 import Insight from "@/components/funnel/Insight";
@@ -23,7 +25,9 @@ export default function LongForm() {
       <ScrollTracker />
       <Navbar />
       <main>
-        <Hero />
+        <Suspense fallback={<HeroV1 />}>
+          <HeroSelector />
+        </Suspense>
         <PersonalStake />
         <Problem />
         <Insight />
