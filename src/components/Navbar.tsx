@@ -3,6 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+// Production URL for the natgold-token Vercel project.
+// Clean global alias — auto-updated by Vercel to the latest main-branch deploy.
+const TOKEN_APP_BASE = "https://natgold-token.vercel.app";
+const TOKEN_URL = `${TOKEN_APP_BASE}/dashboard`;
+const DEPOSITS_URL = `${TOKEN_APP_BASE}/cahuilla`;
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,8 +28,8 @@ export default function Navbar() {
         borderBottom: scrolled ? "1px solid var(--border-base)" : "1px solid transparent",
       }}
     >
-      <div className="max-w-[1400px] mx-auto px-5 md:px-12 flex items-center justify-between h-[72px]">
-        <Link href="/" className="flex items-center gap-2">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-12 flex items-center justify-between h-[72px] gap-4">
+        <Link href="/" className="flex items-center gap-2 shrink-0">
           <span
             className="text-tp"
             style={{
@@ -36,13 +42,39 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <Link
-          href="#join"
-          className="btn-primary"
-          style={{ fontSize: "13px", padding: "10px 22px" }}
-        >
-          Join the waitlist →
-        </Link>
+        <div className="flex items-center gap-1 md:gap-2">
+          <Link
+            href={TOKEN_URL}
+            className="hidden sm:inline-flex items-center rounded-full border border-[color:var(--border-base)] hover:border-[color:var(--ink-primary)] transition-colors"
+            style={{
+              fontSize: "13px",
+              padding: "8px 16px",
+              fontWeight: 500,
+              letterSpacing: "-0.005em",
+            }}
+          >
+            Token
+          </Link>
+          <Link
+            href={DEPOSITS_URL}
+            className="hidden sm:inline-flex items-center rounded-full border border-[color:var(--border-base)] hover:border-[color:var(--ink-primary)] transition-colors"
+            style={{
+              fontSize: "13px",
+              padding: "8px 16px",
+              fontWeight: 500,
+              letterSpacing: "-0.005em",
+            }}
+          >
+            Gold Deposits
+          </Link>
+          <Link
+            href="#join"
+            className="btn-primary"
+            style={{ fontSize: "13px", padding: "10px 22px" }}
+          >
+            Join the waitlist →
+          </Link>
+        </div>
       </div>
     </nav>
   );
