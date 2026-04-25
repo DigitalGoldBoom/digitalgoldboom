@@ -42,6 +42,12 @@ export type StatEntry = {
     precision: number;
     suffix?: string;
   };
+  /**
+   * Whether "up" is good (default) or bad. Cost stats (AISC, AITC) and debt
+   * stats are 'negative' — when they rise the dashboard colors the delta red.
+   * Tables stay color-neutral; this flag only affects standalone stat cards.
+   */
+  directionPolarity?: 'positive' | 'negative';
   // Free-form annotation: deferred reconciliation, divergences across chapters,
   // book-feedback cross-references, or anything the dashboard renderer should know
   // beyond the snapshot value itself. Surfaces in the audit log and in tooltips.
@@ -251,6 +257,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     liveSourceId: 'natgold-aisc',
     derivation: 'NatGold Real-Time AISC Index live value',
     displayHint: { format: 'price-per-oz', precision: 0 },
+    directionPolarity: 'negative',
   },
   {
     id: 'ch02-us-aisc',
@@ -606,6 +613,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     liveSourceId: 'natgold-aisc',
     derivation: 'NatGold Real-Time AISC Index live',
     displayHint: { format: 'price-per-oz', precision: 0 },
+    directionPolarity: 'negative',
   },
   {
     id: 'ch05-traditional-gross-revenue',
@@ -662,6 +670,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     liveSourceId: 'natgold-aisc',
     derivation: '508000 × aisc',
     displayHint: { format: 'currency', precision: 0, suffix: 'M' },
+    directionPolarity: 'negative',
   },
   {
     id: 'ch05-traditional-net-value',
@@ -777,6 +786,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     liveSourceId: 'natgold-biv',
     derivation: '420000 × biv × 0.33',
     displayHint: { format: 'currency', precision: 0, suffix: 'M' },
+    directionPolarity: 'negative',
     notes:
       'Added 2026-04-25 per book-changelog.md (was missing from Phase 1 first pass — Agent A audit truncated mid-Ch 5). Strict math: 420,000 × $3,518 × 0.33 = $487,594,800 → $488M. Pairs with ch05-traditional-operating-cost ($851M) in Step 5 net-value table; digital saves $362M (-43%). Cash portion ~$100-150K (app fee only); $488M paid in NatGold Tokens at the tokenization event. Resolves book-feedback.md item 4 (2026-04-25).',
   },
@@ -1265,6 +1275,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     liveSourceId: 'natgold-aisc',
     derivation: 'NatGold Real-Time AISC Index live value',
     displayHint: { format: 'price-per-oz', precision: 0 },
+    directionPolarity: 'negative',
   },
   {
     id: 'ch11-anchor-biv',
@@ -1308,10 +1319,10 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 4,
     },
     bookSnapshot: {
-      value: 469_000_000,
+      value: 469_656_324,
       unit: 'USD',
       date: '2026-02-26',
-      formula: 'NatGold pre-market reservation total at close',
+      formula: '133,518 reserved tokens × $3,518 BIV at close',
     },
     citations: [
       {
@@ -1320,9 +1331,8 @@ export const STATS_REGISTRY: StatEntry[] = [
           '$469 million of pre-market reservations from 17,466 participants across 162 countries came in against exactly this valuation model.',
       },
     ],
-    liveSourceId: 'natgold-biv-historical',
-    derivation:
-      'Locked at publication ($469.138M, 17,466 participants, 162 countries). Phase 2 may surface live secondary-market data once tokens trade.',
+    liveSourceId: 'natgold-biv',
+    derivation: '133518 × biv',
     displayHint: { format: 'currency', precision: 0, suffix: 'M' },
   },
 
@@ -1377,10 +1387,10 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 1,
     },
     bookSnapshot: {
-      value: 61_600_000_000,
+      value: 61_565_000_000,
       unit: 'USD',
       date: '2026-02-26',
-      formula: '17.5M tokens × $3,518 BIV',
+      formula: '17,500,000 tokens × $3,518 BIV (book prose: $61.6B)',
     },
     citations: [
       {
@@ -1406,10 +1416,10 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 2,
     },
     bookSnapshot: {
-      value: 44_900_000_000,
+      value: 44_942_450_000,
       unit: 'USD',
       date: '2026-02-26',
-      formula: '17.5M × 0.73 × $3,518',
+      formula: '17,500,000 × 0.73 × $3,518 (book prose: $44.9B)',
     },
     citations: [
       {
@@ -1434,10 +1444,10 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 3,
     },
     bookSnapshot: {
-      value: 12_300_000_000,
+      value: 12_313_000_000,
       unit: 'USD',
       date: '2026-02-26',
-      formula: '17.5M × 0.20 × $3,518',
+      formula: '17,500,000 × 0.20 × $3,518 (book prose: $12.3B)',
     },
     citations: [
       {
@@ -1462,10 +1472,10 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 4,
     },
     bookSnapshot: {
-      value: 3_080_000_000,
+      value: 3_078_250_000,
       unit: 'USD',
       date: '2026-02-26',
-      formula: '17.5M × 0.05 × $3,518',
+      formula: '17,500,000 × 0.05 × $3,518 (book prose: $3.08B)',
     },
     citations: [
       {
@@ -1490,10 +1500,10 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 5,
     },
     bookSnapshot: {
-      value: 1_230_000_000,
+      value: 1_231_300_000,
       unit: 'USD',
       date: '2026-02-26',
-      formula: '17.5M × 0.02 × $3,518',
+      formula: '17,500,000 × 0.02 × $3,518 (book prose: $1.23B)',
     },
     citations: [
       {
@@ -1518,10 +1528,10 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 6,
     },
     bookSnapshot: {
-      value: 176_000_000,
+      value: 175_900_000,
       unit: 'USD',
       date: '2026-02-26',
-      formula: 'Year 1: 2.5M tokens × 0.02 × $3,518',
+      formula: '2,500,000 tokens × 0.02 × $3,518 (book prose: $176M)',
     },
     citations: [
       {
@@ -1596,6 +1606,39 @@ export const STATS_REGISTRY: StatEntry[] = [
   // =========================================================================
   // CHAPTER 16 — Pre-Market Demand
   // =========================================================================
+  // Note: counts (17,466 participants, 162 countries, 133,518 tokens reserved,
+  // 307-day program) are STATIC historical facts about what happened during
+  // the pre-market window — they do NOT update. The DOLLAR figure tied to
+  // those reserved tokens IS dynamic — 133,518 × current BIV.
+  {
+    id: 'ch16-pre-market-reservation-value',
+    label: 'Pre-market reservation total at current BIV',
+    category: 'derived',
+    location: {
+      section: 2,
+      sectionTitle: S2,
+      chapter: 16,
+      chapterTitle: CH16,
+      figure: 'Pre-Market Demand headline',
+      orderInChapter: 1,
+    },
+    bookSnapshot: {
+      value: 469_656_324,
+      unit: 'USD',
+      date: '2026-02-26',
+      formula: '133,518 reserved tokens × $3,518 BIV at close (book prose: $469M / $469.138M)',
+    },
+    citations: [
+      {
+        file: 'C:\\DGB\\output\\kindle\\ch-16\\ch-16-pre-market-demand.md',
+        quote:
+          '$469.138 million pre-market reservations from 17,466 participants across 162 countries; 133,518 NatGold Tokens reserved.',
+      },
+    ],
+    liveSourceId: 'natgold-biv',
+    derivation: '133518 × biv',
+    displayHint: { format: 'currency', precision: 0, suffix: 'M' },
+  },
   {
     id: 'ch16-closing-biv-per-token',
     label: 'Closing BIV per token (program close Feb 25-26 2026)',
@@ -1606,7 +1649,7 @@ export const STATS_REGISTRY: StatEntry[] = [
       chapter: 16,
       chapterTitle: CH16,
       figure: 'Pre-Market Demand opening',
-      orderInChapter: 1,
+      orderInChapter: 2,
     },
     bookSnapshot: {
       value: 3518,
@@ -1635,7 +1678,7 @@ export const STATS_REGISTRY: StatEntry[] = [
       chapter: 16,
       chapterTitle: CH16,
       figure: 'Pre-Market Demand opening',
-      orderInChapter: 2,
+      orderInChapter: 3,
     },
     bookSnapshot: {
       value: 5194,
@@ -1663,7 +1706,7 @@ export const STATS_REGISTRY: StatEntry[] = [
       chapter: 16,
       chapterTitle: CH16,
       figure: 'Pre-Market Demand opening — equation restate',
-      orderInChapter: 3,
+      orderInChapter: 4,
     },
     bookSnapshot: {
       value: 1676,
@@ -1680,6 +1723,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     liveSourceId: 'natgold-aisc',
     derivation: 'NatGold Real-Time AISC Index live',
     displayHint: { format: 'price-per-oz', precision: 0 },
+    directionPolarity: 'negative',
   },
   {
     id: 'ch16-biv-jun-2025-checkpoint',
@@ -1691,7 +1735,7 @@ export const STATS_REGISTRY: StatEntry[] = [
       chapter: 16,
       chapterTitle: CH16,
       figure: 'Demand-curve narrative — historical reference',
-      orderInChapter: 4,
+      orderInChapter: 5,
     },
     bookSnapshot: {
       value: 1854,
@@ -1720,7 +1764,7 @@ export const STATS_REGISTRY: StatEntry[] = [
       chapter: 16,
       chapterTitle: CH16,
       figure: 'Demand-curve narrative — historical reference',
-      orderInChapter: 5,
+      orderInChapter: 6,
     },
     bookSnapshot: {
       value: 1761.69,
@@ -1748,7 +1792,7 @@ export const STATS_REGISTRY: StatEntry[] = [
       chapter: 16,
       chapterTitle: CH16,
       figure: 'Demand-curve narrative — historical reference',
-      orderInChapter: 6,
+      orderInChapter: 7,
     },
     bookSnapshot: {
       value: 2721.23,
@@ -1776,7 +1820,7 @@ export const STATS_REGISTRY: StatEntry[] = [
       chapter: 16,
       chapterTitle: CH16,
       figure: 'Demand-curve narrative — historical reference',
-      orderInChapter: 7,
+      orderInChapter: 8,
     },
     bookSnapshot: {
       value: 3001,
@@ -1804,7 +1848,7 @@ export const STATS_REGISTRY: StatEntry[] = [
       chapter: 16,
       chapterTitle: CH16,
       figure: 'Demand-curve narrative — late-wave window',
-      orderInChapter: 8,
+      orderInChapter: 9,
     },
     bookSnapshot: {
       value: 3260,

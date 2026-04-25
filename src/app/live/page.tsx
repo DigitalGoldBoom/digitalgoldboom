@@ -26,6 +26,7 @@ export default async function LivePage() {
       <Suspense fallback={null}>
         <LiveDashboard
           stats={stats}
+          bundle={bundle}
           assembledAt={bundle.assembledAt}
           errors={bundle.errors}
         />

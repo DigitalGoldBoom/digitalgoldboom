@@ -4,10 +4,22 @@
 
 export type DeltaDirection = 'up' | 'down' | 'flat';
 
+/**
+ * Whether "up" is good (price-style, positive polarity) or bad (cost-style,
+ * negative polarity). The arrow always reflects raw direction; only the
+ * color/sentiment flips for negative polarity.
+ */
+export type DirectionPolarity = 'positive' | 'negative';
+
+export type DeltaSentiment = 'good' | 'bad' | 'flat';
+
 export type DeltaResult = {
   absolute: number;
   percent: number;
+  /** Raw direction the value moved (▲ ▼ ●) — independent of polarity. */
   direction: DeltaDirection;
+  /** Sentiment colored by polarity: green/red/grey for good/bad/flat. */
+  sentiment: DeltaSentiment;
 };
 
 const FLAT_THRESHOLD_PERCENT = 0.5;
@@ -39,15 +51,31 @@ export function formatTime(date: Date): string {
 
 /**
  * Compute the delta between a snapshot value and a live value.
- * Returns absolute change, percent change, and direction relative to a flat band.
+ * Returns absolute change, percent change, raw direction, and a polarity-aware
+ * sentiment. For positive polarity (default), up is good. For negative polarity
+ * (cost stats — AISC, debt), up is bad and the color flips to red.
  */
-export function formatDelta(snapshot: number, live: number): DeltaResult {
+export function formatDelta(
+  snapshot: number,
+  live: number,
+  polarity: DirectionPolarity = 'positive',
+): DeltaResult {
   const absolute = live - snapshot;
   const percent = snapshot === 0 ? 0 : (absolute / snapshot) * 100;
   let direction: DeltaDirection = 'flat';
   if (percent > FLAT_THRESHOLD_PERCENT) direction = 'up';
   else if (percent < -FLAT_THRESHOLD_PERCENT) direction = 'down';
-  return { absolute, percent, direction };
+
+  let sentiment: DeltaSentiment;
+  if (direction === 'flat') {
+    sentiment = 'flat';
+  } else if (polarity === 'positive') {
+    sentiment = direction === 'up' ? 'good' : 'bad';
+  } else {
+    sentiment = direction === 'up' ? 'bad' : 'good';
+  }
+
+  return { absolute, percent, direction, sentiment };
 }
 
 /**

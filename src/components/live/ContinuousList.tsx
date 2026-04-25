@@ -3,11 +3,15 @@
 import { useMemo } from 'react';
 import type { HydratedStat } from '@/lib/live/derive';
 import type { SectionBlurb } from '@/data/section-blurbs';
+import { tablesForChapter } from '@/data/tables-registry';
+import type { LiveBundle } from '@/lib/live/sources';
 import LiveStatCard from './LiveStatCard';
+import BookStyledTable from './BookStyledTable';
 
 type Props = {
   stats: HydratedStat[];
   blurbs: SectionBlurb[];
+  bundle?: LiveBundle;
 };
 
 type ChapterGroup = {
@@ -60,7 +64,7 @@ function group(stats: HydratedStat[], blurbs: SectionBlurb[]): SectionGroup[] {
   return [...sections.values()].sort((a, b) => a.section - b.section);
 }
 
-export default function ContinuousList({ stats, blurbs }: Props) {
+export default function ContinuousList({ stats, blurbs, bundle }: Props) {
   const sections = useMemo(() => group(stats, blurbs), [stats, blurbs]);
 
   // Flat chapter list for the sticky rail.
@@ -160,36 +164,48 @@ export default function ContinuousList({ stats, blurbs }: Props) {
             </header>
 
             <div className="space-y-8">
-              {sec.chapters.map((c) => (
-                <div
-                  key={c.chapter}
-                  id={`chapter-${c.chapter}`}
-                  className="scroll-mt-24"
-                >
-                  <h3
-                    className="text-sm font-semibold mb-3 flex items-baseline gap-3"
-                    style={{ color: 'var(--text-primary)' }}
+              {sec.chapters.map((c) => {
+                const chapterTables = tablesForChapter(c.chapter);
+                return (
+                  <div
+                    key={c.chapter}
+                    id={`chapter-${c.chapter}`}
+                    className="scroll-mt-24"
                   >
-                    <span
-                      className="text-[10px] uppercase tracking-[0.18em] font-semibold"
-                      style={{ color: 'var(--accent-gold)' }}
+                    <h3
+                      className="text-sm font-semibold mb-3 flex items-baseline gap-3"
+                      style={{ color: 'var(--text-primary)' }}
                     >
-                      Ch {c.chapter}
-                    </span>
-                    <span>{c.chapterTitle}</span>
-                  </h3>
-                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                    {c.stats.map((s) => (
-                      <LiveStatCard
-                        key={s.entry.id}
-                        entry={s.entry}
-                        liveValue={s.liveValue}
-                        liveSource={s.liveSource}
-                      />
-                    ))}
+                      <span
+                        className="text-[10px] uppercase tracking-[0.18em] font-semibold"
+                        style={{ color: 'var(--accent-gold)' }}
+                      >
+                        Ch {c.chapter}
+                      </span>
+                      <span>{c.chapterTitle}</span>
+                    </h3>
+                    {chapterTables.length > 0 && bundle && (
+                      <div className="mb-4">
+                        {chapterTables.map((t) => (
+                          <BookStyledTable key={t.id} table={t} bundle={bundle} />
+                        ))}
+                      </div>
+                    )}
+                    {c.stats.length > 0 && (
+                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {c.stats.map((s) => (
+                          <LiveStatCard
+                            key={s.entry.id}
+                            entry={s.entry}
+                            liveValue={s.liveValue}
+                            liveSource={s.liveSource}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         ))}

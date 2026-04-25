@@ -3,6 +3,8 @@
 import { useMemo, useState } from 'react';
 import type { HydratedStat } from '@/lib/live/derive';
 import type { SectionBlurb } from '@/data/section-blurbs';
+import { tablesForChapter } from '@/data/tables-registry';
+import type { LiveBundle } from '@/lib/live/sources';
 import ChapterPanel from './ChapterPanel';
 
 type Props = {
@@ -10,6 +12,8 @@ type Props = {
   sectionTitle: string;
   blurb?: SectionBlurb;
   stats: HydratedStat[];
+  /** Live bundle for table cell derivations. */
+  bundle?: LiveBundle;
   defaultOpen?: boolean;
 };
 
@@ -45,6 +49,7 @@ export default function SectionPanel({
   sectionTitle,
   blurb,
   stats,
+  bundle,
   defaultOpen = false,
 }: Props) {
   const [open, setOpen] = useState(defaultOpen);
@@ -125,6 +130,8 @@ export default function SectionPanel({
               chapter={c.chapter}
               chapterTitle={c.chapterTitle}
               stats={c.stats}
+              tables={tablesForChapter(c.chapter)}
+              bundle={bundle}
             />
           ))}
         </div>

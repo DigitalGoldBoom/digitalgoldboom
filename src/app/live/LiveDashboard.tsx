@@ -4,13 +4,16 @@ import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
 import type { HydratedStat } from '@/lib/live/derive';
 import { SECTION_BLURBS, type SectionBlurb } from '@/data/section-blurbs';
+import type { LiveBundle } from '@/lib/live/sources';
 import LayoutToggle, { type LiveView } from '@/components/live/LayoutToggle';
 import LastUpdatedBadge from '@/components/live/LastUpdatedBadge';
 import SectionPanel from '@/components/live/SectionPanel';
 import ContinuousList from '@/components/live/ContinuousList';
+import KeyInputsRow from '@/components/live/KeyInputsRow';
 
 type Props = {
   stats: HydratedStat[];
+  bundle: LiveBundle;
   assembledAt: string;
   errors: Record<string, string>;
 };
@@ -39,7 +42,7 @@ function groupBySection(stats: HydratedStat[]): SectionGroup[] {
   return [...map.values()].sort((a, b) => a.section - b.section);
 }
 
-export default function LiveDashboard({ stats, assembledAt, errors }: Props) {
+export default function LiveDashboard({ stats, bundle, assembledAt, errors }: Props) {
   const searchParams = useSearchParams();
   const viewParam = searchParams?.get('view');
   const view: LiveView = viewParam === 'continuous' ? 'continuous' : 'section';
@@ -77,6 +80,8 @@ export default function LiveDashboard({ stats, assembledAt, errors }: Props) {
         </div>
       </header>
 
+      <KeyInputsRow spot={bundle.spot} aisc={bundle.aisc} biv={bundle.biv} />
+
       <div className="flex items-center justify-between mb-6">
         <LayoutToggle value={view} />
         <span
@@ -96,12 +101,13 @@ export default function LiveDashboard({ stats, assembledAt, errors }: Props) {
               sectionTitle={sec.sectionTitle}
               blurb={sec.blurb}
               stats={sec.stats}
+              bundle={bundle}
               defaultOpen={idx === 0}
             />
           ))}
         </div>
       ) : (
-        <ContinuousList stats={stats} blurbs={SECTION_BLURBS} />
+        <ContinuousList stats={stats} blurbs={SECTION_BLURBS} bundle={bundle} />
       )}
 
       <footer

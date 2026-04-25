@@ -18,23 +18,21 @@ type Props = {
 
 function DeltaPill({ delta }: { delta: DeltaResult }) {
   const pct = Math.abs(delta.percent).toFixed(1);
-  if (delta.direction === 'up') {
-    return (
-      <span className="text-sm font-medium text-[var(--success,#15803d)]">
-        ▲ +{pct}%
-      </span>
-    );
-  }
-  if (delta.direction === 'down') {
-    return (
-      <span className="text-sm font-medium text-[var(--error,#b91c1c)]">
-        ▼ −{pct}%
-      </span>
-    );
-  }
+  // Arrow follows raw direction; color follows polarity-aware sentiment.
+  const arrow =
+    delta.direction === 'up' ? '▲' : delta.direction === 'down' ? '▼' : '●';
+  const sign =
+    delta.direction === 'up' ? '+' : delta.direction === 'down' ? '−' : '';
+  const color =
+    delta.sentiment === 'good'
+      ? 'var(--success,#15803d)'
+      : delta.sentiment === 'bad'
+        ? 'var(--error,#b91c1c)'
+        : 'var(--text-muted)';
   return (
-    <span className="text-sm font-medium text-[var(--text-muted)]">
-      ● {pct}%
+    <span className="text-sm font-medium" style={{ color }}>
+      {arrow} {sign}
+      {pct}%
     </span>
   );
 }
@@ -56,7 +54,9 @@ export default function LiveStatCard({ entry, liveValue, liveSource }: Props) {
       : null;
 
   const delta =
-    liveValue !== undefined ? formatDelta(snapshot.value, liveValue) : null;
+    liveValue !== undefined
+      ? formatDelta(snapshot.value, liveValue, entry.directionPolarity ?? 'positive')
+      : null;
 
   const commentary = liveValue !== undefined ? generateCommentary(entry, delta) : null;
   const isStale = liveSource?.stale === true;
