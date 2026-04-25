@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { formatPrice, formatTime } from '@/lib/format';
 
 // ============================================
 // TYPES
@@ -243,25 +244,10 @@ function PriceChange({
 }
 
 // ============================================
-// FORMAT PRICE
+// FORMAT HELPERS — imported from @/lib/format (deduped 2026-04-25)
 // ============================================
-
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(price);
-}
-
-function formatTime(date: Date): string {
-  return date.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZoneName: 'short',
-  });
-}
+// formatPrice and formatTime are now centralized in src/lib/format.ts so the
+// /live dashboard and PriceCard share one implementation.
 
 // ============================================
 // COMPACT VARIANT
@@ -735,3 +721,4 @@ export function HeroPriceGrid() {
 
 export { usePriceData, formatPrice, formatTime };
 export type { PriceCardProps, PriceData, PriceSymbol, CardVariant, PriceStatus };
+

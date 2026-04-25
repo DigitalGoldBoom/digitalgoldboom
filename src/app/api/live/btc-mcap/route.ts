@@ -1,0 +1,23 @@
+import { NextResponse } from 'next/server';
+import { fetchBtcMcap } from '@/lib/live/sources';
+
+export const runtime = 'edge';
+
+const TTL_SECONDS = 300;
+
+/** GET /api/live/btc-mcap — Bitcoin market cap from CoinGecko. */
+export async function GET() {
+  try {
+    const value = await fetchBtcMcap();
+    return NextResponse.json(value, {
+      headers: {
+        'Cache-Control': `s-maxage=${TTL_SECONDS}, stale-while-revalidate=${TTL_SECONDS * 2}`,
+      },
+    });
+  } catch (e) {
+    return NextResponse.json(
+      { error: e instanceof Error ? e.message : 'btc-mcap fetch failed' },
+      { status: 502 },
+    );
+  }
+}
