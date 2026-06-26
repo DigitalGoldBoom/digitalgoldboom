@@ -21,13 +21,17 @@ export default function Hero() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
-  // Reveals are CSS-driven (see [data-hero-reveal] in globals.css) so the LCP element (the book
-  // cover image) and the headline paint immediately, instead of waiting for JS to hydrate + run
-  // GSAP. GSAP here only handles the scroll parallax — a transform, which never gates the paint.
+  // Reveals are CSS-driven (globals.css) so the LCP paints immediately. GSAP only does the
+  // book parallax — a composited transform on the wrapper, tied directly to scroll (scrub:true,
+  // no lag) so it stays smooth.
   useGSAP(
     () => {
       if (!imageRef.current) return;
-      gsap.to(imageRef.current, { y: -50, ease: "none", scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: 1 }, immediateRender: false });
+      gsap.to(imageRef.current, {
+        y: -48,
+        ease: "none",
+        scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
+      });
     },
     { scope: sectionRef },
   );

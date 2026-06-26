@@ -65,6 +65,9 @@ export function useScrollReveal<T extends HTMLElement>(
           start,
           toggleActions: once ? "play none none none" : "play none none reverse",
         },
+        // Keep immediateRender false so content is NEVER stuck hidden if a trigger misfires
+        // (a blank section is worse than a small reveal). The jolt is mostly killed by once:true
+        // above (no reverse/re-animate on scroll-out) + the fonts.ready refresh.
         immediateRender: false,
       },
     );

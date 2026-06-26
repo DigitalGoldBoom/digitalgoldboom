@@ -25,6 +25,30 @@ const sinLut = (v: number) => LUT[((v * LUT_F) | 0) & LUT_MASK];
 
 const BUCKETS = 24;
 
+// Shared scroll state: one passive listener flips a flag while the page is scrolling so every
+// dot-field pauses its render during scroll (smooth scroll), then resumes ~140ms after it stops.
+let _scrolling = false;
+let _scrollTimer: ReturnType<typeof setTimeout> | undefined;
+let _scrollBound = false;
+function isScrolling() {
+  if (typeof window === "undefined") return false;
+  if (!_scrollBound) {
+    _scrollBound = true;
+    window.addEventListener(
+      "scroll",
+      () => {
+        _scrolling = true;
+        if (_scrollTimer) clearTimeout(_scrollTimer);
+        _scrollTimer = setTimeout(() => {
+          _scrolling = false;
+        }, 140);
+      },
+      { passive: true },
+    );
+  }
+  return _scrolling;
+}
+
 export type DotFieldOptions = {
   cell: number;
   dot: number;
@@ -154,9 +178,10 @@ export function createDotField(
     render();
   }
 
-  // STATIC mode: touch / no-hover / reduced-motion → render once, no animation loop ever.
-  const noHover = window.matchMedia?.("(hover: none), (pointer: coarse)").matches;
-  const isStatic = opts.forceStatic || noHover || prefersReducedMotion();
+  // STATIC only for reduced-motion (or explicit opt-out). Mobile now animates too — the engine
+  // is light enough, and we PAUSE the render while the user is scrolling (see isScrolling) so
+  // scrolling stays perfectly smooth on every device.
+  const isStatic = opts.forceStatic || prefersReducedMotion();
 
   resize();
   window.addEventListener("resize", resize, { passive: true });
@@ -173,7 +198,9 @@ export function createDotField(
 
   const loop = (now: number) => {
     raf = requestAnimationFrame(loop);
-    if (!visible || !onScreen) return;
+    // Pause the (relatively heavy) canvas render while the page is scrolling so the main thread
+    // and compositor are free for a smooth scroll. Resumes the instant scrolling stops.
+    if (!visible || !onScreen || isScrolling()) return;
     if (now - last < frameMs) return;
     last = now;
     t += timeSpeed;
