@@ -13,7 +13,7 @@ const DOT = 4; // square size, px (Framer size=4)
 const GAP = 2; // gap between squares, px (Framer gap=2)
 const CELL = DOT + GAP; // 6px grid pitch
 const GOLD = "255,179,0"; // Framer Shimmer Dot color
-const TIME_SPEED = 0.09; // animation speed (faster, ~Framer)
+const TIME_SPEED = 0.18; // animation speed (2x)
 const SPARSE = 0.08; // floor below which a cell stays dark
 
 export default function HeroShimmer() {
