@@ -3,18 +3,18 @@
 import { useEffect, useRef } from "react";
 
 /**
- * ShimmerDots — the Framer "Shimmer Dot" effect as a reusable background layer:
- * an animated grid of gold squares (4px, 2px gap, rgb(255,179,0)) that twinkle.
- * Transparent canvas — drop it as an absolute-inset layer behind content.
- * Reduced-motion aware.
+ * ShimmerDots — the Framer "Shimmer Dot" effect (animated gold square grid).
+ * Performance: capped DPR, throttled to ~30fps, and paused when off-screen or
+ * when the tab is hidden — so it costs nothing until it's actually visible.
  */
 
 const DOT = 4;
 const GAP = 2;
 const CELL = DOT + GAP;
 const GOLD = "255,179,0";
-const TIME_SPEED = 0.18; // animation speed (2x)
+const TIME_SPEED = 0.18;
 const SPARSE = 0.08;
+const FRAME = 1000 / 30; // throttle to 30fps
 
 export default function ShimmerDots({ opacity = 0.85 }: { opacity?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -36,17 +36,11 @@ export default function ShimmerDots({ opacity = 0.85 }: { opacity?: number }) {
     let w = 0;
     let h = 0;
     let dpr = 1;
+    let last = 0;
+    let visible = true;
+    let onScreen = true;
 
-    function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    function draw() {
+    function render() {
       ctx.clearRect(0, 0, w, h);
       const cols = Math.ceil(w / CELL) + 1;
       const rows = Math.ceil(h / CELL) + 1;
@@ -74,19 +68,50 @@ export default function ShimmerDots({ opacity = 0.85 }: { opacity?: number }) {
           ctx.fillRect(x * CELL, yy, DOT, DOT);
         }
       }
-      if (!reduceMotion) {
-        t -= TIME_SPEED; // reversed direction
-        raf = requestAnimationFrame(draw);
-      }
+    }
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      render();
+    }
+
+    function loop(now: number) {
+      raf = requestAnimationFrame(loop);
+      if (!visible || !onScreen) return;
+      if (now - last < FRAME) return;
+      last = now;
+      t -= TIME_SPEED;
+      render();
     }
 
     resize();
     window.addEventListener("resize", resize, { passive: true });
-    draw();
+
+    const onVis = () => {
+      visible = document.visibilityState === "visible";
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        onScreen = entries.some((e) => e.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+    io.observe(canvas);
+
+    if (!reduceMotion) raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVis);
+      io.disconnect();
     };
   }, []);
 

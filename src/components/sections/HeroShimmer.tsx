@@ -3,18 +3,17 @@
 import { useEffect, useRef } from "react";
 
 /**
- * HeroShimmer — replica of the Framer "Shimmer Dot" component used on the
- * Digital Gold Boom site: a full-area grid of small GOLD squares that twinkle.
- * Framer config: shape=Square, size=4px, gap=2px (→ 6px cell), color rgb(255,179,0),
- * animated (speed 30). Sits on a near-black base behind the hero content.
+ * HeroShimmer — Framer "Shimmer Dot" gold grid behind the hero.
+ * Performance: capped DPR, throttled to ~30fps, paused off-screen / tab-hidden.
  */
 
-const DOT = 4; // square size, px (Framer size=4)
-const GAP = 2; // gap between squares, px (Framer gap=2)
-const CELL = DOT + GAP; // 6px grid pitch
-const GOLD = "255,179,0"; // Framer Shimmer Dot color
-const TIME_SPEED = 0.18; // animation speed (2x)
-const SPARSE = 0.08; // floor below which a cell stays dark
+const DOT = 4;
+const GAP = 2;
+const CELL = DOT + GAP;
+const GOLD = "255,179,0";
+const TIME_SPEED = 0.18;
+const SPARSE = 0.08;
+const FRAME = 1000 / 30;
 
 export default function HeroShimmer() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -36,26 +35,18 @@ export default function HeroShimmer() {
     let w = 0;
     let h = 0;
     let dpr = 1;
+    let last = 0;
+    let visible = true;
+    let onScreen = true;
 
-    function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    function draw() {
+    function render() {
       ctx.clearRect(0, 0, w, h);
       const cols = Math.ceil(w / CELL) + 1;
       const rows = Math.ceil(h / CELL) + 1;
-
       const t1 = t * 0.6;
       const t2 = t * 0.45;
       const t3 = t * 0.8;
       const t4 = t * 0.4;
-
       for (let y = 0; y < rows; y++) {
         const yy = y * CELL;
         for (let x = 0; x < cols; x++) {
@@ -76,20 +67,50 @@ export default function HeroShimmer() {
           ctx.fillRect(x * CELL, yy, DOT, DOT);
         }
       }
+    }
 
-      if (!reduceMotion) {
-        t -= TIME_SPEED; // reversed direction
-        raf = requestAnimationFrame(draw);
-      }
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      w = canvas.clientWidth;
+      h = canvas.clientHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      render();
+    }
+
+    function loop(now: number) {
+      raf = requestAnimationFrame(loop);
+      if (!visible || !onScreen) return;
+      if (now - last < FRAME) return;
+      last = now;
+      t -= TIME_SPEED;
+      render();
     }
 
     resize();
     window.addEventListener("resize", resize, { passive: true });
-    draw();
+
+    const onVis = () => {
+      visible = document.visibilityState === "visible";
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        onScreen = entries.some((e) => e.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+    io.observe(canvas);
+
+    if (!reduceMotion) raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVis);
+      io.disconnect();
     };
   }, []);
 
@@ -99,7 +120,6 @@ export default function HeroShimmer() {
       aria-hidden="true"
       style={{ background: "#00020F" }}
     >
-      {/* Soft warm gold glow up top for depth */}
       <div
         className="absolute inset-x-0 top-0 h-[70%]"
         style={{
@@ -107,11 +127,7 @@ export default function HeroShimmer() {
             "radial-gradient(80% 70% at 50% 0%, rgba(255,179,0,0.14) 0%, transparent 60%)",
         }}
       />
-
-      {/* The gold Shimmer Dot grid */}
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" style={{ opacity: 0.85 }} />
-
-      {/* Bottom fade so the hero melts into the page below */}
       <div
         className="absolute inset-x-0 bottom-0 h-40"
         style={{ background: "linear-gradient(to bottom, transparent, #00020F)" }}

@@ -9,6 +9,7 @@ const GOLD_G = 168;
 const GOLD_B = 67;
 const SPARSE_THRESHOLD = 0.10;
 const TIME_SPEED = 0.012;
+const FRAME = 1000 / 30; // throttle to 30fps
 
 export default function FallingGold() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -32,7 +33,7 @@ export default function FallingGold() {
     let dpr = 1;
 
     function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);
@@ -41,9 +42,10 @@ export default function FallingGold() {
       canvas.style.height = h + "px";
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
+      render();
     }
 
-    function draw() {
+    function render() {
       ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, w, h);
 
@@ -78,19 +80,32 @@ export default function FallingGold() {
         }
       }
 
-      if (!reduceMotion) {
-        t += TIME_SPEED;
-        raf = requestAnimationFrame(draw);
-      }
+    }
+
+    let last = 0;
+    let visible = true;
+    function loop(now: number) {
+      raf = requestAnimationFrame(loop);
+      if (!visible) return;
+      if (now - last < FRAME) return;
+      last = now;
+      t += TIME_SPEED;
+      render();
     }
 
     resize();
     window.addEventListener("resize", resize, { passive: true });
-    draw();
+    const onVis = () => {
+      visible = document.visibilityState === "visible";
+    };
+    document.addEventListener("visibilitychange", onVis);
+    if (reduceMotion) render();
+    else raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", onVis);
     };
   }, []);
 
