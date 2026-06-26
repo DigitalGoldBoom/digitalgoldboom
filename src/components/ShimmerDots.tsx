@@ -13,7 +13,7 @@ const DOT = 4;
 const GAP = 2;
 const CELL = DOT + GAP;
 const GOLD = "255,179,0";
-const TIME_SPEED = 0.05; // visibly animated twinkle/flow
+const TIME_SPEED = 0.09; // animation speed (faster, ~Framer)
 const SPARSE = 0.08;
 
 export default function ShimmerDots({ opacity = 0.85 }: { opacity?: number }) {
@@ -75,7 +75,7 @@ export default function ShimmerDots({ opacity = 0.85 }: { opacity?: number }) {
         }
       }
       if (!reduceMotion) {
-        t += TIME_SPEED;
+        t -= TIME_SPEED; // reversed direction
         raf = requestAnimationFrame(draw);
       }
     }
