@@ -1,7 +1,6 @@
 import GSAPProvider from "@/components/GSAPProvider";
 import FallingGold from "@/components/FallingGold";
 import ScrollTracker from "@/components/ScrollTracker";
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
 import TokenLaunch from "@/components/sections/TokenLaunch";
 import Problem from "@/components/funnel/Problem";
@@ -20,7 +19,6 @@ export default function Home() {
     <GSAPProvider>
       <FallingGold />
       <ScrollTracker />
-      <Navbar />
       <main>
         <Hero />
         <TokenLaunch />

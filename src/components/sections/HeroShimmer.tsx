@@ -13,7 +13,7 @@ const DOT = 4; // square size, px (Framer size=4)
 const GAP = 2; // gap between squares, px (Framer gap=2)
 const CELL = DOT + GAP; // 6px grid pitch
 const GOLD = "255,179,0"; // Framer Shimmer Dot color
-const TIME_SPEED = 0.022; // twinkle speed
+const TIME_SPEED = 0.05; // visibly animated twinkle/flow
 const SPARSE = 0.08; // floor below which a cell stays dark
 
 export default function HeroShimmer() {
@@ -51,10 +51,10 @@ export default function HeroShimmer() {
       const cols = Math.ceil(w / CELL) + 1;
       const rows = Math.ceil(h / CELL) + 1;
 
-      const t1 = t * 0.3;
-      const t2 = t * 0.22;
-      const t3 = t * 0.4;
-      const t4 = t * 0.18;
+      const t1 = t * 0.6;
+      const t2 = t * 0.45;
+      const t3 = t * 0.8;
+      const t4 = t * 0.4;
 
       for (let y = 0; y < rows; y++) {
         const yy = y * CELL;

@@ -7,9 +7,9 @@ import { usePathname } from "next/navigation";
 
 /**
  * Navbar — replica of the Digital Gold Boom Framer navbar.
- * Left: white wordmark. Right: translucent pill (PixelShovel logo + nav links)
- * and a blue-gradient "Contact Us" CTA. Collapses to a hamburger dropdown on
- * tablet / all mobile widths (< lg). Links use the exact Framer hrefs.
+ * Layout: PixelShovel wordmark (left), centered translucent pill of nav links,
+ * blue-gradient "Contact Us" CTA (right). Links highlight (pill fill) on hover
+ * and on the current page. Collapses to a hamburger dropdown on tablet/mobile.
  */
 
 const LINKS = [
@@ -21,7 +21,6 @@ const LINKS = [
 ];
 
 const CTA_GRADIENT = "linear-gradient(180deg, #4D76FF 0%, #003BFF 100%)";
-const INACTIVE = "rgb(109,119,146)";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -30,14 +29,22 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  const linkClass = (active: boolean) =>
+    [
+      "whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-medium transition-colors duration-200",
+      active
+        ? "bg-[#131839] text-white"
+        : "text-[#6d7792] hover:bg-[#131839] hover:text-white",
+    ].join(" ");
+
   return (
     <nav className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-5 sm:pt-[30px]">
-      <div className="pointer-events-auto mx-auto flex w-[92%] max-w-[1320px] items-center justify-between gap-4">
-        {/* Left wordmark */}
-        <Link href="/" className="shrink-0" aria-label="Digital Gold Boom — home">
+      <div className="pointer-events-auto mx-auto flex w-[92%] max-w-[1320px] items-center justify-between gap-4 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+        {/* Left — PixelShovel wordmark */}
+        <Link href="/" className="shrink-0 lg:justify-self-start" aria-label="Digital Gold Boom — home">
           <Image
             src="/nav-framer/logo-wordmark.png"
-            alt="Digital Gold Boom"
+            alt="PixelShovel"
             width={180}
             height={40}
             priority
@@ -45,82 +52,57 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Right cluster */}
-        <div className="flex items-center gap-3">
-          <div
-            className="flex items-center gap-1 rounded-full p-2 lg:gap-4 lg:pr-6"
-            style={{
-              background: "rgba(10,13,31,0.8)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-            }}
-          >
-            <Image
-              src="/nav-framer/logo-pixelshovel.svg"
-              alt="PixelShovel"
-              width={97}
-              height={33}
-              className="mx-1 h-[26px] w-auto sm:h-[31px]"
-            />
-
-            {/* Desktop links */}
-            <div className="hidden items-center lg:flex">
-              {LINKS.map((l) => {
-                const active = isActive(l.href);
-                return (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    className="whitespace-nowrap rounded-full px-4 py-3 text-sm font-medium transition-colors hover:text-white"
-                    style={{
-                      background: active ? "rgb(19,24,57)" : "transparent",
-                      color: active ? "#fff" : INACTIVE,
-                    }}
-                  >
-                    {l.label}
-                  </Link>
-                );
-              })}
-            </div>
-
-            {/* Hamburger — tablet / mobile */}
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              aria-label="Open menu"
-              aria-expanded={open}
-              className="flex items-center justify-center rounded-full px-4 py-3 lg:hidden"
-              style={{ background: "rgb(14,18,46)" }}
-            >
-              <Image src="/nav-framer/menu.svg" alt="" width={24} height={24} className="h-6 w-6" />
-            </button>
+        {/* Center — pill of nav links */}
+        <div
+          className="flex items-center gap-1 rounded-full p-1.5 lg:justify-self-center"
+          style={{
+            background: "rgba(10,13,31,0.8)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
+        >
+          <div className="hidden items-center lg:flex">
+            {LINKS.map((l) => (
+              <Link key={l.href} href={l.href} className={linkClass(isActive(l.href))}>
+                {l.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Contact CTA — desktop */}
-          <Link
-            href="/contact"
-            className="hidden items-center whitespace-nowrap rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-90 lg:inline-flex"
-            style={{ padding: "14px 20px", background: CTA_GRADIENT }}
+          {/* Hamburger — tablet / mobile */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Open menu"
+            aria-expanded={open}
+            className="flex items-center justify-center rounded-full px-4 py-3 text-white transition-colors hover:bg-[#131839] lg:hidden"
           >
-            Contact Us
-          </Link>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
         </div>
+
+        {/* Right — Contact CTA */}
+        <Link
+          href="/contact"
+          className="hidden items-center whitespace-nowrap rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-90 lg:inline-flex lg:justify-self-end"
+          style={{ padding: "13px 20px", background: CTA_GRADIENT }}
+        >
+          Contact Us
+        </Link>
       </div>
 
       {/* Mobile / tablet dropdown */}
       {open && (
         <div className="pointer-events-auto mx-auto mt-3 flex w-[92%] max-w-[1320px] justify-end lg:hidden">
-          <div
-            className="flex w-[230px] flex-col gap-4 rounded-2xl p-5"
-            style={{ background: "rgb(10,13,31)" }}
-          >
+          <div className="flex w-[230px] flex-col gap-1.5 rounded-2xl p-3" style={{ background: "rgb(10,13,31)" }}>
             {LINKS.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-[15px] font-medium transition-colors hover:text-white"
-                style={{ color: isActive(l.href) ? "#fff" : INACTIVE }}
+                className={linkClass(isActive(l.href))}
               >
                 {l.label}
               </Link>
