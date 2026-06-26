@@ -168,6 +168,10 @@ export function generateArticleSchema({
 }
 
 export function generateBookSchema() {
+  // NOTE: only real, verifiable facts here. No invented rating / reviewCount / pageCount /
+  // dollar claims — fabricated values in JSON-LD get quoted verbatim by Google and AI and
+  // violate the project's "no placeholder data" rule. Add aggregateRating ONLY with real
+  // reviews; add numberOfPages ONLY with the real count.
   return {
     '@context': 'https://schema.org',
     '@type': 'Book',
@@ -176,15 +180,10 @@ export function generateBookSchema() {
       '@type': 'Person',
       name: 'Andrew Fletcher',
     },
-    description: 'The definitive guide to the $200 billion revolution in gold tokenization.',
+    description:
+      'Decoding the start of the biggest gold rush in history — how digital gold mining tokenizes in-ground verified gold into a tradeable, eco-friendly, gold-backed asset.',
     genre: 'Business & Finance',
     inLanguage: 'en',
-    numberOfPages: 250,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '127',
-    },
   };
 }
 
