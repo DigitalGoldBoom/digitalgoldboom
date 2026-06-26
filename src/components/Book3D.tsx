@@ -29,13 +29,15 @@ const IMG = {
 };
 
 const PERSPECTIVE = 1200;
-const REST_RY = 6; // near front-on; tilts both ways with the mouse
-const REST_RX = -6;
-const MAX_RY = 46; // mouse-left -> ~-40deg (reveals page edges), right -> spine
-const MAX_RX = 22;
-const SENS_X = 360; // smaller = more responsive to mouse position
+// Rest is an angled 3/4 view so the spine + page edges show WITHOUT a mouse
+// (critical on mobile/touch, which can't tilt it).
+const REST_RY = -22; // shows the right page-edge thickness + cover at rest
+const REST_RX = -9; // slight downward tilt -> top page edge shows
+const MAX_RY = 36; // desktop: mouse-left -> more page edge, mouse-right -> spine
+const MAX_RX = 16;
+const SENS_X = 360;
 const SENS_Y = 300;
-const LERP = 0.17; // snappier / faster follow
+const LERP = 0.17;
 
 export default function Book3D() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -50,9 +52,47 @@ export default function Book3D() {
     const box = boxRef.current;
     if (!wrap || !box) return;
 
+    const setTransform = (ry: number, rx: number) => {
+      box.style.transform = `translateZ(-${D / 2}px) rotateY(${ry}deg) rotateX(${rx}deg)`;
+    };
+    setTransform(REST_RY, REST_RX); // initial 3/4 pose (shows spine/pages without a mouse)
+
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const noHover =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(hover: none), (pointer: coarse)").matches;
+
+    // Touch / no-mouse / reduced-motion: keep the static 3/4 pose. No rAF, no
+    // listeners — removes the perpetual animation loop that bogged down mobile.
+    if (reduceMotion || noHover) return;
+
+    let running = false;
+    let onScreen = true;
+
     function center() {
       const r = box!.getBoundingClientRect();
       return { cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+    }
+    function tick() {
+      const c = current.current;
+      const t = target.current;
+      c.ry += (t.ry - c.ry) * LERP;
+      c.rx += (t.rx - c.rx) * LERP;
+      setTransform(Number(c.ry.toFixed(2)), Number(c.rx.toFixed(2)));
+      // Stop the loop once settled — only animates while actually moving.
+      if (Math.abs(t.ry - c.ry) < 0.04 && Math.abs(t.rx - c.rx) < 0.04) {
+        running = false;
+        return;
+      }
+      raf.current = requestAnimationFrame(tick);
+    }
+    function ensure() {
+      if (!running && onScreen) {
+        running = true;
+        raf.current = requestAnimationFrame(tick);
+      }
     }
     function onMove(e: MouseEvent) {
       const { cx, cy } = center();
@@ -64,26 +104,34 @@ export default function Book3D() {
         interacted.current = true;
         track("book3d_interaction");
       }
+      ensure();
     }
     function onLeave() {
       target.current.ry = REST_RY;
       target.current.rx = REST_RX;
+      ensure();
     }
-    function tick() {
-      const c = current.current;
-      const t = target.current;
-      c.ry += (t.ry - c.ry) * LERP;
-      c.rx += (t.rx - c.rx) * LERP;
-      box!.style.transform = `translateZ(-${D / 2}px) rotateY(${c.ry.toFixed(2)}deg) rotateX(${c.rx.toFixed(2)}deg)`;
-      raf.current = requestAnimationFrame(tick);
-    }
+
     const scope = wrap.closest("section") ?? document.body;
     scope.addEventListener("mousemove", onMove as EventListener);
     scope.addEventListener("mouseleave", onLeave);
-    raf.current = requestAnimationFrame(tick);
+    const io = new IntersectionObserver(
+      (entries) => {
+        onScreen = entries.some((e) => e.isIntersecting);
+        if (onScreen) ensure();
+        else if (raf.current) {
+          cancelAnimationFrame(raf.current);
+          running = false;
+        }
+      },
+      { threshold: 0 },
+    );
+    io.observe(box);
+
     return () => {
       scope.removeEventListener("mousemove", onMove as EventListener);
       scope.removeEventListener("mouseleave", onLeave);
+      io.disconnect();
       if (raf.current) cancelAnimationFrame(raf.current);
     };
   }, []);

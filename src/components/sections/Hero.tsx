@@ -85,8 +85,8 @@ export default function Hero() {
             </p>
 
             <h1 data-hero-reveal className="text-tp font-extrabold tracking-[-0.04em] leading-[1.12]" style={{ fontSize: "clamp(2rem, 4.5vw, 3.8rem)" }}>
-              <span className="block whitespace-nowrap">Missed Bitcoin?</span>
-              <span className="block whitespace-nowrap mt-2">
+              <span className="block whitespace-normal lg:whitespace-nowrap">Missed Bitcoin?</span>
+              <span className="block whitespace-normal lg:whitespace-nowrap mt-2">
                 <em className="not-italic-none italic font-extrabold">Don&rsquo;t Miss</em>{" "}
                 <span className="text-gold">Digital Gold Mining.</span>
               </span>

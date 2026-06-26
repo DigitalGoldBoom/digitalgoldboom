@@ -33,7 +33,7 @@ export default function FallingGold() {
     let dpr = 1;
 
     function resize() {
-      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      dpr = window.innerWidth < 768 ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
       w = window.innerWidth;
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);
