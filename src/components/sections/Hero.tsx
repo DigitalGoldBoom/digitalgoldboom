@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useRef, useState, type CSSProperties, type FormEvent } from "react";
 import { track } from "@vercel/analytics";
 import Book3D from "@/components/Book3D";
+import HeroShimmer from "@/components/sections/HeroShimmer";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -60,10 +61,21 @@ export default function Hero() {
   const locked = status === "submitting" || status === "success";
 
   return (
-    <section ref={sectionRef} className="relative min-h-[100dvh] flex items-center overflow-hidden">
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute animate-mesh-drift-a" style={{ width: "900px", height: "700px", top: "10%", left: "55%", background: "radial-gradient(ellipse at center, rgba(212,168,67,0.05) 0%, transparent 65%)" }} />
-      </div>
+    <section
+      ref={sectionRef}
+      className="relative min-h-[100dvh] flex items-center overflow-hidden"
+      style={
+        {
+          // Dark-scope: flip hero text to the site's on-dark tokens so it reads on the
+          // near-black shimmer. Cascades to this section only — rest of the page unchanged.
+          "--text-primary": "var(--text-on-dark-primary)",
+          "--text-secondary": "var(--text-on-dark-secondary)",
+          "--text-tertiary": "var(--text-on-dark-tertiary)",
+          "--border-base": "var(--border-on-dark)",
+        } as CSSProperties
+      }
+    >
+      <HeroShimmer />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 w-full pt-40 md:pt-36 pb-20 md:pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-10 items-center">
@@ -110,15 +122,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes mesh-drift-a {
-          0% { transform: translate(0, 0) scale(1); }
-          50% { transform: translate(-30px, 20px) scale(1.08); }
-          100% { transform: translate(0, 0) scale(1); }
-        }
-        .animate-mesh-drift-a { animation: mesh-drift-a 28s ease-in-out infinite; }
-      `}</style>
     </section>
   );
 }
