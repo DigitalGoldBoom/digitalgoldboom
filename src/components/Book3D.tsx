@@ -29,10 +29,10 @@ const IMG = {
 };
 
 const PERSPECTIVE = 1200;
-const REST_RY = 22;
+const REST_RY = 6; // near front-on; tilts both ways with the mouse
 const REST_RX = -6;
-const MAX_RY = 38; // wider tilt each direction
-const MAX_RX = 24;
+const MAX_RY = 46; // mouse-left -> ~-40deg (reveals page edges), right -> spine
+const MAX_RX = 22;
 const SENS_X = 360; // smaller = more responsive to mouse position
 const SENS_Y = 300;
 const LERP = 0.17; // snappier / faster follow
@@ -97,7 +97,20 @@ export default function Book3D() {
 
   return (
     <div ref={wrapRef} style={{ display: "block", padding: "60px 56px", textAlign: "center" }}>
-      <div style={{ width: W, height: H, maxWidth: "82vw", margin: "0 auto", perspective: `${PERSPECTIVE}px` }}>
+      <div style={{ position: "relative", width: W, height: H, maxWidth: "82vw", margin: "0 auto", perspective: `${PERSPECTIVE}px` }}>
+        {/* Soft ground shadow (flat layer, not a filter on the 3D box) */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            left: "6%",
+            right: "6%",
+            bottom: "-5%",
+            height: "16%",
+            background: "radial-gradient(50% 50% at 50% 50%, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 70%)",
+            filter: "blur(20px)",
+          }}
+        />
         <div
           ref={boxRef}
           style={{
@@ -107,7 +120,6 @@ export default function Book3D() {
             transformStyle: "preserve-3d",
             transform: `translateZ(-${D / 2}px) rotateY(${REST_RY}deg) rotateX(${REST_RX}deg)`,
             willChange: "transform",
-            filter: "drop-shadow(0 46px 64px rgba(0,0,0,0.6))",
           }}
         >
           {/* FRONT cover: blue base + art + texture + highlight */}
