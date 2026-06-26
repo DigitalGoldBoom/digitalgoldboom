@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -25,6 +25,14 @@ const CTA_GRADIENT = "linear-gradient(180deg, #4D76FF 0%, #003BFF 100%)";
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -38,20 +46,21 @@ export default function Navbar() {
     ].join(" ");
 
   return (
-    <nav className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-5 sm:pt-[30px]">
-      {/* Translucent black strip so the white PixelShovel logo stays legible over light sections */}
+    <nav className="pointer-events-none fixed inset-x-0 top-0 z-50">
+      {/* Translucent black strip — only appears on scroll, keeps the white logo legible over light sections */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-24 sm:h-28"
+        className="pointer-events-none absolute inset-0 transition-opacity duration-300"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.32) 55%, rgba(0,0,0,0) 100%)",
-          backdropFilter: "blur(2px)",
-          WebkitBackdropFilter: "blur(2px)",
+          opacity: scrolled ? 1 : 0,
+          background: "rgba(0,2,12,0.65)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       />
 
-      <div className="pointer-events-auto relative mx-auto flex w-[92%] max-w-[1320px] items-center justify-between gap-4 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+      <div className="pointer-events-auto relative mx-auto flex w-[92%] max-w-[1320px] items-center justify-between gap-4 py-[10px] lg:grid lg:grid-cols-[1fr_auto_1fr]">
         {/* Left — PixelShovel wordmark */}
         <Link href="/" className="shrink-0 lg:justify-self-start" aria-label="Digital Gold Boom — home">
           <Image
