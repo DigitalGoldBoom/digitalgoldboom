@@ -56,7 +56,7 @@ export default function TokenLaunch() {
         }}
       />
 
-      <div className="relative z-10 mx-auto grid w-[92%] max-w-[1320px] grid-cols-1 items-center gap-12 py-20 md:py-28 lg:grid-cols-[46%_1fr] lg:gap-16">
+      <div className="relative z-10 mx-auto grid w-[92%] max-w-[1320px] grid-cols-1 items-center gap-12 pt-20 md:pt-28 lg:grid-cols-[46%_1fr] lg:gap-16">
         {/* Left — copy */}
         <div>
           <div
@@ -113,6 +113,51 @@ export default function TokenLaunch() {
           <StatCard label="Launch Date">Jul 8, 2026</StatCard>
         </div>
       </div>
+
+      {/* As Seen On — scrolling press logo ticker */}
+      <div className="relative z-10 mx-auto w-[92%] max-w-[1320px] pb-20 pt-12 md:pb-28 md:pt-16">
+        <div className="mb-6 flex items-center gap-4">
+          <span
+            className="shrink-0 text-xs font-medium uppercase tracking-[0.15em]"
+            style={{ color: "rgb(167,173,190)" }}
+          >
+            As Seen On:
+          </span>
+          <span
+            className="h-px flex-1"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(23,29,69,0) 0%, rgba(51,99,255,0.45) 50%, rgba(23,29,69,0) 100%)",
+            }}
+          />
+        </div>
+        <div className="press-mask overflow-hidden">
+          <div className="press-track flex w-max items-center gap-14 md:gap-20">
+            {[0, 1, 2].flatMap((rep) =>
+              ["/press/logo1.png", "/press/logo2.png", "/press/logo3.png"].map((src, i) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={`${rep}-${i}`}
+                  src={src}
+                  alt="As seen on"
+                  className="h-6 w-auto opacity-80 md:h-8"
+                />
+              )),
+            )}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes dgbPressScroll { from { transform: translateX(-33.333%); } to { transform: translateX(0); } }
+        .press-track { animation: dgbPressScroll 22s linear infinite; }
+        .press-track:hover { animation-play-state: paused; }
+        @media (prefers-reduced-motion: reduce) { .press-track { animation: none; } }
+        .press-mask {
+          -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+        }
+      `}</style>
     </section>
   );
 }
