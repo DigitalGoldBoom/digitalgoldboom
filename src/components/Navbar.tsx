@@ -1,81 +1,141 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 
-// Production URL for the natgold-token Vercel project.
-// Clean global alias — auto-updated by Vercel to the latest main-branch deploy.
-const TOKEN_APP_BASE = "https://natgold-token.vercel.app";
-const TOKEN_URL = `${TOKEN_APP_BASE}/dashboard`;
-const DEPOSITS_URL = `${TOKEN_APP_BASE}/cahuilla`;
+/**
+ * Navbar — replica of the Digital Gold Boom Framer navbar.
+ * Left: white wordmark. Right: translucent pill (PixelShovel logo + nav links)
+ * and a blue-gradient "Contact Us" CTA. Collapses to a hamburger dropdown on
+ * tablet / all mobile widths (< lg). Links use the exact Framer hrefs.
+ */
+
+const LINKS = [
+  { label: "Digital Gold Boom", href: "/" },
+  { label: "Projects", href: "/projects" },
+  { label: "Blog", href: "/blogs" },
+  { label: "Live Stats", href: "/live" },
+  { label: "Waitlist", href: "/waitlist" },
+];
+
+const CTA_GRADIENT = "linear-gradient(180deg, #4D76FF 0%, #003BFF 100%)";
+const INACTIVE = "rgb(109,119,146)";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
-      style={{
-        background: scrolled ? "rgba(250, 250, 249, 0.82)" : "transparent",
-        backdropFilter: scrolled ? "blur(16px) saturate(1.4)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(16px) saturate(1.4)" : "none",
-        borderBottom: scrolled ? "1px solid var(--border-base)" : "1px solid transparent",
-      }}
-    >
-      <div className="max-w-[1400px] mx-auto px-5 md:px-12 flex items-center justify-between h-[72px] gap-4">
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <span
-            className="text-tp"
-            style={{
-              fontSize: "clamp(1rem, 1.4vw, 1.125rem)",
-              fontWeight: 600,
-              letterSpacing: "-0.01em",
-            }}
-          >
-            Digital Gold Boom
-          </span>
+    <nav className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-5 sm:pt-[30px]">
+      <div className="pointer-events-auto mx-auto flex w-[92%] max-w-[1320px] items-center justify-between gap-4">
+        {/* Left wordmark */}
+        <Link href="/" className="shrink-0" aria-label="Digital Gold Boom — home">
+          <Image
+            src="/nav-framer/logo-wordmark.png"
+            alt="Digital Gold Boom"
+            width={180}
+            height={40}
+            priority
+            className="h-8 w-auto sm:h-10"
+          />
         </Link>
 
-        <div className="flex items-center gap-1 md:gap-2">
-          <Link
-            href={TOKEN_URL}
-            className="hidden sm:inline-flex items-center rounded-full border border-[color:var(--border-base)] hover:border-[color:var(--ink-primary)] transition-colors"
+        {/* Right cluster */}
+        <div className="flex items-center gap-3">
+          <div
+            className="flex items-center gap-1 rounded-full p-2 lg:gap-4 lg:pr-6"
             style={{
-              fontSize: "13px",
-              padding: "8px 16px",
-              fontWeight: 500,
-              letterSpacing: "-0.005em",
+              background: "rgba(10,13,31,0.8)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
             }}
           >
-            Token
-          </Link>
+            <Image
+              src="/nav-framer/logo-pixelshovel.svg"
+              alt="PixelShovel"
+              width={97}
+              height={33}
+              className="mx-1 h-[26px] w-auto sm:h-[31px]"
+            />
+
+            {/* Desktop links */}
+            <div className="hidden items-center lg:flex">
+              {LINKS.map((l) => {
+                const active = isActive(l.href);
+                return (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    className="whitespace-nowrap rounded-full px-4 py-3 text-sm font-medium transition-colors hover:text-white"
+                    style={{
+                      background: active ? "rgb(19,24,57)" : "transparent",
+                      color: active ? "#fff" : INACTIVE,
+                    }}
+                  >
+                    {l.label}
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Hamburger — tablet / mobile */}
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Open menu"
+              aria-expanded={open}
+              className="flex items-center justify-center rounded-full px-4 py-3 lg:hidden"
+              style={{ background: "rgb(14,18,46)" }}
+            >
+              <Image src="/nav-framer/menu.svg" alt="" width={24} height={24} className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Contact CTA — desktop */}
           <Link
-            href={DEPOSITS_URL}
-            className="hidden sm:inline-flex items-center rounded-full border border-[color:var(--border-base)] hover:border-[color:var(--ink-primary)] transition-colors"
-            style={{
-              fontSize: "13px",
-              padding: "8px 16px",
-              fontWeight: 500,
-              letterSpacing: "-0.005em",
-            }}
+            href="/contact"
+            className="hidden items-center whitespace-nowrap rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-90 lg:inline-flex"
+            style={{ padding: "14px 20px", background: CTA_GRADIENT }}
           >
-            Gold Deposits
-          </Link>
-          <Link
-            href="#join"
-            className="btn-primary"
-            style={{ fontSize: "13px", padding: "10px 22px" }}
-          >
-            Join the waitlist →
+            Contact Us
           </Link>
         </div>
       </div>
+
+      {/* Mobile / tablet dropdown */}
+      {open && (
+        <div className="pointer-events-auto mx-auto mt-3 flex w-[92%] max-w-[1320px] justify-end lg:hidden">
+          <div
+            className="flex w-[230px] flex-col gap-4 rounded-2xl p-5"
+            style={{ background: "rgb(10,13,31)" }}
+          >
+            {LINKS.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="text-[15px] font-medium transition-colors hover:text-white"
+                style={{ color: isActive(l.href) ? "#fff" : INACTIVE }}
+              >
+                {l.label}
+              </Link>
+            ))}
+            <Link
+              href="/contact"
+              onClick={() => setOpen(false)}
+              className="mt-1 inline-flex items-center justify-center rounded-full text-sm font-semibold text-white"
+              style={{ padding: "12px 18px", background: CTA_GRADIENT }}
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
