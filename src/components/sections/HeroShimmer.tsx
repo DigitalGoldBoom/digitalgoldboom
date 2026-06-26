@@ -29,20 +29,29 @@ export default function HeroShimmer() {
     let h = 0;
     let dpr = 1;
 
-    type Particle = { x: number; y: number; r: number; a: number; vy: number; vx: number };
+    // Framer "Gold Background" template colors: gold particles rgb(255,179,0)
+    // (the dominant "Gold Shimmer" layer) plus white sparkle in the glow region.
+    const GOLD = "255,179,0";
+    const WHITE = "255,255,255";
+
+    type Particle = { x: number; y: number; r: number; a: number; vy: number; vx: number; c: string };
     let parts: Particle[] = [];
 
     function seed() {
-      // Density tuned to match Framer's gentle white particle field.
-      const count = Math.min(260, Math.max(60, Math.floor((w * h) / 9000)));
-      parts = Array.from({ length: count }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: 0.4 + Math.random() * 1.1,
-        a: 0.06 + Math.random() * 0.34, // peaks near Framer's 0.45
-        vy: 6 + Math.random() * 14, // px / second, downward
-        vx: -4 + Math.random() * 8, // slight lateral drift
-      }));
+      // Density tuned to match Framer's gentle particle field.
+      const count = Math.min(280, Math.max(70, Math.floor((w * h) / 8500)));
+      parts = Array.from({ length: count }, () => {
+        const gold = Math.random() < 0.65; // ~2/3 gold, 1/3 white — matches the template
+        return {
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: 0.4 + Math.random() * 1.1,
+          a: (gold ? 0.1 : 0.06) + Math.random() * (gold ? 0.42 : 0.34),
+          vy: 6 + Math.random() * 14, // px / second, downward
+          vx: -4 + Math.random() * 8, // slight lateral drift
+          c: gold ? GOLD : WHITE,
+        };
+      });
     }
 
     function resize() {
@@ -60,7 +69,7 @@ export default function HeroShimmer() {
       for (const p of parts) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        ctx.fillStyle = `rgba(${p.c},${p.a})`;
         ctx.fill();
       }
     }
@@ -81,7 +90,7 @@ export default function HeroShimmer() {
         else if (p.x > w + 2) p.x = -2;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        ctx.fillStyle = `rgba(${p.c},${p.a})`;
         ctx.fill();
       }
       raf = requestAnimationFrame(frame);
