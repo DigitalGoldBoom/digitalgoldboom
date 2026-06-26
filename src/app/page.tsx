@@ -7,7 +7,6 @@ import Problem from "@/components/funnel/Problem";
 import Insight from "@/components/funnel/Insight";
 import Solution from "@/components/funnel/Solution";
 import BitcoinParallel from "@/components/funnel/BitcoinParallel";
-import ProofLine from "@/components/funnel/ProofLine";
 import People from "@/components/funnel/People";
 import Book from "@/components/funnel/Book";
 import Stack from "@/components/funnel/Stack";
@@ -21,12 +20,11 @@ export default function Home() {
       <ScrollTracker />
       <main>
         <Hero />
-        <TokenLaunch />
         <Problem />
         <Insight />
         <Solution />
         <BitcoinParallel />
-        <ProofLine />
+        <TokenLaunch />
         <People />
         <Book />
         <Stack />

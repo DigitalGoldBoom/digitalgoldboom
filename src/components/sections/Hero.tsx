@@ -21,12 +21,12 @@ export default function Hero() {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
+  // Reveals are CSS-driven (see [data-hero-reveal] in globals.css) so the LCP element (the book
+  // cover image) and the headline paint immediately, instead of waiting for JS to hydrate + run
+  // GSAP. GSAP here only handles the scroll parallax — a transform, which never gates the paint.
   useGSAP(
     () => {
-      if (!contentRef.current || !imageRef.current) return;
-      const els = contentRef.current.querySelectorAll("[data-hero-reveal]");
-      gsap.fromTo(els, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.9, stagger: 0.12, ease: "power3.out", delay: 0.2 });
-      gsap.fromTo(imageRef.current, { opacity: 0, scale: 0.94, x: 30 }, { opacity: 1, scale: 1, x: 0, duration: 1.2, ease: "power3.out", delay: 0.35 });
+      if (!imageRef.current) return;
       gsap.to(imageRef.current, { y: -50, ease: "none", scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: 1 }, immediateRender: false });
     },
     { scope: sectionRef },
@@ -117,7 +117,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <div ref={imageRef} className="relative flex items-center justify-center">
+          <div ref={imageRef} className="hero-book-reveal relative flex items-center justify-center">
             <Book3D />
           </div>
         </div>

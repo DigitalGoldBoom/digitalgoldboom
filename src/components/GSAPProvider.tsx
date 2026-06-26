@@ -14,6 +14,11 @@ export default function GSAPProvider({
   useEffect(() => {
     const handleLoad = () => ScrollTrigger.refresh();
     window.addEventListener("load", handleLoad);
+    // Fonts change line-wrapping → element heights → trigger positions. Refresh once they're
+    // ready so triggers don't fire at stale offsets (a common cause of scroll "jumps").
+    if (typeof document !== "undefined" && document.fonts?.ready) {
+      document.fonts.ready.then(() => ScrollTrigger.refresh());
+    }
 
     return () => {
       window.removeEventListener("load", handleLoad);

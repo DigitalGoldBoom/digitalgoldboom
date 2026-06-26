@@ -30,7 +30,7 @@ export function useScrollReveal<T extends HTMLElement>(
     start = "top 82%",
     ease = "power3.out",
     delay = 0,
-    once = false,
+    once = true, // play once and STAY — no reverse-on-scroll-out (that caused the jolty feel)
   } = options;
 
   const triggerRef = useRef<ScrollTrigger | null>(null);
