@@ -4,23 +4,19 @@ import { useEffect, useRef } from "react";
 import { track } from "@vercel/analytics";
 
 /**
- * Book3D — reconstructed PIECE-FOR-PIECE from the Framer "Shiny 3D Book"
- * (node UBnKjXaG8): every layer at its exact offset/size/fill, staged in Z so
- * the Framer "3D Look" tilt (node reN_yYpir: perspective 1200, pointer-follow,
- * sensitivity ~5, no auto-drift) reveals the spine / page edges / green back.
- *
- * Layers (book box 352x517), back -> front:
- *   Back 2 (green) | Back (blue + magenta stripe + logo) | Spine (l-38) |
- *   Pages Top (t-22) / Bottom (b-22) / Right (r-10) | blue edge lines |
- *   Cover (blue base + cover art + canvas texture + highlight)
+ * Book3D — Framer "Shiny 3D Book" rebuilt as a true 3D box so the angles are
+ * coherent: six rotated faces (front cover, back, spine=left, page edges =
+ * right/top/bottom) using the real Framer face images, depth = spine width 76.
+ * Wrapped in the Framer "3D Look" (perspective 1200, pointer-follow tilt,
+ * no auto-drift). Front cover = blue base + cover art + canvas texture + highlight.
  */
 
-const BOOK_W = 352;
-const BOOK_H = 517;
+const W = 340;
+const H = 500;
+const D = 76; // Framer spine width = book thickness
 
 const BLUE = "rgb(11,54,191)";
-const BLUE_EDGE = "rgb(22,70,226)";
-const GREEN = "rgb(0,255,0)";
+const DARK_BLUE = "#06205c";
 const MAGENTA = "rgb(128,3,69)";
 
 const IMG = {
@@ -32,19 +28,18 @@ const IMG = {
   pagesBottom: "/book3d-framer/pages-bottom.png",
 };
 
-// Framer "3D Look"
 const PERSPECTIVE = 1200;
-const REST_RY = 18;
+const REST_RY = 22;
 const REST_RX = -6;
-const MAX_RY = 24;
-const MAX_RX = 14;
-const SENS_X = 540;
-const SENS_Y = 400;
-const LERP = 0.1;
+const MAX_RY = 38; // wider tilt each direction
+const MAX_RX = 24;
+const SENS_X = 360; // smaller = more responsive to mouse position
+const SENS_Y = 300;
+const LERP = 0.17; // snappier / faster follow
 
 export default function Book3D() {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const bookRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
   const interacted = useRef(false);
   const target = useRef({ ry: REST_RY, rx: REST_RX });
   const current = useRef({ ry: REST_RY, rx: REST_RX });
@@ -52,11 +47,11 @@ export default function Book3D() {
 
   useEffect(() => {
     const wrap = wrapRef.current;
-    const book = bookRef.current;
-    if (!wrap || !book) return;
+    const box = boxRef.current;
+    if (!wrap || !box) return;
 
     function center() {
-      const r = book!.getBoundingClientRect();
+      const r = box!.getBoundingClientRect();
       return { cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
     }
     function onMove(e: MouseEvent) {
@@ -79,7 +74,7 @@ export default function Book3D() {
       const t = target.current;
       c.ry += (t.ry - c.ry) * LERP;
       c.rx += (t.rx - c.rx) * LERP;
-      book!.style.transform = `rotateY(${c.ry.toFixed(2)}deg) rotateX(${c.rx.toFixed(2)}deg)`;
+      box!.style.transform = `translateZ(-${D / 2}px) rotateY(${c.ry.toFixed(2)}deg) rotateX(${c.rx.toFixed(2)}deg)`;
       raf.current = requestAnimationFrame(tick);
     }
     const scope = wrap.closest("section") ?? document.body;
@@ -93,8 +88,8 @@ export default function Book3D() {
     };
   }, []);
 
-  const L = (s: React.CSSProperties): React.CSSProperties => ({ position: "absolute", ...s });
-  const cover = (src: string): React.CSSProperties => ({
+  const face: React.CSSProperties = { position: "absolute", backfaceVisibility: "hidden" };
+  const img = (src: string): React.CSSProperties => ({
     backgroundImage: `url(${src})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -102,48 +97,43 @@ export default function Book3D() {
 
   return (
     <div ref={wrapRef} style={{ display: "block", padding: "60px 56px", textAlign: "center" }}>
-      <div style={{ width: BOOK_W, height: BOOK_H, maxWidth: "82vw", margin: "0 auto", perspective: `${PERSPECTIVE}px` }}>
+      <div style={{ width: W, height: H, maxWidth: "82vw", margin: "0 auto", perspective: `${PERSPECTIVE}px` }}>
         <div
-          ref={bookRef}
+          ref={boxRef}
           style={{
             position: "relative",
-            width: BOOK_W,
-            height: BOOK_H,
+            width: W,
+            height: H,
             transformStyle: "preserve-3d",
-            transform: `rotateY(${REST_RY}deg) rotateX(${REST_RX}deg)`,
+            transform: `translateZ(-${D / 2}px) rotateY(${REST_RY}deg) rotateX(${REST_RX}deg)`,
             willChange: "transform",
             filter: "drop-shadow(0 46px 64px rgba(0,0,0,0.6))",
           }}
         >
-          {/* Back 2 — green hardcover (backmost) */}
-          <div style={L({ right: "-0.03px", bottom: "-0.5px", width: BOOK_W, height: BOOK_H, background: GREEN, transform: "translateZ(-40px)", borderRadius: 3 })} />
-
-          {/* Back — blue, with magenta stripe + logo */}
-          <div style={L({ left: 0, top: 0, width: 340, height: BOOK_H, background: BLUE, transform: "translateZ(-36px)", borderRadius: 3 })}>
-            <div style={L({ left: 156, top: 276, width: 40, height: 21, background: MAGENTA, borderRadius: 2 })} />
-            <div style={L({ left: 163, top: 242, width: 23, height: 30, background: MAGENTA, borderRadius: 2 })} />
-            <div style={L({ inset: 0, backgroundImage: `url(${IMG.texture})`, backgroundSize: "cover", opacity: 0.19, mixBlendMode: "overlay" })} />
+          {/* FRONT cover: blue base + art + texture + highlight */}
+          <div style={{ ...face, width: W, height: H, left: 0, top: 0, transform: `translateZ(${D / 2}px)`, background: BLUE, overflow: "hidden", borderRadius: 3 }}>
+            <div style={{ ...face, inset: 0, ...img(IMG.cover) }} />
+            <div style={{ ...face, inset: 0, ...img(IMG.texture), opacity: 0.2, mixBlendMode: "overlay" }} />
+            <div style={{ ...face, left: 0, top: 0, width: 18, height: H, background: "linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 100%)" }} />
           </div>
 
-          {/* Spine — sticks out left */}
-          <div style={L({ left: "-38px", top: 0, width: 76, height: BOOK_H, background: "#06205c", transform: "translateZ(-14px)", ...cover(IMG.spine) })} />
-
-          {/* Page blocks — stick out top / bottom / right */}
-          <div style={L({ left: 0, top: "-22px", width: 329, height: 65, transform: "translateZ(-8px)", ...cover(IMG.pagesTop) })} />
-          <div style={L({ left: 0, bottom: "-22px", width: 329, height: 69, transform: "translateZ(-8px)", ...cover(IMG.pagesBottom) })} />
-          <div style={L({ right: "-10px", top: 10, width: 66, height: 496, transform: "translateZ(-8px)", ...cover(IMG.pagesRight) })} />
-
-          {/* Blue hardcover edge lines */}
-          <div style={L({ right: 0, top: 0, width: BOOK_W, height: 4, background: BLUE_EDGE, transform: "translateZ(2px)" })} />
-          <div style={L({ left: 0, bottom: 0, width: BOOK_W, height: 4, background: BLUE_EDGE, transform: "translateZ(2px)" })} />
-          <div style={L({ right: "-2px", top: 0, width: 4, height: 518, background: BLUE_EDGE, transform: "translateZ(2px)" })} />
-
-          {/* Cover — blue base + cover art + canvas texture + highlight (frontmost) */}
-          <div style={L({ left: 0, top: 0, width: 351, height: BOOK_H, background: BLUE, transform: "translateZ(6px)", overflow: "hidden", borderRadius: 3 })}>
-            <div style={L({ left: "-1px", top: 0, width: BOOK_W, height: BOOK_H, ...cover(IMG.cover) })} />
-            <div style={L({ inset: 0, backgroundImage: `url(${IMG.texture})`, backgroundSize: "cover", opacity: 0.19, mixBlendMode: "overlay" })} />
-            <div style={L({ left: 1, top: 0, width: 18, height: BOOK_H, background: "linear-gradient(90deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 100%)" })} />
+          {/* BACK: blue + magenta stripe + logo */}
+          <div style={{ ...face, width: W, height: H, left: 0, top: 0, transform: `rotateY(180deg) translateZ(${D / 2}px)`, background: BLUE, borderRadius: 3 }}>
+            <div style={{ ...face, left: "44%", top: "53%", width: 40, height: 21, background: MAGENTA, borderRadius: 2 }} />
+            <div style={{ ...face, left: "46%", top: "46%", width: 23, height: 30, background: MAGENTA, borderRadius: 2 }} />
           </div>
+
+          {/* SPINE = left face */}
+          <div style={{ ...face, width: D, height: H, left: (W - D) / 2, top: 0, transform: `rotateY(-90deg) translateZ(${W / 2}px)`, background: DARK_BLUE, ...img(IMG.spine) }} />
+
+          {/* RIGHT page edge */}
+          <div style={{ ...face, width: D, height: H, left: (W - D) / 2, top: 0, transform: `rotateY(90deg) translateZ(${W / 2}px)`, background: "#efe9da", ...img(IMG.pagesRight) }} />
+
+          {/* TOP page edge */}
+          <div style={{ ...face, width: W, height: D, left: 0, top: (H - D) / 2, transform: `rotateX(90deg) translateZ(${H / 2}px)`, background: "#efe9da", ...img(IMG.pagesTop) }} />
+
+          {/* BOTTOM page edge */}
+          <div style={{ ...face, width: W, height: D, left: 0, top: (H - D) / 2, transform: `rotateX(-90deg) translateZ(${H / 2}px)`, background: "#efe9da", ...img(IMG.pagesBottom) }} />
         </div>
       </div>
     </div>
