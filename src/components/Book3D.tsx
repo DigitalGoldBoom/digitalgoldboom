@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { track } from "@vercel/analytics";
 
-const FRONT = "/images/Digital Gold Boom Cover (1).png";
+const FRONT = "/book3d-framer/cover-front.png";
 const SPINE = "/images/DGB Spine.png";
 const BACK = "/images/book-edges/back-cover.png";
 const EDGE_RIGHT = "/images/book-edges/edge-right.png";
@@ -99,7 +99,7 @@ export default function Book3D() {
           width: W,
           height: H,
           margin: "0 auto",
-          perspective: "1600px",
+          perspective: "1200px", // Framer "3D Look" perspective
         }}
       >
         <div
@@ -126,6 +126,18 @@ export default function Book3D() {
             }}
           >
             <Image src={FRONT} alt="Book cover" fill style={{ objectFit: "cover" }} priority sizes="320px" />
+            {/* shine highlight (Framer Cover "Highlight") */}
+            <div
+              aria-hidden
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(105deg, rgba(255,255,255,0.26) 0%, rgba(255,255,255,0.05) 14%, transparent 34%)",
+                mixBlendMode: "screen",
+                pointerEvents: "none",
+              }}
+            />
           </div>
           {/* BACK */}
           <div
