@@ -4,31 +4,24 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { track } from "@vercel/analytics";
 
-/**
- * Book3D — 3D book using the Framer "Shiny 3D Book" assets + proportions,
- * with the Framer "3D Look" movement: perspective 1200 + smooth pointer-follow
- * tilt, plus a gentle idle float so it has life on touch devices too.
- * Six-face CSS box (preserve-3d). Reduced-motion aware.
- */
+const FRONT = "/images/Digital Gold Boom Cover (1).png";
+const SPINE = "/images/DGB Spine.png";
+const BACK = "/images/book-edges/back-cover.png";
+const EDGE_RIGHT = "/images/book-edges/edge-right.png";
+const EDGE_TOP = "/images/book-edges/edge-top.png";
+const EDGE_BOTTOM = "/images/book-edges/edge-bottom.png";
 
-const FRONT = "/book3d-framer/cover-front.png";
-const SPINE = "/book3d-framer/spine.png";
-const EDGE_RIGHT = "/book3d-framer/pages-right.png";
-const EDGE_TOP = "/book3d-framer/pages-top.png";
-const EDGE_BOTTOM = "/book3d-framer/pages-bottom.png";
-
-// Framer proportions: 352 x 517, spine 76 → scaled to fit layouts.
-const W = 330;
-const H = 485;
-const D = 74;
+const W = 320;
+const H = 480;
+const D = 70;
 
 const REST_ROT_Y = 22;
 const REST_ROT_X = -6;
-const MAX_ROT_Y = 26;
-const MAX_ROT_X = 16;
-const SENSITIVITY_X = 520;
-const SENSITIVITY_Y = 380;
-const LERP = 0.1;
+const MAX_ROT_Y = 30;
+const MAX_ROT_X = 18;
+const SENSITIVITY_X = 480;
+const SENSITIVITY_Y = 360;
+const LERP = 0.12;
 
 export default function Book3D() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -43,10 +36,6 @@ export default function Book3D() {
     const wrap = wrapRef.current;
     const cube = cubeRef.current;
     if (!wrap || !cube) return;
-
-    const reduceMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
     function getCenter() {
       const r = cube!.getBoundingClientRect();
@@ -70,15 +59,12 @@ export default function Book3D() {
       targetRef.current.rx = REST_ROT_X;
     }
 
-    function tick(now: number) {
+    function tick() {
       const c = currentRef.current;
       const t = targetRef.current;
       c.ry += (t.ry - c.ry) * LERP;
       c.rx += (t.rx - c.rx) * LERP;
-      // Gentle idle float layered on top (keeps the book alive on touch devices).
-      const fy = reduceMotion ? 0 : Math.sin(now / 1500) * 2.4;
-      const fx = reduceMotion ? 0 : Math.sin(now / 2100) * 1.4;
-      cube!.style.transform = `rotateY(${(c.ry + fy).toFixed(2)}deg) rotateX(${(c.rx + fx).toFixed(2)}deg)`;
+      cube!.style.transform = `rotateY(${c.ry.toFixed(2)}deg) rotateX(${c.rx.toFixed(2)}deg)`;
       rafRef.current = requestAnimationFrame(tick);
     }
 
@@ -94,17 +80,26 @@ export default function Book3D() {
     };
   }, []);
 
-  const faceBase: React.CSSProperties = { position: "absolute", backfaceVisibility: "hidden" };
+  // Canonical CSS 3D book — minimal nesting, known-good structure.
+  //
+  // Layer 1 (wrapRef): plain block for centering. NO 3D properties here.
+  // Layer 2 (sceneRef): explicit dims + perspective. This is the camera.
+  // Layer 3 (cubeRef): explicit dims + preserve-3d + rotation transform.
+  // Layer 4 (faces): six absolutely-positioned children of cubeRef.
+  //
+  // CRITICAL: NO `filter`, NO `overflow:hidden`, NO `position:absolute`
+  // on the 3D-context elements. CSS filter and overflow:hidden break
+  // preserve-3d propagation. position:absolute on the cube changes its
+  // containing block in ways that flatten descendants.
 
   return (
-    <div ref={wrapRef} style={{ display: "block", padding: "50px 40px", textAlign: "center" }}>
+    <div ref={wrapRef} style={{ display: "block", padding: "60px 50px", textAlign: "center" }}>
       <div
         style={{
           width: W,
           height: H,
-          maxWidth: "78vw",
           margin: "0 auto",
-          perspective: "1200px", // Framer "3D Look" perspective value
+          perspective: "1600px",
         }}
       >
         <div
@@ -116,52 +111,95 @@ export default function Book3D() {
             transformStyle: "preserve-3d",
             transform: `rotateY(${REST_ROT_Y}deg) rotateX(${REST_ROT_X}deg)`,
             willChange: "transform",
-            filter: "drop-shadow(0 40px 60px rgba(0,0,0,0.55))",
           }}
         >
-          {/* FRONT cover */}
-          <div style={{ ...faceBase, width: W, height: H, top: 0, left: 0, transform: `translateZ(${D / 2}px)` }}>
-            <Image src={FRONT} alt="Digital Gold Boom — book cover" fill style={{ objectFit: "cover" }} priority sizes="330px" />
-            {/* shine highlight near the spine edge (Framer Cover "Highlight") */}
-            <div
-              aria-hidden
-              style={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(105deg, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.05) 12%, transparent 32%)",
-                mixBlendMode: "screen",
-                pointerEvents: "none",
-              }}
-            />
+          {/* FRONT */}
+          <div
+            style={{
+              position: "absolute",
+              width: W,
+              height: H,
+              top: 0,
+              left: 0,
+              transform: `translateZ(${D / 2}px)`,
+              backfaceVisibility: "hidden",
+            }}
+          >
+            <Image src={FRONT} alt="Book cover" fill style={{ objectFit: "cover" }} priority sizes="320px" />
           </div>
           {/* BACK */}
           <div
             style={{
-              ...faceBase,
+              position: "absolute",
               width: W,
               height: H,
               top: 0,
               left: 0,
               transform: `rotateY(180deg) translateZ(${D / 2}px)`,
-              background: "linear-gradient(135deg, #0b36bf 0%, #07215e 100%)",
+              backfaceVisibility: "hidden",
             }}
-          />
-          {/* SPINE (left) */}
-          <div style={{ ...faceBase, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(-90deg) translateZ(${W / 2}px)`, background: "#07215e" }}>
-            <Image src={SPINE} alt="" fill style={{ objectFit: "cover" }} sizes="74px" />
+          >
+            <Image src={BACK} alt="Back cover" fill style={{ objectFit: "cover" }} sizes="320px" />
+          </div>
+          {/* SPINE (LEFT) */}
+          <div
+            style={{
+              position: "absolute",
+              width: D,
+              height: H,
+              top: 0,
+              left: (W - D) / 2,
+              transform: `rotateY(-90deg) translateZ(${W / 2}px)`,
+              backfaceVisibility: "hidden",
+              background: "#0E0E14",
+            }}
+          >
+            <Image src={SPINE} alt="Spine" fill style={{ objectFit: "cover" }} sizes="70px" />
           </div>
           {/* PAGES RIGHT */}
-          <div style={{ ...faceBase, width: D, height: H, top: 0, left: (W - D) / 2, transform: `rotateY(90deg) translateZ(${W / 2}px)`, background: "#e9e2cf" }}>
-            <Image src={EDGE_RIGHT} alt="" fill style={{ objectFit: "cover" }} sizes="74px" />
+          <div
+            style={{
+              position: "absolute",
+              width: D,
+              height: H,
+              top: 0,
+              left: (W - D) / 2,
+              transform: `rotateY(90deg) translateZ(${W / 2}px)`,
+              backfaceVisibility: "hidden",
+              background: "#1A1A24",
+            }}
+          >
+            <Image src={EDGE_RIGHT} alt="Page edges" fill style={{ objectFit: "cover" }} sizes="70px" />
           </div>
           {/* PAGES TOP */}
-          <div style={{ ...faceBase, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(90deg) translateZ(${H / 2}px)`, background: "#e9e2cf" }}>
-            <Image src={EDGE_TOP} alt="" fill style={{ objectFit: "cover" }} sizes="330px" />
+          <div
+            style={{
+              position: "absolute",
+              width: W,
+              height: D,
+              top: (H - D) / 2,
+              left: 0,
+              transform: `rotateX(90deg) translateZ(${H / 2}px)`,
+              backfaceVisibility: "hidden",
+              background: "#1A1A24",
+            }}
+          >
+            <Image src={EDGE_TOP} alt="Top pages" fill style={{ objectFit: "cover" }} sizes="320px" />
           </div>
           {/* PAGES BOTTOM */}
-          <div style={{ ...faceBase, width: W, height: D, top: (H - D) / 2, left: 0, transform: `rotateX(-90deg) translateZ(${H / 2}px)`, background: "#e9e2cf" }}>
-            <Image src={EDGE_BOTTOM} alt="" fill style={{ objectFit: "cover" }} sizes="330px" />
+          <div
+            style={{
+              position: "absolute",
+              width: W,
+              height: D,
+              top: (H - D) / 2,
+              left: 0,
+              transform: `rotateX(-90deg) translateZ(${H / 2}px)`,
+              backfaceVisibility: "hidden",
+              background: "#1A1A24",
+            }}
+          >
+            <Image src={EDGE_BOTTOM} alt="Bottom pages" fill style={{ objectFit: "cover" }} sizes="320px" />
           </div>
         </div>
       </div>

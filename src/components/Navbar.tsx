@@ -39,7 +39,19 @@ export default function Navbar() {
 
   return (
     <nav className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-5 sm:pt-[30px]">
-      <div className="pointer-events-auto mx-auto flex w-[92%] max-w-[1320px] items-center justify-between gap-4 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+      {/* Translucent black strip so the white PixelShovel logo stays legible over light sections */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-24 sm:h-28"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.32) 55%, rgba(0,0,0,0) 100%)",
+          backdropFilter: "blur(2px)",
+          WebkitBackdropFilter: "blur(2px)",
+        }}
+      />
+
+      <div className="pointer-events-auto relative mx-auto flex w-[92%] max-w-[1320px] items-center justify-between gap-4 lg:grid lg:grid-cols-[1fr_auto_1fr]">
         {/* Left — PixelShovel wordmark */}
         <Link href="/" className="shrink-0 lg:justify-self-start" aria-label="Digital Gold Boom — home">
           <Image
