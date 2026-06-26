@@ -3,6 +3,7 @@ import FallingGold from "@/components/FallingGold";
 import ScrollTracker from "@/components/ScrollTracker";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/sections/Hero";
+import TokenLaunch from "@/components/sections/TokenLaunch";
 import Problem from "@/components/funnel/Problem";
 import Insight from "@/components/funnel/Insight";
 import Solution from "@/components/funnel/Solution";
@@ -22,6 +23,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <TokenLaunch />
         <Problem />
         <Insight />
         <Solution />
