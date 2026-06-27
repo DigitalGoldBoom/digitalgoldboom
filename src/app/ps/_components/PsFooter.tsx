@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const WORDMARK = "https://framerusercontent.com/images/A7NwOG8y9w96QoSwSD8vgWMri2c.png";
+// Full white PixelShovel wordmark (same as nav/hero).
+const WORDMARK = "https://framerusercontent.com/images/nzBDrjjIcc9jVr8kaHG51L3wTGc.png";
 
 const MENU = [
   { label: "Home", href: "/ps" },
@@ -39,7 +40,7 @@ export default function PsFooter() {
               alt="PixelShovel"
               width={180}
               height={30}
-              className="h-7 w-auto"
+              className="h-7 w-auto self-start"
             />
             <p className="max-w-[28ch] text-sm text-[var(--ps-text-2)]">
               PixelShovel educates, invests and connects in the future of digital gold mining.
