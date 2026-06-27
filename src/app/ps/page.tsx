@@ -3,6 +3,7 @@ import Link from "next/link";
 import Book3D from "@/components/Book3D";
 import PsWaitlistForm from "./_components/PsWaitlistForm";
 import PsRotatingCube from "./_components/PsRotatingCube";
+import PsAboutScroll from "./_components/PsAboutScroll";
 
 const CDN = "https://framerusercontent.com/images";
 const img = (id: string) => `${CDN}/${id}.png`;
@@ -23,29 +24,6 @@ const DGB_SQUARES = [
   "eJQMgjmZnbvOG1D9uX8M4E81h2s",
   "ipz8IN97Lh71ZewaRZ5KfjOa9MI",
   "VNFzaWfCZRKGzAAu5LsZJmQ58kc",
-];
-
-const PILLARS = [
-  {
-    n: "01",
-    title: "We Educate.",
-    body: "Making digital gold mining simple to understand. We help the world see gold's future clearly.",
-  },
-  {
-    n: "02",
-    title: "We Influence.",
-    body: "Creating media and technology that advance the Digital Gold Boom. Turning ideas into influence and opportunity.",
-  },
-  {
-    n: "03",
-    title: "We Invest.",
-    body: "Backing projects that power the NatGold ecosystem. Focused on innovation, integrity, and long-term value.",
-  },
-  {
-    n: "04",
-    title: "We Connect.",
-    body: "Linking investors, partners, and pioneers. Accelerating the movement toward a digital gold economy.",
-  },
 ];
 
 // Demo projects (the Framer template's filler — scaled to 3, swap for real work later).
@@ -143,34 +121,8 @@ export default function PixelShovelHome() {
         </div>
       </section>
 
-      {/* ——— Four pillars ——— */}
-      <section id="about" className="ps-section">
-        <div className="ps-wrap">
-          <div className="mb-12 flex items-end justify-between gap-6">
-            <h2 className="text-[clamp(1.8rem,4vw,3.2rem)]">Digital Gold Mining</h2>
-            <p className="hidden max-w-[34ch] text-[var(--ps-text-2)] md:block">
-              Four ways PixelShovel moves the digital gold economy forward.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-[var(--ps-r-card)] border sm:grid-cols-2"
-            style={{ borderColor: "var(--ps-line)", background: "var(--ps-line)" }}
-          >
-            {PILLARS.map((p) => (
-              <div
-                key={p.n}
-                className="flex flex-col gap-4 p-8 md:p-10"
-                style={{ background: "var(--ps-bg)" }}
-              >
-                <span className="font-[var(--font-ps-manrope)] text-sm text-[var(--ps-accent-2)]">
-                  {p.n}
-                </span>
-                <h3 className="text-2xl md:text-3xl">{p.title}</h3>
-                <p className="max-w-[42ch] text-[var(--ps-text-2)]">{p.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ——— About: pinned 3D scroll card sequence (DIGITAL GOLD MINING) ——— */}
+      <PsAboutScroll />
 
       {/* ——— DGB image marquee ——— */}
       <section className="overflow-hidden py-6" style={{ background: "var(--ps-bg-soft)" }}>

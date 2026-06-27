@@ -134,6 +134,38 @@
   animation-duration: 64s;
 }
 
+/* About — pinned 3D scroll section */
+.ps-about-section {
+  height: 300vh;
+  position: relative;
+  background: var(--ps-bg);
+}
+.ps-about-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+.ps-about-fallback {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ps-about-section {
+    height: auto;
+  }
+  .ps-about-pin {
+    position: static;
+    height: auto;
+    padding-block: clamp(56px, 9vw, 140px);
+  }
+  .ps-about-motion {
+    display: none !important;
+  }
+  .ps-about-fallback {
+    display: grid !important;
+  }
+}
+
 /* hero rotating cube (render-blocking here so faces never flash unstyled on load) */
 .ps-cube-scene {
   --cube: clamp(220px, 30vw, 420px);
