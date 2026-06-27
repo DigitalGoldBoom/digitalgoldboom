@@ -11,15 +11,17 @@ import { prefersReducedMotion } from "@/lib/reducedMotion";
  *   • precomputes the constant per-cell spatial phases + grain ONCE (on resize)
  *   • replaces Math.sin with a lookup table (LUT)
  *   • quantises alpha into a few buckets with PRECOMPUTED colour strings (no per-cell alloc)
- *   • is STATIC on mobile / touch / reduced-motion (one render, no rAF loop at all)
- *   • on desktop runs a capped-FPS rAF that pauses off-screen and when the tab is hidden
+ *   • animates on mobile too, but PAUSES the render the instant scrolling starts (so the
+ *     shimmer stays without ever costing anything during a scroll), and is STATIC for
+ *     reduced-motion
+ *   • runs a capped-FPS rAF that pauses off-screen and when the tab is hidden
  *
- * Why static on touch (not "light animation"): the full-screen FallingGold canvas is
- * position:fixed BEHIND the page. On a phone, animating it forces a full-viewport repaint, and
- * any semi-transparent / backdrop-filter card scrolling over it must re-composite against the
- * moving background every frame — the jank that gets worse the further you scroll (more cards
- * over the fixed layer). A STATIC fixed canvas composites once and the scroll stays smooth. So
- * touch devices get the shimmer look without the per-frame cost; desktop keeps it alive.
+ * Mobile-scroll note: this canvas is position:fixed BEHIND the page. The shimmer animation is
+ * NOT what janks mobile scroll — it's paused while scrolling. The real killer was
+ * backdrop-filter blur on cards LAYERED over this fixed canvas (the browser re-blurs the moving
+ * background every scroll frame, worse the more cards are on screen). That blur is now gated to
+ * desktop pointers in globals.css, so the shimmer can keep animating on mobile and scroll stays
+ * smooth.
  */
 
 const LUT_SIZE = 2048;
@@ -185,15 +187,12 @@ export function createDotField(
     render();
   }
 
-  // STATIC on touch/mobile, reduced-motion, or explicit opt-out — animate ONLY on real
-  // pointer+hover devices (desktop/laptop). A full-screen animating canvas behind backdrop-blur
-  // / translucent cards is the mobile scroll killer; see the file header. The scroll-pause alone
-  // doesn't help, because backdrop-filter recomputes whenever a card moves over the fixed layer.
-  const isTouch =
-    typeof window !== "undefined" &&
-    typeof window.matchMedia === "function" &&
-    !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const isStatic = opts.forceStatic || prefersReducedMotion() || isTouch;
+  // Animate on mobile too (the shimmer stays) — it's safe for SCROLL because the render PAUSES
+  // the instant scrolling starts (see isScrolling) and only ticks while the page is still. The
+  // thing that actually wrecked mobile scroll was backdrop-filter blur over this fixed layer
+  // (re-blurred every scroll frame); that's now gated to desktop in globals.css, not killed here.
+  // Static only for reduced-motion or an explicit opt-out.
+  const isStatic = opts.forceStatic || prefersReducedMotion();
 
   resize();
   window.addEventListener("resize", resize, { passive: true });
