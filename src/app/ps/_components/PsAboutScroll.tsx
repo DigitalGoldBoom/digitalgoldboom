@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -8,13 +9,14 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /**
- * PsAboutScroll — node-exact rebuild of the Framer "About" section: a 300vh PINNED
- * 3D scroll sequence. The giant "DIGITAL GOLD MINING" heading (Inter 700, 160px,
- * -0.06em) fades out; a 3D card prism enters (scale 0.4→1, y up, rotateX -45→0) then
- * rotates on X (~320°) cycling the 4 cards: We Educate → Influence → Invest → Connect.
- * Reduced-motion: a static, readable 2×2 grid (no pin).
+ * PsAboutScroll — Framer "About / DIGITAL GOLD MINING": 300vh PINNED 3D scroll.
+ * A gold wireframe cube spins up top; the 160px heading + a green scroll bullet fade
+ * out; a 3D card prism enters (scale 0.4→1, up, rotateX -45→0) then rotates on X
+ * cycling the 4 cards. Cards: transparent w/ green border, green title, PixelShovel
+ * wordmark, giant faint number watermark. Reduced-motion → static 2×2 grid.
  */
 
+const WORDMARK = "https://framerusercontent.com/images/nzBDrjjIcc9jVr8kaHG51L3wTGc.png";
 const CARDS = [
   { n: "01", title: "We Educate.", body: "Making digital gold mining simple to understand. We help the world see gold's future clearly." },
   { n: "02", title: "We Influence.", body: "Creating media and technology that advance the Digital Gold Boom. Turning ideas into influence and opportunity." },
@@ -22,105 +24,102 @@ const CARDS = [
   { n: "04", title: "We Connect.", body: "Linking investors, partners, and pioneers. Accelerating the movement toward a digital gold economy." },
 ];
 
+// 4-face X-axis prism (radius = half the 240px face height)
+const FACE_TF = [
+  "rotateX(0deg) translateZ(120px)",
+  "rotateX(90deg) translateZ(120px)",
+  "rotateX(180deg) translateZ(120px)",
+  "rotateX(270deg) translateZ(120px)",
+];
+
+// gold wireframe cube — 6 faces, half-size 90px
+const CUBE6 = [
+  "rotateY(0deg) translateZ(90px)",
+  "rotateY(90deg) translateZ(90px)",
+  "rotateY(180deg) translateZ(90px)",
+  "rotateY(270deg) translateZ(90px)",
+  "rotateX(90deg) translateZ(90px)",
+  "rotateX(-90deg) translateZ(90px)",
+];
+
 function Card({ n, title, body }: { n: string; title: string; body: string }) {
   return (
-    <div
-      className="flex h-full w-full flex-col justify-center gap-3 px-8 md:px-12"
-      style={{
-        background: "rgb(13,13,13)",
-        border: "1px solid rgba(255,255,255,0.12)",
-        borderRadius: "var(--ps-r-card)",
-      }}
-    >
-      <span style={{ color: "var(--ps-accent)", fontFamily: "var(--font-ps-manrope)", fontSize: 14 }}>{n}</span>
-      <h3 className="text-[clamp(1.6rem,3vw,2.5rem)]">{title}</h3>
-      <p className="max-w-[46ch] text-[var(--ps-text-2)]">{body}</p>
+    <div className="ps-about-card">
+      <Image src={WORDMARK} alt="PixelShovel" width={120} height={20} className="h-4 w-auto opacity-80" />
+      <h3 className="ps-about-card-title">{title}</h3>
+      <p className="ps-about-card-body">{body}</p>
+      <span className="ps-about-card-num" aria-hidden>{n}</span>
     </div>
   );
 }
 
 export default function PsAboutScroll() {
   const root = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
+  const fadeGroup = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const prismRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      const faces = CARDS.length;
-      const radius = 150; // half the face height (300px) for a 4-face X prism @90°
-
-      // place faces around an X-axis prism
-      gsap.set(prismRef.current!.children, {
-        position: "absolute",
-        inset: 0,
-        backfaceVisibility: "hidden",
-      });
       Array.from(prismRef.current!.children).forEach((face, i) => {
-        gsap.set(face, { rotateX: i * 90, transformOrigin: "50% 50%", z: radius });
+        gsap.set(face, { position: "absolute", inset: 0, backfaceVisibility: "hidden", transform: FACE_TF[i] });
       });
-
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: root.current!,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.6,
-        },
+        scrollTrigger: { trigger: root.current!, start: "top top", end: "bottom bottom", scrub: 0.6 },
       });
-
-      // heading fades + lifts away early
-      tl.fromTo(headingRef.current!, { opacity: 1, y: 0 }, { opacity: 0, y: -120, duration: 0.18, ease: "power2.in" }, 0);
-
-      // stage entrance: from far/below/tilted to front
+      // gold cube + heading + bullet fade out (opacity only — matches Framer)
+      tl.to(fadeGroup.current!, { opacity: 0, duration: 0.18, ease: "power2.in" }, 0);
+      // stage enters from far/below/tilted
       tl.fromTo(
         stageRef.current!,
-        { scale: 0.4, yPercent: 60, rotateX: -45, opacity: 0 },
+        { scale: 0.4, yPercent: 55, rotateX: -45, opacity: 0 },
         { scale: 1, yPercent: 0, rotateX: 0, opacity: 1, duration: 0.22, ease: "power2.out" },
         0.05
       );
-
-      // prism rotates through the faces (0 → last face) across the rest of the scroll
-      tl.to(prismRef.current!, { rotateX: -(faces - 1) * 90, duration: 0.7, ease: "none" }, 0.28);
+      // prism rotates through the 4 faces
+      tl.to(prismRef.current!, { rotateX: -(CARDS.length - 1) * 90, duration: 0.7, ease: "none" }, 0.28);
     },
     { scope: root }
   );
 
   return (
     <section ref={root} id="about" className="ps-about-section">
-      <div className="ps-about-pin flex flex-col items-center justify-center px-5">
-        <h2
-          ref={headingRef}
-          className="ps-about-heading ps-about-motion pointer-events-none absolute text-center"
-          style={{
-            fontFamily: "var(--font-ps-inter)",
-            fontWeight: 700,
-            fontSize: "clamp(2.75rem, 12vw, 160px)",
-            letterSpacing: "-0.06em",
-            lineHeight: "0.9em",
-            color: "#fff",
-          }}
-        >
-          DIGITAL GOLD MINING
-        </h2>
+      <div className="ps-about-pin">
+        {/* fade group: gold cube + heading + scroll bullet */}
+        <div ref={fadeGroup} className="ps-about-motion ps-about-fadegroup">
+          <div className="ps-goldcube" aria-hidden>
+            <div className="ps-goldcube-inner">
+              {CUBE6.map((tf, i) => (
+                <div key={i} className="ps-goldcube-face" style={{ transform: tf }} />
+              ))}
+              {/* nested inner cube for depth */}
+              <div className="ps-goldcube-nest">
+                {CUBE6.map((tf, i) => (
+                  <div key={i} className="ps-goldcube-face" style={{ transform: tf }} />
+                ))}
+              </div>
+            </div>
+          </div>
+          <h2 className="ps-about-heading">DIGITAL GOLD MINING</h2>
+          <div className="ps-about-bullet" aria-hidden>
+            <span />
+          </div>
+        </div>
 
-        {/* 3D stage */}
-        <div ref={stageRef} className="ps-about-motion" style={{ perspective: "1400px", width: "min(960px, 92vw)" }}>
-          <div
-            ref={prismRef}
-            style={{ position: "relative", width: "100%", height: "300px", transformStyle: "preserve-3d" }}
-          >
+        {/* 3D card prism */}
+        <div ref={stageRef} className="ps-about-motion ps-about-stage">
+          <div ref={prismRef} className="ps-about-prism">
             {CARDS.map((c) => (
               <Card key={c.n} {...c} />
             ))}
           </div>
         </div>
 
-        {/* Static fallback grid for reduced-motion (CSS-shown only when motion reduced) */}
-        <div className="ps-about-fallback ps-wrap grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+        {/* reduced-motion static grid */}
+        <div className="ps-about-fallback ps-wrap">
           {CARDS.map((c) => (
-            <div key={c.n} className="h-[200px]">
+            <div key={c.n} style={{ minHeight: 200 }}>
               <Card {...c} />
             </div>
           ))}

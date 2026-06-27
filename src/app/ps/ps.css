@@ -146,24 +146,164 @@
   height: 100vh;
   overflow: hidden;
 }
+.ps-about-fadegroup {
+  position: absolute;
+  inset: 0;
+}
+
+/* gold wireframe cube, top-centre, continuous spin */
+.ps-goldcube {
+  position: absolute;
+  top: clamp(24px, 6vh, 56px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 180px;
+  perspective: 700px;
+}
+.ps-goldcube-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: ps-gold-spin 16s linear infinite;
+}
+.ps-goldcube-nest {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: scale(0.6);
+}
+.ps-goldcube-face {
+  position: absolute;
+  inset: 0;
+  border: 2px solid rgba(255, 187, 0, 0.85);
+  background: rgba(255, 187, 0, 0.08);
+}
+@keyframes ps-gold-spin {
+  from { transform: rotateX(-24deg) rotateY(0deg); }
+  to { transform: rotateX(-24deg) rotateY(360deg); }
+}
+
+/* huge centred heading */
+.ps-about-heading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  font-family: var(--font-ps-inter);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 12vw, 160px);
+  letter-spacing: -0.06em;
+  line-height: 0.9em;
+  color: #fff;
+}
+
+/* green scroll bullet (mouse) bottom-centre */
+.ps-about-bullet {
+  position: absolute;
+  bottom: clamp(28px, 6vh, 56px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  border: 2px solid var(--ps-accent);
+  border-radius: 999px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+.ps-about-bullet span {
+  width: 4px;
+  height: 8px;
+  border-radius: 999px;
+  background: #fff;
+  animation: ps-bullet 1.6s ease-in-out infinite;
+}
+@keyframes ps-bullet {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(10px); opacity: 0.3; }
+}
+
+/* 3D card prism */
+.ps-about-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1080px, 92vw);
+  perspective: 1100px;
+}
+.ps-about-prism {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  transform-style: preserve-3d;
+}
+.ps-about-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: clamp(20px, 3vw, 36px) clamp(24px, 4vw, 48px);
+  border: 1px solid var(--ps-accent);
+  background: rgba(0, 0, 0, 0.92);
+  border-radius: var(--ps-r-card);
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+.ps-about-card-title {
+  color: var(--ps-accent);
+  font-family: var(--font-ps-rethink), var(--font-ps-inter);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1;
+}
+.ps-about-card-body {
+  position: relative;
+  z-index: 1;
+  max-width: 62%;
+  color: #fff;
+  font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+  line-height: 1.35;
+}
+.ps-about-card-num {
+  position: absolute;
+  right: clamp(16px, 3vw, 40px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-ps-inter);
+  font-weight: 800;
+  font-size: clamp(7rem, 16vw, 15rem);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.10);
+  pointer-events: none;
+}
+
 .ps-about-fallback {
   display: none;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .ps-about-fallback {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ps-about-section {
-    height: auto;
-  }
+  .ps-about-section { height: auto; }
   .ps-about-pin {
     position: static;
     height: auto;
     padding-block: clamp(56px, 9vw, 140px);
   }
-  .ps-about-motion {
-    display: none !important;
-  }
-  .ps-about-fallback {
-    display: grid !important;
-  }
+  .ps-about-motion { display: none !important; }
+  .ps-about-fallback { display: grid !important; }
 }
 
 /* hero rotating cube (render-blocking here so faces never flash unstyled on load) */
