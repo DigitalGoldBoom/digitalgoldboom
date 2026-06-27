@@ -334,8 +334,8 @@
 
 /* hero rotating cube (render-blocking here so faces never flash unstyled on load) */
 .ps-cube-scene {
-  /* scales smoothly: ~150px phone → ~300px tablet → 420px desktop */
-  --cube: clamp(150px, 38vw, 420px);
+  /* scales smoothly: ~195px phone → ~380px tablet → 420px desktop */
+  --cube: clamp(185px, 50vw, 420px);
   --half: calc(var(--cube) / 2);
   width: var(--cube);
   height: var(--cube);

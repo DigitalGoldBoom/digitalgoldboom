@@ -34,7 +34,7 @@ export default function PsRotatingCube() {
               src={`${CDN}/${id}.png`}
               alt=""
               fill
-              sizes="(max-width: 640px) 160px, (max-width: 1024px) 320px, 420px"
+              sizes="(max-width: 640px) 220px, (max-width: 1024px) 400px, 420px"
               // Only the front face is the LCP candidate — prioritise just that one so it
               // isn't diluted; the other 5 faces (sides/back, seen later as it spins) lazy-load.
               priority={i === 0}
