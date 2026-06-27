@@ -181,7 +181,7 @@
   width: 180px;
   height: 180px;
   perspective: 760px;
-  top: calc(clamp(24px, 6vh, 56px) - 30px); /* up 30px for a stronger overlap */
+  top: calc(clamp(24px, 6vh, 56px) - 60px); /* up 60px for a stronger overlap */
 }
 .ps-goldcube-layer {
   position: absolute;
@@ -211,7 +211,7 @@
 /* huge centred heading */
 .ps-about-heading {
   position: absolute;
-  top: calc(50% - 30px);
+  top: calc(50% - 60px);
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
@@ -254,7 +254,7 @@
 /* 3D card prism */
 .ps-about-stage {
   position: absolute;
-  top: calc(50% - 30px);
+  top: calc(50% - 60px);
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(1080px, 92vw);
