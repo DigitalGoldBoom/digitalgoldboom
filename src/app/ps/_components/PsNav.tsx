@@ -23,20 +23,11 @@ export default function PsNav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const [isDesktop, setIsDesktop] = useState(false);
-
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const onMq = () => setIsDesktop(mq.matches);
-    onMq();
-    mq.addEventListener("change", onMq);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      mq.removeEventListener("change", onMq);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -92,20 +83,7 @@ export default function PsNav() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          style={{
-            display: isDesktop ? "none" : "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 44,
-            height: 44,
-            borderRadius: 999,
-            background: "rgba(17,19,17,0.85)",
-            border: "1px solid rgba(255,255,255,0.22)",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
-            pointerEvents: "auto",
-            flexShrink: 0,
-          }}
+          className="ps-burger pointer-events-auto"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" aria-hidden>
             {open ? (

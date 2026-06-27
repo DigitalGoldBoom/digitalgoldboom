@@ -89,17 +89,19 @@ export default function PsAboutScroll() {
         {/* fade group: gold cube + heading + scroll bullet */}
         <div ref={fadeGroup} className="ps-about-motion ps-about-fadegroup">
           <div className="ps-goldcube" aria-hidden>
-            <div className="ps-goldcube-inner">
-              {CUBE6.map((tf, i) => (
-                <div key={i} className="ps-goldcube-face" style={{ transform: tf }} />
-              ))}
-              {/* nested inner cube for depth */}
-              <div className="ps-goldcube-nest">
-                {CUBE6.map((tf, i) => (
-                  <div key={i} className="ps-goldcube-face" style={{ transform: tf }} />
-                ))}
+            {/* 5 nested cubes, alternating spin direction + speed (Framer RotatingCubes: totalCubes 5) */}
+            {[1, 0.8, 0.6, 0.4, 0.22].map((s, li) => (
+              <div key={li} className="ps-goldcube-layer" style={{ transform: `scale(${s})` }}>
+                <div
+                  className="ps-goldcube-spin"
+                  style={{ animationDuration: `${11 + li * 3}s`, animationDirection: li % 2 ? "reverse" : "normal" }}
+                >
+                  {CUBE6.map((tf, i) => (
+                    <div key={i} className="ps-goldcube-face" style={{ transform: tf }} />
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
           </div>
           <h2 className="ps-about-heading">DIGITAL GOLD MINING</h2>
           <div className="ps-about-bullet" aria-hidden>
