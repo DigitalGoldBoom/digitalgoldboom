@@ -115,9 +115,25 @@ export default function PixelShovelHome() {
               Everything You Think You Know About Gold is Wrong
             </h2>
             <p className="max-w-[48ch] text-lg text-[var(--ps-text-2)]">
-              Tokenization just started the biggest gold rush in history. Join the waitlist and
-              get the book <strong className="text-white">free</strong>.
+              Tokenization just started the biggest gold rush in history.
             </p>
+            {/* Join the Waitlist (node-exact: green dot · Inter Display 34px · grey-blue) */}
+            <div className="flex items-center gap-2 pt-2">
+              <span
+                className="inline-block h-[18px] w-[18px] rounded-full"
+                style={{ background: "rgb(13,222,51)" }}
+                aria-hidden
+              />
+              <span
+                className="text-[clamp(1.4rem,2.4vw,2.125rem)] font-medium leading-[1.2]"
+                style={{
+                  color: "rgb(167,173,190)",
+                  fontFamily: "var(--font-ps-inter), sans-serif",
+                }}
+              >
+                Join the Waitlist and Get it FREE
+              </span>
+            </div>
             <PsWaitlistForm source="ps-home-dgb" />
           </div>
 
