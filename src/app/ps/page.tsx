@@ -26,13 +26,6 @@ const DGB_SQUARES = [
   "VNFzaWfCZRKGzAAu5LsZJmQ58kc",
 ];
 
-// Demo projects (the Framer template's filler — scaled to 3, swap for real work later).
-const PROJECTS = [
-  { img: "HONJjNCuNpLmuGeDy0Y6nmLB6Do", slug: "huggl-1-0-website-made-in-framer", title: "Huggl" },
-  { img: "D7k8E4WZWYXu0iQi9n5ZXhXgqg", slug: "charmant-website-made-in-framer", title: "Charmant" },
-  { img: "yCY5SlXVESWmcgUnZDmmMhybc", slug: "predict-website-made-in-framer", title: "Predict" },
-];
-
 export default function PixelShovelHome() {
   return (
     <>
@@ -139,40 +132,6 @@ export default function PixelShovelHome() {
         </div>
       </section>
 
-      {/* ——— Projects (3) ——— */}
-      <section className="ps-section">
-        <div className="ps-wrap">
-          <div className="mb-12 flex items-end justify-between gap-6">
-            <h2 className="text-[clamp(1.8rem,4vw,3.2rem)]">Recent Work</h2>
-            <Link href="/ps/projects" className="ps-ghost">
-              View all
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {PROJECTS.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/ps/projects/${p.slug}`}
-                className="group flex flex-col gap-4"
-              >
-                <div
-                  className="relative aspect-[4/5] overflow-hidden rounded-[var(--ps-r-card)] border"
-                  style={{ borderColor: "var(--ps-line)" }}
-                >
-                  <Image
-                    src={img(p.img)}
-                    alt={p.title}
-                    fill
-                    sizes="(max-width:768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <span className="text-lg font-medium">{p.title}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }
