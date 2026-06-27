@@ -13,6 +13,13 @@ import { prefersReducedMotion } from "@/lib/reducedMotion";
  *   • quantises alpha into a few buckets with PRECOMPUTED colour strings (no per-cell alloc)
  *   • is STATIC on mobile / touch / reduced-motion (one render, no rAF loop at all)
  *   • on desktop runs a capped-FPS rAF that pauses off-screen and when the tab is hidden
+ *
+ * Why static on touch (not "light animation"): the full-screen FallingGold canvas is
+ * position:fixed BEHIND the page. On a phone, animating it forces a full-viewport repaint, and
+ * any semi-transparent / backdrop-filter card scrolling over it must re-composite against the
+ * moving background every frame — the jank that gets worse the further you scroll (more cards
+ * over the fixed layer). A STATIC fixed canvas composites once and the scroll stays smooth. So
+ * touch devices get the shimmer look without the per-frame cost; desktop keeps it alive.
  */
 
 const LUT_SIZE = 2048;
@@ -178,10 +185,15 @@ export function createDotField(
     render();
   }
 
-  // STATIC only for reduced-motion (or explicit opt-out). Mobile now animates too — the engine
-  // is light enough, and we PAUSE the render while the user is scrolling (see isScrolling) so
-  // scrolling stays perfectly smooth on every device.
-  const isStatic = opts.forceStatic || prefersReducedMotion();
+  // STATIC on touch/mobile, reduced-motion, or explicit opt-out — animate ONLY on real
+  // pointer+hover devices (desktop/laptop). A full-screen animating canvas behind backdrop-blur
+  // / translucent cards is the mobile scroll killer; see the file header. The scroll-pause alone
+  // doesn't help, because backdrop-filter recomputes whenever a card moves over the fixed layer.
+  const isTouch =
+    typeof window !== "undefined" &&
+    typeof window.matchMedia === "function" &&
+    !window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const isStatic = opts.forceStatic || prefersReducedMotion() || isTouch;
 
   resize();
   window.addEventListener("resize", resize, { passive: true });

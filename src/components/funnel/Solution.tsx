@@ -63,15 +63,8 @@ export default function Solution() {
         {/* Official definition — glass card */}
         <div
           data-reveal
-          className="mt-16 relative"
-          style={{
-            background: "rgba(255,255,255,0.04)",
-            backdropFilter: "blur(20px)",
-            border: "1px solid rgba(202,138,4,0.25)",
-            borderRadius: "var(--r-2xl)",
-            padding: "40px 48px",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)",
-          }}
+          className="glass-panel mt-16 relative"
+          style={{ padding: "40px 48px" }}
         >
           <div className="absolute left-0 top-10 bottom-10 w-[3px] rounded-r-full" style={{ background: "var(--accent-gold)" }} />
           <p
@@ -100,12 +93,8 @@ export default function Solution() {
             <div
               key={s.n}
               data-reveal
-              className="relative"
+              className="glass-tile relative"
               style={{
-                background: "rgba(255,255,255,0.03)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                borderRadius: "var(--r-xl)",
                 padding: "36px 32px",
                 transition: "border-color 240ms, transform 240ms",
               }}

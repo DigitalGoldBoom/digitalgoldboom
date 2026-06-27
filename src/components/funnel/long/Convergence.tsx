@@ -74,10 +74,8 @@ export default function Convergence() {
             <article
               key={f.n}
               data-reveal
-              className="relative flex flex-col h-full"
+              className="glass-tile relative flex flex-col h-full"
               style={{
-                background: "rgba(255,255,255,0.04)",
-                backdropFilter: "blur(16px)",
                 border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: "var(--r-2xl)",
                 padding: "40px 32px",

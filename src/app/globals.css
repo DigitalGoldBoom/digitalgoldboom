@@ -293,19 +293,59 @@ body {
 }
 
 /* ================================================================
-   LIQUID GLASS — morphing blur layer for hero / section transitions
+   LIQUID GLASS — frosted layer for hero / section transitions
+
+   backdrop-filter: blur() is the single biggest mobile scroll killer here: the browser must
+   re-sample + re-blur everything behind the card every time it moves over the (fixed) shimmer
+   background — i.e. every scroll frame, for every glass element on screen. So blur is applied
+   ONLY on real desktop pointers (hover + fine). On touch/mobile the cards fall back to a
+   solid-ish, legible background (no blur) — near-identical look, zero per-frame blur cost.
    ================================================================ */
 .glass {
-  background: var(--glass-light);
-  backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  background: rgba(255, 255, 255, 0.9); /* touch fallback: opaque, no blur */
   border: 1px solid var(--border-base);
 }
 .glass-dark {
-  background: var(--glass-dark);
-  backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  background: rgba(28, 25, 23, 0.92); /* touch fallback: opaque, no blur */
   border: 1px solid var(--border-on-dark);
+}
+
+/* Solution-style frosted panels (were inline backdrop-filter in funnel components).
+   Touch fallback = a legible dark panel so text stays readable without blurring the shimmer. */
+.glass-panel {
+  background: rgba(10, 12, 24, 0.55);
+  border: 1px solid rgba(202, 138, 4, 0.25);
+  border-radius: var(--r-2xl);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.glass-tile {
+  background: rgba(10, 12, 24, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--r-xl);
+}
+
+/* Blur ONLY on real desktop pointers — phones/tablets keep the cheap solid fallback above. */
+@media (hover: hover) and (pointer: fine) {
+  .glass {
+    background: var(--glass-light);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  }
+  .glass-dark {
+    background: var(--glass-dark);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.4);
+  }
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .glass-tile {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
 }
 
 /* ================================================================
