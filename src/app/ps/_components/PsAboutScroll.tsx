@@ -32,14 +32,14 @@ const FACE_TF = [
   "rotateX(270deg) translateZ(120px)",
 ];
 
-// gold wireframe cube — 6 faces, half-size 90px
+// gold wireframe cube — 6 faces; depth = --gh (half the responsive cube size)
 const CUBE6 = [
-  "rotateY(0deg) translateZ(90px)",
-  "rotateY(90deg) translateZ(90px)",
-  "rotateY(180deg) translateZ(90px)",
-  "rotateY(270deg) translateZ(90px)",
-  "rotateX(90deg) translateZ(90px)",
-  "rotateX(-90deg) translateZ(90px)",
+  "rotateY(0deg) translateZ(var(--gh))",
+  "rotateY(90deg) translateZ(var(--gh))",
+  "rotateY(180deg) translateZ(var(--gh))",
+  "rotateY(270deg) translateZ(var(--gh))",
+  "rotateX(90deg) translateZ(var(--gh))",
+  "rotateX(-90deg) translateZ(var(--gh))",
 ];
 
 function Card({ n, title, body }: { n: string; title: string; body: string }) {

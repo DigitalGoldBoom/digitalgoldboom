@@ -178,8 +178,11 @@
   top: clamp(24px, 6vh, 56px);
   left: 50%;
   transform: translateX(-50%);
-  width: 180px;
-  height: 180px;
+  /* size scales with viewport (~110px phone → 180px desktop); --gh feeds face depth */
+  --g: clamp(110px, 24vw, 180px);
+  --gh: calc(var(--g) / 2);
+  width: var(--g);
+  height: var(--g);
   perspective: 760px;
   top: calc(clamp(24px, 6vh, 56px) - 60px); /* up 60px for a stronger overlap */
 }
@@ -331,7 +334,8 @@
 
 /* hero rotating cube (render-blocking here so faces never flash unstyled on load) */
 .ps-cube-scene {
-  --cube: clamp(220px, 30vw, 420px);
+  /* scales smoothly: ~150px phone → ~300px tablet → 420px desktop */
+  --cube: clamp(150px, 38vw, 420px);
   --half: calc(var(--cube) / 2);
   width: var(--cube);
   height: var(--cube);
