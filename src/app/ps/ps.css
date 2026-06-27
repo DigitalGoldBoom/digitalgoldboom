@@ -34,7 +34,6 @@
   font-family: var(--font-ps-inter), system-ui, sans-serif;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  overflow-x: clip;
 }
 
 .ps h1,

@@ -23,11 +23,20 @@ export default function PsNav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  const [isDesktop, setIsDesktop] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const onMq = () => setIsDesktop(mq.matches);
+    onMq();
+    mq.addEventListener("change", onMq);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      mq.removeEventListener("change", onMq);
+    };
   }, []);
 
   return (
@@ -70,10 +79,12 @@ export default function PsNav() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <Link href="/ps#dgb" className="ps-cta pointer-events-auto hidden lg:inline-flex">
-          Get Digital Gold Boom Free
-        </Link>
+        {/* Desktop CTA (wrapper hides it on mobile — .ps-cta forces its own display) */}
+        <div className="pointer-events-auto hidden lg:block">
+          <Link href="/ps#dgb" className="ps-cta">
+            Get Digital Gold Boom Free
+          </Link>
+        </div>
 
         {/* Mobile hamburger */}
         <button
@@ -81,17 +92,34 @@ export default function PsNav() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="pointer-events-auto flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-full border lg:hidden"
-          style={{ background: "rgba(17,19,17,0.7)", borderColor: "var(--ps-line)" }}
+          style={{
+            display: isDesktop ? "none" : "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 44,
+            height: 44,
+            borderRadius: 999,
+            background: "rgba(17,19,17,0.85)",
+            border: "1px solid rgba(255,255,255,0.22)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            pointerEvents: "auto",
+            flexShrink: 0,
+          }}
         >
-          <span
-            className="block h-0.5 w-5 bg-white transition-transform duration-200"
-            style={{ transform: open ? "translateY(4px) rotate(45deg)" : "none" }}
-          />
-          <span
-            className="block h-0.5 w-5 bg-white transition-transform duration-200"
-            style={{ transform: open ? "translateY(-4px) rotate(-45deg)" : "none" }}
-          />
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" aria-hidden>
+            {open ? (
+              <>
+                <line x1="5" y1="5" x2="19" y2="19" />
+                <line x1="19" y1="5" x2="5" y2="19" />
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="8" x2="21" y2="8" />
+                <line x1="3" y1="16" x2="21" y2="16" />
+              </>
+            )}
+          </svg>
         </button>
       </div>
 

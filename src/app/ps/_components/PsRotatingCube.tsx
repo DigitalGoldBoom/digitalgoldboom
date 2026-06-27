@@ -35,7 +35,11 @@ export default function PsRotatingCube() {
               alt=""
               fill
               sizes="420px"
-              priority
+              // Only the front face is the LCP candidate — prioritise just that one so it
+              // isn't diluted; the other 5 faces (sides/back, seen later as it spins) lazy-load.
+              priority={i === 0}
+              fetchPriority={i === 0 ? "high" : "auto"}
+              loading={i === 0 ? "eager" : "lazy"}
               className="object-cover"
             />
           </div>
