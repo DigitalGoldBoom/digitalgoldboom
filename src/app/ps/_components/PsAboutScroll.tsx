@@ -45,7 +45,7 @@ const CUBE6 = [
 function Card({ n, title, body }: { n: string; title: string; body: string }) {
   return (
     <div className="ps-about-card">
-      <Image src={WORDMARK} alt="PixelShovel" width={120} height={20} className="h-4 w-auto opacity-80" />
+      <Image src={WORDMARK} alt="PixelShovel" width={130} height={22} className="h-[18px] w-auto self-start opacity-80" />
       <h3 className="ps-about-card-title">{title}</h3>
       <p className="ps-about-card-body">{body}</p>
       <span className="ps-about-card-num" aria-hidden>{n}</span>

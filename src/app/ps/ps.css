@@ -158,13 +158,14 @@
 .ps-about-section {
   height: 300vh;
   position: relative;
+  z-index: 2; /* lift the whole section (incl. the cube) in front of the grey section above */
   background: var(--ps-bg);
 }
 .ps-about-pin {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow: visible; /* let the gold cube overlap up into the section above (not clipped) */
 }
 .ps-about-fadegroup {
   position: absolute;
@@ -180,6 +181,7 @@
   width: 180px;
   height: 180px;
   perspective: 760px;
+  top: calc(clamp(24px, 6vh, 56px) - 30px); /* up 30px for a stronger overlap */
 }
 .ps-goldcube-layer {
   position: absolute;
@@ -209,7 +211,7 @@
 /* huge centred heading */
 .ps-about-heading {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 30px);
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
@@ -252,7 +254,7 @@
 /* 3D card prism */
 .ps-about-stage {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 30px);
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(1080px, 92vw);
@@ -274,7 +276,7 @@
   padding: clamp(20px, 3vw, 36px) clamp(24px, 4vw, 48px);
   border: 1px solid var(--ps-accent);
   background: rgba(0, 0, 0, 0.92);
-  border-radius: var(--ps-r-card);
+  border-radius: 0; /* square edges so the prism faces sit flush */
   overflow: hidden;
   backface-visibility: hidden;
 }
