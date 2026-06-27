@@ -260,8 +260,10 @@
   top: calc(50% - 60px);
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(1080px, 92vw);
-  perspective: 1100px;
+  /* narrower than the viewport so the 3D-tilted/perspective-magnified card edges
+     don't run off the sides on mobile */
+  width: min(1080px, 84vw);
+  perspective: 1300px;
 }
 .ps-about-prism {
   position: relative;
@@ -334,8 +336,8 @@
 
 /* hero rotating cube (render-blocking here so faces never flash unstyled on load) */
 .ps-cube-scene {
-  /* scales smoothly: ~195px phone → ~380px tablet → 420px desktop */
-  --cube: clamp(185px, 50vw, 420px);
+  /* scales smoothly: ~215px phone → ~400px tablet → 420px desktop */
+  --cube: clamp(205px, 55vw, 420px);
   --half: calc(var(--cube) / 2);
   width: var(--cube);
   height: var(--cube);
