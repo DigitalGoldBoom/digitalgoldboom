@@ -1,0 +1,163 @@
+/* ================================================================
+   PixelShovel design system — scoped to .ps so it never touches the
+   Digital Gold Boom site. Forensic clone of the PixelShovel Framer
+   project (vwkDOz2TgLBqeaTbxrpa), live ref: daily-palette-709568.framer.app
+   Look: black canvas · olive-green accent · pill buttons ·
+   Rethink Sans headings / Inter body / Manrope accents.
+   ================================================================ */
+.ps {
+  /* Real palette resolved from the Framer ColorStyleTokens (not eyeballed) */
+  --ps-bg: rgb(0, 0, 0); /* token "0" */
+  --ps-bg-soft: rgb(13, 13, 13); /* token "5" */
+  --ps-surface: rgb(13, 13, 13);
+  --ps-surface-2: rgb(38, 38, 38); /* token "15" */
+  --ps-line: rgba(255, 255, 255, 0.1);
+  --ps-line-strong: rgba(255, 255, 255, 0.18);
+
+  --ps-text: rgb(255, 255, 255); /* token "100" */
+  --ps-text-2: rgb(204, 204, 204); /* token "80" */
+  --ps-text-3: rgb(153, 153, 153); /* token "60" */
+
+  --ps-accent: rgb(0, 255, 0); /* token "60"/"48" — bright green */
+  --ps-accent-2: rgb(66, 128, 0); /* token "25" — dark green */
+  --ps-accent-red: rgb(255, 51, 51); /* token "60" red */
+  --ps-accent-soft: rgba(0, 255, 0, 0.12);
+
+  --ps-r-pill: 100px;
+  --ps-r-card: 18px;
+
+  --ps-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ps-dur: 240ms;
+
+  background: var(--ps-bg);
+  color: var(--ps-text);
+  font-family: var(--font-ps-inter), system-ui, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+.ps h1,
+.ps h2,
+.ps h3,
+.ps h4 {
+  font-family: var(--font-ps-rethink), var(--font-ps-inter), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  margin: 0;
+}
+
+.ps p {
+  margin: 0;
+}
+
+/* shared eyebrow / mono-ish accent label */
+.ps-eyebrow {
+  font-family: var(--font-ps-manrope), var(--font-ps-inter), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ps-text-3);
+}
+
+/* primary pill CTA */
+.ps-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ps-accent); /* bright green rgb(0,255,0) — node-exact */
+  color: #000;
+  border-radius: var(--ps-r-pill);
+  padding: 16px 26px;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  transition: transform var(--ps-dur) var(--ps-ease), filter var(--ps-dur) var(--ps-ease);
+}
+.ps-cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* ghost / outline pill */
+.ps-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--ps-text);
+  border: 1px solid var(--ps-line-strong);
+  border-radius: var(--ps-r-pill);
+  padding: 14px 24px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--ps-dur) var(--ps-ease), background var(--ps-dur) var(--ps-ease);
+}
+.ps-ghost:hover {
+  border-color: var(--ps-text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* section rhythm */
+.ps-section {
+  width: 100%;
+  padding-inline: clamp(20px, 5vw, 80px);
+  padding-block: clamp(56px, 9vw, 140px);
+}
+.ps-wrap {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+/* horizontal marquee ticker */
+@keyframes ps-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ps-marquee {
+  display: flex;
+  width: max-content;
+  animation: ps-marquee 38s linear infinite;
+}
+.ps-marquee--slow {
+  animation-duration: 64s;
+}
+
+/* scroll reveal */
+.ps-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s var(--ps-ease), transform 0.7s var(--ps-ease);
+  will-change: opacity, transform;
+}
+.ps-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-marquee {
+    animation: none;
+  }
+  .ps-cta:hover,
+  .ps-ghost:hover {
+    transform: none;
+  }
+  .ps-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -27,6 +27,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // PixelShovel is a separate site (pixelshovel.com) living under /ps with its own
+  // nav — never show the Digital Gold Boom navbar there.
+  const isPixelShovel = pathname === "/ps" || pathname.startsWith("/ps/");
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
@@ -44,6 +48,8 @@ export default function Navbar() {
         ? "bg-[#131839] text-white"
         : "text-[#6d7792] hover:bg-[#131839] hover:text-white",
     ].join(" ");
+
+  if (isPixelShovel) return null;
 
   return (
     <nav className="pointer-events-none fixed inset-x-0 top-0 z-50">
