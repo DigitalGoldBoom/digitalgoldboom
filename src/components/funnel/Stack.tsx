@@ -72,7 +72,7 @@ export default function Stack() {
             <div
               key={o.name}
               data-reveal
-              className="flex flex-col h-full"
+              className="lift-card flex flex-col h-full"
               style={{
                 background: "var(--bg-canvas)",
                 border: "1px solid var(--border-base)",

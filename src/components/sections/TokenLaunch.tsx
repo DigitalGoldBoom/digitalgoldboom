@@ -22,7 +22,7 @@ function StatCard({
 }) {
   return (
     <div
-      className="flex flex-col justify-end rounded-2xl p-5 sm:p-6"
+      className="lift-card flex flex-col justify-end rounded-2xl p-5 sm:p-6"
       style={{
         background: "rgba(0,3,25,0.5)",
         border: "1px solid rgba(255,255,255,0.06)",

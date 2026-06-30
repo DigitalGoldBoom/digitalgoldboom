@@ -137,6 +137,37 @@ body {
   font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Taste: avoid ugly single-word last lines in body copy (headings use balance above). */
+  text-wrap: pretty;
+}
+
+/* ================================================================
+   TASTE LAYER — global polish applied site-wide (brand kept intact)
+   ================================================================ */
+/* One consistent, on-brand focus ring everywhere (accessibility + polish). */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+/* Anchor targets clear the fixed nav. */
+:target { scroll-margin-top: 96px; }
+
+/* Tactile lift for content cards that aren't using .card (People, options, stat tiles).
+   transform/opacity only (GPU); tinted to the warm shadow ladder. */
+.lift-card {
+  transition: transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+  will-change: transform;
+}
+.lift-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-gold);
+}
+@media (hover: none) {
+  .lift-card:hover { transform: none; box-shadow: inherit; }
 }
 
 /* ================================================================

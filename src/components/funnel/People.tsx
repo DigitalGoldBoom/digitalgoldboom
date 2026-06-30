@@ -54,7 +54,7 @@ export default function People() {
             <article
               key={p.org}
               data-reveal
-              className="group flex flex-col h-full"
+              className="lift-card group flex flex-col h-full"
               style={{
                 background: "var(--bg-canvas)",
                 border: "1px solid var(--border-base)",
