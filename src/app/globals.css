@@ -406,7 +406,29 @@ body {
   --v2-line: rgba(255, 255, 255, 0.09);
   --v2-dim: rgba(231, 231, 238, 0.62);
   --v2-faint: rgba(231, 231, 238, 0.4);
+
+  /* Flip the whole design system to dark INSIDE .v2 — existing pages use these tokens
+     (text-tp, .card, .section-*, var(--bg-surface) …) so wrapping a page in .v2 darkens it
+     automatically, no per-element rewrite. */
+  --bg-canvas: transparent;            /* let the shimmer field show through sections */
+  --bg-surface: rgba(255, 255, 255, 0.035);      /* white cards -> dark glass */
+  --bg-surface-elevated: rgba(255, 255, 255, 0.06);
+  --bg-contrast: #0d0d15;
+  --bg-contrast-deep: #08080d;
+  --text-primary: #F4F4F7;
+  --text-secondary: rgba(231, 231, 238, 0.72);
+  --text-tertiary: rgba(231, 231, 238, 0.5);
+  --text-muted: rgba(231, 231, 238, 0.4);
+  --border-base: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(232, 178, 58, 0.4);
+  --border-gold: rgba(232, 178, 58, 0.4);
+  --accent-gold: #E8B23A;
+  --accent-gold-wash: rgba(232, 178, 58, 0.12);
+  --accent-gold-ring: rgba(232, 178, 58, 0.28);
+  /* on-dark text tokens already point at light values; keep them */
 }
+/* In dark scope, the light "glass" fallbacks should read as dark glass, not white. */
+.v2 .card, .v2 .card-feature { box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
 .v2 ::selection { background: var(--v2-gold); color: #08080d; }
 .v2-eyebrow {
   font-family: var(--font-mono), ui-monospace, monospace;

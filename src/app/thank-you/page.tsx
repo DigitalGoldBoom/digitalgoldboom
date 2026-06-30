@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+import VaultShell from "@/components/VaultShell";
 
 export const metadata: Metadata = {
   title: "Thank you — Digital Gold Boom",
@@ -11,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function ThankYouPage() {
   return (
-    <>
-      <main className="pt-32 pb-24" style={{ background: "var(--bg-canvas)", minHeight: "70vh" }}>
+    <VaultShell>
+      <main className="pt-32 pb-24" style={{ minHeight: "70vh" }}>
         <div className="mx-auto max-w-2xl px-6 text-center">
           <div
             aria-hidden
@@ -59,6 +60,6 @@ export default function ThankYouPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </VaultShell>
   );
 }

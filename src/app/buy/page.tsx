@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import BuyButton from "@/components/BuyButton";
 import Footer from "@/components/Footer";
+import VaultShell from "@/components/VaultShell";
 
 const PRICE = "17";
 const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
@@ -23,8 +24,8 @@ export const metadata: Metadata = {
  */
 export default function BuyPage() {
   return (
-    <>
-      <main className="pt-32 pb-20" style={{ background: "var(--bg-canvas)", minHeight: "70vh" }}>
+    <VaultShell>
+      <main className="pt-32 pb-20" style={{ minHeight: "70vh" }}>
         <div className="mx-auto max-w-[900px] px-6">
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-[auto_1fr] sm:gap-12 sm:items-start">
             {/* Cover */}
@@ -93,6 +94,6 @@ export default function BuyPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </VaultShell>
   );
 }

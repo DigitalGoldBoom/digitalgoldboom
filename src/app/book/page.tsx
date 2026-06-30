@@ -4,6 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import BuyButton from "@/components/BuyButton";
 import Book3D from "@/components/Book3D";
 import Footer from "@/components/Footer";
+import VaultShell from "@/components/VaultShell";
 import { generateMetadata as genMeta, generateFAQSchema } from "@/lib/seo";
 
 const PRICE = "17";
@@ -106,7 +107,7 @@ const darkScope: CSSProperties = {
 
 export default function BookPage() {
   return (
-    <>
+    <VaultShell>
       <JsonLd data={bookLd} />
       <JsonLd data={generateFAQSchema(faqs)} />
 
@@ -258,6 +259,6 @@ export default function BookPage() {
       </section>
 
       <Footer />
-    </>
+    </VaultShell>
   );
 }
