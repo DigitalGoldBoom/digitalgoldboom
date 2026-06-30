@@ -4,6 +4,33 @@ const SITE_URL = 'https://digitalgoldboom.com';
 const SITE_NAME = 'Digital Gold Boom';
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.jpg`;
 
+// Stable @id anchors so Google/AI resolve these as ONE linked entity graph across the page's
+// JSON-LD blocks (Organization ← founder ← Person; WebSite/Book → publisher → Organization).
+const ORG_ID = `${SITE_URL}/#organization`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
+const PERSON_ID = `${SITE_URL}/#andrew-fletcher`;
+
+// Andrew Fletcher — the book's author. Facts verified against the book (C:\DGB-Book). Author
+// authority is the biggest E-E-A-T lever for a finance title. No `sameAs` yet — the real author
+// profile URLs aren't confirmed, so they're omitted rather than fabricated (Golden Rule #1).
+function authorNode() {
+  return {
+    '@type': 'Person',
+    '@id': PERSON_ID,
+    name: 'Andrew Fletcher',
+    jobTitle: 'Author',
+    description:
+      'Author of Digital Gold Boom. Former President, Director and CEO of NatBridge Resources (formerly Great Eagle Gold Corp), the company behind the first NatGold supply agreement.',
+    knowsAbout: [
+      'Digital gold mining',
+      'Gold tokenization',
+      'NatGold',
+      'Baseline Intrinsic Value (BIV)',
+      'Mineral resource verification (NI 43-101)',
+    ],
+  };
+}
+
 interface SEOConfig {
   title: string;
   description: string;
@@ -103,10 +130,12 @@ export function generateOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
+    '@id': ORG_ID,
     name: SITE_NAME,
     url: SITE_URL,
     description:
       'Digital Gold Boom — the book and live data on digital gold mining and the tokenization of in-ground verified gold.',
+    founder: { '@id': PERSON_ID },
   };
 }
 
@@ -115,13 +144,19 @@ export function generateWebsiteSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': WEBSITE_ID,
     name: SITE_NAME,
     url: SITE_URL,
     description:
       'Digital gold mining and the tokenization of in-ground verified gold — explained, with live data and the book.',
-    publisher: { '@type': 'Organization', name: SITE_NAME },
+    publisher: { '@id': ORG_ID },
     inLanguage: 'en',
   };
+}
+
+// Standalone Person node — render on an /author page (or anywhere author authority helps).
+export function generatePersonSchema() {
+  return { '@context': 'https://schema.org', ...authorNode() };
 }
 
 export function generateArticleSchema({
@@ -173,11 +208,10 @@ export function generateBookSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Book',
+    '@id': `${SITE_URL}/book#book`,
     name: 'Digital Gold Boom',
-    author: {
-      '@type': 'Person',
-      name: 'Andrew Fletcher',
-    },
+    author: authorNode(),
+    publisher: { '@id': ORG_ID },
     description:
       'Decoding the start of the biggest gold rush in history — how digital gold mining tokenizes in-ground verified gold into a tradeable, eco-friendly, gold-backed asset.',
     genre: 'Business & Finance',
