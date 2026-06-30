@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
 import crypto from "node:crypto";
 
-// LemonSqueezy webhook receiver. Verifies the X-Signature HMAC (per LS docs) so we only act on
-// real events, then tags the buyer into the ConvertKit list. LemonSqueezy itself delivers the
-// book file + receipt to the customer — this route is ONLY for our own list segmentation, so it
-// must never 500 LS on a downstream (Kit) hiccup; it logs and still returns 200.
-//
-// Node runtime required (uses node:crypto + the RAW request body for signature verification).
+// LemonSqueezy webhook receiver. Verifies the X-Signature HMAC (per LS docs), then upserts the buyer
+// into Kit (v4) and tags them as a buyer. LemonSqueezy itself delivers the book + receipt — this
+// route is ONLY for our list segmentation, so it must never 500 LS on a downstream (Kit) hiccup: it
+// logs and still returns 200. Node runtime required (node:crypto + raw body for the signature).
 export const runtime = "nodejs";
 
 function verifySignature(rawBody: string, signatureHeader: string | null, secret: string): boolean {
@@ -18,28 +16,40 @@ function verifySignature(rawBody: string, signatureHeader: string | null, secret
   return crypto.timingSafeEqual(a, b);
 }
 
+const KIT_BASE = "https://api.kit.com/v4";
+
 async function tagBuyer(email: string, name?: string) {
   const apiKey = process.env.KIT_API_KEY;
-  const formId = process.env.KIT_FORM_ID;
-  const tag = process.env.KIT_BUYER_TAG || "book-buyer";
-  if (!apiKey || !formId) {
-    console.log(`[ls-webhook] buyer ${email} (no Kit keys set — skipped tagging)`);
+  const tagId = process.env.KIT_BUYER_TAG_ID; // v4 numeric tag id (optional)
+  if (!apiKey) {
+    console.log(`[ls-webhook] buyer ${email} (no Kit key set — skipped tagging)`);
     return;
   }
   try {
-    const res = await fetch(`https://api.convertkit.com/v3/forms/${formId}/subscribe`, {
+    // v4 requires the subscriber to exist before tagging — upsert first.
+    const subRes = await fetch(`${KIT_BASE}/subscribers`, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", "X-Kit-Api-Key": apiKey },
       body: JSON.stringify({
-        api_key: apiKey,
-        email,
+        email_address: email,
         first_name: name?.split(" ")[0],
-        tags: [tag],
+        fields: { source: "book-buyer" },
       }),
     });
-    if (!res.ok) console.error("[ls-webhook] Kit tag failed", res.status, await res.text());
+    if (!subRes.ok) {
+      console.error("[ls-webhook] Kit upsert failed", subRes.status, await subRes.text());
+      return;
+    }
+    if (tagId) {
+      const tagRes = await fetch(`${KIT_BASE}/tags/${tagId}/subscribers`, {
+        method: "POST",
+        headers: { "content-type": "application/json", "X-Kit-Api-Key": apiKey },
+        body: JSON.stringify({ email_address: email }),
+      });
+      if (!tagRes.ok) console.error("[ls-webhook] Kit tag failed", tagRes.status, await tagRes.text());
+    }
   } catch (err) {
-    console.error("[ls-webhook] Kit tag error", err);
+    console.error("[ls-webhook] Kit error", err);
   }
 }
 
@@ -48,7 +58,6 @@ export async function POST(req: Request) {
   const raw = await req.text();
 
   if (!secret) {
-    // Misconfiguration — accept so LS doesn't retry-storm, but make it loud in logs.
     console.error("[ls-webhook] LEMONSQUEEZY_WEBHOOK_SECRET not set — cannot verify; ignoring event.");
     return NextResponse.json({ ok: true });
   }
@@ -68,7 +77,6 @@ export async function POST(req: Request) {
   }
 
   const name = event.meta?.event_name;
-  // Fire on the first money-confirming event for a one-off purchase.
   if (name === "order_created") {
     const attrs = event.data?.attributes;
     if (attrs?.user_email) await tagBuyer(attrs.user_email, attrs.user_name);
