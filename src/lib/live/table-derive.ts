@@ -39,11 +39,13 @@ const TABLE_DERIVATION_HANDLERS: Record<string, Handler> = {
   // -----------------------------------------------------------------------
   '508000 × spot': ({ spot }) => (spot === undefined ? undefined : 508_000 * spot),
   '508000 × aisc': ({ aisc }) => (aisc === undefined ? undefined : 508_000 * aisc),
-  '420000 × biv': ({ biv }) => (biv === undefined ? undefined : 420_000 * biv),
-  '420000 × biv × 0.33': ({ biv }) =>
-    biv === undefined ? undefined : 420_000 * biv * 0.33,
-  '420000 × 0.67 × biv': ({ biv }) =>
-    biv === undefined ? undefined : 420_000 * 0.67 * biv,
+  // Digital side: 1.1M-oz resource at the 0.10 g/t cutoff on a 20/50/30 confidence
+  // mix mints 462,000 tokens (per Ch 5, current edition). AITC ≈ 33% of gross BIV.
+  '462000 × biv': ({ biv }) => (biv === undefined ? undefined : 462_000 * biv),
+  '462000 × biv × 0.33': ({ biv }) =>
+    biv === undefined ? undefined : 462_000 * biv * 0.33,
+  '462000 × 0.67 × biv': ({ biv }) =>
+    biv === undefined ? undefined : 462_000 * 0.67 * biv,
   '508000 × spot - 508000 × aisc - 80000000': ({ spot, aisc }) =>
     spot === undefined || aisc === undefined
       ? undefined
@@ -60,8 +62,8 @@ const TABLE_DERIVATION_HANDLERS: Record<string, Handler> = {
     if (denominator === 0) return undefined;
     return numerator / denominator;
   },
-  '(420000 × 0.67 × biv) / 51000000': ({ biv }) =>
-    biv === undefined ? undefined : (420_000 * 0.67 * biv) / DIGITAL_CASH_DEPLOYED_USD,
+  '(462000 × 0.67 × biv) / 51000000': ({ biv }) =>
+    biv === undefined ? undefined : (462_000 * 0.67 * biv) / DIGITAL_CASH_DEPLOYED_USD,
 
   // -----------------------------------------------------------------------
   // Ch 11 — Exchange ratios applied to BIV

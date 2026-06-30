@@ -2,8 +2,10 @@
 // section accordion in the live dashboard. US English. Keep these short.
 // Drift-check: voice canon is C:\DGB\context\author-style-guide.md.
 //
-// Section 3 + 4 are placeholders — those chapters aren't in stats-registry.ts
-// yet (Phase 1 covers Ch 1–16; Ch 17–23 land in a second-pass audit).
+// Aligned to the current 17-chapter / 2-section book (Operation Condense,
+// 2026-06-12): Section 1 = The Inevitability Case (Ch 1–8); Section 2 = The
+// NatGold Ecosystem (Ch 9–16). Ch 17 (The Road Ahead) is a qualitative closer
+// with no live-moving figures, so it has no stat cards and no section panel.
 
 export type SectionBlurb = {
   number: number;
@@ -14,26 +16,14 @@ export type SectionBlurb = {
 export const SECTION_BLURBS: SectionBlurb[] = [
   {
     number: 1,
-    title: 'Why Gold No Longer Needs Mining',
+    title: 'The Inevitability Case',
     blurb:
-      "Gold's monetary role outlived the case for digging it up. Roughly 219,890 tonnes already sits above ground, recycled and re-recycled for centuries. Reserves of $22 trillion of in-ground gold are verified to mineable standard. Extraction was never the value. Verification is.",
+      "Gold's monetary value never depended on mining it. Roughly 219,890 tonnes already sits above ground, recycled for centuries, while about $22 trillion more is verified underground to the mining industry's own court-grade reporting standards. These eight chapters build the case that connecting that value digitally — rather than extracting it — is the inevitable next step.",
   },
   {
     number: 2,
-    title: 'The NatGold Digital Mining Ecosystem',
+    title: 'The NatGold Ecosystem',
     blurb:
-      'NatGold turns verified in-ground gold into a tradeable token without a single ounce mined. The Baseline Intrinsic Value (spot minus AISC) prices each token off the same data the industry already publishes. Standards, custody, and an institutional verification chain sit underneath.',
-  },
-  {
-    number: 3,
-    // TODO: fill once Ch 17–22 land in stats-registry.ts (second-pass audit).
-    title: '',
-    blurb: '',
-  },
-  {
-    number: 4,
-    // TODO: fill once Ch 23 lands in stats-registry.ts (second-pass audit).
-    title: '',
-    blurb: '',
+      'How NatGold Digital turns verified in-ground gold into a tradeable token without a single ounce mined. The Baseline Intrinsic Value (spot price minus all-in sustaining cost) prices each token off data the industry already publishes; global verification standards, independent custody, and a qualification pipeline sit underneath.',
   },
 ];

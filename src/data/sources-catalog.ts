@@ -140,7 +140,7 @@ export const SOURCES_CATALOG: SourceEntry[] = [
     costTier: 'free',
     cacheTtlSeconds: 86400,
     notes:
-      'GSIA publishes biennially. Bloomberg Intelligence updates approximately annually. Manual refresh; the figure moves slowly enough that a quarterly check is sufficient. Book cites $30T (2021), $33T (2024), $35T (2026), $50T (2025 projection), $40T+ (2030 projection).',
+      'GSIA publishes biennially. Bloomberg Intelligence updates approximately annually. Manual refresh; the figure moves slowly enough that a quarterly check is sufficient. Current book canonical (Ch 7): ~$30T today, projected to reach ~$35T by 2030.',
   },
   {
     id: 'us-debt',
@@ -191,7 +191,7 @@ export const SOURCES_CATALOG: SourceEntry[] = [
     costTier: 'free',
     cacheTtlSeconds: 86400,
     notes:
-      'WGC publishes monthly. Book cites GLD ~$180B (Ch 6), gold ETF total $701B (Ch 2, 6) and $559B (Ch 7) — note divergence; flag for author. Manual refresh.',
+      'WGC publishes monthly. Current book canonical: gold ETF total $701B (Ch 2), GLD subset ~$180B (Ch 6). Manual refresh.',
   },
   {
     id: 'usgs-wgc-gold-stocks',

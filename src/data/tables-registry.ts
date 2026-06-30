@@ -104,7 +104,7 @@ export const TABLES_REGISTRY: TableEntry[] = [
         label: 'Units delivered',
         cells: {
           trad: { staticValue: '508,000 oz', format: 'number' },
-          digital: { staticValue: '420,000 tokens', format: 'number' },
+          digital: { staticValue: '462,000 tokens', format: 'number' },
         },
       },
       {
@@ -120,7 +120,7 @@ export const TABLES_REGISTRY: TableEntry[] = [
         label: 'Gross value',
         cells: {
           trad: { derivation: '508000 × spot', format: 'currency', precision: 2, suffix: 'B' },
-          digital: { derivation: '420000 × biv', format: 'currency', precision: 2, suffix: 'B' },
+          digital: { derivation: '462000 × biv', format: 'currency', precision: 2, suffix: 'B' },
         },
       },
       {
@@ -128,7 +128,7 @@ export const TABLES_REGISTRY: TableEntry[] = [
         label: 'Less: Operating cost (AISC / AITC)',
         cells: {
           trad: { derivation: '508000 × aisc', format: 'currency', precision: 0, suffix: 'M' },
-          digital: { derivation: '420000 × biv × 0.33', format: 'currency', precision: 0, suffix: 'M' },
+          digital: { derivation: '462000 × biv × 0.33', format: 'currency', precision: 0, suffix: 'M' },
         },
       },
       {
@@ -150,7 +150,7 @@ export const TABLES_REGISTRY: TableEntry[] = [
             suffix: 'B',
           },
           digital: {
-            derivation: '420000 × 0.67 × biv',
+            derivation: '462000 × 0.67 × biv',
             format: 'currency',
             precision: 0,
             suffix: 'M',
@@ -189,7 +189,7 @@ export const TABLES_REGISTRY: TableEntry[] = [
             precision: 2,
           },
           digital: {
-            derivation: '(420000 × 0.67 × biv) / 51000000',
+            derivation: '(462000 × 0.67 × biv) / 51000000',
             format: 'multiplier',
             precision: 1,
           },
@@ -278,53 +278,9 @@ export const TABLES_REGISTRY: TableEntry[] = [
     ],
   },
 
-  // =========================================================================
-  // CHAPTER 13 — Token Allocation by Submission Pathway
-  // =========================================================================
-  {
-    id: 'ch13-token-allocation',
-    title: 'Token Allocation by Submission Pathway',
-    format: 'comparison-2col',
-    location: { section: 2, chapter: 13, orderInChapter: 1 },
-    columns: [
-      { id: 'external', label: 'External Submission (Mining Co)' },
-      { id: 'direct', label: 'Direct Acquisition (NatGold)' },
-    ],
-    rows: [
-      {
-        id: 'mining-co',
-        label: 'Mining Company',
-        cells: {
-          external: { staticValue: '73%' },
-          direct: { staticValue: '—' },
-        },
-      },
-      {
-        id: 'natgold-digital',
-        label: 'NatGold Digital',
-        cells: {
-          external: { staticValue: '20%' },
-          direct: { staticValue: '93%' },
-        },
-      },
-      {
-        id: 'integrity',
-        label: 'Integrity Fund',
-        cells: {
-          external: { staticValue: '5%' },
-          direct: { staticValue: '5%' },
-        },
-      },
-      {
-        id: 'social',
-        label: 'Social Giveback',
-        cells: {
-          external: { staticValue: '2%' },
-          direct: { staticValue: '2%' },
-        },
-      },
-    ],
-  },
+  // NOTE: the Ch 13 Token Allocation table (static 73/20/5/2 percentages) was
+  // stripped 2026-06-30 — it has no live data behind it. The same split is shown
+  // with live dollar values in the Ch 15 three-year forecast table below.
 
   // =========================================================================
   // CHAPTER 15 — Three-Year Token Minting Forecast at Today's BIV
@@ -366,7 +322,7 @@ export const TABLES_REGISTRY: TableEntry[] = [
       },
       {
         id: 'integrity',
-        label: 'Integrity Fund (5%)',
+        label: 'Contingency Fund (5%)',
         pct: 0.05,
         value: {
           derivation: '17500000 × biv × 0.05',
@@ -399,16 +355,16 @@ export const TABLES_REGISTRY: TableEntry[] = [
     location: { section: 2, chapter: 16, orderInChapter: 1 },
     checkpoints: [
       {
-        id: 'launch',
-        date: '2025-04-23',
-        label: 'Pre-Market Launch',
-        value: { staticValue: '$1,762/token' },
+        id: 'jun16',
+        date: '2025-06-16',
+        label: 'First public update',
+        value: { staticValue: '$1,854/token' },
       },
       {
         id: 'jul17',
         date: '2025-07-17',
-        label: 'July checkpoint',
-        value: { staticValue: '$1,854/token' },
+        label: 'Program low',
+        value: { staticValue: '$1,762/token' },
       },
       {
         id: 'dec31',
@@ -443,4 +399,36 @@ export function tablesForChapter(chapter: number): TableEntry[] {
   return TABLES_REGISTRY.filter((t) => t.location.chapter === chapter).sort(
     (a, b) => a.location.orderInChapter - b.location.orderInChapter,
   );
+}
+
+// Current-book chapter titles for chapters that appear on the dashboard as
+// TABLES ONLY (no stat card). The renderer groups by stats, so without this a
+// table-only chapter would never get a panel and its table would be invisible.
+const TABLE_CHAPTER_TITLES: Record<number, string> = {
+  5: 'Scorecard: Digital Gold Mining vs Traditional Gold Mining',
+  11: 'Decoding Digital Gold Mining: The Key Innovations',
+  15: 'The 3-Year $61B Forecast and How NatGold Digital Is Built to Deliver It',
+  16: 'Pre-Market Demand: US$469M from 17,466 Participants, 162 Countries',
+};
+
+/**
+ * Chapters in a given section that carry a table, with their titles — so the
+ * dashboard can render a panel for a table-only chapter even when no stat card
+ * lives there. Deduped, sorted by chapter.
+ */
+export function tableChaptersForSection(
+  section: number,
+): Array<{ chapter: number; chapterTitle: string }> {
+  const seen = new Set<number>();
+  const out: Array<{ chapter: number; chapterTitle: string }> = [];
+  for (const t of TABLES_REGISTRY) {
+    if (t.location.section !== section) continue;
+    if (seen.has(t.location.chapter)) continue;
+    seen.add(t.location.chapter);
+    out.push({
+      chapter: t.location.chapter,
+      chapterTitle: TABLE_CHAPTER_TITLES[t.location.chapter] ?? `Chapter ${t.location.chapter}`,
+    });
+  }
+  return out.sort((a, b) => a.chapter - b.chapter);
 }
