@@ -14,11 +14,9 @@ export default function Insight() {
         <h2
           data-reveal
           className="display-xl text-tp"
-          style={{ maxWidth: "18ch", margin: "0 auto" }}
+          style={{ maxWidth: "20ch", margin: "0 auto" }}
         >
-          Gold mining <em className="italic font-light" style={{ color: "var(--accent-gold)" }}>already</em> runs on
-          <br />
-          verification, not extraction.
+          Gold mining <em className="italic font-light" style={{ color: "var(--accent-gold)" }}>already</em> runs on verification, not extraction.
         </h2>
 
         <div
