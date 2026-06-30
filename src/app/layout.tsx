@@ -25,12 +25,12 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://digitalgoldboom.com"),
   title: "Digital Gold Boom — Gold Without the Mine",
   description:
-    "$22 trillion in verified gold sits underground doing nothing. Digital gold mining turns it into a tradeable asset — without extraction, without destruction, without compromise. Built on the model that drew $469M in reservations from 162 countries.",
+    "Twenty-two trillion dollars of gold has already been found, verified and sitting in the ground. For six thousand years there was one way to reach it — dig it up. Digital Gold Boom is the plain-English account of the other way, by Andrew Fletcher, who ran a gold company inside the shift. Educational — not financial advice.",
   alternates: { canonical: "https://digitalgoldboom.com" },
   openGraph: {
     title: "Digital Gold Boom — Gold Without the Mine",
     description:
-      "$22 trillion in verified gold sits underground doing nothing. Digital gold mining turns it into a tradeable asset — without extraction, without destruction, without compromise.",
+      "Twenty-two trillion dollars of verified gold sits in the ground. For six thousand years there was one way to reach it — dig it up. This book is the plain-English account of the other way.",
     type: "website",
     url: "https://digitalgoldboom.com",
     siteName: "Digital Gold Boom",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Digital Gold Boom — Gold Without the Mine",
     description:
-      "$22 trillion in verified gold sits underground. Digital gold mining turns it into a tradeable asset — without extraction.",
+      "Twenty-two trillion dollars of verified gold sits in the ground. For six thousand years there was one way to reach it. This book is about the other way.",
     images: ["/og-image.jpg"],
   },
   robots: { index: true, follow: true },
