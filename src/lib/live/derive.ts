@@ -107,6 +107,15 @@ const DERIVATION_HANDLERS: Record<string, Handler> = {
     biv === undefined ? undefined : 2_500_000 * 0.02 * biv,
 
   // -----------------------------------------------------------------------
+  // Ch 11 / Ch 16 pre-market reservation — current value of reserved tokens
+  // 133,518 NatGold Tokens were RESERVED during the pre-market window (a final,
+  // locked historical count — never "raised"/"paid"). Their book-snapshot dollar
+  // value is the frozen anchor on the card; this handler shows what those same
+  // reserved tokens are worth at TODAY'S BIV (133,518 × live BIV).
+  // -----------------------------------------------------------------------
+  '133518 × biv': ({ biv }) => (biv === undefined ? undefined : 133_518 * biv),
+
+  // -----------------------------------------------------------------------
   // Tokenized-gold combined market cap
   // -----------------------------------------------------------------------
   'paxg.market_cap + xaut.market_cap': ({ paxgMcap, xautMcap }) =>
