@@ -22,15 +22,16 @@ export default function Hero() {
   const [message, setMessage] = useState("");
 
   // Reveals are CSS-driven (globals.css) so the LCP paints immediately. GSAP only does the
-  // book parallax — a composited transform on the wrapper, tied directly to scroll (scrub:true,
-  // no lag) so it stays smooth.
+  // book parallax — a composited transform on the wrapper. scrub:0.3 adds a tiny catch-up lag so
+  // the parallax is decoupled from raw scroll jitter (was scrub:true = frame-locked, which read
+  // as jolty); the look is identical, the motion is smooth.
   useGSAP(
     () => {
       if (!imageRef.current) return;
       gsap.to(imageRef.current, {
         y: -48,
         ease: "none",
-        scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: true },
+        scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom top", scrub: 0.3 },
       });
     },
     { scope: sectionRef },

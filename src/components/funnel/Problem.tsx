@@ -11,7 +11,8 @@ export default function Problem() {
   useCountUp(counterRef, {
     to: 22,
     duration: 1.6,
-    format: (n) => `$${n.toFixed(1).replace(/\.0$/, "")}T`,
+    // Whole numbers only — no flickering decimals mid-count ("$13.7T"), which read as jumpy.
+    format: (n) => `$${Math.round(n)}T`,
   });
 
   return (
@@ -65,6 +66,11 @@ export default function Problem() {
                   color: "var(--accent-gold)",
                   lineHeight: 0.9,
                   letterSpacing: "-0.04em",
+                  // Isolate this big animating number's per-frame relayout/repaint from the rest
+                  // of the page so counting it up can't jank the scroll. inline-block so `contain`
+                  // applies to a sized box.
+                  display: "inline-block",
+                  contain: "layout paint style",
                 }}
               >
                 $22T

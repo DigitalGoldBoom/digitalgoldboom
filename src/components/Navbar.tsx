@@ -56,12 +56,10 @@ export default function Navbar() {
       {/* Translucent black strip — only appears on scroll, keeps the white logo legible over light sections */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 transition-opacity duration-300"
+        className="nav-blur pointer-events-none absolute inset-0 transition-opacity duration-300"
         style={{
           opacity: scrolled ? 1 : 0,
           background: "rgba(0,2,12,0.65)",
-          backdropFilter: "blur(10px)",
-          WebkitBackdropFilter: "blur(10px)",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
         }}
       />
@@ -81,11 +79,9 @@ export default function Navbar() {
 
         {/* Center — pill of nav links */}
         <div
-          className="flex items-center gap-1 rounded-full p-1.5 lg:justify-self-center"
+          className="nav-blur-strong flex items-center gap-1 rounded-full p-1.5 lg:justify-self-center"
           style={{
             background: "rgba(10,13,31,0.8)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
           }}
         >
           <div className="hidden items-center lg:flex">

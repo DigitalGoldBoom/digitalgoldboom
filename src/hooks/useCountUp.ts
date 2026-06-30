@@ -38,15 +38,32 @@ export function useCountUp<T extends HTMLElement>(
       return;
     }
 
+    // If the number is already on screen at first paint, just show the FINAL value — don't reset
+    // it to the start value (that server "$22T" → "$0T" reset is the "flickers once on load" bug).
+    // The count-up animation still plays when you scroll down INTO it from above (the common case).
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      el.textContent = format(to);
+      return;
+    }
+
     const counter = { value: from };
-    el.textContent = format(from);
+    let last = format(from);
+    el.textContent = last;
 
     const tween = gsap.to(counter, {
       value: to,
       duration,
       ease,
       onUpdate: () => {
-        el.textContent = format(counter.value);
+        // Only write to the DOM when the DISPLAYED string actually changes. At integer display
+        // that's ~N writes across the whole animation instead of ~60/sec — so a big number stops
+        // re-laying-out its text every frame (the "jolty $22T" cause), while looking identical.
+        const s = format(counter.value);
+        if (s !== last) {
+          last = s;
+          el.textContent = s;
+        }
       },
       scrollTrigger: {
         trigger: el,

@@ -124,7 +124,9 @@
    BASE
    ================================================================ */
 html {
-  scroll-behavior: smooth;
+  /* No CSS smooth-scroll: it adds an interpolation delay between input and movement (reads as
+     "clunky"), and GSAP/ScrollTrigger advises against it. Native scroll = immediate feedback.
+     Reduced-motion already forces scroll-behavior:auto below. */
   color-scheme: light;
 }
 
@@ -346,6 +348,15 @@ body {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
+}
+
+/* Navbar frosting — SAME rule as .glass: blur ONLY on real desktop pointers. The fixed nav sits
+   over the scrolling page + the fixed gold canvas, so backdrop-filter forces a re-blur every
+   scroll frame — the single biggest remaining scroll-jank source. The solid rgba backgrounds set
+   inline on the nav are the touch fallback (near-identical look, zero per-frame blur cost). */
+@media (hover: hover) and (pointer: fine) {
+  .nav-blur { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .nav-blur-strong { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
 }
 
 /* ================================================================
