@@ -1,41 +1,23 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import Link from "next/link";
-import { track } from "@vercel/analytics";
 import Book3D from "@/components/Book3D";
 import ShimmerDots from "@/components/ShimmerDots";
 import NumberCounter from "@/components/NumberCounter";
 import BuyButton from "@/components/BuyButton";
 
 const bookCheckout = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
-const primerCheckout = process.env.NEXT_PUBLIC_LS_PRIMER_CHECKOUT_URL;
-const updatesCheckout = process.env.NEXT_PUBLIC_LS_NEWSLETTER_CHECKOUT_URL;
 
 const STEPS = [
   { n: "01", t: "Verify", b: "A deposit is drilled, sampled and certified to institutional standard (NI 43-101) — the same proof a $10-billion mine is financed on." },
-  { n: "02", t: "Tokenize", b: "Verified ounces convert to tokens by geological confidence. Each NATG token = one ounce of in-ground gold." },
-  { n: "03", t: "Trade", b: "Priced off the gold industry's own math — spot price minus mining cost. Trades on Kraken from July 8, 2026." },
-];
-
-const STATS = [
-  { node: <NumberCounter start={400} end={469} prefix="US$" suffix="M+" />, label: "Pre-market reservations" },
-  { node: <NumberCounter start={16000} end={17466} suffix="+" />, label: "Global investors" },
-  { node: <NumberCounter start={150} end={162} />, label: "Countries" },
-  { node: <>Jul 8, 2026</>, label: "Token launch · Kraken" },
+  { n: "02", t: "Tokenize", b: "Verified ounces are recorded digitally by geological confidence. Each NATG token references one ounce of in-ground gold." },
+  { n: "03", t: "Trade", b: "Priced off the gold industry's own math — spot price minus mining cost. The first tokens are set to trade on Kraken from July 8, 2026." },
 ];
 
 const SECTIONS = [
-  { n: "01", title: "Why Gold No Longer Needs Mining", meta: "Chapters 1–8", body: "Why the 150-year extraction model is structurally collapsing — at the exact moment $22 trillion of verified gold sits proven in the ground." },
-  { n: "02", title: "The NatGold Digital Mining Ecosystem", meta: "Chapters 9–16", body: "How it actually works: the verification standards, the approval pipeline, the BIV pricing, and the $469M of pre-market demand it drew." },
-  { n: "03", title: "The Cahuilla Case Study", meta: "Chapters 17–19", body: "The first real deposit through the pipeline — verified gold turned into $871M of tokenized value in six months, with zero extraction." },
-  { n: "04", title: "The Opportunity, Risks & Future", meta: "Chapters 20–23", body: "An honest risk register, the ways to invest today, a 10-year forecast, and the parallel to the EV transition." },
-];
-
-const OPTIONS = [
-  { eyebrow: "The book", name: "Digital Gold Boom", desc: "The complete case, every stat sourced.", price: "$17", note: "one-time", kind: "link" as const, href: "/book", cta: "Get the book" },
-  { eyebrow: "Fast start", name: "The Primer", desc: "The whole idea in one sitting.", price: "$99", note: "one-time", kind: "buy" as const, checkout: primerCheckout, cta: "Get the Primer", event: "v2_primer_click" },
-  { eyebrow: "Stay ahead", name: "Intelligence Updates", desc: "Periodic updates as the space evolves.", price: "$199", note: "per year", kind: "buy" as const, checkout: updatesCheckout, cta: "Subscribe", event: "v2_updates_click" },
+  { n: "01", title: "Why Gold No Longer Needs Mining", meta: "Chapters 1–8", body: "Why the 150-year extraction model is under real strain — at the exact moment $22 trillion of verified gold sits proven in the ground." },
+  { n: "02", title: "The NatGold Digital Mining Ecosystem", meta: "Chapters 9–16", body: "How it actually works: the verification standards, the approval pipeline, the BIV pricing, and the institutional partners behind it." },
+  { n: "03", title: "The Cahuilla Case Study", meta: "Chapters 17–19", body: "The first real gold deposit followed through the model step by step — the verification, the standards, the approval gate — documented start to finish." },
+  { n: "04", title: "The Road Ahead, Every Risk Named", meta: "Chapters 20–23", body: "An honest risk register that states each challenge at full strength — including the one the author marks as still open — and where this could go." },
 ];
 
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
@@ -49,41 +31,6 @@ function SectionLabel({ n, children }: { n: string; children: React.ReactNode })
 }
 
 export default function V2Page() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [msg, setMsg] = useState("");
-
-  async function submit(e: FormEvent<HTMLFormElement>, source: string) {
-    e.preventDefault();
-    setStatus("submitting");
-    setMsg("");
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, source }),
-      });
-      const data = (await res.json().catch(() => ({}))) as { message?: string };
-      if (!res.ok) { setStatus("error"); setMsg(data.message ?? "Something went wrong."); return; }
-      track("v2_email_submit");
-      setStatus("success"); setMsg("You're on the list."); setEmail("");
-    } catch { setStatus("error"); setMsg("Network error. Try again."); }
-  }
-
-  const locked = status === "submitting" || status === "success";
-
-  const EmailForm = ({ source }: { source: string }) => (
-    <form onSubmit={(e) => submit(e, source)} noValidate className="mt-9 flex w-full max-w-[520px] flex-col gap-3 sm:flex-row">
-      <label htmlFor={`em-${source}`} className="sr-only">Email</label>
-      <input id={`em-${source}`} type="email" required autoComplete="email" inputMode="email"
-        value={email} onChange={(e) => setEmail(e.target.value)} disabled={locked}
-        placeholder="you@email.com" className="v2-input flex-1" />
-      <button type="submit" disabled={locked} className="v2-btn shrink-0 whitespace-nowrap" style={{ opacity: locked ? 0.7 : 1 }}>
-        {status === "submitting" ? "Adding you…" : status === "success" ? "You're in ✓" : "Join the launch list"}
-      </button>
-    </form>
-  );
-
   return (
     <div className="v2 relative overflow-clip">
       {/* Fixed gold shimmer field + glows */}
@@ -99,20 +46,23 @@ export default function V2Page() {
           <div className="mx-auto w-full max-w-[1320px] px-6 md:px-10 pt-32 pb-20 lg:pt-28">
             <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
               <div>
-                <p className="v2-eyebrow mb-8">Decoding the biggest gold rush in history</p>
+                <p className="v2-eyebrow mb-8">A shift in the gold industry</p>
                 <h1 className="v2-display" style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)" }}>
-                  Missed Bitcoin?
+                  It&rsquo;s not gold.
                   <br />
-                  Don&rsquo;t miss <span className="v2-gold">digital gold mining.</span>
+                  It&rsquo;s not <span className="v2-gold">bitcoin.</span>
                 </h1>
                 <p className="mt-8 max-w-[48ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-                  Gold doesn&rsquo;t need to be mined — it needs to be <span style={{ color: "#F4F4F7" }}>verified.</span> $22 trillion of it sits proven in the ground. This is the plain-English guide to moving that value on-chain, before NATG lists on Kraken.
+                  There is a change underway in how the world&rsquo;s oldest asset works — and most people have never heard of it. This book is the first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of the whole thing.
                 </p>
-                <EmailForm source="v2-hero" />
-                <p className="mt-3 text-xs" style={{ color: "var(--v2-faint)" }} role="status" aria-live="polite">
-                  {status === "success" ? <span className="v2-gold">{msg}</span>
-                    : status === "error" ? <span style={{ color: "#ff7a7a" }}>{msg}</span>
-                    : "Free to join. No spam. Unsubscribe anytime."}
+                <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
+                  <BuyButton checkoutUrl={bookCheckout} label="Get the book — $37" event="v2_buy_click_hero" className="v2-btn" />
+                  <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
+                    Digital book · delivered instantly · 12-month money-back guarantee
+                  </span>
+                </div>
+                <p className="mt-3 text-xs" style={{ color: "var(--v2-faint)" }}>
+                  Educational — not financial advice. The author holds a stake in the model described.
                 </p>
               </div>
 
@@ -178,28 +128,22 @@ export default function V2Page() {
           </div>
         </section>
 
-        {/* ── TOKEN LAUNCH (bento stats) ───────────────────────── */}
+        {/* ── WHY NOW ──────────────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
-          <SectionLabel n="03">You&rsquo;re early</SectionLabel>
-          <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-center">
+          <SectionLabel n="03">Why now</SectionLabel>
+          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-start">
             <h2 className="v2-display" style={{ fontSize: "clamp(2rem, 3.6vw, 3.25rem)", maxWidth: "18ch" }}>
-              The official digital gold mining token launches <span className="v2-gold">July 8, 2026 on Kraken.</span>
+              Why this is worth understanding <span className="v2-gold">now.</span>
             </h2>
-            <div className="grid grid-cols-2 gap-4">
-              {STATS.map((s, i) => (
-                <div key={i} className="v2-tile p-6 md:p-7 flex flex-col justify-end" style={{ minHeight: 150 }}>
-                  <span className="block h-px w-9 mb-5" style={{ background: "var(--v2-gold)" }} />
-                  <div className="font-mono" style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.6rem)", color: "#F4F4F7", fontVariantNumeric: "tabular-nums", lineHeight: 1 }}>
-                    {s.node}
-                  </div>
-                  <div className="mt-2 text-sm" style={{ color: "var(--v2-faint)" }}>{s.label}</div>
-                </div>
-              ))}
+            <div className="lg:pt-2">
+              <p className="text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
+                Three long-running shifts have lined up at once: central banks are holding gold at multi-decade highs, real-world assets are being represented digitally at institutional scale, and a younger generation wants gold without the environmental cost of mining it. The model is no longer theoretical — the first deposits have been submitted, and the first tokens are set to trade on <span style={{ color: "#F4F4F7" }}>July 8, 2026.</span>
+              </p>
+              <p className="mt-8" style={{ fontSize: "clamp(1.25rem, 2vw, 1.625rem)", fontWeight: 300, color: "#F4F4F7", letterSpacing: "-0.01em", maxWidth: "30ch" }}>
+                A real development inside a multi-trillion-dollar industry — <span className="v2-gold">about to be tested in public.</span>
+              </p>
             </div>
           </div>
-          <p className="mt-8 text-sm" style={{ color: "var(--v2-faint)" }}>
-            17,466 people in 162 countries reserved 5.3&times; the token supply — conviction before it ever traded. Figures are reserved, not raised.
-          </p>
         </section>
 
         <div className="mx-auto max-w-[1320px] px-6 md:px-10"><div className="v2-divider" /></div>
@@ -233,48 +177,24 @@ export default function V2Page() {
           </div>
         </section>
 
-        {/* ── PRICING (separate options) ───────────────────────── */}
-        <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
-          <SectionLabel n="05">Get started</SectionLabel>
-          <h2 className="v2-display mb-5" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", maxWidth: "16ch" }}>
-            Pick what you <span className="v2-gold">need.</span>
-          </h2>
-          <p className="mb-12 text-lg" style={{ color: "var(--v2-dim)" }}>
-            Every purchase backed by a <span className="v2-gold">30-day money-back guarantee.</span>
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {OPTIONS.map((o) => (
-              <div key={o.name} className="v2-tile p-8 flex flex-col">
-                <div className="v2-num v2-gold mb-6" style={{ color: "var(--v2-gold)" }}>{o.eyebrow}</div>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 500, color: "#F4F4F7" }}>{o.name}</h3>
-                <p className="mt-3" style={{ color: "var(--v2-dim)", fontSize: "0.9375rem", lineHeight: 1.6 }}>{o.desc}</p>
-                <div className="mt-6 flex items-baseline gap-2">
-                  <span className="font-mono" style={{ fontSize: "2rem", fontWeight: 300, color: "#F4F4F7", fontVariantNumeric: "tabular-nums" }}>{o.price}</span>
-                  <span style={{ color: "var(--v2-faint)", fontSize: "0.8125rem" }}>{o.note}</span>
-                </div>
-                <div className="mt-7 mt-auto pt-2">
-                  {o.kind === "link" ? (
-                    <Link href={o.href} className="v2-btn w-full">{o.cta} →</Link>
-                  ) : (
-                    <BuyButton checkoutUrl={o.checkout} label={o.cta} unavailableLabel="Coming soon" event={o.event} className="v2-btn w-full" />
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── FINAL CTA ────────────────────────────────────────── */}
+        {/* ── FINAL CTA / OFFER ────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1100px] px-6 md:px-10 py-28 md:py-36 text-center">
+          <SectionLabel n="05">Read it for yourself</SectionLabel>
           <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(2.4rem, 6vw, 5rem)", maxWidth: "16ch" }}>
-            Understand it before <span className="v2-gold">Wall Street</span> does.
+            Understand it for the price of a <span className="v2-gold">paperback.</span>
           </h2>
-          <p className="mt-6 mx-auto text-lg" style={{ color: "var(--v2-dim)", maxWidth: "42ch" }}>
-            Gold only gets digitized once. That&rsquo;s the thing to be early to.
+          <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "46ch" }}>
+            Digital Gold Boom is a one-time $37 purchase — the launch price, before it moves to its regular $97. You get the complete book, delivered digitally the moment you check out.
           </p>
-          <div className="flex justify-center">
-            <div className="w-full max-w-[520px]"><EmailForm source="v2-final" /></div>
+          <div className="mt-10 flex flex-col items-center gap-3">
+            <BuyButton checkoutUrl={bookCheckout} label="Get the book — $37" event="v2_buy_click_final" className="v2-btn" />
+            <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
+              Digital book · delivered instantly · 12-month money-back guarantee
+            </span>
           </div>
+          <p className="mt-6 mx-auto text-xs leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
+            Secure checkout via LemonSqueezy. Educational content — not financial advice. The author holds a stake in the model described.
+          </p>
         </section>
       </main>
     </div>

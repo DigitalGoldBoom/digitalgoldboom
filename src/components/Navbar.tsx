@@ -17,6 +17,12 @@ const LINKS = [
   { label: "Mining", href: "/mining-industry" },
   { label: "Live Stats", href: "/live" },
   { label: "Affiliates", href: "/affiliates" },
+  // TEMP: quick-access tabs while the author compares funnel versions. Remove after the decision.
+  // /v2 = current homepage design (live, at root). /v1 = LONG funnel (for email traffic).
+  // /s = SHORT funnel (for cold social traffic). All three are alternatives to review; root is untouched.
+  { label: "V1", href: "/v1" },
+  { label: "V2", href: "/v2" },
+  { label: "S", href: "/s" },
 ];
 
 const CTA_GRADIENT = "linear-gradient(180deg, #F0BE47 0%, #C99214 100%)";

@@ -3,13 +3,13 @@ import Image from "next/image";
 import BuyButton from "@/components/BuyButton";
 import VaultShell from "@/components/VaultShell";
 
-const PRICE = "17";
+const PRICE = "37";
 const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
 
 export const metadata: Metadata = {
-  title: "Buy Digital Gold Boom (ebook) — $17",
+  title: "Buy Digital Gold Boom (ebook) — $37",
   description:
-    "Digital Gold Boom by Andrew Fletcher. A digital book (PDF, EPUB, Kindle) of information and analysis about the gold tokenization industry. $17, instant download.",
+    "Digital Gold Boom by Andrew Fletcher. A digital book (PDF, EPUB, Kindle) of information and analysis about the gold tokenization industry. $37, instant download.",
   // Plain product page used for checkout / merchant review — keep it out of the search index so
   // it doesn't compete with /book.
   robots: { index: false, follow: false },
@@ -77,7 +77,7 @@ export default function BuyPage() {
                   <li>• Instant download after payment (link emailed to you)</li>
                   <li>• PDF, EPUB and Kindle (MOBI) formats — reads on any device</li>
                   <li>• Secure checkout handled by LemonSqueezy</li>
-                  <li>• 30-day money-back guarantee</li>
+                  <li>• 12-month money-back guarantee</li>
                 </ul>
               </div>
 

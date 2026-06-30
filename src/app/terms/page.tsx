@@ -32,7 +32,7 @@ const blocks: LegalBlock[] = [
   {
     h: "Refund policy",
     p: [
-      `We offer a 30-day money-back guarantee on the book. If it isn’t for you, email ${LEGAL.contactEmail} within 30 days of purchase and we’ll refund you in full — no complicated hoops. Refunds are issued to your original payment method via LemonSqueezy.`,
+      `We offer a 12-month money-back guarantee on the book. If it isn’t for you, email ${LEGAL.contactEmail} within 12 months of purchase and we’ll refund you in full — no complicated hoops. Refunds are issued to your original payment method via LemonSqueezy.`,
     ],
   },
   {

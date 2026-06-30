@@ -37,7 +37,7 @@ type BuyButtonProps = {
  */
 export default function BuyButton({
   checkoutUrl,
-  label = "Get the book — $17",
+  label = "Get the book — $37",
   unavailableLabel,
   className = "btn-primary",
   event = "book_buy_click",

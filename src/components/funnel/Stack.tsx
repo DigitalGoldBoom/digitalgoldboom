@@ -16,7 +16,7 @@ const OPTIONS = [
     eyebrow: "The book",
     name: "Digital Gold Boom",
     desc: "The complete case, in plain English — every stat sourced, every claim traceable.",
-    price: "$17",
+    price: "$37",
     note: "one-time",
     kind: "link" as const,
     href: "/book",

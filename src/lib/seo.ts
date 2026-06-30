@@ -221,7 +221,7 @@ export function generateBookSchema() {
     // Real, owner-set price. Still NO ratingValue/reviewCount/numberOfPages/ISBN (none verified).
     offers: {
       '@type': 'Offer',
-      price: '17.00',
+      price: '37.00',
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
       url: `${SITE_URL}/book`,

@@ -21,7 +21,30 @@
 - [ ] RSS-to-email for new articles
 - [ ] API for custom signup forms
 
-**Decision:** ✅ Beehiiv (confirmed)
+**Decision:** ✅ **Kit (ex-ConvertKit) as the STARTING tool** — LOCKED 2026-06-30 by dgb-cmo. Beehiiv OUT.
+
+> **Strategy note (2026-06-30):** The email list is a long-term **PixelShovel audience asset**, not
+> just book buyers — it will later be used to promote other projects and **raise money for a gold
+> mine (Northshore / drilling program)**. That fundraising/crypto use is a WHILE OFF. Plan:
+> **start on Kit free now** (least work — the site code already targets Kit; costs $0 to 10k subs),
+> then **MIGRATE to the best fundraising-grade email tool when the gold-mine raise actually begins.**
+> Migration is deliberately low-cost: contacts + tags **export freely** (no lock-in), so a later move
+> = export/import (minutes) + rebuild flows (few exist yet) + ~1h code swap. KEEP DATA CLEAN +
+> TAGGED BY SOURCE/INTEREST from day one so the eventual export is organized, not a blob.
+> 🚩 At migration time, vet the new tool's Acceptable-Use rules for **crypto/investment/fundraising
+> content** (Kit reviews such accounts case-by-case; Mailchimp has banned crypto senders). Not a
+> today problem — flagged for the migration decision.
+- Why Kit: the live code already talks to Kit (`/api/subscribe`, the LemonSqueezy webhook tags
+  buyers into Kit); it's author-grade and sells direct. Free up to 10,000 subscribers.
+- **Cost path (money-smart, DECIDED 2026-06-30):** START on Kit **FREE** ($0, up to 10,000 subs) —
+  it captures emails and runs ONE simple welcome automation, which covers the newsletter welcome.
+  **Upgrade to Creator (~US$33/mo yearly, ~US$39/mo monthly) ONLY at book launch**, when we add the
+  SECOND automated flow (the buyer thank-you series). Book isn't on sale yet, so no spend yet — pay
+  only when it earns. Source: kit.com/pricing (fetched 2026-06-30). NOTE: free-plan exact sequence
+  allowance reported inconsistently across sources (0 vs 1 sequence) — confirm inside the account.
+- Why NOT Beehiiv: its only real edge was a built-in referral/virality engine — now moot, because
+  the affiliate program runs on **LemonSqueezy's native affiliate system** (see §8), so we don't
+  need referral baked into the email tool.
 
 ---
 
@@ -132,8 +155,8 @@
 
 | Integration | Purpose | Priority |
 |-------------|---------|----------|
-| Stripe / Lemon Squeezy | Paid products | Later |
-| Affiliate tracking | Book referrals | Later |
+| Stripe / Lemon Squeezy | Paid products | ✅ DONE — LemonSqueezy is the live checkout ($17 book) |
+| Affiliate tracking | Book referrals | ✅ DECIDED — **LemonSqueezy native affiliate program** (LOCKED 2026-06-30 by dgb-cmo). Built into our existing checkout: set commission %, cookie window, auto/hand-approve affiliates, automatic tracking + payouts (PayPal/bank), only a 2% fee on referred sales — no new tool, no new subscription, no new code. Source: lemonsqueezy.com/marketing/affiliates (2026-06-30). The on-site `/affiliates` page is the human-facing recruit/explainer; the tracking engine is LS. |
 | NatGold API | Live token data | When available |
 | RSS feed output | Syndication | Phase 2 |
 | Podcast player | If audio content | Later |

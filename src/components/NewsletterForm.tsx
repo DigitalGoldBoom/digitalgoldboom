@@ -1,60 +1,91 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
+import { track } from '@vercel/analytics';
 
 interface NewsletterFormProps {
   variant?: 'inline' | 'stacked' | 'sidebar';
   className?: string;
+  /** Where on the site this form lives — tags the subscriber by origin. */
+  source?: string;
 }
 
-export default function NewsletterForm({ variant = 'stacked', className = '' }: NewsletterFormProps) {
+export default function NewsletterForm({
+  variant = 'stacked',
+  className = '',
+  source = 'newsletter',
+}: NewsletterFormProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Real capture: POST to the existing /api/subscribe route (zod-validated, talks to Kit,
+  // logs a waitlist line when no key is set). Mirrors Hero.tsx — set status from the REAL
+  // response (never fake success on a non-2xx) and track() only after a confirmed 200.
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus('loading');
-    
-    // TODO: Integrate with Beehiiv API
-    // POST to /api/newsletter with { email }
-    // For now, simulate success
-    setTimeout(() => {
-      console.log('Newsletter signup:', email);
+    setMessage('');
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, source }),
+      });
+      const data = (await res.json().catch(() => ({}))) as { message?: string };
+      if (!res.ok) {
+        setStatus('error');
+        setMessage(data.message ?? 'Something went wrong. Try again.');
+        return;
+      }
+      track('newsletter_email_submit', { source });
       setStatus('success');
       setEmail('');
-    }, 1000);
-  };
+    } catch {
+      setStatus('error');
+      setMessage('Network error. Try again.');
+    }
+  }
 
   if (status === 'success') {
     return (
       <div className={`bg-[var(--success-muted)] border border-[var(--success)]/30 rounded-lg p-4 text-center ${className}`}>
-        <p className="text-[var(--success)] font-medium">You&apos;re in! Check your inbox.</p>
+        <p className="text-[var(--success)] font-medium">You&apos;re in! Check your inbox to confirm.</p>
       </div>
     );
   }
 
+  const errorLine = status === 'error' && (
+    <p role="status" aria-live="polite" className="text-[#ff6b6b] text-xs">
+      {message}
+    </p>
+  );
+
   if (variant === 'inline') {
     return (
-      <form onSubmit={handleSubmit} className={`flex gap-0 ${className}`}>
-        <label htmlFor="newsletter-email-inline" className="sr-only">Email address</label>
-        <input
-          type="email"
-          id="newsletter-email-inline"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          required
-          disabled={status === 'loading'}
-          className="input flex-1 rounded-r-none border-r-0 focus:z-10"
-        />
-        <button
-          type="submit"
-          disabled={status === 'loading'}
-          className="btn btn-primary rounded-l-none whitespace-nowrap"
-        >
-          {status === 'loading' ? 'Sending...' : 'Subscribe'}
-        </button>
+      <form onSubmit={handleSubmit} className={`flex flex-col gap-2 ${className}`}>
+        <div className="flex gap-0">
+          <label htmlFor="newsletter-email-inline" className="sr-only">Email address</label>
+          <input
+            type="email"
+            id="newsletter-email-inline"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+            disabled={status === 'loading'}
+            className="input flex-1 rounded-r-none border-r-0 focus:z-10"
+          />
+          <button
+            type="submit"
+            disabled={status === 'loading'}
+            className="btn btn-primary rounded-l-none whitespace-nowrap"
+          >
+            {status === 'loading' ? 'Sending...' : 'Subscribe'}
+          </button>
+        </div>
+        {errorLine}
       </form>
     );
   }
@@ -83,6 +114,7 @@ export default function NewsletterForm({ variant = 'stacked', className = '' }: 
         >
           {status === 'loading' ? 'Sending...' : 'Send It To Me →'}
         </button>
+        {errorLine}
       </form>
     );
   }
@@ -113,6 +145,7 @@ export default function NewsletterForm({ variant = 'stacked', className = '' }: 
       >
         {status === 'loading' ? 'Sending...' : 'Start My Free Subscription'}
       </button>
+      {errorLine}
       <p className="text-[var(--text-tertiary)] text-xs text-center">
         Unsubscribe anytime. We send what we&apos;d want to read.
       </p>

@@ -4,15 +4,17 @@ import JsonLd from "@/components/JsonLd";
 import BuyButton from "@/components/BuyButton";
 import Book3D from "@/components/Book3D";
 import VaultShell from "@/components/VaultShell";
+import ShimmerDots from "@/components/ShimmerDots";
+import Reveal from "@/components/funnel/sales/Reveal";
 import { generateMetadata as genMeta, generateFAQSchema } from "@/lib/seo";
 
-const PRICE = "17";
+const PRICE = "37";
 const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
 
 export const metadata: Metadata = genMeta({
   title: "Get the Book — Digital Gold Boom",
   description:
-    "Digital Gold Boom by Andrew Fletcher — the plain-English guide to digital gold mining and the tokenization of in-ground verified gold. Ebook (PDF, EPUB, Kindle), instant download, $17.",
+    "Digital Gold Boom by Andrew Fletcher — the plain-English guide to digital gold mining and the tokenization of in-ground verified gold. Ebook (PDF, EPUB, Kindle), instant download, $37.",
   path: "/book",
   keywords: ["digital gold boom book", "NatGold book", "gold tokenization book", "digital gold mining", "Andrew Fletcher"],
 });
@@ -65,7 +67,7 @@ const faqs = [
   {
     question: "What if it's not for me?",
     answer:
-      "You're covered by a 30-day money-back guarantee. Email us within 30 days and we'll refund you in full, no questions asked.",
+      "You're covered by a 12-month money-back guarantee. Email us within 12 months and we'll refund you in full, no questions asked.",
   },
   {
     question: "What is NatGold?",
@@ -111,11 +113,21 @@ export default function BookPage() {
       <JsonLd data={generateFAQSchema(faqs)} />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
+      {/* ADD (visual audit): the v2 "verified gold lit from within" field — ShimmerDots +
+          radial gold top-glow + vertical darkening — so the buy page reads as the same
+          premium brand as root. Book3D stays the lit hero object. Reduced-motion safe
+          (ShimmerDots renders a static field under prefers-reduced-motion). */}
       <section
         className="relative overflow-hidden pt-32 pb-16 md:pt-36 md:pb-20"
         style={{ background: "var(--bg-contrast-deep)", ...darkScope }}
       >
-        <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8">
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          <ShimmerDots opacity={0.4} />
+          <div className="absolute inset-0" style={{ background: "radial-gradient(80% 55% at 50% -5%, rgba(232,178,58,0.13), transparent 55%)" }} />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,8,13,0.15), rgba(8,8,13,0.65))" }} />
+        </div>
+
+        <div className="relative z-10 mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8">
           <div className="flex justify-center order-1 lg:order-none">
             <Book3D />
           </div>
@@ -151,7 +163,7 @@ export default function BookPage() {
 
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm" style={{ color: "var(--text-tertiary)" }}>
               <li>✓ Reads on any device</li>
-              <li>✓ 30-day money-back guarantee</li>
+              <li>✓ 12-month money-back guarantee</li>
               <li>✓ Secure checkout (LemonSqueezy)</li>
               <li>✓ Delivered to your inbox</li>
             </ul>
@@ -168,16 +180,25 @@ export default function BookPage() {
           <p className="mx-auto mt-3 max-w-[60ch] text-center" style={{ color: "var(--text-secondary)" }}>
             A clear, honest map of a new asset class — written to be understood, not to sell you a token.
           </p>
+          {/* ADD (visual audit): one accent rhythm so the six learn-cards read as one
+              complete map, not a flat grid — house reveal-up stagger (~70ms/card) + a single
+              gold lit-edge (top rule) per card. Reveal renders the final state under
+              reduced-motion / no-JS, so there is zero CLS and the accent is decorative only. */}
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {learn.map((item) => (
-              <div key={item.h} className="card">
+            {learn.map((item, i) => (
+              <Reveal key={item.h} delay={i * 70} className="relative card overflow-hidden">
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 h-px"
+                  style={{ background: "linear-gradient(90deg, transparent, var(--accent-gold) 40%, var(--accent-gold) 60%, transparent)" }}
+                />
                 <h3 className="text-lg font-semibold" style={{ color: "var(--text-primary)" }}>
                   {item.h}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {item.p}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -243,7 +264,7 @@ export default function BookPage() {
       <section className="py-20 text-center" style={{ background: "var(--bg-contrast-deep)", ...darkScope }}>
         <div className="mx-auto max-w-[640px] px-6">
           <h2 className="text-3xl font-bold" style={{ color: "var(--text-primary)" }}>
-            Understand it before everyone else does.
+            Understand it for the price of a paperback.
           </h2>
           <p className="mt-4 text-lg" style={{ color: "var(--text-secondary)" }}>
             Digital Gold Boom — ${PRICE}, instant download, yours to keep.
@@ -252,7 +273,7 @@ export default function BookPage() {
             <BuyButton checkoutUrl={checkoutUrl} label={`Get the book — $${PRICE}`} event="book_buy_click_footer" />
           </div>
           <p className="mt-5 text-xs" style={{ color: "var(--text-tertiary)" }}>
-            PDF · EPUB · Kindle · 30-day money-back guarantee · Secure checkout via LemonSqueezy · Educational — not financial advice.
+            PDF · EPUB · Kindle · 12-month money-back guarantee · Secure checkout via LemonSqueezy · Educational — not financial advice. The author holds a stake in the model described.
           </p>
         </div>
       </section>
