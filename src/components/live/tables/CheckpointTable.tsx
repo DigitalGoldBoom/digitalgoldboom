@@ -28,21 +28,21 @@ export default function CheckpointTable({ checkpoints, bundle }: Props) {
           <tr style={{ borderBottom: '1.5px solid var(--border-hover)' }}>
             <th
               scope="col"
-              className="text-left px-3 py-2 font-semibold"
+              className="text-left px-2 sm:px-3 py-2 font-semibold"
               style={{ color: 'var(--text-primary)' }}
             >
               Date
             </th>
             <th
               scope="col"
-              className="text-left px-3 py-2 font-semibold"
+              className="text-left px-2 sm:px-3 py-2 font-semibold"
               style={{ color: 'var(--text-primary)' }}
             >
               Checkpoint
             </th>
             <th
               scope="col"
-              className="text-right px-3 py-2 font-semibold"
+              className="text-right px-2 sm:px-3 py-2 font-semibold"
               style={{ color: 'var(--text-primary)' }}
             >
               BIV
@@ -62,7 +62,7 @@ export default function CheckpointTable({ checkpoints, bundle }: Props) {
                 }}
               >
                 <td
-                  className="text-left px-3 py-2 tabular-nums whitespace-nowrap"
+                  className="text-left px-2 sm:px-3 py-2 tabular-nums whitespace-nowrap"
                   style={{
                     fontFamily: 'var(--font-mono), ui-monospace, monospace',
                     color: 'var(--text-tertiary)',
@@ -71,13 +71,13 @@ export default function CheckpointTable({ checkpoints, bundle }: Props) {
                   {cp.date}
                 </td>
                 <td
-                  className="text-left px-3 py-2"
+                  className="text-left px-2 sm:px-3 py-2"
                   style={{ color: 'var(--text-secondary)' }}
                 >
                   {cp.label}
                 </td>
                 <td
-                  className="text-right px-3 py-2 tabular-nums whitespace-nowrap font-semibold"
+                  className="text-right px-2 sm:px-3 py-2 tabular-nums whitespace-nowrap font-semibold"
                   style={{
                     fontFamily: 'var(--font-mono), ui-monospace, monospace',
                     color: isLive ? 'var(--accent-gold)' : 'var(--text-primary)',

@@ -32,7 +32,7 @@ export default function ComparisonTable({ columns, rows, bundle }: Props) {
           <tr style={{ borderBottom: '1.5px solid var(--border-hover)' }}>
             <th
               scope="col"
-              className="text-left px-3 py-2 font-semibold"
+              className="text-left px-2 sm:px-3 py-2 font-semibold"
               style={{ color: 'var(--text-primary)' }}
             >
               Metric
@@ -41,7 +41,7 @@ export default function ComparisonTable({ columns, rows, bundle }: Props) {
               <th
                 key={col.id}
                 scope="col"
-                className="text-right px-3 py-2 font-semibold"
+                className="text-right px-2 sm:px-3 py-2 font-semibold"
                 style={{ color: 'var(--text-primary)' }}
               >
                 {col.label}
@@ -61,7 +61,7 @@ export default function ComparisonTable({ columns, rows, bundle }: Props) {
             >
               <th
                 scope="row"
-                className="text-left px-3 py-2 font-medium"
+                className="text-left px-2 sm:px-3 py-2 font-medium"
                 style={{ color: 'var(--text-secondary)' }}
               >
                 {row.label}
@@ -69,7 +69,7 @@ export default function ComparisonTable({ columns, rows, bundle }: Props) {
               {columns.map((col) => (
                 <td
                   key={col.id}
-                  className="text-right px-3 py-2 tabular-nums whitespace-nowrap"
+                  className="text-right px-2 sm:px-3 py-2 tabular-nums whitespace-nowrap"
                   style={{
                     fontFamily: 'var(--font-mono), ui-monospace, monospace',
                     color: 'var(--text-primary)',

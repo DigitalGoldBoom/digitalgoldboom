@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import type { HydratedStat } from '@/lib/live/derive';
 import type { SectionBlurb } from '@/data/section-blurbs';
-import { tablesForChapter } from '@/data/tables-registry';
+import { tablesForChapter, tableChaptersForSection } from '@/data/tables-registry';
 import type { LiveBundle } from '@/lib/live/sources';
 import ChapterPanel from './ChapterPanel';
 
@@ -15,6 +15,9 @@ type Props = {
   /** Live bundle for table cell derivations. */
   bundle?: LiveBundle;
   defaultOpen?: boolean;
+  /** Open this section's first chapter by default (lead section only) so the
+   *  page doesn't open as a wall of closed accordions on mobile. */
+  firstChapterOpen?: boolean;
 };
 
 type ChapterGroup = {
@@ -23,7 +26,7 @@ type ChapterGroup = {
   stats: HydratedStat[];
 };
 
-function groupByChapter(stats: HydratedStat[]): ChapterGroup[] {
+function groupByChapter(stats: HydratedStat[], section: number): ChapterGroup[] {
   const map = new Map<number, ChapterGroup>();
   for (const s of stats) {
     const c = s.entry.location.chapter;
@@ -35,6 +38,13 @@ function groupByChapter(stats: HydratedStat[]): ChapterGroup[] {
       });
     }
     map.get(c)!.stats.push(s);
+  }
+  // Merge in chapters that carry a TABLE but no stat card, so their live tables
+  // still render (e.g. the Ch 5 scorecard, Ch 11 BIV formula, Ch 15 forecast).
+  for (const { chapter, chapterTitle } of tableChaptersForSection(section)) {
+    if (!map.has(chapter)) {
+      map.set(chapter, { chapter, chapterTitle, stats: [] });
+    }
   }
   for (const group of map.values()) {
     group.stats.sort(
@@ -51,9 +61,10 @@ export default function SectionPanel({
   stats,
   bundle,
   defaultOpen = false,
+  firstChapterOpen = false,
 }: Props) {
   const [open, setOpen] = useState(defaultOpen);
-  const chapters = useMemo(() => groupByChapter(stats), [stats]);
+  const chapters = useMemo(() => groupByChapter(stats, section), [stats, section]);
   const id = `section-${section}`;
   const panelId = `${id}-panel`;
 
@@ -72,7 +83,7 @@ export default function SectionPanel({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="w-full text-left px-6 py-5"
+        className="w-full text-left px-4 sm:px-6 py-4 sm:py-5"
         style={{ minHeight: '44px' }}
       >
         <div className="flex items-start justify-between gap-4">
@@ -122,9 +133,9 @@ export default function SectionPanel({
       {open && (
         <div
           id={panelId}
-          className="px-6 pb-6 pt-1 space-y-3"
+          className="px-3 sm:px-6 pb-4 sm:pb-6 pt-1 sm:space-y-3"
         >
-          {chapters.map((c) => (
+          {chapters.map((c, ci) => (
             <ChapterPanel
               key={c.chapter}
               chapter={c.chapter}
@@ -132,6 +143,7 @@ export default function SectionPanel({
               stats={c.stats}
               tables={tablesForChapter(c.chapter)}
               bundle={bundle}
+              defaultOpen={firstChapterOpen && ci === 0}
             />
           ))}
         </div>

@@ -7,6 +7,18 @@ import type { LiveBundle } from '@/lib/live/sources';
 import LiveStatCard from './LiveStatCard';
 import BookStyledTable from './BookStyledTable';
 
+// Short chapter headlines for narrow screens (presentation only — the full
+// book titles wrap to 2-3 lines and crowd the panel on a phone). Per the
+// designer review Part B. Chapters not listed fall back to the full title.
+const SHORT_TITLES: Record<number, string> = {
+  1: "Gold's Legacy",
+  4: 'Digital Alchemy',
+  5: 'The Scorecard',
+  11: 'Decoding Digital Gold Mining',
+  15: 'The 3-Year $61B Forecast',
+  16: 'Pre-Market Demand',
+};
+
 type Props = {
   chapter: number;
   chapterTitle: string;
@@ -34,10 +46,9 @@ export default function ChapterPanel({
   return (
     <div
       id={id}
-      className="border rounded-[var(--r-md)] scroll-mt-24"
+      className="scroll-mt-24 sm:border sm:rounded-[var(--r-md)] sm:bg-[var(--bg-surface)] border-b sm:border-b"
       style={{
         borderColor: 'var(--border-base)',
-        background: 'var(--bg-surface)',
       }}
     >
       <button
@@ -45,12 +56,12 @@ export default function ChapterPanel({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left"
+        className="w-full flex items-center justify-between gap-3 px-1 sm:px-5 py-3 sm:py-4 text-left"
         style={{ minHeight: '44px' }}
       >
         <span className="flex items-baseline gap-3 min-w-0">
           <span
-            className="text-[10px] uppercase tracking-[0.18em] font-semibold"
+            className="text-[10px] uppercase tracking-[0.18em] font-semibold shrink-0"
             style={{ color: 'var(--accent-gold)' }}
           >
             Ch {chapter}
@@ -59,7 +70,8 @@ export default function ChapterPanel({
             className="text-sm font-medium truncate"
             style={{ color: 'var(--text-primary)' }}
           >
-            {chapterTitle}
+            <span className="sm:hidden">{SHORT_TITLES[chapter] ?? chapterTitle}</span>
+            <span className="hidden sm:inline">{chapterTitle}</span>
           </span>
         </span>
         <span className="flex items-center gap-3 shrink-0">
@@ -83,7 +95,7 @@ export default function ChapterPanel({
       </button>
 
       {open && (
-        <div id={panelId} className="px-5 pb-5 pt-1">
+        <div id={panelId} className="px-0 sm:px-5 pb-4 sm:pb-5 pt-1">
           {tables && tables.length > 0 && bundle && (
             <div className="mb-4">
               {tables.map((t) => (

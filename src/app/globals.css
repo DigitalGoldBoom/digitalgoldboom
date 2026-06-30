@@ -530,6 +530,52 @@ body {
 @media (prefers-reduced-motion: reduce) { .book3d-float { animation: none; } }
 
 /* ================================================================
+   PROJECTS DASHBOARD (/projects) — premium "institutional web3" layer
+   Brand tokens kept (gold + vault dark); taste-skill craft applied:
+   liquid-glass refraction, monospace data, perpetual-but-cheap motion
+   (transform/opacity/background-position only). Heavy effects are
+   touch-gated off per the mobile-perf rule; the global reduced-motion
+   reset below already disables all of these.
+   ================================================================ */
+.pj-glass {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  /* inner 1px refraction edge + tinted diffusion shadow (no neon glow) */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10), 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+@media (hover: hover) and (pointer: fine) {
+  .pj-glass { backdrop-filter: blur(10px); }
+}
+@media (hover: none) {
+  .pj-glass { background: rgba(13, 13, 21, 0.62); }
+}
+
+/* Spotlight hairline that separates pipeline stages (anti-card-overuse) */
+.pj-rule {
+  background: linear-gradient(90deg, transparent, rgba(232, 178, 58, 0.45), transparent);
+  height: 1px;
+}
+
+/* Live pulse dot */
+@keyframes pj-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.78); } }
+.pj-dot { animation: pj-pulse 2.4s ease-in-out infinite; }
+
+/* Pipeline connector — a thin gold beam that flows oz -> tokens (desktop only) */
+@keyframes pj-flow { 0% { background-position: 200% 0; } 100% { background-position: 0 0; } }
+.pj-flowline {
+  background: linear-gradient(90deg, rgba(232, 178, 58, 0.05), rgba(232, 178, 58, 0.7), rgba(232, 178, 58, 0.05));
+  background-size: 200% 100%;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pj-flowline { animation: pj-flow 3.4s linear infinite; }
+}
+
+/* Staggered rise-in (CSS cascade, not framer) */
+@keyframes pj-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.pj-rise { animation: pj-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 80ms); }
+
+/* ================================================================
    REDUCED MOTION
    ================================================================ */
 @media (prefers-reduced-motion: reduce) {

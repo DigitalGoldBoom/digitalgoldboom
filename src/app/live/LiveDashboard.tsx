@@ -103,6 +103,7 @@ export default function LiveDashboard({ stats, bundle, assembledAt, errors }: Pr
               stats={sec.stats}
               bundle={bundle}
               defaultOpen={idx === 0}
+              firstChapterOpen={idx === 0}
             />
           ))}
         </div>
