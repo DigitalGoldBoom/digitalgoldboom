@@ -1,36 +1,20 @@
-import GSAPProvider from "@/components/GSAPProvider";
-import FallingGold from "@/components/FallingGold";
+import type { Metadata } from "next";
 import ScrollTracker from "@/components/ScrollTracker";
-import Hero from "@/components/sections/Hero";
-import TokenLaunch from "@/components/sections/TokenLaunch";
-import Problem from "@/components/funnel/Problem";
-import Insight from "@/components/funnel/Insight";
-import Solution from "@/components/funnel/Solution";
-import BitcoinParallel from "@/components/funnel/BitcoinParallel";
-import People from "@/components/funnel/People";
-import Book from "@/components/funnel/Book";
-import Stack from "@/components/funnel/Stack";
-import FinalCTA from "@/components/funnel/FinalCTA";
-import Footer from "@/components/Footer";
+import V2Home from "./v2/page";
+import { generateMetadata as genMeta } from "@/lib/seo";
+
+export const metadata: Metadata = genMeta({
+  title: "Digital Gold Boom — Decoding the Biggest Gold Rush in History",
+  description:
+    "The plain-English guide to digital gold mining and the tokenization of in-ground verified gold. It's not gold, it's not Bitcoin — understand it before the token launches.",
+  path: "",
+});
 
 export default function Home() {
   return (
-    <GSAPProvider>
-      <FallingGold />
+    <>
       <ScrollTracker />
-      <main>
-        <Hero />
-        <Problem />
-        <Insight />
-        <Solution />
-        <BitcoinParallel />
-        <TokenLaunch />
-        <People />
-        <Book />
-        <Stack />
-        <FinalCTA />
-      </main>
-      <Footer />
-    </GSAPProvider>
+      <V2Home />
+    </>
   );
 }

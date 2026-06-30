@@ -20,7 +20,7 @@ const LINKS = [
   { label: "Waitlist", href: "/waitlist" },
 ];
 
-const CTA_GRADIENT = "linear-gradient(180deg, #4D76FF 0%, #003BFF 100%)";
+const CTA_GRADIENT = "linear-gradient(180deg, #F0BE47 0%, #C99214 100%)";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -109,7 +109,7 @@ export default function Navbar() {
         {/* Right — Contact CTA */}
         <Link
           href="/contact"
-          className="hidden items-center whitespace-nowrap rounded-full text-sm font-semibold text-white transition-opacity hover:opacity-90 lg:inline-flex lg:justify-self-end"
+          className="hidden items-center whitespace-nowrap rounded-full text-sm font-semibold text-[#0A0A0F] transition-opacity hover:opacity-90 lg:inline-flex lg:justify-self-end"
           style={{ padding: "13px 20px", background: CTA_GRADIENT }}
         >
           Contact Us
@@ -133,7 +133,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="mt-1 inline-flex items-center justify-center rounded-full text-sm font-semibold text-white"
+              className="mt-1 inline-flex items-center justify-center rounded-full text-sm font-semibold text-[#0A0A0F]"
               style={{ padding: "12px 18px", background: CTA_GRADIENT }}
             >
               Contact Us
