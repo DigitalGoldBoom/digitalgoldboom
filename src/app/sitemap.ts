@@ -31,19 +31,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/affiliates`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/mining-industry`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    },
   ];
 
   // TODO: Add dynamic article URLs when CMS is integrated
-  // const articles = await getArticles();
-  // const articlePages = articles.map((article) => ({
-  //   url: `${BASE_URL}/news/${article.slug}`,
-  //   lastModified: article.updatedAt,
-  //   changeFrequency: 'weekly' as const,
-  //   priority: 0.6,
-  // }));
 
   return [
     ...staticPages,
-    // ...articlePages,
   ];
 }
