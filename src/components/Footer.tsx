@@ -3,31 +3,28 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+// Footer links — only routes that actually exist today (no dead links). Affiliates
+// and Mining Industry are surfaced here and in the navbar so they're reachable.
 const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
-    heading: "Book",
+    heading: "Explore",
     links: [
-      { label: "Overview", href: "#playbook" },
-      { label: "Chapter Previews", href: "/previews" },
-      { label: "Press Kit", href: "/press-kit" },
+      { label: "Live Dashboard", href: "/live" },
+      { label: "Projects", href: "/projects" },
+      { label: "Mining Industry", href: "/mining-industry" },
     ],
   },
   {
-    heading: "Research",
+    heading: "The Book",
     links: [
-      { label: "Pipeline Scorecards", href: "/pipeline" },
-      { label: "NatGold Model", href: "/model" },
-      { label: "Methodology", href: "/methodology" },
-      { label: "Sources", href: "/sources" },
+      { label: "The Book", href: "/book" },
+      { label: "Get the Book", href: "/buy" },
+      { label: "Newsletter", href: "/newsletter" },
     ],
   },
   {
-    heading: "Company",
-    links: [
-      { label: "Author", href: "/author" },
-      { label: "Contact", href: "/contact" },
-      { label: "Press", href: "/press" },
-    ],
+    heading: "Partners",
+    links: [{ label: "Affiliate Program", href: "/affiliates" }],
   },
   {
     heading: "Legal",
