@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Footer from "@/components/Footer";
 import VaultShell from "@/components/VaultShell";
 
 export const metadata: Metadata = {
@@ -59,7 +58,6 @@ export default function ThankYouPage() {
           </Link>
         </div>
       </main>
-      <Footer />
     </VaultShell>
   );
 }

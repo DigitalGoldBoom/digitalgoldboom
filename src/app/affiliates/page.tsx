@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import Footer from "@/components/Footer";
 import VaultShell from "@/components/VaultShell";
 import AffiliateInterestForm from "@/components/AffiliateInterestForm";
 import { generateMetadata as genMeta, generateFAQSchema } from "@/lib/seo";
@@ -342,7 +341,6 @@ export default function AffiliatesPage() {
         </div>
       </section>
 
-      <Footer />
     </VaultShell>
   );
 }

@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import VaultShell from "@/components/VaultShell";
 import { LEGAL } from "@/lib/legal";
 
@@ -93,7 +92,6 @@ export default function LegalPage({
         </div>
       </section>
 
-      <Footer />
     </VaultShell>
   );
 }

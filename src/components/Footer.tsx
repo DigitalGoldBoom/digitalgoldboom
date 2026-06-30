@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] = [
   {
@@ -37,6 +40,17 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  // PixelShovel (/ps) has its own brand footer; /concept-* are internal design
+  // previews that bring their own. The standard footer renders on every other page.
+  if (
+    pathname === "/ps" ||
+    pathname.startsWith("/ps/") ||
+    pathname.startsWith("/concept")
+  ) {
+    return null;
+  }
+
   return (
     <footer
       className="relative z-10"

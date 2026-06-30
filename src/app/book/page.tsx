@@ -3,7 +3,6 @@ import type { CSSProperties } from "react";
 import JsonLd from "@/components/JsonLd";
 import BuyButton from "@/components/BuyButton";
 import Book3D from "@/components/Book3D";
-import Footer from "@/components/Footer";
 import VaultShell from "@/components/VaultShell";
 import { generateMetadata as genMeta, generateFAQSchema } from "@/lib/seo";
 
@@ -258,7 +257,6 @@ export default function BookPage() {
         </div>
       </section>
 
-      <Footer />
     </VaultShell>
   );
 }

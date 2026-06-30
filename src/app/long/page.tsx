@@ -15,7 +15,6 @@ import People from "@/components/funnel/People";
 import Book from "@/components/funnel/Book";
 import Stack from "@/components/funnel/Stack";
 import FinalCTA from "@/components/funnel/FinalCTA";
-import Footer from "@/components/Footer";
 
 export default function LongForm() {
   return (
@@ -38,7 +37,6 @@ export default function LongForm() {
         <Stack />
         <FinalCTA />
       </main>
-      <Footer />
     </GSAPProvider>
   );
 }

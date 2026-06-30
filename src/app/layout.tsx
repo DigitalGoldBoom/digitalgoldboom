@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import { generateOrganizationSchema, generateWebsiteSchema } from "@/lib/seo";
 import "./globals.css";
@@ -57,6 +58,7 @@ export default function RootLayout({
         <JsonLd data={generateWebsiteSchema()} />
         <Navbar />
         {children}
+        <Footer />
         <Analytics />
       </body>
     </html>

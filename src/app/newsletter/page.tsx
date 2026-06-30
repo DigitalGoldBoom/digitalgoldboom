@@ -2,7 +2,6 @@
 
 import { useState, type FormEvent } from "react";
 import VaultShell from "@/components/VaultShell";
-import Footer from "@/components/Footer";
 import JsonLd from "@/components/JsonLd";
 import { generateFAQSchema } from "@/lib/seo";
 import { track } from "@vercel/analytics";
@@ -96,7 +95,6 @@ export default function NewsletterPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </VaultShell>
   );
 }

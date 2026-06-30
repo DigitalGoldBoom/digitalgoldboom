@@ -88,10 +88,13 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 1,
     },
     bookSnapshot: {
-      value: 22_000_000_000_000,
+      // Exact product of the real inputs at the Feb 26 2026 close ($5,194/oz):
+      // 132,000 t × 32,150.7 oz/t × $5,194 = $22,042,777,125,600. Stored exact;
+      // the display rounds it. The book states this as "$22 trillion".
+      value: 22_042_777_125_600,
       unit: 'USD',
       date: '2026-02-26',
-      formula: '~132,000 tonnes verified in-ground gold × 32,150.7 oz/tonne × spot',
+      formula: '132,000 tonnes verified in-ground gold × 32,150.7 oz/tonne × spot',
     },
     citations: [
       {
@@ -102,7 +105,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     ],
     liveSourceId: 'gold-spot',
     derivation: '132000 × 32150.7 × gold_spot_price',
-    displayHint: { format: 'currency', precision: 0, suffix: 'T' },
+    displayHint: { format: 'currency', precision: 1, suffix: 'T' },
   },
   {
     id: 'ch01-above-ground-gold-value',
@@ -117,10 +120,13 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 2,
     },
     bookSnapshot: {
-      value: 36_000_000_000_000,
+      // Exact product at the Feb 26 2026 close ($5,194/oz):
+      // 219,890 t × 32,150.7 oz/t × $5,194 = $36,719,592,895,062. Stored exact;
+      // the display rounds it. The book states this as "approximately $36 trillion".
+      value: 36_719_592_895_062,
       unit: 'USD',
       date: '2026-02-26',
-      formula: '~219,890 tonnes refined above-ground × 32,150.7 oz/tonne × spot',
+      formula: '219,890 tonnes refined above-ground × 32,150.7 oz/tonne × spot',
     },
     citations: [
       {
@@ -131,7 +137,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     ],
     liveSourceId: 'gold-spot',
     derivation: '219890 × 32150.7 × gold_spot_price',
-    displayHint: { format: 'currency', precision: 0, suffix: 'T' },
+    displayHint: { format: 'currency', precision: 1, suffix: 'T' },
   },
 
   // ---- CHAPTER 4 — Digital Alchemy: Tokenization --------------------------
@@ -205,10 +211,13 @@ export const STATS_REGISTRY: StatEntry[] = [
       orderInChapter: 3,
     },
     bookSnapshot: {
-      value: 58_000_000_000_000,
+      // Exact product at the Feb 26 2026 close ($5,194/oz):
+      // (132,000 + 219,890) t × 32,150.7 oz/t × $5,194 = $58,762,370,020,662.
+      // Stored exact; the display rounds it. The book states "$58 trillion".
+      value: 58_762_370_020_662,
       unit: 'USD',
       date: '2026-02-26',
-      formula: '($22T in-ground) + ($36T above-ground), recomputed live from spot',
+      formula: '(132,000 + 219,890) tonnes × 32,150.7 oz/tonne × spot',
     },
     citations: [
       {
@@ -218,7 +227,7 @@ export const STATS_REGISTRY: StatEntry[] = [
     ],
     liveSourceId: 'gold-spot',
     derivation: '(132000 + 219890 tonnes) × 32150.7 oz/tonne × gold_spot_price',
-    displayHint: { format: 'currency', precision: 0, suffix: 'T' },
+    displayHint: { format: 'currency', precision: 1, suffix: 'T' },
   },
 
   // =========================================================================

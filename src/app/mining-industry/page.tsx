@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Footer from "@/components/Footer";
 import VaultShell from "@/components/VaultShell";
 import IndustryReviewForm from "@/components/IndustryReviewForm";
 import { generateMetadata as genMeta } from "@/lib/seo";
@@ -153,7 +152,6 @@ export default function MiningIndustryPage() {
         </div>
       </section>
 
-      <Footer />
     </VaultShell>
   );
 }

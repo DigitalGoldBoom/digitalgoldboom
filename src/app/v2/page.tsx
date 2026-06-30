@@ -7,7 +7,6 @@ import Book3D from "@/components/Book3D";
 import ShimmerDots from "@/components/ShimmerDots";
 import NumberCounter from "@/components/NumberCounter";
 import BuyButton from "@/components/BuyButton";
-import Footer from "@/components/Footer";
 
 const bookCheckout = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
 const primerCheckout = process.env.NEXT_PUBLIC_LS_PRIMER_CHECKOUT_URL;
@@ -278,8 +277,6 @@ export default function V2Page() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import BuyButton from "@/components/BuyButton";
-import Footer from "@/components/Footer";
 import VaultShell from "@/components/VaultShell";
 
 const PRICE = "17";
@@ -93,7 +92,6 @@ export default function BuyPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </VaultShell>
   );
 }
