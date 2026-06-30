@@ -23,18 +23,16 @@ const FORCES = [
   "A younger generation that wants gold without the cost of mining it",
 ];
 
-const CAHUILLA_STAGES = [
+const PROOF_STAGES = [
   { t: "Verification", b: "Independent geologists prove the deposit, to the standard the industry finances on." },
   { t: "Institutional standards", b: "Held to NI 43-101 / JORC / S-K 1300 — the same proof a mine is financed on." },
   { t: "The approval gate", b: "What each stage actually requires before it can move forward." },
-  { t: "Through the model", b: "A real deposit walked end to end — not theory, documented start to finish." },
+  { t: "Through the model", b: "Real deposits walked end to end — not theory, documented step by step." },
 ];
 
 const CONTENTS = [
-  { n: "01", t: "Why gold’s value may no longer need a mine", b: "The forces reshaping the old model, and the first-principles case underneath it." },
-  { n: "02", t: "How the model works", b: "The team, the verification standards, the approval gate, the pricing, the institutional partners, and the demand it has already drawn." },
-  { n: "03", t: "A real deposit through the model", b: "The Cahuilla case study, documented end to end." },
-  { n: "04", t: "The road ahead, every risk named", b: "An honest risk register that states each challenge at full strength, including the one the author marks as still open." },
+  { n: "01", t: "The Inevitability of Digital Gold Mining", b: "Chapters 1–8. What gold is, why the old way of producing it is failing, where its value actually comes from, and the force large enough to move it — brought together into a single case." },
+  { n: "02", t: "The NatGold Digital Gold Mining Ecosystem", b: "Chapters 9–17. Who built it and whether it works: the people, the proof, the method, the approval gate, the mint, the partners, the forecast, and the demand — ending on the honest challenges." },
 ];
 
 // Named risks — taken verbatim from the Beat 10 copy ("can you sell when you want, is the
@@ -266,16 +264,16 @@ export default function V1Funnel() {
 
         <Divider />
 
-        {/* ── BEAT 7 · CASE STUDY (Cahuilla) ──────────────────────── */}
+        {/* ── BEAT 7 · PROOF ON REAL DEPOSITS ─────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
-          <Reveal><Eyebrow>The case study</Eyebrow></Reveal>
+          <Reveal><Eyebrow>Proof on real ground</Eyebrow></Reveal>
           <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
             <div>
               <Reveal as="h2" delay={60} className="v2-display" style={{ fontSize: "clamp(1.9rem, 3.8vw, 3.25rem)", maxWidth: "20ch" }}>
-                Not theory — the first real gold deposit, taken through the model and documented start to finish.
+                Not theory — real gold deposits, taken through the model and documented step by step.
               </Reveal>
               <Reveal as="p" delay={120} className="mt-7 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
-                The book follows the Cahuilla gold project through the digital gold mining process step by step — the verification, the institutional standards, the approval gate, what each stage actually requires. You see the model work on a real deposit, not just on paper.
+                In Chapter 15, the book follows real projects — among them the Cahuilla project and Friday Gold Mines, deposits with decades of drilling behind them — through the digital gold mining process: the verification, the institutional standards, the approval gate, what each stage actually requires. You see the model work on real ground, not just on paper.
               </Reveal>
             </div>
             <Reveal delay={120}>
@@ -291,7 +289,7 @@ export default function V1Funnel() {
           </div>
           <Reveal delay={80}>
             <div className="mt-16">
-              <ProcessTimeline stages={CAHUILLA_STAGES} />
+              <ProcessTimeline stages={PROOF_STAGES} />
             </div>
           </Reveal>
         </section>

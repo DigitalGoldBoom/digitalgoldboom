@@ -18,10 +18,11 @@ const LINKS = [
   { label: "Live Stats", href: "/live" },
   { label: "Affiliates", href: "/affiliates" },
   // TEMP: quick-access tabs while the author compares funnel versions. Remove after the decision.
-  // /v2 = current homepage design (live, at root). /v1 = LONG funnel (for email traffic).
-  // /s = SHORT funnel (for cold social traffic). All three are alternatives to review; root is untouched.
+  // /v2 = current homepage design (live, at root). /v1 = LONG funnel (email). /s = SHORT funnel
+  // (cold social). /v3 = long-form VSL-derived funnel. All are alternatives to review; root untouched.
   { label: "V1", href: "/v1" },
   { label: "V2", href: "/v2" },
+  { label: "V3", href: "/v3" },
   { label: "S", href: "/s" },
 ];
 

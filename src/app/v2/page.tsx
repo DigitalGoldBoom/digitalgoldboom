@@ -14,10 +14,8 @@ const STEPS = [
 ];
 
 const SECTIONS = [
-  { n: "01", title: "Why Gold No Longer Needs Mining", meta: "Chapters 1–8", body: "Why the 150-year extraction model is under real strain — at the exact moment $22 trillion of verified gold sits proven in the ground." },
-  { n: "02", title: "The NatGold Digital Mining Ecosystem", meta: "Chapters 9–16", body: "How it actually works: the verification standards, the approval pipeline, the BIV pricing, and the institutional partners behind it." },
-  { n: "03", title: "The Cahuilla Case Study", meta: "Chapters 17–19", body: "The first real gold deposit followed through the model step by step — the verification, the standards, the approval gate — documented start to finish." },
-  { n: "04", title: "The Road Ahead, Every Risk Named", meta: "Chapters 20–23", body: "An honest risk register that states each challenge at full strength — including the one the author marks as still open — and where this could go." },
+  { n: "01", title: "The Inevitability of Digital Gold Mining", meta: "Chapters 1–8", body: "What gold is, why the old way of producing it is failing, where its value actually comes from, and the force large enough to move it — brought together into a single case." },
+  { n: "02", title: "The NatGold Digital Gold Mining Ecosystem", meta: "Chapters 9–17", body: "Who built it and whether it actually works: the people, the proof, the method, the approval gate, the mint, the partners, the forecast, and the demand — ending on the honest challenges." },
 ];
 
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {

@@ -1,7 +1,7 @@
 # Sales Funnel Copy — LOCKED for execution (/v1 long · /s short)
 
 > **Status:** APPROVED COPY — ready to build. (Author: "act as if it's fine.")
-> **Last updated:** 2026-06-30
+> **Last updated:** 2026-07-01 (structure corrected to the real 2 sections / 17 chapters — see STRUCTURE note below)
 > **How this was made:** written by `dgb-funnel-copywriter` after a forensic read of the whole book → graded by `dgb-copy-chief` (conversion) → checked by `dgb-fact-verifier` (numbers). This file is the words to ship.
 > **Routes:** long → **`/v1`** · short → **`/s`**. Do NOT touch root until approved.
 > **Design:** build in the **v2 design system, elevated** — see `dgb-funnel-designer` for the visual/motion/3D build spec (separate deliverable). Desktop / tablet / mobile all required.
@@ -49,36 +49,28 @@
 **BEAT 6 — Why now**
 - Eyebrow: Why now
 - Headline: Why this is worth understanding now.
-- Body: Three long-running shifts have lined up at once: central banks are holding gold at multi-decade highs, real-world assets are being represented digitally at institutional scale, and a younger generation wants gold without the environmental cost of mining it. The model is no longer theoretical. The first deposits have been submitted, and the first tokens are set to trade on July 8, 2026.
+- Body: Three long-running shifts have lined up at once: central banks are holding gold at multi-decade highs, real-world assets are being represented digitally at institutional scale, and a younger generation wants gold without the environmental cost of mining it. The model is no longer theoretical: real gold projects are already moving through it — among them the Cahuilla project and Friday Gold Mines (Chapter 15), deposits with decades of drilling behind them, now being taken through the model rather than mined. The first deposits have been submitted, and the first tokens are set to trade on July 8, 2026.
 - Forward-pull closer: This is a real development inside a multi-trillion-dollar industry — and it is about to be tested in public.
 
-**BEAT 7 — Proof in the real world (the case study) · [Cahuilla — restored per author]**
-- Eyebrow: The case study
-- Headline: Not theory — the first real gold deposit, taken through the model and documented start to finish.
-- Body: The book follows the Cahuilla gold project through the digital gold mining process step by step — the verification, the institutional standards, the approval gate, what each stage actually requires. You see the model work on a real deposit, not just on paper.
-- `[VERIFY]` Cahuilla framing for a public sales page (present positively per the book; no dollar "value created" / no investment-outcome claim).
-
-**BEAT 8 — Credibility**
+**BEAT 7 — Credibility**
 - Eyebrow: Who wrote it
 - Headline: Written by someone who ran a gold company inside this shift.
 - Body: Andrew Fletcher is the former President of Great Eagle Gold, now NatBridge Resources — the first gold company built to align with this model. As President he led the company that struck its supply agreement with NatGold Digital. He has assessed more than two hundred gold projects across multiple continents. This is the industry explained by someone who has worked inside it — not a summary written from the outside.
 - Disclosure line (keep visible): The author holds a stake in the model he describes, and says so plainly throughout. This book is educational — not financial advice.
 
-**BEAT 9 — What you get**
+**BEAT 8 — What you get**
 - Eyebrow: What is inside
-- Headline: The complete picture, built one piece at a time.
-- 01 · Why gold's value may no longer need a mine — the forces reshaping the old model, and the first-principles case underneath it.
-- 02 · How the model works — the team, the verification standards, the approval gate, the pricing, the institutional partners, and the demand it has already drawn.
-- 03 · A real deposit through the model — the Cahuilla case study, documented end to end.
-- 04 · The road ahead, every risk named — an honest risk register that states each challenge at full strength, including the one the author marks as still open.
-- Sub: Every statistic sourced to a primary record you can check. Written in plain English. `[VERIFY final chapter count + edition scope with author — Cahuilla now included]`
+- Headline: Two sections. One complete case, end to end.
+- Section 1 · The Inevitability of Digital Gold Mining (Ch 1–8) — what gold is, why the old way of producing it is failing, where gold's value actually comes from, and the force large enough to move it — brought together into a single case.
+- Section 2 · The NatGold Digital Gold Mining Ecosystem (Ch 9–17) — who built it and whether it actually works: the people, the proof, the method, the approval gate, the mint, the partners, the forecast, and the demand — ending on the honest challenges.
+- Sub: 17 chapters, two sections. Every statistic sourced to a primary record you can check. Written in plain English.
 
-**BEAT 10 — Honesty as proof**
+**BEAT 9 — Honesty as proof**
 - Eyebrow: Read the downside too
 - Headline: The book argues a case — and then argues against it.
 - Body: One chapter puts the whole thesis under stress: can you sell when you want, is the gold really there, what if the company fails, what if a government seizes the ground, what if the gold price falls. The author names each one at full strength and answers it with the same mechanics the book lays out — and he is candid that one of them is still open. You get the entire case, and the entire downside, in one place, to judge for yourself.
 
-**BEAT 11 — Close**
+**BEAT 10 — Close**
 - Eyebrow: Read it for yourself
 - Headline: Understand it for the price of a paperback.
 - Body: Digital Gold Boom is a one-time $17 purchase. You get the complete book, delivered digitally the moment you check out — and the chance to understand this model before the first tokens trade on July 8, 2026.
@@ -102,7 +94,7 @@
 - Line: Written by Andrew Fletcher, former president of a gold company built to align with this model, who has assessed more than two hundred gold projects.
 
 **BEAT 4 — What you get**
-- Line: One book. Every statistic sourced to a record you can check — a real deposit followed through the model, and a full chapter that argues against its own case.
+- Line: One book. Real projects already moving through the model (Cahuilla, Friday Gold Mines). Every statistic sourced to a record you can check — including a full chapter that argues against its own case.
 
 **BEAT 5 — Close**
 - CTA: Get the book — $17
@@ -111,11 +103,13 @@
 
 ---
 
+## STRUCTURE — corrected 2026-07-01
+The book is **TWO sections, 17 chapters** (per book-config + the book's own "Read This First" map): **Section 1 — The Inevitability of Digital Gold Mining (Ch 1–8)** and **Section 2 — The NatGold Digital Gold Mining Ecosystem (Ch 9–17)**, ending on the honest challenges. NOT four sections, NOT a separate Cahuilla "case-study section."
+**Cahuilla + Friday Gold Mines = the two real projects in Chapter 15** (Section 2) — used in the copy as a COMPLIANT proof point (the model applied to real deposits), never a separate section and never with a dollar/outcome figure. Author decision 2026-07-01: **name both** on the public pages. (Real-world note: Friday's NI 43-101 is filed — 632,641 oz; Cahuilla's public framing is author-owned given the real-world resource sensitivity — keep it figure-free.)
+
 ## REMAINING [VERIFY] FLAGS (don't publish these specific items unchecked)
-1. **Cahuilla framing** (Beat 7 / Beat 9 card) — confirm the positive, no-dollar-figure framing is right for a public sales page given the real-world resource sensitivity.
-2. **Final chapter count + edition scope** — with Cahuilla restored, confirm what the $17 product contains (the Book-1 17-chapter PDF vs a fuller edition incl. the Cahuilla chapters) so "what's inside" + the sample/PDF match.
-3. **$22T** — keep the "as of Feb 26 2026, $5,194/oz" as-of line whenever shown (perishable).
-4. **NatGold definition wording** (Beat 5 card) + **author bio** specifics + **July 8 2026 date** — all verified once this session; re-confirm at publish time.
+1. **$22T** — keep the "as of Feb 26 2026, $5,194/oz" as-of line whenever shown (perishable).
+2. **NatGold definition wording** (Beat 5 card) + **author bio** specifics + **July 8 2026 date** — all verified once this session; re-confirm at publish time.
 
 ## DESIGN + BUILD
 - Visual/motion/3D build spec: run `dgb-funnel-designer` against this copy (separate deliverable) — killer web3 in the v2 brand, elevated; always conversion-optimized; desktop/tablet/mobile all hardwired.

@@ -155,7 +155,7 @@ export function ConvergenceDiagram({ forces }: { forces: string[] }) {
   );
 }
 
-/* ── BEAT 7 — Cahuilla process timeline: nodes light along a gold rail ──── */
+/* ── BEAT 7 — proof process timeline: nodes light along a gold rail ──── */
 export function ProcessTimeline({ stages }: { stages: { t: string; b: string }[] }) {
   const { ref, inView } = useInView<HTMLOListElement>(0.25);
   return (

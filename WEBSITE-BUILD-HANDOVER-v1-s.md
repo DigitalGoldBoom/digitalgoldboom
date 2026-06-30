@@ -23,8 +23,9 @@
 
 ## 1. The deliverable files (your source of truth — read the ones for what you're building)
 
-- `SALES-COPY-FINAL-v1-s.md` — LOCKED copy for `/v1` + `/s` (paste exactly; don't rewrite).
-- `SALES-DESIGN-SPEC-v1-s.md` — design/motion/3D build spec for `/v1` + `/s`.
+- `SALES-COPY-FINAL-v1-s.md` — copy for `/v1` (long) + `/s` (short). Structure corrected (2 sections / 17 ch); names Cahuilla + Friday (Ch 15) as compliant proof.
+- `SALES-COPY-v3.md` — alternative LONG copy for **`/v3`** (VSL-based variant, to split-test vs `/v1`).
+- `SALES-DESIGN-SPEC-v1-s.md` — design/motion/3D build spec for `/v1` + `/s`. ⚠️ Predates the structure fix — re-sync to the corrected copy before building (no Cahuilla "section"; 2 sections). No V3 design spec yet.
 - `SALES-DESIGN-affiliates-mining.md` — design + copy for `/affiliates` (CASH-ONLY) and `/mining-industry`.
 - `SALES-VISUAL-AUDIT.md` — the 5 site-wide visual ADDs (priority-ranked).
 - `SALES-COPY-WORKING.md` — strategy / compliance source-of-truth + changelog.
