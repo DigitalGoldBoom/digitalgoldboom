@@ -14,6 +14,9 @@ type Props = {
   entry: StatEntry;
   liveValue?: number;
   liveSource?: LiveValue;
+  /** Baseline for the % delta (formula at the book anchor). Falls back to the
+   *  book snapshot value for non-formula (market-cap) cards. */
+  anchorValue?: number;
 };
 
 function DeltaPill({ delta }: { delta: DeltaResult }) {
@@ -37,9 +40,13 @@ function DeltaPill({ delta }: { delta: DeltaResult }) {
   );
 }
 
-export default function LiveStatCard({ entry, liveValue, liveSource }: Props) {
+export default function LiveStatCard({ entry, liveValue, liveSource, anchorValue }: Props) {
   const snapshot = entry.bookSnapshot;
   const hint = entry.displayHint;
+  // Measure the % move against the formula-at-anchor baseline so cards that are
+  // both linear in the same input (e.g. spot) show the identical %. Market-cap
+  // cards have no anchorValue and fall back to the book snapshot value.
+  const deltaBaseline = anchorValue ?? snapshot.value;
 
   const snapshotFormatted = formatLargeNumber(
     snapshot.value,
@@ -55,7 +62,7 @@ export default function LiveStatCard({ entry, liveValue, liveSource }: Props) {
 
   const delta =
     liveValue !== undefined
-      ? formatDelta(snapshot.value, liveValue, entry.directionPolarity ?? 'positive')
+      ? formatDelta(deltaBaseline, liveValue, entry.directionPolarity ?? 'positive')
       : null;
 
   const commentary = liveValue !== undefined ? generateCommentary(entry, delta) : null;

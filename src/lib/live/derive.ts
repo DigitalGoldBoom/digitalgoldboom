@@ -185,12 +185,25 @@ function pickLiveSource(entry: StatEntry, bundle: LiveBundle): LiveValue | undef
   }
 }
 
+// Locked book-anchor inputs (Feb 26 2026 close). Each derived card's % delta is
+// measured against its value computed from THESE anchors with the same formula —
+// not against the rounded book headline ($22T, $36T, …). The rounded headlines
+// carry uneven rounding error, which made two cards that are both linear in spot
+// show different % moves. Anchoring the baseline to the formula makes every
+// spot/AISC/BIV-pegged card move by the exact input %. Market-cap cards have no
+// anchor input here, so their handler returns undefined and they fall back to the
+// book headline (their book value IS a point-in-time market figure, not a formula).
+const ANCHOR_INPUTS: DerivationInputs = { spot: 5194, aisc: 1676, biv: 3518 };
+
 export type HydratedStat = {
   entry: StatEntry;
   /** The current derived live value, or undefined if not derivable / no upstream. */
   liveValue?: number;
   /** The LiveValue the derivation pulled from (for source attribution + freshness). */
   liveSource?: LiveValue;
+  /** Baseline for the % delta: the same formula evaluated at the book anchors.
+   *  Undefined for non-formula (market-cap) cards → caller uses the book value. */
+  anchorValue?: number;
 };
 
 /**
@@ -215,7 +228,8 @@ export function hydrateRegistry(
       return { entry, liveSource };
     }
     const liveValue = handler(inputs);
-    return { entry, liveValue, liveSource };
+    const anchorValue = handler(ANCHOR_INPUTS);
+    return { entry, liveValue, liveSource, anchorValue };
   });
 }
 

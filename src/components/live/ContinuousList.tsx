@@ -199,6 +199,7 @@ export default function ContinuousList({ stats, blurbs, bundle }: Props) {
                             entry={s.entry}
                             liveValue={s.liveValue}
                             liveSource={s.liveSource}
+                            anchorValue={s.anchorValue}
                           />
                         ))}
                       </div>

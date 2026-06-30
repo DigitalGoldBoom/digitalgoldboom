@@ -111,6 +111,7 @@ export default function ChapterPanel({
                   entry={s.entry}
                   liveValue={s.liveValue}
                   liveSource={s.liveSource}
+                  anchorValue={s.anchorValue}
                 />
               ))}
             </div>
