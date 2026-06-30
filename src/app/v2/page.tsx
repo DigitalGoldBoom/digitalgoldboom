@@ -14,9 +14,9 @@ const primerCheckout = process.env.NEXT_PUBLIC_LS_PRIMER_CHECKOUT_URL;
 const updatesCheckout = process.env.NEXT_PUBLIC_LS_NEWSLETTER_CHECKOUT_URL;
 
 const STEPS = [
-  { n: "01", t: "Verify", b: "Independent geological proof that the gold is really in the ground." },
-  { n: "02", t: "Tokenize", b: "That verified ownership becomes a digital, gold-backed asset on-chain." },
-  { n: "03", t: "Trade", b: "Anyone, anywhere, 24/7. No extraction. No ESG cost." },
+  { n: "01", t: "Verify", b: "A deposit is drilled, sampled and certified to institutional standard (NI 43-101) — the same proof a $10-billion mine is financed on." },
+  { n: "02", t: "Tokenize", b: "Verified ounces convert to tokens by geological confidence. Each NATG token = one ounce of in-ground gold." },
+  { n: "03", t: "Trade", b: "Priced off the gold industry's own math — spot price minus mining cost. Trades on Kraken from July 8, 2026." },
 ];
 
 const STATS = [
@@ -27,10 +27,10 @@ const STATS = [
 ];
 
 const SECTIONS = [
-  { n: "01", title: "Why Gold No Longer Needs Mining", meta: "Chapters 1–8", body: "Why the old extraction-based gold industry is structurally collapsing — at the exact moment trillions in verified gold sit untouched in the ground." },
-  { n: "02", title: "The NatGold Digital Mining Ecosystem", meta: "Chapters 9–16", body: "How it actually works: the team, the patents, the verification standards, the approval pipeline, the token economics." },
-  { n: "03", title: "The $1B Case Study: Cahuilla", meta: "Chapters 17–19", body: "The first real deposit through the pipeline — the transaction, the players, the financial and environmental scorecard." },
-  { n: "04", title: "The Opportunity, Risks & Future", meta: "Chapters 20–23", body: "An honest risk register, the investment options today, a 10-year forecast, and the parallel to the EV transition." },
+  { n: "01", title: "Why Gold No Longer Needs Mining", meta: "Chapters 1–8", body: "Why the 150-year extraction model is structurally collapsing — at the exact moment $22 trillion of verified gold sits proven in the ground." },
+  { n: "02", title: "The NatGold Digital Mining Ecosystem", meta: "Chapters 9–16", body: "How it actually works: the verification standards, the approval pipeline, the BIV pricing, and the $469M of pre-market demand it drew." },
+  { n: "03", title: "The Cahuilla Case Study", meta: "Chapters 17–19", body: "The first real deposit through the pipeline — verified gold turned into $871M of tokenized value in six months, with zero extraction." },
+  { n: "04", title: "The Opportunity, Risks & Future", meta: "Chapters 20–23", body: "An honest risk register, the ways to invest today, a 10-year forecast, and the parallel to the EV transition." },
 ];
 
 const OPTIONS = [
@@ -106,8 +106,8 @@ export default function V2Page() {
                   <br />
                   Don&rsquo;t miss <span className="v2-gold">digital gold mining.</span>
                 </h1>
-                <p className="mt-8 max-w-[46ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-                  Tokenization just triggered the oldest store of value&rsquo;s first real upgrade in 5,000 years — digital, eco-friendly, global. This is the plain-English guide, before a token has been minted.
+                <p className="mt-8 max-w-[48ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
+                  Gold doesn&rsquo;t need to be mined — it needs to be <span style={{ color: "#F4F4F7" }}>verified.</span> $22 trillion of it sits proven in the ground. This is the plain-English guide to moving that value on-chain, before NATG lists on Kraken.
                 </p>
                 <EmailForm source="v2-hero" />
                 <p className="mt-3 text-xs" style={{ color: "var(--v2-faint)" }} role="status" aria-live="polite">
@@ -133,10 +133,10 @@ export default function V2Page() {
             </div>
             <div>
               <h2 className="v2-display" style={{ fontSize: "clamp(1.75rem, 3vw, 2.75rem)", maxWidth: "16ch" }}>
-                Geologically verified gold, sitting in the ground.
+                Verified gold, sitting in the ground.
               </h2>
-              <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "46ch" }}>
-                Enough to reset the financial order — locked behind an extraction model the world is walking away from. Traditional gold mining is dying.
+              <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "48ch" }}>
+                132,000 tonnes of it — drilled, mapped and certified to the same standard a $10-billion mine is financed on. The gold is real. The way we&rsquo;ve always unlocked it — extraction — is breaking down.
               </p>
             </div>
           </div>
@@ -199,7 +199,7 @@ export default function V2Page() {
             </div>
           </div>
           <p className="mt-8 text-sm" style={{ color: "var(--v2-faint)" }}>
-            Pre-market reservations closed 5.3&times; oversubscribed. Figures are reserved, not raised.
+            17,466 people in 162 countries reserved 5.3&times; the token supply — conviction before it ever traded. Figures are reserved, not raised.
           </p>
         </section>
 
