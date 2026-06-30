@@ -7,7 +7,6 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
       { label: "Overview", href: "#playbook" },
       { label: "Chapter Previews", href: "/previews" },
       { label: "Press Kit", href: "/press-kit" },
-      { label: "Waitlist", href: "#playbook" },
     ],
   },
   {

@@ -5,6 +5,8 @@ import { fetchLiveBundle } from '@/lib/live/sources';
 import { hydrateRegistry } from '@/lib/live/derive';
 import { generateMetadata as buildMetadata } from '@/lib/seo';
 import LiveDashboard from './LiveDashboard';
+import VaultShell from '@/components/VaultShell';
+import LiveGate from '@/components/LiveGate';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Live Dashboard — Digital Gold Boom',
@@ -22,15 +24,19 @@ export default async function LivePage() {
   const stats = hydrateRegistry(STATS_REGISTRY, bundle);
 
   return (
-    <main className="min-h-screen pt-16" style={{ background: 'var(--bg-canvas)' }}>
-      <Suspense fallback={null}>
-        <LiveDashboard
-          stats={stats}
-          bundle={bundle}
-          assembledAt={bundle.assembledAt}
-          errors={bundle.errors}
-        />
-      </Suspense>
-    </main>
+    <VaultShell>
+      <main className="min-h-screen pt-16">
+        <LiveGate>
+          <Suspense fallback={null}>
+            <LiveDashboard
+              stats={stats}
+              bundle={bundle}
+              assembledAt={bundle.assembledAt}
+              errors={bundle.errors}
+            />
+          </Suspense>
+        </LiveGate>
+      </main>
+    </VaultShell>
   );
 }

@@ -17,7 +17,6 @@ const LINKS = [
   { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blogs" },
   { label: "Live Stats", href: "/live" },
-  { label: "Waitlist", href: "/waitlist" },
 ];
 
 const CTA_GRADIENT = "linear-gradient(180deg, #F0BE47 0%, #C99214 100%)";

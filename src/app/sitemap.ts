@@ -14,22 +14,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${BASE_URL}/prices`,
+      url: `${BASE_URL}/live`,
       lastModified: currentDate,
-      changeFrequency: 'hourly' as const, // Prices update frequently
-      priority: 0.9,
+      changeFrequency: 'hourly' as const,
+      priority: 0.8,
     },
     {
       url: `${BASE_URL}/book`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/news`,
-      lastModified: currentDate,
-      changeFrequency: 'daily' as const,
-      priority: 0.8,
     },
     {
       url: `${BASE_URL}/newsletter`,

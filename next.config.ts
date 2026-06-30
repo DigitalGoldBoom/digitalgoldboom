@@ -24,6 +24,13 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      { source: "/prices", destination: "/live", permanent: true },
+      { source: "/news", destination: "/", permanent: true },
+      { source: "/waitlist", destination: "/", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
