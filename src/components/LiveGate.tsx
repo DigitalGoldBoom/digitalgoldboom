@@ -11,8 +11,10 @@ const KEY = "dgb_live_unlocked";
  * localStorage so returning visitors aren't asked again.
  */
 export default function LiveGate({ children }: { children: React.ReactNode }) {
+  // Locked by DEFAULT (including server render + first paint) so the gate is always there for a
+  // direct /live visit — it only lifts once we confirm this visitor already unlocked. Promoted in
+  // the book, so it must never flash the dashboard before the gate.
   const [locked, setLocked] = useState(true);
-  const [ready, setReady] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [msg, setMsg] = useState("");
@@ -21,7 +23,6 @@ export default function LiveGate({ children }: { children: React.ReactNode }) {
     try {
       if (localStorage.getItem(KEY) === "1") setLocked(false);
     } catch {}
-    setReady(true);
   }, []);
 
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -51,7 +52,7 @@ export default function LiveGate({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const hidden = ready && locked;
+  const hidden = locked;
 
   return (
     <div className="relative">
