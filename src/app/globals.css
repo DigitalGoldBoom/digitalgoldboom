@@ -395,6 +395,67 @@ body {
 }
 
 /* ================================================================
+   V2 — BOLD DARK-CINEMATIC REDESIGN (route /v2). Scoped under .v2 so it
+   never affects the live pages. Dark "vault" field + gold leaf + big editorial type.
+   ================================================================ */
+.v2 {
+  background: #08080d;
+  color: #E7E7EE;
+  --v2-gold: #E8B23A;
+  --v2-gold-soft: rgba(232, 178, 58, 0.14);
+  --v2-line: rgba(255, 255, 255, 0.09);
+  --v2-dim: rgba(231, 231, 238, 0.62);
+  --v2-faint: rgba(231, 231, 238, 0.4);
+}
+.v2 ::selection { background: var(--v2-gold); color: #08080d; }
+.v2-eyebrow {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--v2-gold);
+  display: inline-flex; align-items: center; gap: 12px;
+}
+.v2-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--v2-gold); opacity: 0.7; }
+.v2-num {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 0.2em; color: var(--v2-faint);
+}
+.v2-display { font-weight: 300; line-height: 1.02; letter-spacing: -0.035em; text-wrap: balance; color: #F4F4F7; }
+.v2-gold { color: var(--v2-gold); }
+.v2-tile {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--v2-line);
+  border-radius: 22px;
+  transition: transform .3s var(--ease-out), border-color .3s var(--ease-out), background .3s var(--ease-out);
+}
+.v2-tile:hover { transform: translateY(-5px); border-color: rgba(232,178,58,0.45); background: rgba(255,255,255,0.04); }
+@media (hover: none) { .v2-tile:hover { transform: none; } }
+.v2-divider { height: 1px; background: linear-gradient(90deg, transparent, var(--v2-line) 20%, var(--v2-line) 80%, transparent); }
+.v2-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 54px; padding: 0 30px; border-radius: 999px;
+  background: var(--v2-gold); color: #08080d; font-weight: 700; font-size: 15px; letter-spacing: 0.01em;
+  border: none; cursor: pointer;
+  transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background .2s var(--ease-out);
+}
+.v2-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 44px rgba(232,178,58,0.32); background: #F0BE47; }
+.v2-btn:active { transform: translateY(0) scale(0.99); }
+.v2-btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 54px; padding: 0 28px; border-radius: 999px;
+  background: transparent; color: #F4F4F7; font-weight: 600; font-size: 15px;
+  border: 1px solid var(--v2-line); cursor: pointer;
+  transition: border-color .2s var(--ease-out), background .2s var(--ease-out);
+}
+.v2-btn-ghost:hover { border-color: rgba(232,178,58,0.5); background: rgba(255,255,255,0.03); }
+.v2-input {
+  width: 100%; min-height: 54px; background: rgba(255,255,255,0.04);
+  border: 1px solid var(--v2-line); border-radius: 999px; padding: 0 22px;
+  font-size: 16px; color: #F4F4F7; font-family: inherit; outline: none;
+  transition: border-color .2s var(--ease-out), box-shadow .2s var(--ease-out);
+}
+.v2-input::placeholder { color: var(--v2-faint); }
+.v2-input:focus { border-color: var(--v2-gold); box-shadow: 0 0 0 3px var(--v2-gold-soft); }
+
+/* ================================================================
    SECTION RHYTHM — alternating tonal surfaces (Funnel 3-Step acts)
    ================================================================ */
 .section { padding: clamp(72px, 12vw, 144px) 0; position: relative; }
