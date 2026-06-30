@@ -32,7 +32,7 @@ function StatCard({
       <div style={{ width: 34, height: 2, background: GOLD, marginBottom: 16 }} />
       <div
         className="font-bold leading-none"
-        style={{ color: NUM, fontSize: "clamp(2rem, 3vw, 2.8rem)" }}
+        style={{ color: NUM, fontSize: "clamp(1.5rem, 5vw, 2.8rem)" }}
       >
         {children}
       </div>
@@ -56,7 +56,7 @@ export default function TokenLaunch() {
         }}
       />
 
-      <div className="relative z-10 mx-auto grid w-[92%] max-w-[1320px] grid-cols-1 items-center gap-12 pt-20 md:pt-28 lg:grid-cols-[46%_1fr] lg:gap-16">
+      <div className="relative z-10 mx-auto grid w-[92%] max-w-[1320px] grid-cols-1 items-center gap-8 pt-20 md:pt-28 md:grid-cols-[46%_1fr] md:gap-10 lg:gap-16">
         {/* Left — copy */}
         <div>
           <div

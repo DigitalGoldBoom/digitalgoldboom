@@ -1,23 +1,48 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import BuyButton from "@/components/BuyButton";
 
-const ITEMS = [
+/**
+ * Stack — three SEPARATE purchase options (not a bundle). The book is live (links to /book);
+ * the Primer and the yearly Updates are "ready to connect" — their LemonSqueezy checkout URLs
+ * (NEXT_PUBLIC_LS_PRIMER_CHECKOUT_URL / NEXT_PUBLIC_LS_NEWSLETTER_CHECKOUT_URL) get set later;
+ * until then their buttons show "Coming soon". Prices are real and owner-set.
+ */
+const OPTIONS = [
   {
+    eyebrow: "The book",
     name: "Digital Gold Boom",
-    desc: "The full book. Every stat sourced, every claim traceable, the complete case from top to bottom.",
-    value: "$39",
+    desc: "The complete case, in plain English — every stat sourced, every claim traceable.",
+    price: "$17",
+    note: "one-time",
+    kind: "link" as const,
+    href: "/book",
+    cta: "Get the book",
   },
   {
+    eyebrow: "Fast start",
     name: "The Primer",
-    desc: "Waitlist-only dummy's guide. The play-by-play of what digital gold mining is and how it works — condensed for one sitting.",
-    value: "$99",
+    desc: "The quick guide to digital gold mining — the whole idea in one sitting.",
+    price: "$99",
+    note: "one-time",
+    kind: "buy" as const,
+    checkoutUrl: process.env.NEXT_PUBLIC_LS_PRIMER_CHECKOUT_URL,
+    cta: "Get the Primer",
+    event: "primer_buy_click",
   },
   {
+    eyebrow: "Stay ahead",
     name: "Industry Intelligence Updates",
-    desc: "One year of periodic updates as the digital gold mining space evolves — new deposits, new partners, new milestones.",
-    value: "$199 / yr",
+    desc: "Periodic updates as the space evolves — new deposits, partners and milestones.",
+    price: "$199",
+    note: "per year",
+    kind: "buy" as const,
+    checkoutUrl: process.env.NEXT_PUBLIC_LS_NEWSLETTER_CHECKOUT_URL,
+    cta: "Subscribe",
+    event: "newsletter_buy_click",
   },
 ];
 
@@ -27,151 +52,92 @@ export default function Stack() {
 
   return (
     <section ref={sectionRef} className="section section-surface relative">
-      <div className="max-w-[960px] mx-auto px-6 md:px-12 relative z-10">
+      <div className="max-w-[1100px] mx-auto px-6 md:px-12 relative z-10">
         <div className="text-center max-w-[640px] mx-auto">
-          <p data-reveal className="eyebrow mb-6">What waitlist members get</p>
-          <h2
-            data-reveal
-            className="display-lg text-tp"
-            style={{ maxWidth: "22ch", margin: "0 auto" }}
-          >
-            <span className="font-mono tabular-nums" style={{ fontWeight: 300 }}>$337</span> of value.
-            <br />
-            <span style={{ color: "var(--accent-gold)" }}>
-              <span className="font-mono tabular-nums" style={{ fontWeight: 300 }}>$0</span> to join.
-            </span>
+          <p data-reveal className="eyebrow mb-6">Get started</p>
+          <h2 data-reveal className="display-lg text-tp" style={{ maxWidth: "20ch", margin: "0 auto" }}>
+            Pick what you <span style={{ color: "var(--accent-gold)" }}>need.</span>
           </h2>
+          <p
+            data-reveal
+            className="mt-6 text-ts mx-auto"
+            style={{ fontSize: "1.0625rem", lineHeight: 1.6, maxWidth: "48ch" }}
+          >
+            No bundle. Each available on its own — start with the book, or go deeper.
+          </p>
         </div>
 
-        <div
-          data-reveal
-          className="mt-16 overflow-hidden"
-          style={{
-            background: "var(--bg-canvas)",
-            border: "1px solid var(--border-base)",
-            borderRadius: "var(--r-2xl)",
-            boxShadow: "var(--shadow-lg)",
-          }}
-        >
-          {ITEMS.map((item, i) => (
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {OPTIONS.map((o) => (
             <div
-              key={item.name}
-              className="flex items-start justify-between gap-8 px-8 md:px-12 py-8 md:py-10"
+              key={o.name}
+              data-reveal
+              className="flex flex-col h-full"
               style={{
-                borderBottom: i < ITEMS.length - 1 ? "1px solid var(--border-base)" : undefined,
+                background: "var(--bg-canvas)",
+                border: "1px solid var(--border-base)",
+                borderRadius: "var(--r-2xl)",
+                padding: "clamp(24px, 5vw, 36px)",
+                boxShadow: "var(--shadow-sm)",
               }}
             >
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <span
-                    className="font-mono"
-                    style={{
-                      fontSize: "10px",
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "var(--text-tertiary)",
-                      fontWeight: 600,
-                    }}
-                  >
-                    Item {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <h3
-                  className="text-tp"
-                  style={{
-                    fontSize: "clamp(1.125rem, 1.5vw, 1.375rem)",
-                    fontWeight: 500,
-                    letterSpacing: "-0.01em",
-                    lineHeight: 1.25,
-                  }}
-                >
-                  {item.name}
-                </h3>
-                <p
-                  className="mt-3 text-ts"
-                  style={{ fontSize: "0.9375rem", lineHeight: 1.6, maxWidth: "60ch" }}
-                >
-                  {item.desc}
-                </p>
-              </div>
-              <div
-                className="font-mono tabular-nums shrink-0 text-right"
+              <p
+                className="font-mono mb-5"
                 style={{
-                  fontSize: "clamp(1.25rem, 1.8vw, 1.625rem)",
-                  color: "var(--text-primary)",
-                  fontWeight: 300,
-                  letterSpacing: "-0.01em",
+                  fontSize: "10px",
+                  letterSpacing: "0.18em",
+                  textTransform: "uppercase",
+                  color: "var(--accent-gold)",
+                  fontWeight: 600,
                 }}
               >
-                {item.value}
+                {o.eyebrow}
+              </p>
+
+              <h3
+                className="text-tp"
+                style={{ fontSize: "clamp(1.25rem, 1.6vw, 1.5rem)", fontWeight: 500, lineHeight: 1.25 }}
+              >
+                {o.name}
+              </h3>
+
+              <p className="mt-3 text-ts" style={{ fontSize: "0.9375rem", lineHeight: 1.6 }}>
+                {o.desc}
+              </p>
+
+              <div className="mt-6 flex items-baseline gap-2">
+                <span
+                  className="font-mono tabular-nums text-tp"
+                  style={{ fontSize: "clamp(1.75rem, 2.4vw, 2.25rem)", fontWeight: 300, letterSpacing: "-0.02em" }}
+                >
+                  {o.price}
+                </span>
+                <span className="text-tt" style={{ fontSize: "0.8125rem" }}>
+                  {o.note}
+                </span>
+              </div>
+
+              <div className="mt-6 pt-2 mt-auto">
+                {o.kind === "link" ? (
+                  <Link href={o.href} className="btn-primary w-full">
+                    {o.cta} →
+                  </Link>
+                ) : (
+                  <BuyButton
+                    checkoutUrl={o.checkoutUrl}
+                    label={o.cta}
+                    unavailableLabel="Coming soon"
+                    event={o.event}
+                    className="btn-primary w-full"
+                  />
+                )}
               </div>
             </div>
           ))}
-
-          <div
-            className="flex items-center justify-between gap-6 px-8 md:px-12 py-7"
-            style={{
-              background: "var(--bg-surface-elevated)",
-              borderTop: "1px solid var(--border-base)",
-            }}
-          >
-            <span
-              className="text-tp"
-              style={{ fontSize: "0.9375rem", fontWeight: 500, letterSpacing: "0.01em" }}
-            >
-              Total value
-            </span>
-            <span
-              className="font-mono tabular-nums text-tt"
-              style={{
-                fontSize: "1.25rem",
-                textDecoration: "line-through",
-                fontWeight: 300,
-                opacity: 0.7,
-              }}
-            >
-              $337
-            </span>
-          </div>
-
-          <div
-            className="flex items-center justify-between gap-6 px-8 md:px-12 py-9"
-            style={{
-              background: "linear-gradient(135deg, rgba(202,138,4,0.08), rgba(202,138,4,0.02))",
-              borderTop: "1px solid var(--border-gold)",
-            }}
-          >
-            <span
-              className="text-tp"
-              style={{
-                fontSize: "1rem",
-                fontWeight: 500,
-                letterSpacing: "0.01em",
-              }}
-            >
-              Your price on the waitlist
-            </span>
-            <span
-              className="font-mono tabular-nums"
-              style={{
-                fontSize: "clamp(2.25rem, 3.5vw, 3rem)",
-                color: "var(--accent-gold)",
-                fontWeight: 300,
-                letterSpacing: "-0.02em",
-                lineHeight: 1,
-              }}
-            >
-              $0
-            </span>
-          </div>
         </div>
 
-        <p
-          data-reveal
-          className="mt-6 text-center text-tt"
-          style={{ fontSize: "0.8125rem" }}
-        >
-          Free until the book drops. $39 after. No spam.
+        <p data-reveal className="mt-6 text-center text-tt" style={{ fontSize: "0.8125rem" }}>
+          Secure checkout via LemonSqueezy · Educational — not financial advice.
         </p>
       </div>
     </section>

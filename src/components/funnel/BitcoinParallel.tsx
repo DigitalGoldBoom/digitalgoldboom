@@ -28,7 +28,7 @@ export default function BitcoinParallel() {
 
         <div
           data-reveal
-          className="mt-14 text-left mx-auto"
+          className="mt-8 md:mt-14 text-left mx-auto"
           style={{
             color: "var(--text-on-dark-secondary)",
             fontSize: "clamp(1.0625rem, 1.4vw, 1.25rem)",
@@ -47,7 +47,7 @@ export default function BitcoinParallel() {
           style={{
             borderTop: "1px solid rgba(202,138,4,0.4)",
             borderBottom: "1px solid rgba(202,138,4,0.4)",
-            padding: "32px 48px",
+            padding: "clamp(20px, 5vw, 32px) clamp(24px, 8vw, 48px)",
           }}
         >
           <p

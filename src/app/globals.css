@@ -180,6 +180,8 @@ body {
   background: var(--accent-gold);
   color: var(--text-on-dark-primary);
   padding: 14px 28px;
+  min-height: 44px;          /* WCAG/Apple min touch target on mobile */
+  justify-content: center;   /* centre label when the button goes full-width on phones */
   border-radius: var(--r-pill);
   border: none;
   font-weight: 600;

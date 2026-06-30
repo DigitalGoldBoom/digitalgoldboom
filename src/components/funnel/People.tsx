@@ -59,7 +59,7 @@ export default function People() {
                 background: "var(--bg-canvas)",
                 border: "1px solid var(--border-base)",
                 borderRadius: "var(--r-xl)",
-                padding: "36px 32px",
+                padding: "clamp(24px, 5vw, 36px) clamp(20px, 4vw, 32px)",
                 boxShadow: "var(--shadow-sm)",
                 transition: "transform 240ms, box-shadow 240ms, border-color 240ms",
               }}

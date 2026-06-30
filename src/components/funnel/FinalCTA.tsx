@@ -145,7 +145,7 @@ export default function FinalCTA() {
             <p role="status" aria-live="polite" className="mt-3 min-h-[1rem]" style={{ fontSize: "0.75rem", color: "var(--text-on-dark-tertiary)" }}>
               {status === "success" && <span style={{ color: "#4ADE80", fontWeight: 500 }}>{message}</span>}
               {status === "error" && <span style={{ color: "#F87171", fontWeight: 500 }}>{message}</span>}
-              {(status === "idle" || status === "submitting") && <span>Free until the book drops. $39 after. No spam.</span>}
+              {(status === "idle" || status === "submitting") && <span>Free to join. No spam. Unsubscribe anytime.</span>}
             </p>
           </div>
         </div>

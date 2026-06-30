@@ -11,9 +11,11 @@ declare global {
 }
 
 type BuyButtonProps = {
-  /** LemonSqueezy product checkout URL (from NEXT_PUBLIC_LS_CHECKOUT_URL). */
+  /** LemonSqueezy product checkout URL (from NEXT_PUBLIC_LS_*_CHECKOUT_URL). */
   checkoutUrl?: string;
   label?: string;
+  /** Shown (disabled) when no checkoutUrl is set yet. Defaults to the label. */
+  unavailableLabel?: string;
   className?: string;
   /** Vercel analytics event name fired on click. */
   event?: string;
@@ -36,6 +38,7 @@ type BuyButtonProps = {
 export default function BuyButton({
   checkoutUrl,
   label = "Get the book — $17",
+  unavailableLabel,
   className = "btn-primary",
   event = "book_buy_click",
   children,
@@ -51,9 +54,9 @@ export default function BuyButton({
         className={className}
         disabled
         aria-disabled="true"
-        title="Checkout opens at launch"
+        title="Available soon"
       >
-        {children ?? label}
+        {unavailableLabel ?? children ?? label}
       </button>
     );
   }

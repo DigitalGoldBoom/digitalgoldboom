@@ -18,7 +18,7 @@ export default function Problem() {
   return (
     <section ref={sectionRef} className="section section-surface relative">
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 md:gap-12 lg:gap-20 items-start">
           {/* LEFT — headline + body */}
           <div>
             <p data-reveal className="eyebrow mb-6">The problem</p>
@@ -40,14 +40,14 @@ export default function Problem() {
           </div>
 
           {/* RIGHT — giant stat callout card */}
-          <div data-reveal className="lg:sticky lg:top-32">
+          <div data-reveal className="md:sticky md:top-24 lg:top-32">
             <div
               className="card-feature"
               style={{
                 background: "var(--bg-surface)",
                 border: "1px solid var(--border-gold)",
                 borderRadius: "var(--r-2xl)",
-                padding: "48px 40px",
+                padding: "clamp(28px, 6vw, 48px)",
                 boxShadow: "var(--shadow-lg)",
               }}
             >

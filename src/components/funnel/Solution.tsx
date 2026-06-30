@@ -64,7 +64,7 @@ export default function Solution() {
         <div
           data-reveal
           className="glass-panel mt-16 relative"
-          style={{ padding: "40px 48px" }}
+          style={{ padding: "clamp(24px, 5vw, 40px) clamp(24px, 6vw, 48px)" }}
         >
           <div className="absolute left-0 top-10 bottom-10 w-[3px] rounded-r-full" style={{ background: "var(--accent-gold)" }} />
           <p

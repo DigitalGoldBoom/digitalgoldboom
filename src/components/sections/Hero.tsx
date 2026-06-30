@@ -68,7 +68,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[100dvh] flex items-center overflow-hidden"
+      className="relative min-h-[100svh] flex items-center overflow-hidden"
       style={
         {
           // Dark-scope: flip hero text to the site's on-dark tokens so it reads on the
@@ -82,16 +82,16 @@ export default function Hero() {
     >
       <HeroShimmer />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 w-full pt-40 md:pt-36 pb-20 md:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-12 lg:gap-10 items-center">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 w-full pt-28 md:pt-32 lg:pt-40 pb-20 md:pb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 md:gap-8 lg:gap-10 items-center">
           <div ref={contentRef}>
             <p data-hero-reveal className="text-[10px] font-semibold tracking-[0.2em] uppercase text-gold mb-6">
               DECODING THE START OF THE BIGGEST GOLD RUSH IN HISTORY
             </p>
 
             <h1 data-hero-reveal className="text-tp font-extrabold tracking-[-0.04em] leading-[1.12]" style={{ fontSize: "clamp(2rem, 4.5vw, 3.8rem)" }}>
-              <span className="block whitespace-normal lg:whitespace-nowrap">Missed Bitcoin?</span>
-              <span className="block whitespace-normal lg:whitespace-nowrap mt-2">
+              <span className="block whitespace-normal md:whitespace-nowrap">Missed Bitcoin?</span>
+              <span className="block whitespace-normal md:whitespace-nowrap mt-2">
                 <em className="not-italic-none italic font-extrabold">Don&rsquo;t Miss</em>{" "}
                 <span className="text-gold">Digital Gold Mining.</span>
               </span>
@@ -113,7 +113,7 @@ export default function Hero() {
             <p role="status" aria-live="polite" data-hero-reveal className="mt-3 text-xs text-tt min-h-[1rem]">
               {status === "success" && <span className="text-green">{message}</span>}
               {status === "error" && <span className="text-[#ff6b6b]">{message}</span>}
-              {(status === "idle" || status === "submitting") && <span>Free until the book drops. $39 after. No spam.</span>}
+              {(status === "idle" || status === "submitting") && <span>Free to join. No spam. Unsubscribe anytime.</span>}
             </p>
 
             <p data-hero-reveal className="mt-8 max-w-[56ch] text-tp leading-[1.55] font-medium" style={{ fontSize: "clamp(0.95rem, 1.15vw, 1.05rem)" }}>

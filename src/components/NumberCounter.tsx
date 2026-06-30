@@ -69,7 +69,7 @@ export default function NumberCounter({
   }, [start, end, durationMs]);
 
   return (
-    <span ref={ref} className={className} style={style}>
+    <span ref={ref} className={className} style={{ ...style, fontVariantNumeric: "tabular-nums" }}>
       {prefix}
       {value.toLocaleString("en-US")}
       {suffix}
