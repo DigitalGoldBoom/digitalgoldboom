@@ -31,19 +31,15 @@ export default function People() {
   return (
     <section ref={sectionRef} className="section section-surface relative overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="text-center max-w-[740px] mx-auto">
+        <div className="max-w-[760px]">
           <p data-reveal className="eyebrow mb-6">Who&rsquo;s behind it</p>
-          <h2
-            data-reveal
-            className="display-lg text-tp"
-            style={{ maxWidth: "20ch", margin: "0 auto" }}
-          >
+          <h2 data-reveal className="display-lg text-tp" style={{ maxWidth: "20ch" }}>
             Built by people who built <span style={{ color: "var(--accent-gold)" }}>the old system.</span>
           </h2>
           <p
             data-reveal
-            className="mt-8 text-ts"
-            style={{ fontSize: "1.0625rem", lineHeight: 1.7, maxWidth: "58ch", margin: "32px auto 0" }}
+            className="mt-6 text-ts"
+            style={{ fontSize: "1.0625rem", lineHeight: 1.7, maxWidth: "58ch" }}
           >
             This isn&rsquo;t a crypto-anon project. It&rsquo;s being built by people retail investors already quietly <span className="text-tp font-semibold">trust</span> every day.
           </p>

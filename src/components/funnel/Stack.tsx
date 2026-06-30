@@ -53,14 +53,14 @@ export default function Stack() {
   return (
     <section ref={sectionRef} className="section section-surface relative">
       <div className="max-w-[1100px] mx-auto px-6 md:px-12 relative z-10">
-        <div className="text-center max-w-[640px] mx-auto">
+        <div className="max-w-[640px]">
           <p data-reveal className="eyebrow mb-6">Get started</p>
-          <h2 data-reveal className="display-lg text-tp" style={{ maxWidth: "20ch", margin: "0 auto" }}>
+          <h2 data-reveal className="display-lg text-tp" style={{ maxWidth: "16ch" }}>
             Pick what you <span style={{ color: "var(--accent-gold)" }}>need.</span>
           </h2>
           <p
             data-reveal
-            className="mt-6 text-ts mx-auto"
+            className="mt-6 text-ts"
             style={{ fontSize: "1.0625rem", lineHeight: 1.6, maxWidth: "48ch" }}
           >
             No bundle. Each available on its own — start with the book, or go deeper.
