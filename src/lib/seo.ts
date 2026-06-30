@@ -98,31 +98,29 @@ export function generateMetadata({
 
 // JSON-LD Structured Data Generators
 export function generateOrganizationSchema() {
+  // No `logo` (no real logo asset exists yet — a 404 logo is worse than none) and no `sameAs`
+  // (the social profiles aren't verified). Real-and-sourced or omitted (Golden Rule #1).
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
-    description: 'Your source for digital gold intelligence, live prices, and the tokenization revolution.',
-    sameAs: [
-      'https://twitter.com/digitalgoldboom',
-      'https://linkedin.com/company/digitalgoldboom',
-    ],
+    description:
+      'Digital Gold Boom — the book and live data on digital gold mining and the tokenization of in-ground verified gold.',
   };
 }
 
 export function generateWebsiteSchema() {
+  // No SearchAction — there is no /search page, so claiming one would be a fabricated capability.
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: SITE_NAME,
     url: SITE_URL,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${SITE_URL}/search?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
+    description:
+      'Digital gold mining and the tokenization of in-ground verified gold — explained, with live data and the book.',
+    publisher: { '@type': 'Organization', name: SITE_NAME },
+    inLanguage: 'en',
   };
 }
 
@@ -184,6 +182,16 @@ export function generateBookSchema() {
       'Decoding the start of the biggest gold rush in history — how digital gold mining tokenizes in-ground verified gold into a tradeable, eco-friendly, gold-backed asset.',
     genre: 'Business & Finance',
     inLanguage: 'en',
+    bookFormat: 'https://schema.org/EBook',
+    url: `${SITE_URL}/book`,
+    // Real, owner-set price. Still NO ratingValue/reviewCount/numberOfPages/ISBN (none verified).
+    offers: {
+      '@type': 'Offer',
+      price: '17.00',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+      url: `${SITE_URL}/book`,
+    },
   };
 }
 

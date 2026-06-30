@@ -3,6 +3,8 @@
 import { useState, type FormEvent } from "react";
 import VaultShell from "@/components/VaultShell";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import { generateFAQSchema } from "@/lib/seo";
 import { track } from "@vercel/analytics";
 
 // Metadata lives in newsletter/layout.tsx (this is a client component).
@@ -44,6 +46,7 @@ export default function NewsletterPage() {
 
   return (
     <VaultShell>
+      <JsonLd data={generateFAQSchema(FAQS.map((f) => ({ question: f.q, answer: f.a })))} />
       <main className="pt-32 pb-24">
         <div className="mx-auto max-w-[820px] px-6">
           <p className="v2-eyebrow mb-6">Free weekly briefing</p>

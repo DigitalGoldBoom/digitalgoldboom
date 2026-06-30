@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import ScrollTracker from "@/components/ScrollTracker";
+import JsonLd from "@/components/JsonLd";
 import V2Home from "./v2/page";
-import { generateMetadata as genMeta } from "@/lib/seo";
+import { generateMetadata as genMeta, generateBookSchema } from "@/lib/seo";
 
 export const metadata: Metadata = genMeta({
   title: "Digital Gold Boom — Decoding the Biggest Gold Rush in History",
@@ -13,6 +14,7 @@ export const metadata: Metadata = genMeta({
 export default function Home() {
   return (
     <>
+      <JsonLd data={generateBookSchema()} />
       <ScrollTracker />
       <V2Home />
     </>
