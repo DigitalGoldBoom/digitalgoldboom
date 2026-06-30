@@ -914,27 +914,15 @@ function SectionBook() {
   const sections = [
     {
       n: "01",
-      title: "Why Gold No Longer Needs Mining",
-      chapters: "Chapters 1–8 · The Inevitability Case",
+      title: "The Inevitability of Digital Gold Mining",
+      chapters: "Chapters 1–8",
       body: "Why the old extraction-based gold industry is structurally collapsing — environmental, social, and economic forces shutting it down at the exact moment trillions in verified gold sit untouched in the ground.",
     },
     {
       n: "02",
-      title: "The NatGold Digital Mining Ecosystem",
-      chapters: "Chapters 9–16 · How It Works",
+      title: "The NatGold Digital Gold Mining Ecosystem",
+      chapters: "Chapters 9–16",
       body: "How NatGold Digital actually works. The team, the patents, the verification standards, the approval pipeline, the token economics — and the pre-market demand it has already attracted.",
-    },
-    {
-      n: "03",
-      title: "The $1B Case Study: Cahuilla Gold Project",
-      chapters: "Chapters 17–19 · Proof of Concept",
-      body: "The first real deposit through the pipeline. The transaction details, the players, the financial and environmental scorecard — theory replaced with a real-world transaction.",
-    },
-    {
-      n: "04",
-      title: "The Opportunity, Risks & Future",
-      chapters: "Chapters 20–23 · What to Do Next",
-      body: "An honest risk register, the investment options that exist today, a 10-year forecast, and the structural parallel between digital gold mining and the EV transition of the last decade.",
     },
   ];
   return (
@@ -1008,14 +996,14 @@ function SectionBook() {
             </div>
           </div>
 
-          {/* Four sections — stacked editorial list */}
+          {/* Two sections — stacked editorial list */}
           <div className="lg:col-span-7">
             <div className="mb-10">
               <div
                 className="text-[10px] font-semibold uppercase tracking-[0.24em]"
                 style={{ color: C.gold, fontFamily: FONT_MONO }}
               >
-                Four sections · 23 chapters
+                Two sections · 17 chapters
               </div>
               <h3
                 className="mt-3 text-3xl font-medium leading-tight tracking-[-0.01em] md:text-[40px]"

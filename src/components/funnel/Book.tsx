@@ -4,11 +4,13 @@ import { useRef } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import Book3D from "@/components/Book3D";
 
+// Current book = 17 chapters in 2 sections + a closing chapter (Operation
+// Condense). Section titles verbatim from the published book PDF. The former
+// Section 3 (Cahuilla) and Section 4 moved to Book 2, so they are not shown here.
 const SECTIONS = [
-  { n: "01", title: "Why Gold No Longer Needs Mining", chapters: "Chapters 1–8 · The Inevitability Case", body: "Why the old extraction-based gold industry is structurally collapsing — environmental, social, and economic forces shutting it down at the exact moment trillions in verified gold sit untouched in the ground." },
-  { n: "02", title: "The NatGold Digital Mining Ecosystem", chapters: "Chapters 9–16 · How It Works", body: "How NatGold Digital actually works. The team, the patents, the verification standards, the approval pipeline, the token economics — and the pre-market demand it has already attracted." },
-  { n: "03", title: "The $1B Case Study: Cahuilla Gold Project", chapters: "Chapters 17–19 · Proof of Concept", body: "The first real deposit through the pipeline. The transaction details, the players, the financial and environmental scorecard — theory replaced with a real-world transaction." },
-  { n: "04", title: "The Opportunity, Risks & Future", chapters: "Chapters 20–23 · What to Do Next", body: "An honest risk register, the investment options that exist today, a 10-year forecast, and the structural parallel between digital gold mining and the EV transition of the last decade." },
+  { n: "01", kicker: "Section 01", title: "The Inevitability of Digital Gold Mining", chapters: "Chapters 1–8", body: "Why the old extraction-based gold industry is structurally collapsing — environmental, social, and economic forces shutting it down at the exact moment trillions in verified gold sit untouched in the ground. The case that connecting that value digitally, rather than extracting it, is the inevitable next step." },
+  { n: "02", kicker: "Section 02", title: "The NatGold Digital Gold Mining Ecosystem", chapters: "Chapters 9–16", body: "How NatGold Digital actually works. The team, the patents, the verification standards, the approval pipeline, the token economics — and the pre-market demand it has already attracted." },
+  { n: "03", kicker: "The closer", title: "The Road Ahead: The Challenges, Answered", chapters: "Chapter 17", body: "The honest reckoning. The nine hardest questions a skeptic would press — can you sell when you want, is the gold really there, what if the company fails — each answered with the same machine the rest of the book builds, and the decision placed in the reader's hands." },
 ];
 
 export default function Book() {
@@ -76,7 +78,7 @@ export default function Book() {
 
         {/* Chapter breakdown */}
         <div className="text-center mb-14">
-          <p data-reveal className="eyebrow mb-5">Four sections · 23 chapters</p>
+          <p data-reveal className="eyebrow mb-5">Two sections · 17 chapters</p>
           <h3
             data-reveal
             className="display-md text-tp"
@@ -111,7 +113,7 @@ export default function Book() {
                     textTransform: "uppercase",
                   }}
                 >
-                  Section {s.n}
+                  {s.kicker}
                 </span>
                 <span
                   className="font-mono text-tt"

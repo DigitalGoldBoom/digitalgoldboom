@@ -275,9 +275,9 @@ export default function ConceptPsPage() {
                 className="mt-6"
                 style={{ fontSize: "13px", color: MUTED, lineHeight: 1.6 }}
               >
-                Chapters 3–5
+                Chapters 1–8
                 <br />
-                The Inevitability Case
+                The Inevitability of Digital Gold Mining
               </p>
             </aside>
             <div className="col-span-12 md:col-span-9">
@@ -855,7 +855,7 @@ export default function ConceptPsPage() {
           >
             <div className="grid grid-cols-12 gap-8 mb-12">
               <div className="col-span-12 md:col-span-5">
-                <div style={{ ...eyebrow, color: GOLD_SOFT }}>Four sections · 23 chapters</div>
+                <div style={{ ...eyebrow, color: GOLD_SOFT }}>Two sections · 17 chapters</div>
                 <h3
                   className="mt-5"
                   style={{ ...display, fontSize: "clamp(28px, 3.6vw, 44px)", color: CANVAS }}
@@ -869,27 +869,15 @@ export default function ConceptPsPage() {
               {[
                 {
                   n: "01",
-                  title: "Why Gold No Longer Needs Mining",
-                  meta: "Chapters 1–8 · The Inevitability Case",
+                  title: "The Inevitability of Digital Gold Mining",
+                  meta: "Chapters 1–8",
                   copy: "Why the old extraction-based gold industry is structurally collapsing — environmental, social, and economic forces shutting it down at the exact moment trillions in verified gold sit untouched in the ground.",
                 },
                 {
                   n: "02",
-                  title: "The NatGold Digital Mining Ecosystem",
-                  meta: "Chapters 9–16 · How It Works",
+                  title: "The NatGold Digital Gold Mining Ecosystem",
+                  meta: "Chapters 9–16",
                   copy: "How NatGold Digital actually works. The team, the patents, the verification standards, the approval pipeline, the token economics — and the pre-market demand it has already attracted.",
-                },
-                {
-                  n: "03",
-                  title: "The $1B Case Study: Cahuilla Gold Project",
-                  meta: "Chapters 17–19 · Proof of Concept",
-                  copy: "The first real deposit through the pipeline. The transaction details, the players, the financial and environmental scorecard — theory replaced with a real-world transaction.",
-                },
-                {
-                  n: "04",
-                  title: "The Opportunity, Risks & Future",
-                  meta: "Chapters 20–23 · What to Do Next",
-                  copy: "An honest risk register, the investment options that exist today, a 10-year forecast, and the structural parallel between digital gold mining and the EV transition of the last decade.",
                 },
               ].map((s) => (
                 <li

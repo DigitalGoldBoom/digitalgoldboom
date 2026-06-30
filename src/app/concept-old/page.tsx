@@ -1427,27 +1427,15 @@ function Book() {
   const sections = [
     {
       n: "01",
-      title: "Why Gold No Longer Needs Mining",
-      meta: "Chapters 1–8 · The Inevitability Case",
+      title: "The Inevitability of Digital Gold Mining",
+      meta: "Chapters 1–8",
       body: "Why the old extraction-based gold industry is structurally collapsing — environmental, social, and economic forces shutting it down at the exact moment trillions in verified gold sit untouched in the ground.",
     },
     {
       n: "02",
-      title: "The NatGold Digital Mining Ecosystem",
-      meta: "Chapters 9–16 · How It Works",
+      title: "The NatGold Digital Gold Mining Ecosystem",
+      meta: "Chapters 9–16",
       body: "How NatGold Digital actually works. The team, the patents, the verification standards, the approval pipeline, the token economics — and the pre-market demand it has already attracted.",
-    },
-    {
-      n: "03",
-      title: "The $1B Case Study: Cahuilla Gold Project",
-      meta: "Chapters 17–19 · Proof of Concept",
-      body: "The first real deposit through the pipeline. The transaction details, the players, the financial and environmental scorecard — theory replaced with a real-world transaction.",
-    },
-    {
-      n: "04",
-      title: "The Opportunity, Risks & Future",
-      meta: "Chapters 20–23 · What to Do Next",
-      body: "An honest risk register, the investment options that exist today, a 10-year forecast, and the structural parallel between digital gold mining and the EV transition of the last decade.",
     },
   ];
 
@@ -1592,7 +1580,7 @@ function Book() {
           }}
         >
           <div style={{ marginBottom: 48 }}>
-            <Eyebrow>Four sections · 23 chapters</Eyebrow>
+            <Eyebrow>Two sections · 17 chapters</Eyebrow>
             <h3
               style={{
                 ...displayFont,
