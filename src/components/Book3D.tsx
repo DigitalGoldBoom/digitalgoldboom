@@ -110,9 +110,16 @@ export default function Book3D() {
       typeof window !== "undefined" &&
       window.matchMedia?.("(hover: none), (pointer: coarse)").matches;
 
-    // Touch / no-mouse / reduced-motion: keep the static pose. No listeners, no rAF
-    // loop — this is the lighter rebuild that stops the perpetual animation on mobile.
-    if (prefersReducedMotion() || noHover) return;
+    // Reduced-motion: truly static — no animation at all.
+    if (prefersReducedMotion()) return;
+
+    // Touch / no-mouse devices have no cursor to follow, so give the book a gentle CSS
+    // auto-rotate (GPU-only keyframes, ZERO per-frame JS) — it "moves" on mobile without the
+    // per-frame rAF that used to choke low-end phones.
+    if (noHover) {
+      box.classList.add("book3d-float");
+      return;
+    }
 
     let running = false;
     let onScreen = true;

@@ -497,6 +497,16 @@ body {
 @keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
 .hero-book-reveal { animation: heroFade 0.7s var(--ease-out) both; }
 
+/* Book3D gentle auto-rotate on touch devices (no cursor to follow). GPU-only transform
+   keyframes — no per-frame JS. Shows the spine / fore-edge as it turns. */
+@keyframes dgbBookFloat {
+  0%   { transform: rotateY(-20deg) rotateX(7deg); }
+  50%  { transform: rotateY(20deg) rotateX(-3deg); }
+  100% { transform: rotateY(-20deg) rotateX(7deg); }
+}
+.book3d-float { animation: dgbBookFloat 8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .book3d-float { animation: none; } }
+
 /* ================================================================
    REDUCED MOTION
    ================================================================ */

@@ -63,6 +63,11 @@ const faqs = [
     answer: `US$${PRICE}, one time. No subscription.`,
   },
   {
+    question: "What if it's not for me?",
+    answer:
+      "You're covered by a 30-day money-back guarantee. Email us within 30 days and we'll refund you in full, no questions asked.",
+  },
+  {
     question: "What is NatGold?",
     answer:
       "NatGold is the real-world example the book uses: an approach to tokenizing in-ground, independently-verified gold. The book explains and analyses how it works — it does not sell tokens or digital assets.",
@@ -146,6 +151,7 @@ export default function BookPage() {
 
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm" style={{ color: "var(--text-tertiary)" }}>
               <li>✓ Reads on any device</li>
+              <li>✓ 30-day money-back guarantee</li>
               <li>✓ Secure checkout (LemonSqueezy)</li>
               <li>✓ Delivered to your inbox</li>
             </ul>
@@ -246,7 +252,7 @@ export default function BookPage() {
             <BuyButton checkoutUrl={checkoutUrl} label={`Get the book — $${PRICE}`} event="book_buy_click_footer" />
           </div>
           <p className="mt-5 text-xs" style={{ color: "var(--text-tertiary)" }}>
-            PDF · EPUB · Kindle · Secure checkout via LemonSqueezy · Educational — not financial advice.
+            PDF · EPUB · Kindle · 30-day money-back guarantee · Secure checkout via LemonSqueezy · Educational — not financial advice.
           </p>
         </div>
       </section>

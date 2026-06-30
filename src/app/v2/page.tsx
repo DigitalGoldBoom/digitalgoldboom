@@ -237,9 +237,12 @@ export default function V2Page() {
         {/* ── PRICING (separate options) ───────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
           <SectionLabel n="05">Get started</SectionLabel>
-          <h2 className="v2-display mb-14" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", maxWidth: "16ch" }}>
+          <h2 className="v2-display mb-5" style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", maxWidth: "16ch" }}>
             Pick what you <span className="v2-gold">need.</span>
           </h2>
+          <p className="mb-12 text-lg" style={{ color: "var(--v2-dim)" }}>
+            Every purchase backed by a <span className="v2-gold">30-day money-back guarantee.</span>
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {OPTIONS.map((o) => (
               <div key={o.name} className="v2-tile p-8 flex flex-col">

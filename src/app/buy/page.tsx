@@ -77,6 +77,7 @@ export default function BuyPage() {
                   <li>• Instant download after payment (link emailed to you)</li>
                   <li>• PDF, EPUB and Kindle (MOBI) formats — reads on any device</li>
                   <li>• Secure checkout handled by LemonSqueezy</li>
+                  <li>• 30-day money-back guarantee</li>
                 </ul>
               </div>
 
