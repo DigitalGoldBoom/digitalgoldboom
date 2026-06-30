@@ -59,8 +59,12 @@ export type StatEntry = {
   notes?: string;
 };
 
-const S1 = 'The Inevitability Case';
-const S2 = 'The NatGold Ecosystem';
+// Section titles verbatim from the published book PDF (output/kindle/dist):
+// Section 1 — "The Inevitability of Digital Gold Mining"; Section 2 —
+// "The NatGold Digital Gold Mining Ecosystem". (The earlier short working
+// names "The Inevitability Case" / "The NatGold Ecosystem" were not final.)
+const S1 = 'The Inevitability of Digital Gold Mining';
+const S2 = 'The NatGold Digital Gold Mining Ecosystem';
 
 const CH1 = "Gold's Legacy and Its Digital Future";
 const CH4 = 'Digital Alchemy: How Tokenization Unlocks Gold Without Extraction';
@@ -70,7 +74,7 @@ const CHAPTERS_DIR = 'C:\\DGB-Book\\chapters';
 
 export const STATS_REGISTRY: StatEntry[] = [
   // =========================================================================
-  // SECTION 1 — THE INEVITABILITY CASE
+  // SECTION 1 — THE INEVITABILITY OF DIGITAL GOLD MINING
   // =========================================================================
 
   // ---- CHAPTER 1 — Gold's Legacy and Its Digital Future -------------------
@@ -231,7 +235,7 @@ export const STATS_REGISTRY: StatEntry[] = [
   },
 
   // =========================================================================
-  // SECTION 2 — THE NATGOLD ECOSYSTEM
+  // SECTION 2 — THE NATGOLD DIGITAL GOLD MINING ECOSYSTEM
   // =========================================================================
   // Section 2's gold-anchored token economics are rendered as live TABLES via
   // tables-registry.ts (Ch 11 BIV formula + exchange ratios, Ch 15 three-year
