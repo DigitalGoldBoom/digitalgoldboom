@@ -1,7 +1,7 @@
 # Sales Copy — V3 (VSL-derived long-form landing page)
 
 > **Route:** `/v3` — a long-form variant to split-test alongside `/v1` (long) and `/s` (short).
-> **Product:** the **$17 book** (Digital Gold Boom). Single CTA → LemonSqueezy checkout. **12-month money-back guarantee.**
+> **Product:** the book (Digital Gold Boom) at the **$37 early-reader launch price** (rising to the regular **$97**). Single CTA → LemonSqueezy checkout. **12-month money-back guarantee.**
 > **Design:** build in the **v2 design system** (reference `src/app/v2/page.tsx` — `v2-*` classes, ShimmerDots, bento tiles). Do NOT reuse `/long` components.
 > **Source:** adapted from the VSL script v5 (`C:\DGB-Book\_video-production\DGB-VSL-script.md`) — its 15-beat architecture, narrative spine (the book's self-assembling chain / Read-This-First / Ch 8 logic), proof-stacking, flat-authority voice, and withheld-offer structure — translated to a scannable WEB page (read, not spoken; no "watch/listen" verbs).
 > **Status:** DRAFT — routes to dgb-copy-chief (grade) + dgb-fact-verifier (numbers) next. Builder ≠ breaker; not self-certified.
@@ -18,7 +18,7 @@
 - **Eyebrow:** A shift in the gold industry
 - **Headline:** It's not gold. It's not bitcoin.
 - **Subhead:** Twenty-two trillion dollars of gold has already been found — drilled, mapped, signed off by independent experts, sitting in the ground right now. For six thousand years there was one way to reach it: dig it up. This book is about the other way.
-- **CTA:** Get the book — $17
+- **CTA:** Get the book — $37
 - **Under CTA:** Digital book · delivered instantly · 12-month money-back guarantee
 - **Fine print near CTA:** Educational — not financial advice.
 - *VSL map:* carries the VSL's proclamation open and the $22T shock; holds the mechanism ("the other way") for Beat 5, exactly as the VSL withholds it. **De-risk:** the VSL line "the ones who understand it first will own gold the way no one has been able to" is cut — it reads as an early-mover/ownership tease. The page sells understanding ("This book is about the other way").
@@ -138,18 +138,18 @@
 - **Headline:** The complete case — and the honest case against it — in one place.
 - **Body:** Digital Gold Boom is the full map of everything above, and far more: how a verified deposit becomes something you can own without a shovel ever touching it; the team behind it, including a former chief of staff of the U.S. Securities and Exchange Commission and the former chief innovation officer of Barrick; the ten patent-pending applications now under examination at the U.S. patent office; and a full chapter of honest risks — what could go wrong, and the one question the author marks as still open — laid out in plain view, because a case you can trust is one that shows you its own weak points.
 - **Structure line:** Two sections, seventeen chapters. Section 1 builds the case that gold's value no longer needs a mine. Section 2 opens the machine that does it — the team, the verification, the gate, the pricing, the partners, the demand — and ends on the honest challenges.
-- **Disclosure line (keep visible):** Andrew Fletcher holds a stake in the model he describes, and says so plainly throughout. This book is educational — not financial advice. That is exactly why it shows the downside as carefully as the upside.
-- *VSL map:* the delayed-offer reveal — the book as the full case + the receipts (team, patents, honest risks) + the stake disclosure. **Compliance:** "patent-pending applications," never "patented" (LANDMINE #5); Ch 17 framed as honest risks with the open question kept as a gesture, not a description of the unresolved legal mechanics (LANDMINE #13); structure corrected to two sections / 17 chapters.
+- **Disclosure line:** This book is educational — not financial advice. That is exactly why it shows the downside as carefully as the upside. *(author-stake line REMOVED per author directive 2026-07-02 — disclosure lives in the book only)*
+- *VSL map:* the delayed-offer reveal — the book as the full case + the receipts (team, patents, honest risks). **Compliance:** "patent-pending applications," never "patented" (LANDMINE #5); Ch 17 framed as honest risks with the open question kept as a gesture, not a description of the unresolved legal mechanics (LANDMINE #13); structure corrected to two sections / 17 chapters.
 
 ---
 
 ## BEAT 15 — Close + risk reversal (maps to VSL Beat 15: CTA + guarantee)
 - **Eyebrow:** Read it for yourself
 - **Headline:** Understand it for the price of a paperback.
-- **Body:** Digital Gold Boom is a one-time $17 purchase — less than dinner out — and it is the whole map of a six-thousand-year-old asset changing form, written by the person who ran a gold company at the center of it. You get the complete book, delivered digitally the moment you check out.
+- **Body:** Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97, in exchange for an honest review — and it is the whole map of a six-thousand-year-old asset changing form, written by the person who ran a gold company at the center of it. You get the complete book, delivered digitally the moment you check out.
 - **Guarantee:** Take a full year with it. Read every page, twice if you like. If it does not change the way you see gold and where this is heading, ask any time in the next twelve months and you get every cent back — and keep the book. The risk is entirely ours.
-- **CTA:** Get the book — $17
-- **Fine print:** Secure checkout via LemonSqueezy. Educational content — not financial advice. The author holds a stake in the model described.
+- **CTA:** Get the book — $37
+- **Fine print:** Secure checkout via LemonSqueezy. Educational content — not financial advice.
 - *VSL map:* the calm risk-reversal close and the "price of a book vs a research report" value frame. **Major de-risk:** the VSL's entire evergreen-urgency close — "early has always been cheaper," "its value nearly doubled while people reserved," "late capital pays full price," "position yourself before the crowd arrives" — is REMOVED. Every one of those is a price-appreciation / early-mover-investment cue. The page closes on the guarantee and the value-of-understanding frame only. No urgency device, real or manufactured (and no dated catalyst — V3 carries no July 8 line, since its whole frame is understanding, not timing).
 
 ---
@@ -170,7 +170,7 @@
 - Carrying cost: ~$7,726 drained on a $100k position over 20 years in a ~0.40% gold ETF (Ch 13).
 - Team: former U.S. SEC chief of staff (Mark Radke); former Barrick chief innovation officer (Michelle Ash) (Ch 9). Ten patent-pending applications under USPTO examination (Ch 9/11/14) — **never "patented."**
 - Author bio: President of Great Eagle Gold, now NatBridge Resources; 200+ projects; Chocó 2020 (preface, Ch 9, Disclosures). Author's stake + "not financial advice" (Disclosures — mandatory keep).
-- $17 price; 12-month money-back guarantee; LemonSqueezy (offer table).
+- $37 early-reader launch price (rising to the regular $97); 12-month money-back guarantee; LemonSqueezy (offer table).
 
 **[NEEDS VERIFICATION] — open flags (route to dgb-fact-verifier):**
 1. `[VERIFY]` **$22T** figure + as-of framing intact at publish (Feb 26 2026, $5,194/oz).

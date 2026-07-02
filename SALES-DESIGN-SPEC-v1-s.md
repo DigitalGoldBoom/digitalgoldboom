@@ -39,7 +39,7 @@ The through-line in three repeating moves, used everywhere:
 
 **The one accent move, repeated.** Every section has exactly ONE gold element that is the brightest pixel and points to the next action: a lit edge, a single gold rule (`h-px` gold), a glowing number, or the gold CTA. Trains the eye; never two gold focal points competing.
 
-**CTA system (compliance-anchored).** Primary CTA = `.v2-btn` (solid gold, `#08080d` text), label exactly **"Get the book — $17"**, → LemonSqueezy checkout (`BuyButton` component, `checkoutUrl` env, `unavailableLabel="Coming soon"`, with a `track()` event per placement). Directly under EVERY CTA, persistent and visible: **"Digital book · delivered instantly · 12-month money-back guarantee"** and the fine print **"Educational — not financial advice."** These lines are non-negotiable furniture, styled `--v2-faint`, never hidden behind a hover or accordion.
+**CTA system (compliance-anchored).** Primary CTA = `.v2-btn` (solid gold, `#08080d` text), label exactly **"Get the book — $37"** (the early-reader launch price, rising to the regular $97), → LemonSqueezy checkout (`BuyButton` component, `checkoutUrl` env, `unavailableLabel="Coming soon"`, with a `track()` event per placement). Directly under EVERY CTA, persistent and visible: **"Digital book · delivered instantly · 12-month money-back guarantee"** and the fine print **"Educational — not financial advice."** These lines are non-negotiable furniture, styled `--v2-faint`, never hidden behind a hover or accordion.
 
 **Scroll behavior.** Reveal-on-scroll is the house motion: each block fades up `translateY(16px)→0`, `opacity 0→1`, 500ms, `cubic-bezier(0.22,0.61,0.36,1)`, staggered 60ms per child, triggered at ~15% in view via IntersectionObserver (one shared hook). Runs ONCE per element. `prefers-reduced-motion`: everything renders in final state, no transform, no fade.
 
@@ -237,9 +237,9 @@ SECTION: Proof in the real world — Cahuilla case study  (copy beat: BEAT 7 · 
 SECTION: Credibility — who wrote it  (copy beat: BEAT 8 · component: AuthorV1 / People.tsx)
 ```
 
-**VISUAL CONCEPT** — Trust beat. "Written by someone who ran a gold company inside this shift." A restrained author panel: portrait (if author supplies one) + the credential line (former President of Great Eagle Gold / NatBridge, 200+ projects assessed) + the honest stake disclosure, kept visible (not hidden). Sober, editorial, high-trust — the opposite of guru.
+**VISUAL CONCEPT** — Trust beat. "Written by someone who ran a gold company inside this shift." A restrained author panel: portrait (if author supplies one) + the credential line (former President of Great Eagle Gold / NatBridge, 200+ projects assessed) + the educational fine-print line. Sober, editorial, high-trust — the opposite of guru. (Author-stake line REMOVED per author directive 2026-07-02 — disclosure lives in the book only.)
 
-**LAYOUT** — `[0.9fr_1.1fr]`: left = author portrait in a `.v2-tile` with a thin gold frame; right = `<h2>` + body credentials + a distinct **disclosure line** ("The author holds a stake in the model he describes… educational, not financial advice.") in a quietly bordered note so it reads as integrity, not fine print.
+**LAYOUT** — `[0.9fr_1.1fr]`: left = author portrait in a `.v2-tile` with a thin gold frame; right = `<h2>` + body credentials + a distinct **disclosure line** ("This book is educational — not financial advice.") in a quietly bordered note so it reads as integrity, not fine print.
 
 **IMAGERY** —
 - Author portrait: real photo, **author-supplied** (do not generate a person). If none available: a credibility-by-environment still (a field/geology setting, no identifiable face) as a placeholder.
@@ -248,7 +248,7 @@ SECTION: Credibility — who wrote it  (copy beat: BEAT 8 · component: AuthorV1
 
 **MOTION** — Panel reveal-up; the disclosure note's border draws in (signals "we're showing you this on purpose"). No gimmicks here — trust beats want stillness. Reduced-motion: static.
 
-**CONVERSION RATIONALE** — Authority + radical honesty is the conversion engine for a $17 info product about a sensitive topic. Putting the stake disclosure *forward* (not buried) flips a liability into a trust signal and satisfies compliance simultaneously.
+**CONVERSION RATIONALE** — Authority + radical honesty is the conversion engine for a $37 info product about a sensitive topic. The educational line kept visible (not buried) reads as integrity and satisfies compliance.
 
 **RESPONSIVE** — Desktop: portrait + text side-by-side. Tablet: portrait top, text below. Phone: stack; portrait ~64% width centered; disclosure note full-width, never collapsed.
 
@@ -273,7 +273,7 @@ SECTION: What you get  (copy beat: BEAT 9 · component: BookV1 / Book.tsx + Book
 
 **MOTION** — `Book3D` pointer-follow tilt (existing: cursor-anywhere, lerp 0.16, paused off-screen; CSS float on touch; static on reduced-motion). Contents tiles reveal-up staggered. Reduced-motion: book static 3/4 pose.
 
-**CONVERSION RATIONALE** — Seeing the actual product (a real, premium-looking book) at the decision-approach point makes the $17 feel concrete and fair. The four-part breakdown answers "what exactly am I buying?" with specifics (incl. the honest risk chapter), reinforcing value before the price.
+**CONVERSION RATIONALE** — Seeing the actual product (a real, premium-looking book) at the decision-approach point makes the $37 feel concrete and fair. The four-part breakdown answers "what exactly am I buying?" with specifics (incl. the honest risk chapter), reinforcing value before the price.
 
 **RESPONSIVE** — Desktop: book + 2×2 tiles. Tablet: book top, tiles 2-col below. Phone: book ~62vw centered (existing `--bw` clamp handles it), tiles single-column.
 
@@ -313,7 +313,7 @@ SECTION: Close  (copy beat: BEAT 11 · component: FinalCTAV1)
 
 **VISUAL CONCEPT** — The resolution. Centered, the core glow at its brightest — "Understand it for the price of a paperback." The gold CTA is the single brightest, largest interactive thing on the page; everything funnels here. The guarantee removes the last risk; the July 8 date gives the honest reason to act now.
 
-**LAYOUT** — Centered narrow column (`max-w-[1100px]`, big `py-28 md:py-36`): `<h2>` "Understand it for the price of a paperback." → body ($17 one-time, instant digital delivery, before July 8) → guarantee line → **primary CTA "Get the book — $17"** → under-CTA delivery/guarantee line → fine print (LemonSqueezy secure checkout, educational not advice, author stake). The CTA is centered and large.
+**LAYOUT** — Centered narrow column (`max-w-[1100px]`, big `py-28 md:py-36`): `<h2>` "Understand it for the price of a paperback." → body ($37 one-time early-reader launch price rising to the regular $97, instant digital delivery, before July 8) → guarantee line → **primary CTA "Get the book — $37"** → under-CTA delivery/guarantee line → fine print (LemonSqueezy secure checkout, educational not advice, author stake). The CTA is centered and large.
 
 **IMAGERY** — None photoreal. The page's core glow concentrates behind the CTA; optionally a faint `Book3D` echo or gold ring behind the button. ROUTE: **code-only**.
 
@@ -341,7 +341,7 @@ SECTION: Hook + one-breath explanation + buy  (copy beats: /s BEAT 1–5 · comp
 
 **VISUAL CONCEPT** — A single, near-full-screen composition: the same lit gold mass (the one big idea) anchoring "It's not gold. It's not bitcoin." with a one-breath explanation, a one-line credibility, a one-line "what you get," and the gold CTA — all visible with minimal scroll. The feeling: premium, mysterious, fast — earns the click before the scroller loses interest.
 
-**LAYOUT** — Single centered column (or `[1fr_1fr]` on desktop with the gold object beside the text). Vertical order: eyebrow → `<h1>` "It's not gold. It's not bitcoin." → subhead (the real shift) → one-breath "what it is" line → one-line credibility (Andrew Fletcher, 200+ projects) → one-line "what you get" (sourced stats, real deposit, the argue-against-itself chapter) → **CTA "Get the book — $17"** → sub-line "Read it before the first tokens trade on July 8, 2026." → under-CTA "Delivered instantly · 12-month money-back guarantee · Educational, not financial advice." Everything above or near the fold; at most one short scroll on phone.
+**LAYOUT** — Single centered column (or `[1fr_1fr]` on desktop with the gold object beside the text). Vertical order: eyebrow → `<h1>` "It's not gold. It's not bitcoin." → subhead (the real shift) → one-breath "what it is" line → one-line credibility (Andrew Fletcher, 200+ projects) → one-line "what you get" (sourced stats, real deposit, the argue-against-itself chapter) → **CTA "Get the book — $37"** → sub-line "Early-reader launch price, in exchange for an honest review, before it moves to its regular $97. Read it before the first tokens trade on July 8, 2026." → under-CTA "Delivered instantly · 12-month money-back guarantee · Educational, not financial advice." Everything above or near the fold; at most one short scroll on phone.
 
 **IMAGERY** —
 - The same lit gold-mass hero (reuse the /v1 hero asset — ONE shared asset, no extra production). On phone, a static lit still.

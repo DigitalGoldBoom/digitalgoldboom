@@ -8,7 +8,7 @@
 
 ## 1. What we're building (plain)
 
-Two landing pages that both sell ONE product — the **$17 book** — and send the buyer to checkout. They will be **split-tested** against each other:
+Two landing pages that both sell ONE product — the book at the **$37 early-reader launch price** (rising to the regular **$97**) — and send the buyer to checkout. They will be **split-tested** against each other:
 
 - **Page A — LONG.** Full sales page. For warm/considered traffic. Build at **`/v1`**.
 - **Page B — SHORT.** Fast, minimal page for **cold social-media traffic**. Build at **`/s`**.
@@ -21,7 +21,7 @@ Two landing pages that both sell ONE product — the **$17 book** — and send t
 
 The VSL (sales video) is separate and **not** part of this work.
 
-**For now: $17 book only.** The Primer ($99) and Updates ($199) options come OFF the page. One product, one price, one button. (Reason below.)
+**For now: the book only, at the $37 early-reader launch price (rising to the regular $97).** The Primer ($99) and Updates ($199) options come OFF the page. One product, one price, one button. (Reason below.)
 
 ### ⚠️ WHO writes the copy + the forensic-read rule (HARD — author directive)
 - The copy must be written by a **sales-funnel + copywriting expert skill** — not a generalist.
@@ -41,14 +41,14 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 - ❌ "Missed Bitcoin? Don't miss digital gold mining" → reads as an invitation to invest.
 - ❌ "be early" / "the thing to be early to" / "before Wall Street" → investment timing pitch.
 - ❌ "the biggest gold rush in history" → upside hype.
-- ❌ "Join the waitlist" + the line **"Free until the book drops. $39 after."** → the book is **live now at $17**; this is false/expiring scarcity. Remove everywhere.
+- ❌ "Join the waitlist" + the line **"Free until the book drops. $39 after."** → the book is **live now at the $37 early-reader launch price** (rising to the regular $97); the waitlist line is false/expiring scarcity. Remove everywhere.
 - ❌ Using **"$469M reserved / 17,466 investors / 162 countries"** as a reason for *the reader* to invest. (The numbers can stay only if framed as reported industry facts the book examines — never as "join them.")
 - ❌ Any anonymous authority claims ("Former SEC Chief of Staff", "Former CFTC Counsel", "Ex-Barrick/BHP") — both a weak proof and a claim-verification risk on a public page. Name them (with permission) or cut.
 
 ### MUST KEEP / ADD
 - ✅ Frame everything as **"understand this industry,"** not "profit from it."
 - ✅ **"Educational — not financial advice."** visible near every CTA.
-- ✅ Author's honest disclosure: **"The author holds a stake in the model he describes."**
+- ✅ (author-stake line REMOVED per author directive 2026-07-02 — the stake disclosure lives in the book only; do NOT add it to website or video copy. This supersedes the earlier "author's honest disclosure" rule on this line.)
 - ✅ Clear product + delivery: a **digital book**, delivered instantly on checkout.
 - ✅ A plain **refund/guarantee** line (processors want clear refund terms). [confirm window — see flags]
 - ✅ "Secure checkout via LemonSqueezy."
@@ -71,13 +71,13 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 
 ## 4. PAGE A — LONG (ready-to-paste draft)
 
-> Build at **`/v1`** in the **v2 design system** (reference: `src/app/v2/page.tsx` — `v2-*` classes, ShimmerDots, bento tiles). Do NOT reuse the old `/long` components. Beat names below map to the page's argument flow. **Every CTA button = `Get the book — $17` → checkout** (no email/waitlist).
+> Build at **`/v1`** in the **v2 design system** (reference: `src/app/v2/page.tsx` — `v2-*` classes, ShimmerDots, bento tiles). Do NOT reuse the old `/long` components. Beat names below map to the page's argument flow. **Every CTA button = `Get the book — $37` → checkout** (no email/waitlist).
 
 ### Beat 1 — Hook → `HeroBoardD.tsx`
 - **Eyebrow:** A shift in the gold industry
 - **Headline:** It's not gold. It's not bitcoin.
 - **Subhead:** There's a change underway in how the world's oldest asset works — and most people have never heard of it. This book explains it, start to finish, in plain English.
-- **CTA:** Get the book — $17
+- **CTA:** Get the book — $37
 - **Under CTA:** Digital book · delivered instantly · 12-month money-back guarantee
 - *(Remove the email form, the "$39 after" line, and the "Missed Bitcoin" headline.)*
 
@@ -117,7 +117,7 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 - **Eyebrow:** Who wrote it
 - **Headline:** Written by someone who ran a gold company inside this shift.
 - **Body:** Andrew Fletcher is the former President of Great Eagle Gold Corp (now NatBridge Resources), the first company to sign a supply agreement with NatGold Digital. He has assessed more than 200 gold projects across multiple continents. `[VERIFY]` This is the industry explained by someone who has worked in it — not a summary written from the outside.
-- **Disclosure line (keep visible):** The author holds a stake in the model he describes, and says so plainly throughout. This book is educational — not financial advice.
+- **Disclosure line:** This book is educational — not financial advice. *(author-stake line REMOVED per author directive 2026-07-02 — disclosure lives in the book only)*
 
 ### Beat 8 — What you get → `Book.tsx`
 - **Eyebrow:** What is inside
@@ -132,10 +132,10 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 ### Beat 9 — Close → `FinalCTA.tsx` + `Stack.tsx`  *(single product, no email capture)*
 - **Eyebrow:** Read it for yourself
 - **Headline:** Understand it for the price of a paperback.
-- **Body:** Digital Gold Boom is a one-time $17 purchase. You get the complete book, delivered digitally the moment you check out.
+- **Body:** Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, I'm asking the first readers for an honest review. You get the complete book, delivered digitally the moment you check out.
 - **Guarantee:** If the book is not worth your time, email us within 12 months for a full refund. No questions asked.
-- **CTA:** Get the book — $17
-- **Fine print:** Secure checkout via LemonSqueezy. Educational content — not financial advice. The author holds a stake in the model described.
+- **CTA:** Get the book — $37
+- **Fine print:** Secure checkout via LemonSqueezy. Educational content — not financial advice.
 
 ---
 
@@ -148,8 +148,8 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 - **Line 2 (what it is):** A way to verify and digitize gold's value without mining it — explained in plain English.
 - **Credibility:** Written by Andrew Fletcher, former president of a gold company working inside this shift. `[VERIFY]`
 - **What it is (the product):** One book explains the whole thing — 23 chapters, every statistic sourced.
-- **CTA:** Get the book — $17
-- **Under CTA:** Delivered instantly · 12-month money-back guarantee · Educational, not financial advice
+- **CTA:** Get the book — $37
+- **Under CTA:** Early-reader launch price, in exchange for an honest review, before it moves to its regular $97 · Delivered instantly · 12-month money-back guarantee · Educational, not financial advice
 
 ---
 
@@ -157,7 +157,7 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 
 | Item | Price | CTA | Notes |
 |---|---|---|---|
-| **Digital Gold Boom (the book)** | **$17 one-time** | Get the book — $17 | Digital delivery, instant. **12-month money-back guarantee.** The ONLY product on these sales pages for now. |
+| **Digital Gold Boom (the book)** | **$37 one-time** (early-reader launch price, rising to the regular **$97**) | Get the book — $37 | Digital delivery, instant. **12-month money-back guarantee.** Offered at $37 in exchange for an honest review; list price $97 set in LemonSqueezy. The ONLY product on these sales pages for now. |
 | **Industry Intelligence newsletter** | **$199 / year → tiering up to $999 / year** | — | **PLANNED product #2** — recurring subscription. **Founding-member pricing:** starts at $199/yr and steps up toward $999/yr as the member base passes set thresholds (**early members lock $199 for life** — confirm grandfathering in LS). Add AFTER the book is approved. See compliance note below. |
 | ~~The Primer ($99)~~ | — | — | OFF the page for now. |
 
@@ -204,7 +204,7 @@ Nothing below is approved as fact yet. Confirm each, then delete the flag.
 ## 8. Instructions for the website team
 
 1. **Structure first, copy second.** You can wire Page B and adjust Page A layout now; paste copy from sections 4–5 as it locks.
-2. **Every CTA → checkout for the $17 book.** Remove all email-capture / waitlist forms from these two sales pages. (Email capture can live elsewhere, not on the buy pages.)
+2. **Every CTA → checkout for the book (the $37 early-reader launch price, rising to the regular $97).** Remove all email-capture / waitlist forms from these two sales pages. (Email capture can live elsewhere, not on the buy pages.)
 3. **Do not publish any line still carrying a `[VERIFY]` flag.** Leave it as placeholder text or hold the section.
 4. **Keep the compliance lines** (educational disclaimer + author stake + LemonSqueezy checkout) on both pages.
 5. **Split test:** serve Page A and Page B and track checkout conversion per page. (Confirm the test tool with Andrew.)
@@ -213,6 +213,9 @@ Nothing below is approved as fact yet. Confirm each, then delete the flag.
 ---
 
 ## 9. Changelog
+- **v1.4 — 2026-07-02** — /s REBUILT AS VIDEO-LED (author direction: "more web3 and video based with supporting copy") → `SALES-PAGE-VIDEO-LED-BLUEPRINT-2026-07-02.md`. 7 sections, 4 chaptered video modules (~6:05 combined = the full VSL, chaptered for cold traffic — one long fold video rejected). Module 1 = the teaching core (author: 90s versions delivered "no understanding of the model"). World-class copy pass applied (v5 hook restored, vault-flip teaching frame, "somewhere solid to stand" + "nothing to apologize for" emotion, open-loop module closes). Author rules baked in: industry = hero; no "argues against" device in videos; no "raw material"; no "I invested." AWAITING author lock → then fact-verifier → dgb-funnel-designer → Higgsfield production. NOTE: page Beat 5 ("argues against the model") still stands in the older copy-only package — author to confirm keep/kill there.
+- **v1.3 — 2026-07-02** — HERO VIDEO SCRIPT (~95s, first fold of /s) added to `SALES-COPY-COLD-S-2026-07-02.md` — upgraded from the author's draft; three MUST-STRIP lines removed ("biggest gold rush", "before Wall Street", "love money"), token-venue ad reframed as news (July 8 beat marked EXPIRING with post-launch swap), SEC/Barrick people named (Radke, Ash), $22T + Donlin $1B proof beat added. BEAT 3B (team + patents + $469M reservations) added to the /s page by author decision under the reported-fact framing + press-release link. Fact-verifier still pending author prose sign-off.
+- **v1.2 — 2026-07-02** — COLD-TRAFFIC page rewritten fresh under the forensic-read rule (full Ch 1–17 + front matter read this session) → `SALES-COPY-COLD-S-2026-07-02.md`. Built for viral-content arrivals: message-match hero (3 swap variants keyed to the viral hook families), one-breath loop-deepener + $22T callout, insider-credibility beat, "last chapter argues against the book" trust beat, $37→$97 close. $469M/17,466/162 kept OFF the cold page (compliance). July 8 urgency line marked EXPIRING (remove after launch). Chapter count = 17/2 sections (the FRESH 2026-07-01 file still says "23 chapters" in two closes — do not ship those lines). Routed to dgb-copy-chief; fact-verifier waits for author sign-off.
 - **v0.1 — 2026-06-30** — First working draft. Compliance pivot (sell the book, not the investment); $17-only offer; long + short beat maps and draft copy; fact-flags listed. Copy NOT yet fact-verified or final-graded.
 - **v0.2 — 2026-06-30** — LemonSqueezy confirmed the framing (info/analysis about the industry, not selling tokens). Guarantee set to **12 months**. Added **newsletter ($199/yr)** as planned product #2 with its compliance note (analysis-only, no investment advice). LS asked for a sample + pricing model to submit (both prepared).
 - **v0.3 — 2026-06-30** — Newsletter pricing = **founding-member tiered**: $199/yr stepping up toward $999/yr at member thresholds. Added pricing-framing compliance rule (early-member pricing, not invest-early) + grandfathering operational TODO. Open Q to author: do early members lock $199 for life, or move up over time?

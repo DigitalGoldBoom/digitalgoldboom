@@ -14,7 +14,7 @@ const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
  *   - the educational fine print ("Educational — not financial advice.")
  *
  * `fine` lets the close/final CTA pass the fuller compliance line (secure checkout via
- * LemonSqueezy + the author-stake disclosure). `subline` is the optional dated-urgency line
+ * LemonSqueezy). `subline` is the optional dated-urgency line
  * used on /s ("Read it before the first tokens trade on July 8, 2026.").
  */
 export default function SalesCTA({

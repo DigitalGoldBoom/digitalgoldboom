@@ -49,14 +49,14 @@ The book is a LemonSqueezy-approved **information product** about the industry �
 - No investment/returns/FOMO claims or visuals: no price-up/gain charts, no "join thousands of investors", no moon/rocket/lambo, no countdown timers (July 8 2026 is stated as fact, never a ticking clock).
 - Do NOT reintroduce the old `/v2` triggers ("$469M / 17,466 reserved", "$871M tokenized value", "you're early", "before Wall Street", email waitlist, 3-product grid) — they were removed this session.
 - Visual STYLE can be as bold/web3 as it wants; the CLAIMS stay compliant.
-- Keep near every CTA: **"Educational — not financial advice"** + the author-stake line.
+- Keep near every CTA: **"Educational — not financial advice"** (author-stake line REMOVED per author directive 2026-07-02 — disclosure lives in the book only).
 
 ---
 
 ## 4. Per-page detail
 
 ### `/v1` (long) + `/s` (short) — NEW BUILD
-- Sell ONE product: the **$17 book**. Single CTA → **LemonSqueezy checkout**. **12-month money-back guarantee.** No email/waitlist, no Primer/Updates.
+- Sell ONE product: the book at the **$37 early-reader launch price** (rising to the regular **$97**). Single CTA → **LemonSqueezy checkout**. **12-month money-back guarantee.** No email/waitlist, no Primer/Updates.
 - Build from `SALES-COPY-FINAL-v1-s.md` + `SALES-DESIGN-SPEC-v1-s.md`.
 - **Assets (10 new — page NOT blocked on them):** 5 author-manual photoreal (incl. hero gold-mass — author produces; do NOT generate), 5 visual-strategist figures (no price/return charts), author portrait = real photo only. **Ship-now path:** use existing `Book3D` as the interim hero; leave clean swap points.
 - **`[VERIFY]` before publish (in the copy file):** Cahuilla framing (figure-free), final chapter count/edition scope, $22T always with its "as of Feb 26 2026, $5,194/oz" line, NatGold definition + author bio + July 8 2026 date.

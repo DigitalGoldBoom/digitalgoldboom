@@ -60,7 +60,7 @@ export default function V2Page() {
                   </span>
                 </div>
                 <p className="mt-3 text-xs" style={{ color: "var(--v2-faint)" }}>
-                  Educational — not financial advice. The author holds a stake in the model described.
+                  Educational — not financial advice.
                 </p>
               </div>
 
@@ -191,7 +191,7 @@ export default function V2Page() {
             </span>
           </div>
           <p className="mt-6 mx-auto text-xs leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
-            Secure checkout via LemonSqueezy. Educational content — not financial advice. The author holds a stake in the model described.
+            Secure checkout via LemonSqueezy. Educational content — not financial advice.
           </p>
         </section>
       </main>

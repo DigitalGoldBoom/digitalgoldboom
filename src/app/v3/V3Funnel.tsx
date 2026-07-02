@@ -456,7 +456,7 @@ export default function V3Funnel() {
               </div>
               <Reveal delay={120}>
                 <p className="mt-8 rounded-2xl p-6 text-base leading-relaxed" style={{ border: "1px solid var(--v2-line)", color: "#E7E7EE", maxWidth: "62ch" }}>
-                  Andrew Fletcher holds a stake in the model he describes, and says so plainly throughout. This book is educational, not financial advice. That is exactly why it shows the downside as carefully as the upside.
+                  This book is educational, not financial advice. That is exactly why it shows the downside as carefully as the upside.
                 </p>
               </Reveal>
             </div>
@@ -482,7 +482,7 @@ export default function V3Funnel() {
                 event="v3_final_buy"
                 align="center"
                 regular="97"
-                fine="Secure checkout via LemonSqueezy. Educational content, not financial advice. The author holds a stake in the model described."
+                fine="Secure checkout via LemonSqueezy. Educational content, not financial advice."
               />
             </div>
           </Reveal>

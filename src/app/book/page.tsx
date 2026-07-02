@@ -273,7 +273,7 @@ export default function BookPage() {
             <BuyButton checkoutUrl={checkoutUrl} label={`Get the book — $${PRICE}`} event="book_buy_click_footer" />
           </div>
           <p className="mt-5 text-xs" style={{ color: "var(--text-tertiary)" }}>
-            PDF · EPUB · Kindle · 12-month money-back guarantee · Secure checkout via LemonSqueezy · Educational — not financial advice. The author holds a stake in the model described.
+            PDF · EPUB · Kindle · 12-month money-back guarantee · Secure checkout via LemonSqueezy · Educational — not financial advice.
           </p>
         </div>
       </section>

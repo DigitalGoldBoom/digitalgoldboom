@@ -5,8 +5,8 @@
 > **How this was made:** written by `dgb-funnel-copywriter` after a forensic read of the whole book → graded by `dgb-copy-chief` (conversion) → checked by `dgb-fact-verifier` (numbers). This file is the words to ship.
 > **Routes:** long → **`/v1`** · short → **`/s`**. Do NOT touch root until approved.
 > **Design:** build in the **v2 design system, elevated** — see `dgb-funnel-designer` for the visual/motion/3D build spec (separate deliverable). Desktop / tablet / mobile all required.
-> **Offer:** the **$17 book**, single CTA → LemonSqueezy checkout. 12-month money-back guarantee. No email/waitlist, no Primer/Updates on these pages.
-> **Compliance:** sells INFORMATION about the industry — not investment/tokens/advice. Keep "Educational — not financial advice" + the author-stake line by every CTA.
+> **Offer:** the book at the **$37 early-reader launch price** (rising to the regular **$97**), single CTA → LemonSqueezy checkout. 12-month money-back guarantee. No email/waitlist, no Primer/Updates on these pages.
+> **Compliance:** sells INFORMATION about the industry — not investment/tokens/advice. Keep "Educational — not financial advice" by every CTA (author-stake line REMOVED per author directive 2026-07-02 — disclosure lives in the book only).
 
 ---
 
@@ -16,7 +16,7 @@
 - Eyebrow: A shift in the gold industry
 - Headline: It's not gold. It's not bitcoin.
 - Subhead: There is a change underway in how the world's oldest asset works — and most people have never heard of it. This book is the first plain-English account of the whole thing.
-- CTA: Get the book — $17
+- CTA: Get the book — $37
 - Under CTA: Digital book · delivered instantly · 12-month money-back guarantee
 - Fine print: Educational — not financial advice.
 
@@ -56,7 +56,7 @@
 - Eyebrow: Who wrote it
 - Headline: Written by someone who ran a gold company inside this shift.
 - Body: Andrew Fletcher is the former President of Great Eagle Gold, now NatBridge Resources — the first gold company built to align with this model. As President he led the company that struck its supply agreement with NatGold Digital. He has assessed more than two hundred gold projects across multiple continents. This is the industry explained by someone who has worked inside it — not a summary written from the outside.
-- Disclosure line (keep visible): The author holds a stake in the model he describes, and says so plainly throughout. This book is educational — not financial advice.
+- Disclosure line: This book is educational — not financial advice. *(author-stake line REMOVED per author directive 2026-07-02 — disclosure lives in the book only)*
 
 **BEAT 8 — What you get**
 - Eyebrow: What is inside
@@ -73,10 +73,10 @@
 **BEAT 10 — Close**
 - Eyebrow: Read it for yourself
 - Headline: Understand it for the price of a paperback.
-- Body: Digital Gold Boom is a one-time $17 purchase. You get the complete book, delivered digitally the moment you check out — and the chance to understand this model before the first tokens trade on July 8, 2026.
+- Body: Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, I'm asking the first readers for an honest review. You get the complete book, delivered digitally the moment you check out — and the chance to understand this model before the first tokens trade on July 8, 2026.
 - Guarantee: If the book is not worth your time, email us within 12 months for a full refund. No questions asked.
-- CTA: Get the book — $17
-- Fine print: Secure checkout via LemonSqueezy. Educational content — not financial advice. The author holds a stake in the model described.
+- CTA: Get the book — $37
+- Fine print: Secure checkout via LemonSqueezy. Educational content — not financial advice.
 
 ---
 
@@ -97,8 +97,8 @@
 - Line: One book. Real projects already moving through the model (Cahuilla, Friday Gold Mines). Every statistic sourced to a record you can check — including a full chapter that argues against its own case.
 
 **BEAT 5 — Close**
-- CTA: Get the book — $17
-- Sub-line (dated urgency): Read it before the first tokens trade on July 8, 2026.
+- CTA: Get the book — $37
+- Sub-line (dated urgency): Early-reader launch price, in exchange for an honest review, before it moves to its regular $97. Read it before the first tokens trade on July 8, 2026.
 - Under CTA: Delivered instantly · 12-month money-back guarantee · Educational, not financial advice
 
 ---

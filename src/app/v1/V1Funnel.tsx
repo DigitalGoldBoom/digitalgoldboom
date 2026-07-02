@@ -323,7 +323,7 @@ export default function V1Funnel() {
                   className="mt-9 rounded-2xl p-6 text-base leading-relaxed"
                   style={{ border: "1px solid var(--v2-line)", color: "#E7E7EE", maxWidth: "60ch" }}
                 >
-                  The author holds a stake in the model he describes, and says so plainly throughout. This book is educational — not financial advice.
+                  This book is educational — not financial advice.
                 </p>
               </Reveal>
             </div>
@@ -424,7 +424,7 @@ export default function V1Funnel() {
                 event="v1_final_buy"
                 align="center"
                 regular="97"
-                fine="Secure checkout via LemonSqueezy. Educational content — not financial advice. The author holds a stake in the model described."
+                fine="Secure checkout via LemonSqueezy. Educational content — not financial advice."
               />
             </div>
           </Reveal>
