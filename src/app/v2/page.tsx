@@ -52,8 +52,8 @@ export default function V2Page() {
                   <br />
                   It&rsquo;s not <span className="v2-gold">bitcoin.</span>
                 </h1>
-                <p className="mt-8 max-w-[48ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-                  There is a change underway in how the world&rsquo;s oldest asset works — and most people have never heard of it. This book is the first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of digital gold mining.
+                <p className="mt-8 max-w-[50ch] text-xl leading-relaxed" style={{ color: "var(--v2-dim)" }}>
+                  For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span> That just ended &mdash; and almost no one has noticed yet.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
                   <Link href="/book" className="v2-btn">Get the book — $37</Link>
@@ -159,7 +159,10 @@ export default function V2Page() {
                 Tell all. Nothing held back.
               </p>
               <p className="mt-8 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}>
-                Written by <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Andrew Fletcher</span> — former President of Great Eagle Gold Corp, now NatBridge Resources, which signed the first NatGold supply agreement.
+                The first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of digital gold mining — the whole story, start to finish. Written so a reader with no background in gold, blockchain, or investing can follow every step, but packed with real numbers and named sources throughout.
+              </p>
+              <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}>
+                By <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Andrew Fletcher</span> — former President &amp; CEO of Great Eagle Gold, now NatBridge Resources, which signed the first NatGold supply agreement.
               </p>
               <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {SECTIONS.map((s) => (

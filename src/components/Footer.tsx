@@ -9,7 +9,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
   {
     heading: "Explore",
     links: [
-      { label: "Live Dashboard", href: "/live" },
+      { label: "Live Stats", href: "/live" },
       { label: "Projects", href: "/projects" },
       { label: "Mining Industry", href: "/mining-industry" },
     ],

@@ -55,10 +55,10 @@ export default function IndustryReviewForm() {
         style={{ borderColor: "var(--border-gold)", background: "var(--accent-gold-wash)" }}
       >
         <p className="font-semibold" style={{ color: "var(--text-primary)" }}>
-          Thank you — you&apos;re on the reviewer list.
+          Thank you — you&apos;re connected.
         </p>
         <p className="mt-2 text-sm" style={{ color: "var(--text-secondary)" }}>
-          We&apos;ll be in touch with a copy and how to share your feedback.
+          We&apos;ll be in touch with your copy of the book and a way to stay involved.
         </p>
       </div>
     );
@@ -121,14 +121,14 @@ export default function IndustryReviewForm() {
       </div>
 
       <button type="submit" disabled={locked} className="btn-primary w-full">
-        {status === "submitting" ? "Sending…" : "Become an early reviewer →"}
+        {status === "submitting" ? "Sending…" : "Connect with us →"}
       </button>
 
       <p role="status" aria-live="polite" className="min-h-[1rem] text-xs" style={{ color: "var(--text-tertiary)" }}>
         {status === "error" ? (
           <span style={{ color: "#ff6b6b" }}>{message}</span>
         ) : (
-          <span>No spam. We only email you about the book and your review.</span>
+          <span>No spam. We only email you about the book and digital gold mining.</span>
         )}
       </p>
     </form>

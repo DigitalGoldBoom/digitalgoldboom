@@ -11,30 +11,30 @@ import { generateMetadata as genMeta } from "@/lib/seo";
    would lose this audience, so a strong type hero is the right call until a real asset lands. */
 
 export const metadata: Metadata = genMeta({
-  title: "For the Mining Industry — Review Digital Gold Boom",
+  title: "For the Mining Industry — Digital Gold Boom",
   description:
-    "Work in gold or mining? Read Digital Gold Boom and give your expert feedback. Become an early reviewer of the plain-English account of digital gold mining and the tokenization of in-ground verified gold.",
+    "Work in gold or mining? Connect with the people building digital gold mining. Understand the model for valuing and tokenizing in-ground verified gold, and help move a new industry forward.",
   path: "/mining-industry",
-  keywords: ["gold mining industry book", "mining industry feedback", "digital gold mining review", "tokenization of gold", "in-ground gold reserves"],
+  keywords: ["digital gold mining", "gold mining industry", "tokenization of gold", "in-ground gold reserves", "NatGold", "join digital gold mining"],
 });
 
 const why = [
-  { h: "You see what outsiders miss", p: "Reserves, grades, AISC, permitting, the realities of getting gold out of the ground — you live it. That's exactly the lens this book needs tested against." },
-  { h: "It's about your industry's next chapter", p: "Digital gold mining is about valuing and representing in-ground, independently-verified gold. Whatever you make of it, your read sharpens the argument." },
-  { h: "Honest beats flattering", p: "Tell us where it's right, where it's wrong, and what's missing. Hard feedback is the useful kind, and it's what we're asking for." },
+  { h: "You see what outsiders miss", p: "Reserves, grades, AISC, permitting, the realities of getting gold out of the ground — you live it. The people building this need that lens at the table." },
+  { h: "It's your industry's next chapter", p: "Digital gold mining is about valuing and representing in-ground, independently-verified gold. Whoever knows gold best should be part of shaping it." },
+  { h: "Get in at the start", p: "This is a new industry in its first chapter. Connecting now means understanding it — and helping steer it — before the wider market catches on." },
 ];
 
 const steps = [
-  { n: "01", h: "Put your name down", p: "Tell us who you are and your angle in the industry." },
-  { n: "02", h: "We send you the book", p: "You get a full copy to read on your own time, free." },
-  { n: "03", h: "Give your honest read", p: "Share what holds up, what doesn't, and what's missing." },
-  { n: "04", h: "Help shape it", p: "Your feedback informs the book. Reviewers who want credit can have it." },
+  { n: "01", h: "Introduce yourself", p: "Tell us who you are and your angle in the industry." },
+  { n: "02", h: "Get the full book", p: "We send you the complete book, so you can understand the model in depth." },
+  { n: "03", h: "Connect", p: "Share your read, your questions, and your expertise directly with the people building this." },
+  { n: "04", h: "Move it forward", p: "Stay close as digital gold mining takes shape, and contribute where it fits." },
 ];
 
 const reading = [
-  { h: "Two sections, seventeen chapters", p: "A complete, finished book, not a pitch deck." },
+  { h: "A complete, finished book", p: "The whole model, start to finish — not a pitch deck." },
   { h: "Every statistic sourced", p: "Each figure traces to a primary record you can check." },
-  { h: "Written in plain English", p: "Technical where it must be, readable throughout." },
+  { h: "Written for professionals", p: "Technical where it must be, readable throughout." },
 ];
 
 export default function MiningIndustryPage() {
@@ -48,10 +48,10 @@ export default function MiningIndustryPage() {
             You know this ground <span className="v2-gold">better than anyone.</span>
           </h1>
           <p className="mx-auto mt-8 max-w-[60ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-            Digital Gold Boom makes the case for digital gold mining: valuing and representing in-ground, verified gold. Before it reaches a wider audience, we want it read by the people who actually work the industry. Read it, and tell us where we&apos;re right, where we&apos;re wrong, and what&apos;s missing.
+            Digital gold mining is a new industry taking shape right now — valuing and representing in-ground, verified gold instead of tearing it out. This is an open invitation to the people who know gold best: connect with us, understand the model in full, and help move it forward.
           </p>
           <div className="mt-10 flex justify-center">
-            <a href="#review" className="v2-btn">Become an early reviewer &rarr;</a>
+            <a href="#connect" className="v2-btn">Connect with us &rarr;</a>
           </div>
         </div>
       </section>
@@ -60,7 +60,7 @@ export default function MiningIndustryPage() {
 
       {/* ── WHY YOUR READ MATTERS ────────────────────────────── */}
       <section className="mx-auto w-full max-w-[1100px] px-6 py-20 md:py-28">
-        <h2 className="v2-display mb-12 text-center mx-auto" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)" }}>Why your read matters.</h2>
+        <h2 className="v2-display mb-12 text-center mx-auto" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.75rem)" }}>Why get involved.</h2>
         <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {why.map((w) => (
             <div key={w.h} className="v2-tile h-full p-8">
@@ -109,11 +109,11 @@ export default function MiningIndustryPage() {
       </section>
 
       {/* ── CAPTURE ──────────────────────────────────────────── */}
-      <section id="review" className="scroll-mt-24 mx-auto w-full max-w-[560px] px-6 py-20 md:py-28 text-center">
+      <section id="connect" className="scroll-mt-24 mx-auto w-full max-w-[560px] px-6 py-20 md:py-28 text-center">
         <div className="rounded-[24px] p-8 md:p-10" style={{ border: "1px solid rgba(232,178,58,0.3)", background: "rgba(255,255,255,0.018)" }}>
-          <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(1.7rem, 3.4vw, 2.4rem)", maxWidth: "16ch" }}>Become an early reviewer.</h2>
+          <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(1.7rem, 3.4vw, 2.4rem)", maxWidth: "18ch" }}>Connect with the people building this.</h2>
           <p className="mx-auto mt-4 max-w-[50ch] leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-            We&apos;re asking for your honest read, including where it&apos;s wrong. Put your name down and we&apos;ll send you the book and a simple way to give your feedback.
+            Put your name down. We&apos;ll send you the full book and a direct line to the team moving digital gold mining forward.
           </p>
           <div className="mt-8 text-left">
             <IndustryReviewForm />
