@@ -181,16 +181,24 @@ export default function V2Page() {
         {/* ── ABOUT THE AUTHOR ─────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
           <SectionLabel n="05">About the author</SectionLabel>
-          <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20 items-center">
-            <div className="order-1 flex justify-center">
-              <div
-                className="relative w-full max-w-[360px] overflow-hidden rounded-[20px]"
-                style={{
-                  aspectRatio: "4 / 5",
-                  background: "rgba(0,2,18,0.55)",
-                  boxShadow: "0px 0px 3px 2px rgba(255,255,255,0.25)",
-                }}
-              >
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-20 items-center">
+            <div className="order-2 lg:order-1">
+              <h2 className="v2-display" style={{ fontSize: "clamp(2.2rem, 5vw, 4.25rem)" }}>Andrew Fletcher.</h2>
+              <p className="mt-5 v2-gold" style={{ fontSize: "clamp(1rem,1.4vw,1.25rem)", fontWeight: 500, letterSpacing: "0.02em" }}>
+                President &amp; CEO, Great Eagle Gold — now NatBridge Resources.
+              </p>
+              <p className="mt-8 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
+                Andrew Fletcher was President &amp; CEO of Great Eagle Gold — now <span style={{ color: "#F4F4F7", fontWeight: 600 }}>NatBridge Resources</span>, the first gold company built to align with NatGold&rsquo;s Digital Gold Mining Model. He signed the landmark supply agreement that delivers tokenization-ready gold deposits to back the NatGold Token (&ldquo;NATG&rdquo;), and has assessed hundreds of gold projects.
+              </p>
+              <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
+                In 2020 he walked away from a <span style={{ color: "#F4F4F7", fontWeight: 600 }}>$30 million gold deal in Colombia</span> after standing at the edge of a mercury-contaminated pit where workers, some of them teenagers, handled the material without protection. That day is where this book began.
+              </p>
+              <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
+                The two companies at the center cannot tell the whole story — one is heads-down building it, the other is publicly listed and limited in what it can say. <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Digital Gold Boom</span> is the one place it is told start to finish: a full analysis of why digital gold mining is the future of gold, and a complete breakdown of NatGold Digital&rsquo;s vision, team, technology, and how digital gold mining works.
+              </p>
+            </div>
+            <div className="order-1 lg:order-2 flex justify-center">
+              <div className="relative w-full max-w-[360px] overflow-hidden rounded-[20px]" style={{ aspectRatio: "4 / 5" }}>
                 <Image
                   src="/images/fletch3.png"
                   alt="Andrew Fletcher, author of Digital Gold Boom"
@@ -199,21 +207,6 @@ export default function V2Page() {
                   className="object-cover"
                 />
               </div>
-            </div>
-            <div className="order-2">
-              <h2 className="v2-display" style={{ fontSize: "clamp(2.2rem, 5vw, 4.25rem)" }}>Andrew Fletcher.</h2>
-              <p className="mt-5 v2-gold" style={{ fontSize: "clamp(1rem,1.4vw,1.25rem)", fontWeight: 500, letterSpacing: "0.02em" }}>
-                President, Great Eagle Gold — now NatBridge Resources.
-              </p>
-              <p className="mt-8 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
-                Andrew Fletcher was President of Great Eagle Gold — now <span style={{ color: "#F4F4F7", fontWeight: 600 }}>NatBridge Resources</span>, the first gold company built to align with NatGold&rsquo;s Digital Gold Mining Model. He signed the landmark supply agreement that delivers tokenization-ready gold deposits to back the NatGold Token (&ldquo;NATG&rdquo;), and has assessed hundreds of gold projects.
-              </p>
-              <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
-                In 2020 he walked away from a <span style={{ color: "#F4F4F7", fontWeight: 600 }}>$30 million gold deal in Colombia</span> after standing at the edge of a mercury-contaminated pit where workers, some of them teenagers, handled the material without protection. That day is where this book began.
-              </p>
-              <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
-                The two companies at the center cannot tell the whole story — one is heads-down building it, the other is publicly listed and limited in what it can say. <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Digital Gold Boom</span> is the one place it is told start to finish: a full analysis of why digital gold mining is the future of gold, and a complete breakdown of NatGold Digital&rsquo;s vision, team, technology, and how digital gold mining works.
-              </p>
             </div>
           </div>
         </section>
