@@ -83,8 +83,8 @@ export default function BuyPage() {
 
               <p className="mt-5 text-xs leading-relaxed" style={{ color: "var(--text-tertiary)" }}>
                 Questions or problems with your order? Email{" "}
-                <a href="mailto:support@digitalgoldboom.com" style={{ color: "var(--accent-gold)" }}>
-                  support@digitalgoldboom.com
+                <a href="mailto:fletcher@digitalgoldboom.com" style={{ color: "var(--accent-gold)" }}>
+                  fletcher@digitalgoldboom.com
                 </a>
                 . Digital Gold Boom is an educational book; nothing in it is financial advice.
               </p>

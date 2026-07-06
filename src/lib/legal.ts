@@ -6,7 +6,7 @@ export const LEGAL = {
   siteUrl: "https://digitalgoldboom.com",
   // Confirmed by Andrew 2026-06-30. Swap to a registered entity name later if/when one is formed.
   operator: "Andrew Fletcher",
-  contactEmail: "team@digitalgoldboom.com",
+  contactEmail: "fletcher@digitalgoldboom.com",
   jurisdiction: "Panama",
   lastUpdated: "June 30, 2026",
 } as const;

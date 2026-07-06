@@ -194,13 +194,16 @@ export default function V2Page() {
                 In 2020 he walked away from a <span style={{ color: "#F4F4F7", fontWeight: 600 }}>$30 million gold deal in Colombia</span> after standing at the edge of a mercury-contaminated pit where workers, some of them teenagers, handled the material without protection. That day is where this book began.
               </p>
               <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
-                The two companies at the center cannot tell the whole story — one is heads-down building it, the other is publicly listed and limited in what it can say. <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Digital Gold Boom</span> is the one place it is told start to finish: a full analysis of why digital gold mining is the future of gold, and a complete breakdown of NatGold Digital&rsquo;s vision, team, technology, and how digital gold mining works.
+                The two companies at the center cannot tell the whole story — one is heads-down building it, the other is publicly listed and limited in what it can say. <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Digital Gold Boom</span>{" "}is the one place it is told start to finish: a full analysis of why digital gold mining is the future of gold, and a complete breakdown of NatGold Digital&rsquo;s vision, team, technology, and how digital gold mining works.
               </p>
             </div>
             <div className="order-1 lg:order-2 flex justify-center">
-              <div className="relative w-full max-w-[360px] overflow-hidden rounded-[20px]" style={{ aspectRatio: "4 / 5" }}>
+              <div
+                className="relative w-full max-w-[360px] overflow-hidden rounded-[20px]"
+                style={{ aspectRatio: "4 / 5", boxShadow: "0 0 40px rgba(232,178,58,0.28)" }}
+              >
                 <Image
-                  src="/images/fletch3.png"
+                  src="/images/ai-profile-af.png"
                   alt="Andrew Fletcher, author of Digital Gold Boom"
                   fill
                   sizes="(max-width: 1024px) 80vw, 360px"

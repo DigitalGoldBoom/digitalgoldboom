@@ -45,8 +45,8 @@ export default function ThankYouPage() {
               <li>• Check your spam / promotions folder for the receipt from LemonSqueezy.</li>
               <li>
                 • Still nothing? Email{" "}
-                <a href="mailto:support@digitalgoldboom.com" style={{ color: "var(--accent-gold)" }}>
-                  support@digitalgoldboom.com
+                <a href="mailto:fletcher@digitalgoldboom.com" style={{ color: "var(--accent-gold)" }}>
+                  fletcher@digitalgoldboom.com
                 </a>{" "}
                 and we&rsquo;ll sort it out.
               </li>
