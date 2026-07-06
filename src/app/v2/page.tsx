@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import Book3D from "@/components/Book3D";
 import ShimmerDots from "@/components/ShimmerDots";
 import NumberCounter from "@/components/NumberCounter";
@@ -55,7 +56,7 @@ export default function V2Page() {
                   There is a change underway in how the world&rsquo;s oldest asset works — and most people have never heard of it. This book is the first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of the whole thing.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
-                  <BuyButton checkoutUrl={bookCheckout} label="Get the book — $37" event="v2_buy_click_hero" className="v2-btn" />
+                  <Link href="/book" className="v2-btn">Get the book — $37</Link>
                   <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
                     Digital book · delivered instantly · 60-day money-back guarantee
                   </span>
@@ -173,7 +174,7 @@ export default function V2Page() {
                 ))}
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
-                <BuyButton checkoutUrl={bookCheckout} label="Get the book — $37" event="v2_buy_click_book_section" className="v2-btn" />
+                <Link href="/book" className="v2-btn">Get the book — $37</Link>
                 <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
                   Digital book · delivered instantly · 60-day money-back guarantee
                 </span>
