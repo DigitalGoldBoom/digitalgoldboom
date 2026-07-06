@@ -209,7 +209,7 @@ export default function V2Page() {
                 style={{ aspectRatio: "4 / 5", boxShadow: "0 0 40px rgba(232,178,58,0.28)" }}
               >
                 <Image
-                  src="/images/ai-profile-af.png"
+                  src="/images/ai-profile-af.webp"
                   alt="Andrew Fletcher, author of Digital Gold Boom"
                   fill
                   sizes="(max-width: 1024px) 80vw, 360px"
