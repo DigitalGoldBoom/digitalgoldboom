@@ -8,8 +8,8 @@ const MENU = [
   { label: "Home", href: "/ps" },
   { label: "About", href: "/ps#about" },
   { label: "Get Digital Gold Boom", href: "/ps#dgb" },
-  { label: "Cookie Policy", href: "/ps/cookie-policy" },
-  { label: "Privacy Policy", href: "/ps/privacy-policy" },
+  { label: "Cookie Policy", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
 ];
 
 export default function PsFooter() {
@@ -74,7 +74,7 @@ export default function PsFooter() {
 
           <div className="flex flex-col items-start gap-4">
             <p className="ps-eyebrow">Careers</p>
-            <Link href="/ps/join-our-team" className="ps-ghost">
+            <Link href="/contact" className="ps-ghost">
               Join our Team
             </Link>
           </div>

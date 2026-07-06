@@ -16,7 +16,6 @@ const LINKS = [
   { label: "Projects", href: "/projects" },
   { label: "Mining", href: "/mining-industry" },
   { label: "Live Stats", href: "/live" },
-  { label: "Affiliates", href: "/affiliates" },
 ];
 
 const CTA_GRADIENT = "linear-gradient(180deg, #F0BE47 0%, #C99214 100%)";

@@ -1077,7 +1077,7 @@ export default function ConceptPsPage() {
       </section>
 
       {/* ——— 12 FINAL CTA ——— dark hero mirror of section 01, centered ——— */}
-      <section style={{ background: NAVY, color: CANVAS }}>
+      <section id="waitlist" style={{ background: NAVY, color: CANVAS }}>
         <div
           className="mx-auto px-6 md:px-12 lg:px-16 text-center"
           style={{ maxWidth: "1080px", paddingTop: "160px", paddingBottom: "160px" }}
