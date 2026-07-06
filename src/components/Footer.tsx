@@ -18,7 +18,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
     heading: "The Book",
     links: [
       { label: "The Book", href: "/book" },
-      { label: "Get the Book", href: "/buy" },
+      { label: "Get the Book", href: "/book" },
       { label: "Newsletter", href: "/newsletter" },
     ],
   },
@@ -29,6 +29,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
   {
     heading: "Legal",
     links: [
+      { label: "Contact", href: "/contact" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
       { label: "Disclaimer", href: "/disclaimer" },
@@ -43,7 +44,15 @@ export default function Footer() {
   if (
     pathname === "/ps" ||
     pathname.startsWith("/ps/") ||
-    pathname.startsWith("/concept")
+    pathname.startsWith("/concept") ||
+    pathname === "/film" ||
+    pathname.startsWith("/film/") ||
+    pathname === "/deposit" ||
+    pathname.startsWith("/deposit/") ||
+    pathname === "/deposit2" ||
+    pathname.startsWith("/deposit2/") ||
+    pathname === "/deposit3" ||
+    pathname.startsWith("/deposit3/")
   ) {
     return null;
   }
