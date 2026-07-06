@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/Navbar";
@@ -60,6 +61,12 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics />
+        {/* LemonSqueezy affiliate tracking — site-wide so a referral is credited no matter
+            which page the visitor lands on or converts from. */}
+        <Script id="ls-affiliate-config" strategy="beforeInteractive">
+          {`window.lemonSqueezyAffiliateConfig = { store: "digitalgoldboom" };`}
+        </Script>
+        <Script src="https://lmsqueezy.com/affiliate.js" strategy="afterInteractive" />
       </body>
     </html>
   );

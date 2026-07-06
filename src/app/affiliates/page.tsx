@@ -58,6 +58,54 @@ const toolkit = [
   { h: "Post templates", p: "Proven shapes for a share that actually gets views." },
 ];
 
+// ── "What you're promoting" section data — every figure verified against the book
+// (Read This First, Ch 8–9, 11, 16) and the site stats registry. Doctrine locks:
+// "reserved" never "raised"; "patent applications" never "patents"; the new industry
+// is the hero, not the token. Do not hard-code price-driven figures beyond the book's
+// stated snapshots — these are the book's own reference numbers, not live values.
+const marketStats = [
+  { v: "$35B", l: "Tokenized real-world-asset market, early 2026" },
+  { v: "$6B", l: "Tokenized gold so far (PAXG + XAUT)" },
+  { v: "0.01%", l: "Of gold’s ~$58T value tokenized to date" },
+  { v: "$22T", l: "Verified gold still sitting in the ground" },
+];
+
+const bookPoints = [
+  "Builds one case, chapter by chapter: why digital gold mining is the inevitable future of gold.",
+  "Three trillion-dollar forces meet at one point for the first time — gold’s 6,000-year trust, the values-driven capital that refused to fund mining, and the blockchain that matured between them. It happens once.",
+  "Gold’s value gets a second road out of the ground — the value proven and tokenized, the metal left where it sits.",
+  "Run head-to-head on a single deposit, digital gold mining beats traditional mining on all four scorecards: time & risk, money, the environment, and every stakeholder.",
+  "Written so a total beginner gets it — no gold, blockchain, or investing background needed — but packed with real numbers and named frameworks. Substance, not hype.",
+];
+
+const credibility = [
+  {
+    h: "The team behind NatGold",
+    items: [
+      "Executive Chairman — former Chief of Staff of the U.S. SEC",
+      "CEO — former Colombian cabinet minister",
+      "Director / Advisor — former CFTC attorney and ex-General Counsel of Cboe Digital",
+      "Supply side chaired by the former Chief Innovation Officer of Barrick Gold, through NatBridge Resources — publicly listed (CSE: NATB · OTC: NATBF · FRA: GI80)",
+      "Built on Fireblocks — trusted by 2,400+ institutions (BNP Paribas, BNY, VanEck)",
+    ],
+  },
+  {
+    h: "Patents & standards",
+    items: [
+      "Ten non-provisional patent applications in full examination at the U.S. Patent & Trademark Office",
+      "Gold admitted only to bank-grade standards (NI 43-101, JORC, S-K 1300)",
+      "Every deposit cleared through an 8-stage independent approval",
+    ],
+  },
+];
+
+const premarketStats = [
+  { v: "US$469.138M", l: "Reserved before any public launch" },
+  { v: "17,466", l: "Participants" },
+  { v: "162", l: "Countries" },
+  { v: "133,518", l: "NatGold Tokens reserved" },
+];
+
 const faqs = [
   { question: "How much do I earn?", answer: "You earn a commission on every copy sold through your link. The exact rate is set in LemonSqueezy and shown to you when you sign up." },
   { question: "How are sales tracked?", answer: "LemonSqueezy tracks every click and sale tied to your unique link, in your own dashboard. You don't have to manage anything." },
@@ -88,6 +136,85 @@ export default function AffiliatesPage() {
           <p className="mx-auto mt-6 max-w-[64ch] text-xs leading-relaxed" style={{ color: "var(--v2-faint)" }}>
             This is a paid affiliate program: when someone buys the book through your link, you earn a commission on that sale. Tracking and payouts are handled by LemonSqueezy. See our{" "}
             <a href="/disclaimer" className="v2-gold">Disclaimer</a> and <a href="/terms" className="v2-gold">Terms</a>.
+          </p>
+        </div>
+      </section>
+
+      <div className="mx-auto max-w-[1320px] px-6 md:px-10"><div className="v2-divider" /></div>
+
+      {/* ── WHAT YOU'RE PROMOTING ────────────────────────────── */}
+      <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-20 md:py-28">
+        <p className="v2-eyebrow mb-6 justify-center">What you&rsquo;re promoting</p>
+        <h2 className="v2-display text-center mx-auto" style={{ fontSize: "clamp(1.9rem, 4.5vw, 3.5rem)", maxWidth: "16ch" }}>
+          It&rsquo;s not gold. It&rsquo;s not <span className="v2-gold">bitcoin.</span>
+        </h2>
+        <p className="mx-auto mt-6 max-w-[64ch] text-center text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
+          It&rsquo;s the best of both — the rails Bitcoin created (the blockchain) carrying gold&rsquo;s 6,000 years of monetary trust. NatGold is the natural evolution of gold and Bitcoin in today&rsquo;s digital, values-conscious world. <span style={{ color: "#F4F4F7" }}>Digital Gold Boom</span> is the first plain-English account of it.
+        </p>
+
+        {/* What is digital gold mining */}
+        <div className="mt-12 mx-auto max-w-[920px] v2-tile p-8 md:p-10">
+          <h3 className="v2-gold" style={{ fontSize: "1.15rem", fontWeight: 500, marginBottom: 12 }}>
+            What is digital gold mining?
+          </h3>
+          <p style={{ color: "var(--v2-dim)", fontSize: "1rem", lineHeight: 1.7 }}>
+            A brand-new industry launching <span style={{ color: "#F4F4F7" }}>July 2026</span>. A multi-patent-pending process that tokenizes geologically verified gold deposits into the first gold-backed digital asset — <span style={{ color: "#F4F4F7" }}>NatGold Tokens (NATG)</span> — removing the heavy financial, environmental, and social costs of traditional mining, while unlocking gold&rsquo;s value on the blockchain.
+          </p>
+        </div>
+
+        {/* Why now — market stat tiles */}
+        <div className="mt-5 grid grid-cols-2 gap-5 lg:grid-cols-4">
+          {marketStats.map((s) => (
+            <div key={s.l} className="v2-tile p-6 text-center">
+              <div className="v2-display v2-gold" style={{ fontSize: "clamp(1.9rem, 3.5vw, 2.75rem)", lineHeight: 1 }}>{s.v}</div>
+              <p className="mt-3" style={{ color: "var(--v2-dim)", fontSize: "0.85rem", lineHeight: 1.5 }}>{s.l}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* What the book dives into + credibility */}
+        <div className="mt-5 grid grid-cols-1 gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="v2-tile p-8 md:p-10">
+            <h3 style={{ fontSize: "1.15rem", fontWeight: 500, color: "#F4F4F7", marginBottom: 18 }}>What the book dives into</h3>
+            <ul className="space-y-4">
+              {bookPoints.map((p, i) => (
+                <li key={i} className="flex gap-3" style={{ color: "var(--v2-dim)", fontSize: "0.95rem", lineHeight: 1.6 }}>
+                  <span aria-hidden className="v2-gold" style={{ flexShrink: 0 }}>→</span>
+                  <span>{p}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="grid grid-cols-1 gap-5">
+            {credibility.map((c) => (
+              <div key={c.h} className="v2-tile p-7">
+                <h3 className="v2-gold" style={{ fontSize: "1.05rem", fontWeight: 500, marginBottom: 14 }}>{c.h}</h3>
+                <ul className="space-y-2.5">
+                  {c.items.map((it, i) => (
+                    <li key={i} className="flex gap-2.5" style={{ color: "var(--v2-dim)", fontSize: "0.85rem", lineHeight: 1.5 }}>
+                      <span aria-hidden className="v2-gold" style={{ flexShrink: 0 }}>•</span>
+                      <span>{it}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Pre-market demand — highlighted band */}
+        <div className="mt-5 rounded-[24px] p-8 md:p-10" style={{ border: "1px solid rgba(232,178,58,0.4)", background: "linear-gradient(180deg, rgba(232,178,58,0.07), rgba(232,178,58,0.02))" }}>
+          <p className="v2-eyebrow mb-8 justify-center">Pre-market demand — before any public launch</p>
+          <div className="grid grid-cols-2 gap-6 lg:grid-cols-4">
+            {premarketStats.map((s) => (
+              <div key={s.l} className="text-center">
+                <div className="v2-display v2-gold" style={{ fontSize: "clamp(1.6rem, 3vw, 2.5rem)", lineHeight: 1 }}>{s.v}</div>
+                <p className="mt-3" style={{ color: "var(--v2-dim)", fontSize: "0.85rem", lineHeight: 1.5 }}>{s.l}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 text-center text-xs leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "60ch", marginInline: "auto" }}>
+            Reserved demand only — non-binding expressions of interest, with no money changing hands until the token goes live.
           </p>
         </div>
       </section>

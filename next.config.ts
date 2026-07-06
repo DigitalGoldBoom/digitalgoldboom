@@ -26,11 +26,17 @@ const nextConfig: NextConfig = {
       "default-src 'self'",
       "base-uri 'self'",
       "object-src 'none'",
-      "script-src 'self' 'unsafe-inline' https://app.lemonsqueezy.com https://va.vercel-scripts.com",
+      // 'wasm-unsafe-eval' — Three.js KTX2/basis texture transcoder for the /deposit 3D hero.
+      // 'unsafe-eval' is added ONLY in development (React dev tooling needs it); never in prod.
+      // lmsqueezy.com (not a lemonsqueezy.com subdomain — LemonSqueezy's separate short domain)
+      // serves the affiliate tracking script (affiliate.js) used site-wide for referral attribution.
+      `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://app.lemonsqueezy.com https://lmsqueezy.com https://va.vercel-scripts.com`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://framerusercontent.com https://app.framerstatic.com",
       "font-src 'self' data:",
-      "connect-src 'self' https://*.lemonsqueezy.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+      // blob: — Three.js/GLTFLoader loads embedded GLB textures via blob URLs (the /deposit 3D hero)
+      "connect-src 'self' blob: https://*.lemonsqueezy.com https://lmsqueezy.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+      "worker-src 'self' blob:",
       "frame-src https://*.lemonsqueezy.com",
       "form-action 'self' https://*.lemonsqueezy.com",
       "frame-ancestors 'self'",
@@ -59,6 +65,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // The book (Ch 7) prints digitalgoldboom.com/partners — every reader who types it
+      // must land on the affiliate program, not a 404. Permanent: the book URL never changes.
+      { source: "/partners", destination: "/affiliates", permanent: true },
       { source: "/prices", destination: "/live", permanent: true },
       { source: "/news", destination: "/", permanent: true },
       { source: "/waitlist", destination: "/", permanent: true },
