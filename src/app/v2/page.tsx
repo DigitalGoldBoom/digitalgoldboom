@@ -223,9 +223,12 @@ export default function V2Page() {
         {/* ── FINAL CTA / OFFER ────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1100px] px-6 md:px-10 py-28 md:py-36 text-center">
           <SectionLabel n="06">Read it for yourself</SectionLabel>
-          <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(2.4rem, 6vw, 5rem)", maxWidth: "16ch" }}>
-            Understand it for the price of a <span className="v2-gold">paperback.</span>
+          <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(2.4rem, 6vw, 5rem)", maxWidth: "20ch" }}>
+            Understand the future of gold <span className="v2-gold">before Wall Street does.</span>
           </h2>
+          <p className="mt-5 mx-auto v2-gold" style={{ fontSize: "clamp(1rem,1.4vw,1.25rem)", fontWeight: 500, letterSpacing: "0.02em" }}>
+            Get it Early. Get Informed. Get the Edge.
+          </p>
           <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "46ch" }}>
             Digital Gold Boom is a one-time $37 purchase — the launch price, before it moves to its regular $97. You get the complete book, delivered digitally the moment you check out.
           </p>
@@ -236,7 +239,9 @@ export default function V2Page() {
             </span>
           </div>
           <p className="mt-6 mx-auto text-xs leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
-            Secure checkout via LemonSqueezy. Educational content — not financial advice.
+            Secure checkout via LemonSqueezy.
+            <br />
+            Educational content — not financial advice.
           </p>
         </section>
       </main>
