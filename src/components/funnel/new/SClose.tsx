@@ -101,10 +101,10 @@ export default function SClose({
             {/* Guarantee as a certificate, not a footnote. */}
             <div data-reveal className="cold-cert mt-7 p-5 md:p-6">
               <p className="v2-num mb-2" style={{ color: "var(--v2-gold)", letterSpacing: "0.18em" }}>
-                12-MONTH GUARANTEE
+                60-DAY GUARANTEE
               </p>
               <p className="text-[0.95rem] leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-                If it is not worth your time, email within 12 months for a full refund. No
+                If it is not worth your time, email within 60 days for a full refund. No
                 questions asked.
               </p>
             </div>

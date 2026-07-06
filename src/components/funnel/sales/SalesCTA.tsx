@@ -7,10 +7,10 @@ const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
 /**
  * SalesCTA — the single, compliance-anchored call to action for the /v1 + /s funnel.
  *
- * One product, one button → the LemonSqueezy checkout overlay ($37 book, 12-month
+ * One product, one button → the LemonSqueezy checkout overlay ($37 book, 60-day
  * money-back guarantee). The lines UNDER the button are non-negotiable furniture and are
  * ALWAYS visible (never behind a hover/accordion):
- *   - delivery + guarantee  ("Digital book · delivered instantly · 12-month money-back guarantee")
+ *   - delivery + guarantee  ("Digital book · delivered instantly · 60-day money-back guarantee")
  *   - the educational fine print ("Educational — not financial advice.")
  *
  * `fine` lets the close/final CTA pass the fuller compliance line (secure checkout via
@@ -23,7 +23,7 @@ export default function SalesCTA({
   subline,
   price = "37",
   regular,
-  deliveryLine = "Digital book · delivered instantly · 12-month money-back guarantee",
+  deliveryLine = "Digital book · delivered instantly · 60-day money-back guarantee",
   fine = "Educational — not financial advice.",
 }: {
   /** Vercel analytics event name, unique per placement (e.g. "v1_hero_buy"). */

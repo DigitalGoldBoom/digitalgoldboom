@@ -146,7 +146,7 @@ export default function SHero({
         </div>
         <div className="cold-intro-fade" data-order="4">
           <p className="text-sm" style={{ color: "var(--v2-faint)" }}>
-            Digital book · delivered instantly · 12-month money-back guarantee
+            Digital book · delivered instantly · 60-day money-back guarantee
           </p>
           <p className="mt-2 text-xs" style={{ color: "var(--v2-faint)" }}>
             Educational — not financial advice.

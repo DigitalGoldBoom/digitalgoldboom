@@ -50,7 +50,7 @@ export default function ShortFunnel() {
                     event="s_hero_buy"
                     regular="97"
                     subline="Early-reader launch price, in exchange for an honest review. Read it before the first tokens trade on July 8, 2026."
-                    deliveryLine="Delivered instantly · 12-month money-back guarantee · Educational, not financial advice"
+                    deliveryLine="Delivered instantly · 60-day money-back guarantee · Educational, not financial advice"
                     fine={null}
                   />
                 </Reveal>

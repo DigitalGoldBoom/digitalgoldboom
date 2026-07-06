@@ -416,7 +416,7 @@ export default function V1Funnel() {
             Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, I&rsquo;m asking the first readers for an honest review. You get the complete book, delivered digitally the moment you check out — and the chance to understand this model before the first tokens trade on July 8, 2026.
           </Reveal>
           <Reveal as="p" delay={150} className="mx-auto mt-5 text-base" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
-            If the book is not worth your time, email us within 12 months for a full refund. No questions asked.
+            If the book is not worth your time, email us within 60 days for a full refund. No questions asked.
           </Reveal>
           <Reveal delay={180} className="mt-10 flex justify-center">
             <div className="w-full max-w-[420px]">

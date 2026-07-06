@@ -474,7 +474,7 @@ export default function V3Funnel() {
             Digital Gold Boom is a one-time $37, the early-reader launch price, before it moves to its regular $97. It is the whole map of a six-thousand-year-old asset changing form, written by the person who ran a gold company at the center of it. You get the complete book, delivered digitally the moment you check out.
           </Lead>
           <Reveal as="p" delay={150} className="mx-auto mt-5 text-base leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "56ch" }}>
-            Take a full year with it. If it does not change the way you see gold and where this is heading, ask any time in the next twelve months and you get every cent back, and keep the book. The risk is entirely ours.
+            Take a full 60 days with it. If it does not change the way you see gold and where this is heading, ask any time in the next 60 days and you get every cent back, and keep the book. The risk is entirely ours.
           </Reveal>
           <Reveal delay={180} className="mt-10 flex justify-center">
             <div className="w-full max-w-[420px]">

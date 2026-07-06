@@ -17,13 +17,6 @@ const LINKS = [
   { label: "Mining", href: "/mining-industry" },
   { label: "Live Stats", href: "/live" },
   { label: "Affiliates", href: "/affiliates" },
-  // TEMP: quick-access tabs while the author compares funnel versions. Remove after the decision.
-  // /v2 = current homepage design (live, at root). /v1 = LONG funnel (email). /s = SHORT funnel
-  // (cold social). /v3 = long-form VSL-derived funnel. All are alternatives to review; root untouched.
-  { label: "V1", href: "/v1" },
-  { label: "V2", href: "/v2" },
-  { label: "V3", href: "/v3" },
-  { label: "S", href: "/s" },
 ];
 
 const CTA_GRADIENT = "linear-gradient(180deg, #F0BE47 0%, #C99214 100%)";
@@ -34,8 +27,19 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   // PixelShovel is a separate site (pixelshovel.com) living under /ps with its own
-  // nav — never show the Digital Gold Boom navbar there.
-  const isPixelShovel = pathname === "/ps" || pathname.startsWith("/ps/");
+  // nav — never show the Digital Gold Boom navbar there. /film is the cinematic
+  // scroll sales page: no nav, no external link — its only exit is the buy CTA.
+  const isPixelShovel =
+    pathname === "/ps" ||
+    pathname.startsWith("/ps/") ||
+    pathname === "/film" ||
+    pathname.startsWith("/film/") ||
+    pathname === "/deposit" ||
+    pathname.startsWith("/deposit/") ||
+    pathname === "/deposit2" ||
+    pathname.startsWith("/deposit2/") ||
+    pathname === "/deposit3" ||
+    pathname.startsWith("/deposit3/");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);

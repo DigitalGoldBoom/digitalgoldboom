@@ -67,7 +67,7 @@ const faqs = [
   {
     question: "What if it's not for me?",
     answer:
-      "You're covered by a 12-month money-back guarantee. Email us within 12 months and we'll refund you in full, no questions asked.",
+      "You're covered by a 60-day money-back guarantee. Email us within 60 days and we'll refund you in full, no questions asked.",
   },
   {
     question: "What is NatGold?",
@@ -163,7 +163,7 @@ export default function BookPage() {
 
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm" style={{ color: "var(--text-tertiary)" }}>
               <li>✓ Reads on any device</li>
-              <li>✓ 12-month money-back guarantee</li>
+              <li>✓ 60-day money-back guarantee</li>
               <li>✓ Secure checkout (LemonSqueezy)</li>
               <li>✓ Delivered to your inbox</li>
             </ul>
@@ -273,7 +273,7 @@ export default function BookPage() {
             <BuyButton checkoutUrl={checkoutUrl} label={`Get the book — $${PRICE}`} event="book_buy_click_footer" />
           </div>
           <p className="mt-5 text-xs" style={{ color: "var(--text-tertiary)" }}>
-            PDF · EPUB · Kindle · 12-month money-back guarantee · Secure checkout via LemonSqueezy · Educational — not financial advice.
+            PDF · EPUB · Kindle · 60-day money-back guarantee · Secure checkout via LemonSqueezy · Educational — not financial advice.
           </p>
         </div>
       </section>
