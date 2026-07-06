@@ -1,0 +1,256 @@
+/* ================================================================
+   /new — COLD-TRAFFIC TEXT-ONLY SALES PAGE ("the descent to the proof")
+   Spec: web/SALES-DESIGN-BRIEF-COLD-2026-07-06.md
+   Copy: web/SALES-COPY-COLD-2026-07-06.md
+   Scoped under .cold so nothing leaks into other routes.
+   ================================================================ */
+
+/* The world variable: 0 = surface, 1 = the warm underground glow.
+   initial-value 0.4 IS the reduced-motion / no-JS state (a settled mid-grade). */
+@property --cold-depth {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.4;
+}
+
+.cold {
+  /* Loop-out lines share ONE style page-wide — the reader learns the heartbeat. */
+  --cold-loop-color: rgba(231, 231, 238, 0.6);
+}
+
+/* ---- Depth overlays (fixed, opacity-only — GPU-free consumers of --cold-depth) ---- */
+.cold-rock-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, #050508, #0a0a10);
+  opacity: calc(var(--cold-depth) * 0.5);
+}
+.cold-warm-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(90% 70% at 50% 100%, rgba(232, 178, 58, 0.16), transparent 65%);
+  opacity: calc(max(0, var(--cold-depth) - 0.5) * 2 * 0.85);
+}
+/* One atmosphere layer: grain. Never stacked with glow+particles over text blocks. */
+.cold-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* ---- Hero intro (CSS-only load choreography: runs without JS, ends visible,
+        gated for reduced motion; total < 900ms; CTA is a real link from first paint) ---- */
+.cold-intro-mask {
+  overflow: hidden;
+  display: block;
+}
+.cold-intro-line {
+  display: block;
+  transform: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cold-intro-line {
+    animation: cold-line-rise 0.55s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  .cold-intro-line[data-line="2"] {
+    animation-delay: 90ms;
+  }
+  /* NOTE: the hero SUBHEAD never animates — it is the page's LCP element and
+     must paint with the first frame (measured: fading it cost ~1.9s of LCP). */
+  .cold-intro-fade {
+    animation: cold-fade-rise 0.4s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  .cold-intro-fade[data-order="3"] { animation-delay: 0.2s; }
+  .cold-intro-fade[data-order="4"] { animation-delay: 0.32s; }
+  /* Hero veins pulse ultra-slowly (8s cycle, opacity 0.10 -> 0.16). */
+  .cold-vein {
+    animation: cold-vein-pulse 8s ease-in-out infinite;
+  }
+}
+@keyframes cold-line-rise {
+  from { transform: translate3d(0, 110%, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+@keyframes cold-fade-rise {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes cold-vein-pulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.16; }
+}
+
+/* ---- The gold thread (the page's spine, drawn per-section) ----
+   Segments are 1.5px gradient lines that draw downward when they enter view.
+   The JS hook sets the hidden state (scaleY 0) on mount — no-JS ships them drawn. */
+.cold-thread {
+  width: 1.5px;
+  margin-inline: auto;
+  background: linear-gradient(180deg, rgba(232, 178, 58, 0), var(--v2-gold) 30%, var(--v2-gold) 70%, rgba(232, 178, 58, 0.35));
+  transform-origin: top center;
+}
+
+/* ---- Loop-out lines: one shared style — italic, quiet, arrow-less ---- */
+.cold-loop {
+  font-style: italic;
+  color: var(--cold-loop-color);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  max-width: 46ch;
+}
+
+/* ---- Section rhythm ---- */
+.cold-section {
+  position: relative;
+  padding: clamp(72px, 11vw, 132px) 0;
+}
+.cold-wrap {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1200px;
+  padding-inline: 24px;
+}
+@media (min-width: 810px) {
+  .cold-wrap { padding-inline: 40px; }
+}
+
+/* Body copy measure */
+.cold-body {
+  color: var(--v2-dim);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  max-width: 58ch;
+}
+.cold-body strong { color: #f4f4f7; font-weight: 600; }
+
+/* ---- S3: slab tiles + the quiet stat band ---- */
+.cold-slab {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015)),
+    rgba(8, 8, 13, 0.5);
+  border: 1px solid var(--v2-line);
+  border-radius: 20px;
+}
+.cold-slab-num {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
+  letter-spacing: -0.02em;
+  color: #f4f4f7;
+}
+/* The $22T band: body-scale, never display-scale (2026-07-03 directive). */
+.cold-stat-band {
+  border-block: 1px solid var(--v2-line);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* ---- S4: the deck (CSS sticky stack on desktop; plain stack on phone) ---- */
+@media (min-width: 810px) {
+  .cold-deck-item {
+    position: sticky;
+    top: 14vh;
+  }
+}
+.cold-step-card {
+  background: rgba(10, 10, 16, 0.92);
+  border: 1px solid var(--v2-line);
+  border-radius: 22px;
+}
+
+/* SVG line-draw icons: the JS hook hides (dashoffset 1) then draws; the
+   authored state below is DRAWN, so no-JS and reduced-motion see finished icons. */
+.cold [data-draw="stroke"] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+/* ---- S5: scorecard ---- */
+.cold-roads-divider {
+  width: 1.5px;
+  background: linear-gradient(180deg, rgba(232, 178, 58, 0.05), var(--v2-gold) 25%, var(--v2-gold) 75%, rgba(232, 178, 58, 0.05));
+}
+.cold-road-old { color: rgba(231, 231, 238, 0.66); }
+.cold-road-new { color: #f4f4f7; }
+.cold-row-value {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+/* The old path frays out after the scorecard. */
+.cold-fray path { stroke: rgba(232, 178, 58, 0.35); }
+
+/* ---- S7: ledger rule lines (scaleX draw via the JS hook; authored drawn) ---- */
+.cold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(232, 178, 58, 0.55), rgba(232, 178, 58, 0.08));
+  transform-origin: left center;
+}
+
+/* ---- Verdict lines (kinetic word-landing — exactly 4 on the page) ---- */
+.cold-verdict-word {
+  display: inline-block;
+  white-space: pre;
+}
+
+/* ---- S9: guarantee certificate tile + thread terminus glow ---- */
+.cold-cert {
+  border: 1px solid rgba(232, 178, 58, 0.35);
+  border-radius: 20px;
+  background: rgba(232, 178, 58, 0.04);
+}
+.cold-cta-glow {
+  position: absolute;
+  inset: -28px;
+  border-radius: 999px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(232, 178, 58, 0.28), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+}
+.cold-cta-glow.is-lit {
+  transition: opacity 0.4s ease-out;
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cold-cta-glow.is-lit { transition: none; }
+}
+
+/* ---- Sticky mobile buy bar (phone only) ---- */
+.cold-sticky-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  height: calc(64px + env(safe-area-inset-bottom, 0px));
+  padding: 0 16px env(safe-area-inset-bottom, 0px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(8, 8, 13, 0.94);
+  border-top: 1px solid var(--v2-line);
+  transform: translate3d(0, 105%, 0);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cold-sticky-bar.is-shown { transform: translate3d(0, 0, 0); }
+@media (min-width: 810px) {
+  .cold-sticky-bar { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cold-sticky-bar { transition: none; }
+}
+
+/* Compact CTA inside the bar */
+.cold-sticky-bar .v2-btn {
+  min-height: 44px;
+  padding: 0 22px;
+  font-size: 14px;
+}

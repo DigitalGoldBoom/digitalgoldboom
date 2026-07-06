@@ -19,6 +19,8 @@ type BuyButtonProps = {
   className?: string;
   /** Vercel analytics event name fired on click. */
   event?: string;
+  /** Optional props attached to the click event (taxonomy: context in props, never in the name). */
+  eventProps?: Record<string, string>;
   children?: React.ReactNode;
 };
 
@@ -41,6 +43,7 @@ export default function BuyButton({
   unavailableLabel,
   className = "btn-primary",
   event = "book_buy_click",
+  eventProps,
   children,
 }: BuyButtonProps) {
   useEffect(() => {
@@ -76,7 +79,7 @@ export default function BuyButton({
       <a
         href={url}
         className={`lemonsqueezy-button ${className}`}
-        onClick={() => track(event)}
+        onClick={() => (eventProps ? track(event, eventProps) : track(event))}
       >
         {children ?? label}
       </a>
