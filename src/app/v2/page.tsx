@@ -53,7 +53,7 @@ export default function V2Page() {
                   It&rsquo;s not <span className="v2-gold">bitcoin.</span>
                 </h1>
                 <p className="mt-8 max-w-[48ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-                  There is a change underway in how the world&rsquo;s oldest asset works — and most people have never heard of it. This book is the first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of the whole thing.
+                  There is a change underway in how the world&rsquo;s oldest asset works — and most people have never heard of it. This book is the first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of digital gold mining.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
                   <Link href="/book" className="v2-btn">Get the book — $37</Link>
