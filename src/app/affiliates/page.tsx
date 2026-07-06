@@ -39,9 +39,9 @@ function AffiliateCTA({ children = "Become an affiliate", className = "v2-btn" }
 }
 
 const facts = [
-  { h: "Your rate", p: "A flat commission on every sale your link makes — the same on the first and the thousandth. The exact rate is set in LemonSqueezy and shown to you at signup." },
-  { h: "Tracked for you", p: "Every click and sale through your unique link is counted automatically in your own LemonSqueezy dashboard. Nothing to manage." },
-  { h: "Paid by wire", p: "Your balance is paid out on LemonSqueezy's regular schedule, after its standard holding period, direct to your account." },
+  { h: "50% per sale", p: "You earn half of every sale your link makes — US$18.50 on each $37 copy, the same on the first sale and the thousandth." },
+  { h: "Tracked for you", p: "Every click and sale through your unique link is counted automatically in your own dashboard. Nothing to manage." },
+  { h: "No tiers, no targets", p: "One flat rate for everyone. No thresholds to hit, no ladder to climb, no minimums before you earn." },
 ];
 
 const steps = [
@@ -52,10 +52,16 @@ const steps = [
 ];
 
 const toolkit = [
-  { h: "Mining B-roll clips", p: "Short, on-brand footage you can post as-is." },
+  { h: "Gold & mining B-roll", p: "Cinematic, on-brand footage — post it as-is or cut it into your own." },
   { h: "Images & thumbnails", p: "Ready-sized visuals for every platform." },
-  { h: "Captions & hashtags", p: "Copy-and-paste hooks that travel." },
-  { h: "Post templates", p: "Proven shapes for a share that actually gets views." },
+];
+
+// Sample B-roll shown on the page to break it up and prove the footage is real and
+// good — these are real gold/deposit clips already in the site. Muted autoplay loops.
+const brollExamples = [
+  { src: "/film/ignition-loop.mp4", label: "Molten gold" },
+  { src: "/deposit/deposit-turntable.webm", label: "Verified deposit" },
+  { src: "/deposit/spin.mp4", label: "Gold in the round" },
 ];
 
 // ── "What you're promoting" section data — every figure verified against the book
@@ -107,11 +113,10 @@ const premarketStats = [
 ];
 
 const faqs = [
-  { question: "How much do I earn?", answer: "You earn a commission on every copy sold through your link. The exact rate is set in LemonSqueezy and shown to you when you sign up." },
-  { question: "How are sales tracked?", answer: "LemonSqueezy tracks every click and sale tied to your unique link, in your own dashboard. You don't have to manage anything." },
-  { question: "How and when do I get paid?", answer: "LemonSqueezy pays your commission balance by wire on its regular payout schedule, after its standard holding period. You'll see the exact cadence when you sign up." },
-  { question: "Do I need to own crypto?", answer: "No. This is a straightforward cash commission for selling a book. No crypto, no wallet, nothing token-related." },
-  { question: "What does it cost me?", answer: "Nothing. Signing up as a LemonSqueezy affiliate is free." },
+  { question: "How much do I earn?", answer: "50% of every sale your link makes — US$18.50 on each $37 copy. The same flat rate on your first sale and your thousandth." },
+  { question: "How are sales tracked and paid?", answer: "The program runs on LemonSqueezy. Every click and sale tied to your unique link is tracked automatically in your own dashboard, and your balance is paid out by wire on LemonSqueezy's regular schedule. Nothing to manage." },
+  { question: "Do I need to own any digital assets?", answer: "No. This is a straightforward cash commission for selling a book. No wallet, nothing token-related." },
+  { question: "What does it cost me?", answer: "Nothing. Signing up is free." },
   { question: "What counts as a valid sale?", answer: "A real purchase made through your link. LemonSqueezy handles the attribution and the standard rules; you'll see them when you sign up." },
 ];
 
@@ -128,13 +133,13 @@ export default function AffiliatesPage() {
             Promote the book. <span className="v2-gold">Earn cash</span> on every sale you refer.
           </h1>
           <p className="mx-auto mt-8 max-w-[58ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-            Sign up as a LemonSqueezy affiliate, get your own link, and earn a commission on every copy of Digital Gold Boom it sells. Tracked automatically. Paid by wire, straight from LemonSqueezy.
+            Get your own link and earn <span style={{ color: "#F4F4F7", fontWeight: 600 }}>50% on every copy</span> of Digital Gold Boom it sells — US$18.50 a sale. Tracked automatically, paid by wire.
           </p>
           <div className="mt-10 flex justify-center">
             <AffiliateCTA />
           </div>
           <p className="mx-auto mt-6 max-w-[64ch] text-xs leading-relaxed" style={{ color: "var(--v2-faint)" }}>
-            This is a paid affiliate program: when someone buys the book through your link, you earn a commission on that sale. Tracking and payouts are handled by LemonSqueezy. See our{" "}
+            This is a paid affiliate program: when someone buys the book through your link, you earn a commission on that sale. See our{" "}
             <a href="/disclaimer" className="v2-gold">Disclaimer</a> and <a href="/terms" className="v2-gold">Terms</a>.
           </p>
         </div>
@@ -224,10 +229,10 @@ export default function AffiliatesPage() {
       {/* ── THE COMMISSION ───────────────────────────────────── */}
       <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-20 md:py-28">
         <h2 className="v2-display text-center mx-auto" style={{ fontSize: "clamp(1.9rem, 4vw, 3.25rem)", maxWidth: "18ch" }}>
-          One link. One rate. <span className="v2-gold">Paid on every sale.</span>
+          <span className="v2-gold">50%</span> on every sale you refer.
         </h2>
         <p className="mx-auto mt-5 max-w-[60ch] text-center text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-          You earn a commission on every copy of the book your link sells — the same rate on the first sale and the thousandth. There are no tiers to chase and no targets to hit.
+          You keep half of every copy your link sells — US$18.50 on each $37 sale, the same on the first and the thousandth. No tiers to chase, no targets to hit.
         </p>
         <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
           {facts.map((f) => (
@@ -238,7 +243,7 @@ export default function AffiliatesPage() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm" style={{ color: "var(--v2-faint)" }}>
-          The exact commission rate and payout details are set in LemonSqueezy and shown to you when you sign up.
+          Tracking and payout details are covered in the questions below.
         </p>
       </section>
 
@@ -265,9 +270,38 @@ export default function AffiliatesPage() {
           We give you everything to <span className="v2-gold">post with.</span>
         </h2>
         <p className="mx-auto mt-4 max-w-[60ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-          The hardest part of sharing is making something good. Sign up and get a kit of ready-made mining footage, images, captions, and post templates, so your posts do the work for you.
+          The hardest part of sharing is making something good. Get a growing library of ready-made gold and mining footage and images, so your posts do the work for you.
         </p>
-        <div className="mt-12 grid grid-cols-1 gap-5 text-left sm:grid-cols-2 lg:grid-cols-4" aria-hidden>
+
+        {/* Sample B-roll — muted autoplay loops, a taste of the library */}
+        <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          {brollExamples.map((clip) => (
+            <div key={clip.src} className="v2-tile relative overflow-hidden p-0">
+              <video
+                src={clip.src}
+                muted
+                loop
+                autoPlay
+                playsInline
+                preload="metadata"
+                aria-label={`Example B-roll: ${clip.label}`}
+                className="block h-full w-full object-cover"
+                style={{ aspectRatio: "16 / 10" }}
+              />
+              <span
+                className="v2-num absolute bottom-3 left-3"
+                style={{ color: "#F4F4F7", background: "rgba(0,2,18,0.55)", padding: "4px 9px", borderRadius: 8, backdropFilter: "blur(6px)" }}
+              >
+                {clip.label}
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
+          A sample of the B-roll in the kit — more clips inside.
+        </p>
+
+        <div className="mt-10 grid grid-cols-1 gap-5 text-left sm:grid-cols-2 mx-auto max-w-[720px]">
           {toolkit.map((t) => (
             <div key={t.h} className="v2-tile p-6">
               <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-[12px]" style={{ background: "rgba(255,255,255,0.04)", color: "var(--v2-faint)" }}>
