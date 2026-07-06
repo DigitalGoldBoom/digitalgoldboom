@@ -159,7 +159,7 @@ export default function V2Page() {
                 Tell all. Nothing held back.
               </p>
               <p className="mt-8 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}>
-                The first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of digital gold mining — the whole story, start to finish. Written so a reader with no background in gold, blockchain, or investing can follow every step, but packed with real numbers and named sources throughout.
+                The first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of digital gold mining — the whole story, start to finish. Written so a reader with no background in gold, blockchain, or investing can follow every step — detailed and carefully sourced, and clear about what&rsquo;s established today versus what&rsquo;s a forward-looking forecast.
               </p>
               <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}>
                 By <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Andrew Fletcher</span> — former President &amp; CEO of Great Eagle Gold, now NatBridge Resources, which signed the first NatGold supply agreement.

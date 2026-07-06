@@ -81,7 +81,7 @@ const bookPoints = [
   "Three trillion-dollar forces meet at one point for the first time — gold’s 6,000-year trust, the values-driven capital that refused to fund mining, and the blockchain that matured between them. It happens once.",
   "Gold’s value gets a second road out of the ground — the value proven and tokenized, the metal left where it sits.",
   "Run head-to-head on a single deposit, digital gold mining beats traditional mining on all four scorecards: time & risk, money, the environment, and every stakeholder.",
-  "Written so a total beginner gets it — no gold, blockchain, or investing background needed — but packed with real numbers and named frameworks. Substance, not hype.",
+  "Written so a total beginner gets it — no gold, blockchain, or investing background needed — detailed and carefully sourced, and clear about what’s established today versus what’s a forward-looking forecast. Substance, not hype.",
 ];
 
 const credibility = [

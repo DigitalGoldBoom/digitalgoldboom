@@ -33,7 +33,7 @@ const steps = [
 
 const reading = [
   { h: "A complete, finished book", p: "The whole model, start to finish — not a pitch deck." },
-  { h: "Every statistic sourced", p: "Each figure traces to a primary record you can check." },
+  { h: "Sourced, and honest about it", p: "Established figures trace to a primary record you can check; forward-looking forecasts are clearly flagged as forecasts." },
   { h: "Written for professionals", p: "Technical where it must be, readable throughout." },
 ];
 
