@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import BuyButton from "@/components/BuyButton";
+import Book3D from "@/components/Book3D";
 import VaultShell from "@/components/VaultShell";
 
 const PRICE = "37";
@@ -28,15 +28,9 @@ export default function BuyPage() {
         <div className="mx-auto max-w-[900px] px-6">
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-[auto_1fr] sm:gap-12 sm:items-start">
             {/* Cover */}
-            <Image
-              src="/book3d-framer/cover-front.webp"
-              alt="Digital Gold Boom — book cover"
-              width={500}
-              height={763}
-              priority
-              className="w-[200px] sm:w-[240px] h-auto rounded-lg"
-              style={{ boxShadow: "var(--shadow-lg)" }}
-            />
+            <div className="flex justify-center">
+              <Book3D />
+            </div>
 
             {/* Details */}
             <div>

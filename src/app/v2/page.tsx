@@ -172,6 +172,12 @@ export default function V2Page() {
                   </div>
                 ))}
               </div>
+              <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
+                <BuyButton checkoutUrl={bookCheckout} label="Get the book — $37" event="v2_buy_click_book_section" className="v2-btn" />
+                <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
+                  Digital book · delivered instantly · 60-day money-back guarantee
+                </span>
+              </div>
             </div>
           </div>
         </section>
