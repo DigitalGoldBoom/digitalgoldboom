@@ -17,7 +17,7 @@ const STEPS = [
 
 const SECTIONS = [
   { n: "01", title: "The Inevitability of Digital Gold Mining", meta: "Chapters 1–8", body: "What gold is, why the old way of producing it is failing, where its value actually comes from, and the force large enough to move it — brought together into a single case." },
-  { n: "02", title: "The NatGold Digital Gold Mining Ecosystem", meta: "Chapters 9–17", body: "Who built it and whether it actually works: the people, the proof, the method, the approval gate, the mint, the partners, the forecast, and the demand — ending on the honest challenges." },
+  { n: "02", title: "The NatGold Digital Gold Mining Ecosystem", meta: "Chapters 9–16", body: "Who built it and whether it actually works: the people, the proof, the method, the approval gate, the mint, the partners, the forecast, and the demand — ending on the honest challenges." },
 ];
 
 function SectionLabel({ n, children }: { n: string; children: React.ReactNode }) {
