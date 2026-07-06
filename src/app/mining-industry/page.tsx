@@ -92,7 +92,7 @@ export default function MiningIndustryPage() {
         <p className="v2-eyebrow mb-5">The author</p>
         <h2 className="v2-display" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)" }}>Andrew Fletcher</h2>
         <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "62ch" }}>
-          Andrew Fletcher is the former President of Great Eagle Gold Corp, which became NatBridge Resources, the company that signed the first NatGold supply agreement. He has assessed more than two hundred gold projects across multiple continents. He writes from inside the industry he&apos;s describing, which is exactly why an industry read of the book is worth having.
+          Andrew Fletcher is the former President of Great Eagle Gold Corp, which became NatBridge Resources, the company that signed the first NatGold supply agreement. He has assessed more than two hundred gold projects across multiple continents. He draws on that first-hand experience and the public record — which is exactly why an industry read of the book is worth having.
         </p>
       </section>
 

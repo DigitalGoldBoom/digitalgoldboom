@@ -232,9 +232,11 @@ export default function BookPage() {
             Andrew Fletcher
           </h2>
           <p className="mt-5 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            Andrew Fletcher writes from inside the industry he’s describing. Digital Gold Boom is his plain-English
-            account of digital gold mining and the tokenization of in-ground verified gold — the case for it, how it
-            works, and the risks — so a normal reader can understand a shift most people haven’t noticed yet.
+            Andrew Fletcher writes from the experience of having helped build this industry — drawing on public
+            record and what he learned first-hand running a gold company at its center. Digital Gold Boom is his
+            plain-English account of digital gold mining and the tokenization of in-ground verified gold — the case
+            for it, how it works, and the risks — so a normal reader can understand a shift most people haven’t
+            noticed yet.
           </p>
         </div>
       </section>

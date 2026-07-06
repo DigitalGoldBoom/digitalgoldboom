@@ -10,7 +10,7 @@ import { track } from "@vercel/analytics";
 
 const BENEFITS = [
   { t: "Market analysis", b: "Plain-English reads on gold, AISC, BIV and the tokenization shift — what moved and why it matters." },
-  { t: "Industry signal", b: "What's actually happening in mining and digital gold mining, from inside the industry." },
+  { t: "Industry signal", b: "What's actually happening in mining and digital gold mining, explained by someone who spent his career in the gold industry." },
   { t: "Early on the launch", b: "Milestones on the road to the NATG token launch — straight to your inbox." },
 ];
 
