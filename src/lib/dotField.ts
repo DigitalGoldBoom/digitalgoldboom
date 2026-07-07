@@ -198,12 +198,11 @@ export function createDotField(
     (window.matchMedia?.("(hover: none), (pointer: coarse)").matches ||
       (typeof navigator !== "undefined" && (navigator.maxTouchPoints || 0) > 0));
   const isStatic = opts.forceStatic || prefersReducedMotion();
-  // Mobile runs the drift at ~12fps (well under half the repaint work of desktop's 30) but advances
-  // the phase MORE per frame so the drift travels the SAME distance per second — the shimmer looks
-  // identical, it's just rendered with fewer, cheaper frames. Gentle on a low-end phone + battery.
-  const MOBILE_FPS = 12;
-  const effFrameMs = coarsePointer ? 1000 / MOBILE_FPS : frameMs;
-  const effTimeSpeed = coarsePointer ? timeSpeed * (fps / MOBILE_FPS) : timeSpeed;
+  // IMPORTANT (Andrew's standing rule): the shimmer must look + move IDENTICALLY on every device —
+  // same grid, same 30fps everywhere. Do NOT lower the mobile frame rate or coarsen the grid (that
+  // was tried before and rejected because it visibly changed the motion). The ONLY mobile-specific
+  // change here is WHEN the loop starts (deferred until after load, below) — the drift itself is
+  // unchanged. So frame rate + phase step are the same on mobile as desktop.
 
   resize();
   window.addEventListener("resize", resize, { passive: true });
@@ -224,9 +223,9 @@ export function createDotField(
     // Pause the (relatively heavy) canvas render while the page is scrolling so the main thread
     // and compositor are free for a smooth scroll. Resumes the instant scrolling stops.
     if (!visible || !onScreen || isScrolling()) return;
-    if (now - last < effFrameMs) return;
+    if (now - last < frameMs) return;
     last = now;
-    t += effTimeSpeed;
+    t += timeSpeed;
     render();
   };
 
