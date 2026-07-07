@@ -1,9 +1,11 @@
-"use client";
-
+// Server Component — this page is pure markup; the only interactive pieces (Book3D, NumberCounter,
+// BuyButton) are their own client islands. Keeping the page server-rendered means the browser does
+// NOT download/hydrate the whole page (that was a ~1s main-thread block on mobile), so first paint
+// and LCP land far sooner.
+import ReactDOM from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import Book3D from "@/components/Book3D";
-import ShimmerDots from "@/components/ShimmerDots";
 import NumberCounter from "@/components/NumberCounter";
 import BuyButton from "@/components/BuyButton";
 
@@ -31,15 +33,18 @@ function SectionLabel({ n, children }: { n: string; children: React.ReactNode })
 }
 
 export default function V2Page() {
-  return (
-    <div className="v2 relative overflow-clip">
-      {/* Fixed gold shimmer field + glows */}
-      <div aria-hidden className="fixed inset-0 z-0 pointer-events-none">
-        <ShimmerDots opacity={0.45} />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(80% 50% at 50% -5%, rgba(232,178,58,0.12), transparent 55%)" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,8,13,0.2), rgba(8,8,13,0.75))" }} />
-      </div>
+  // Preload the hero book-cover art — it's the LCP element but ships as a CSS background image
+  // inside Book3D, which browsers fetch late at low priority. Preloading (hoisted into <head> in
+  // the SSR HTML) starts the download immediately, in parallel with the page JS, so LCP lands far
+  // sooner on mobile. Same art the /book hero uses.
+  ReactDOM.preload("/book3d-framer/cover-front-v2.webp", { as: "image", fetchPriority: "high" });
+  ReactDOM.preload("/book3d-framer/cover-texture.webp", { as: "image", fetchPriority: "high" });
 
+  return (
+    <div className="v2 dgb-vault-bg relative overflow-clip">
+      {/* Gold shimmer field lives in the root layout now (SiteBackground) — one continuous field
+          for the whole site, so it never re-pops between pages. dgb-vault-bg makes this page's
+          base transparent so that single field shows through. */}
       <main className="relative z-10">
         {/* ── HERO ─────────────────────────────────────────────── */}
         <section className="relative min-h-[100svh] flex items-center">

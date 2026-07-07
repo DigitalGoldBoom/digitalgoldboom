@@ -4,7 +4,6 @@ import JsonLd from "@/components/JsonLd";
 import BuyButton from "@/components/BuyButton";
 import Book3D from "@/components/Book3D";
 import VaultShell from "@/components/VaultShell";
-import ShimmerDots from "@/components/ShimmerDots";
 import Reveal from "@/components/funnel/sales/Reveal";
 import { generateMetadata as genMeta, generateFAQSchema } from "@/lib/seo";
 
@@ -113,18 +112,15 @@ export default function BookPage() {
       <JsonLd data={generateFAQSchema(faqs)} />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      {/* ADD (visual audit): the v2 "verified gold lit from within" field — ShimmerDots +
-          radial gold top-glow + vertical darkening — so the buy page reads as the same
-          premium brand as root. Book3D stays the lit hero object. Reduced-motion safe
-          (ShimmerDots renders a static field under prefers-reduced-motion). */}
+      {/* Transparent base so the ONE continuous global gold field (SiteBackground) shows through
+          here just like the rest of the site — no local duplicate canvas. The extra radial
+          top-glow behind Book3D is kept for the "lit from within" hero lighting. */}
       <section
         className="relative overflow-hidden pt-32 pb-16 md:pt-36 md:pb-20"
-        style={{ background: "var(--bg-contrast-deep)", ...darkScope }}
+        style={darkScope}
       >
         <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-          <ShimmerDots opacity={0.4} />
           <div className="absolute inset-0" style={{ background: "radial-gradient(80% 55% at 50% -5%, rgba(232,178,58,0.13), transparent 55%)" }} />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(8,8,13,0.15), rgba(8,8,13,0.65))" }} />
         </div>
 
         <div className="relative z-10 mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8">

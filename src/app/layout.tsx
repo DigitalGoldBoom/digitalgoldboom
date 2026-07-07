@@ -4,6 +4,7 @@ import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SiteBackground from "@/components/SiteBackground";
 import JsonLd from "@/components/JsonLd";
 import { generateOrganizationSchema, generateWebsiteSchema } from "@/lib/seo";
 import "./globals.css";
@@ -57,6 +58,9 @@ export default function RootLayout({
       <body>
         <JsonLd data={generateOrganizationSchema()} />
         <JsonLd data={generateWebsiteSchema()} />
+        {/* ONE continuous gold shimmer field for the whole site — mounted here (not per page) so
+            it never unmounts between navigations. Sits behind everything at z-0. */}
+        <SiteBackground />
         <Navbar />
         {children}
         <Footer />
@@ -66,7 +70,9 @@ export default function RootLayout({
         <Script id="ls-affiliate-config" strategy="beforeInteractive">
           {`window.lemonSqueezyAffiliateConfig = { store: "digitalgoldboom" };`}
         </Script>
-        <Script src="https://lmsqueezy.com/affiliate.js" strategy="afterInteractive" />
+        {/* lazyOnload: affiliate tracking only needs to be present before a checkout click, not
+            during first paint — keep it off the critical load path so it never competes with LCP. */}
+        <Script src="https://lmsqueezy.com/affiliate.js" strategy="lazyOnload" />
       </body>
     </html>
   );

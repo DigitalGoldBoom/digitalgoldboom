@@ -127,11 +127,19 @@ html {
   /* No CSS smooth-scroll: it adds an interpolation delay between input and movement (reads as
      "clunky"), and GSAP/ScrollTrigger advises against it. Native scroll = immediate feedback.
      Reduced-motion already forces scroll-behavior:auto below. */
-  color-scheme: light;
+  color-scheme: dark;
+  /* Dark vault base under everything. This MUST live on the root element (html): the root
+     background paints at the very bottom of the page, below the negative-z SiteBackground field,
+     so the field shows over it. (If this were on <body>, body is an in-flow box that paints ABOVE
+     a negative-z fixed layer and would hide the field.) It also kills the old white flash — the
+     root paints dark instantly, before any JS, and overscroll areas stay dark. */
+  background: #08080d;
 }
 
 body {
-  background: var(--bg-canvas);
+  /* Transparent so the single global SiteBackground field (z:-10, above the html base) shows
+     through. The dark base comes from html above; opaque pages paint their own background over it. */
+  background: transparent;
   color: var(--text-secondary);
   font-family: var(--font-sans), system-ui, sans-serif;
   font-feature-settings: "ss01", "cv11";
@@ -427,6 +435,16 @@ body {
   --accent-gold-ring: rgba(232, 178, 58, 0.28);
   /* on-dark text tokens already point at light values; keep them */
 }
+/* Pages that should reveal the ONE global gold field (SiteBackground in the root layout) drop
+   their opaque base so it shows through — home + every Vault page. Flat funnel pages keep the
+   solid #08080d from .v2 above and show no shimmer, exactly as before. */
+.v2.dgb-vault-bg { background: transparent; }
+
+/* The gold dots ease in over the already-painted dark base + glow, so there is never a pop-in.
+   Ends at the field's real opacity (0.45). Reduced-motion collapses this to an instant show. */
+@keyframes siteBgFade { from { opacity: 0; } to { opacity: 0.45; } }
+.site-bg-canvas { animation: siteBgFade 0.7s var(--ease-out) both; }
+
 /* In dark scope, the light "glass" fallbacks should read as dark glass, not white. */
 .v2 .card, .v2 .card-feature { box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
 .v2 ::selection { background: var(--v2-gold); color: #08080d; }

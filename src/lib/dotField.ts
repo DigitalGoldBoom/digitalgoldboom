@@ -187,12 +187,23 @@ export function createDotField(
     render();
   }
 
-  // Animate on mobile too (the shimmer stays) — it's safe for SCROLL because the render PAUSES
-  // the instant scrolling starts (see isScrolling) and only ticks while the page is still. The
-  // thing that actually wrecked mobile scroll was backdrop-filter blur over this fixed layer
-  // (re-blurred every scroll frame); that's now gated to desktop in globals.css, not killed here.
-  // Static only for reduced-motion or an explicit opt-out.
+  // The shimmer ANIMATES everywhere, including mobile (the drift the visitor wants). The only thing
+  // that made mobile slow was letting it animate DURING the critical load — a continuous canvas
+  // repaint competing with the page for a throttled CPU (delaying LCP + blowing TBT). So on touch /
+  // coarse-pointer devices we START the loop only AFTER the page has loaded + gone idle, and run it
+  // a touch gentler (fps below), while it already pauses on scroll + off-screen. Result: it shimmers
+  // like desktop, but the load is unaffected. Truly static only for reduced-motion / explicit opt-out.
+  const coarsePointer =
+    typeof window !== "undefined" &&
+    (window.matchMedia?.("(hover: none), (pointer: coarse)").matches ||
+      (typeof navigator !== "undefined" && (navigator.maxTouchPoints || 0) > 0));
   const isStatic = opts.forceStatic || prefersReducedMotion();
+  // Mobile runs the drift at ~12fps (well under half the repaint work of desktop's 30) but advances
+  // the phase MORE per frame so the drift travels the SAME distance per second — the shimmer looks
+  // identical, it's just rendered with fewer, cheaper frames. Gentle on a low-end phone + battery.
+  const MOBILE_FPS = 12;
+  const effFrameMs = coarsePointer ? 1000 / MOBILE_FPS : frameMs;
+  const effTimeSpeed = coarsePointer ? timeSpeed * (fps / MOBILE_FPS) : timeSpeed;
 
   resize();
   window.addEventListener("resize", resize, { passive: true });
@@ -201,20 +212,21 @@ export function createDotField(
     return () => window.removeEventListener("resize", resize);
   }
 
-  // ANIMATED mode (desktop): capped FPS, paused off-screen and when the tab is hidden.
+  // ANIMATED mode: capped FPS, paused off-screen / when the tab is hidden / while scrolling.
   let raf = 0;
   let last = 0;
   let visible = true;
   let onScreen = true;
+  let started = false;
 
   const loop = (now: number) => {
     raf = requestAnimationFrame(loop);
     // Pause the (relatively heavy) canvas render while the page is scrolling so the main thread
     // and compositor are free for a smooth scroll. Resumes the instant scrolling stops.
     if (!visible || !onScreen || isScrolling()) return;
-    if (now - last < frameMs) return;
+    if (now - last < effFrameMs) return;
     last = now;
-    t += timeSpeed;
+    t += effTimeSpeed;
     render();
   };
 
@@ -231,11 +243,29 @@ export function createDotField(
   );
   io.observe(canvas);
 
-  raf = requestAnimationFrame(loop);
+  // Kick the loop. Desktop starts immediately; mobile waits until AFTER load + one idle beat so the
+  // animation never competes with LCP/first paint (the field is already painted once by resize()).
+  const startLoop = () => {
+    if (started) return;
+    started = true;
+    raf = requestAnimationFrame(loop);
+  };
+  const deferToIdle = () =>
+    typeof (window as { requestIdleCallback?: unknown }).requestIdleCallback === "function"
+      ? (window as unknown as { requestIdleCallback: (cb: () => void, o?: { timeout: number }) => void }).requestIdleCallback(startLoop, { timeout: 1200 })
+      : setTimeout(startLoop, 600);
+  if (!coarsePointer) {
+    startLoop();
+  } else if (document.readyState === "complete") {
+    deferToIdle();
+  } else {
+    window.addEventListener("load", deferToIdle, { once: true });
+  }
 
   return () => {
     cancelAnimationFrame(raf);
     window.removeEventListener("resize", resize);
+    window.removeEventListener("load", deferToIdle);
     document.removeEventListener("visibilitychange", onVis);
     io.disconnect();
   };
