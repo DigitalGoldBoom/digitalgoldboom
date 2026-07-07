@@ -8,6 +8,7 @@ import Link from "next/link";
 import Book3D from "@/components/Book3D";
 import NumberCounter from "@/components/NumberCounter";
 import BuyButton from "@/components/BuyButton";
+import LeadMagnetForm from "@/components/LeadMagnetForm";
 
 const bookCheckout = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
 
@@ -74,6 +75,39 @@ export default function V2Page() {
               <div className="flex justify-center lg:justify-end">
                 <Book3D />
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── LEAD MAGNET — first 5 chapters free (email capture) ─── */}
+        <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 pb-8">
+          <div
+            className="mx-auto max-w-[880px] rounded-[24px] border p-8 md:p-12 text-center"
+            style={{
+              borderColor: "rgba(232,178,58,0.28)",
+              background: "rgba(255,255,255,0.03)",
+              boxShadow: "0 24px 60px rgba(0,0,0,0.45)",
+            }}
+          >
+            <p className="v2-eyebrow justify-center mb-5" style={{ display: "inline-flex" }}>
+              Start reading free
+            </p>
+            <h2
+              className="v2-display mx-auto"
+              style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", maxWidth: "20ch" }}
+            >
+              Read the first <span className="v2-gold">5 chapters</span> free.
+            </h2>
+            <p
+              className="mt-5 mx-auto text-lg leading-relaxed"
+              style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}
+            >
+              The plain-English opening of <span style={{ color: "#F4F4F7" }}>Digital Gold Boom</span> —
+              what gold really is, why the old way of producing it is breaking down, and the shift
+              almost no one has noticed yet. Enter your email and start reading now.
+            </p>
+            <div className="mt-8 mx-auto max-w-[560px]">
+              <LeadMagnetForm source="home_lead_magnet" />
             </div>
           </div>
         </section>
