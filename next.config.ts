@@ -70,7 +70,6 @@ const nextConfig: NextConfig = {
       { source: "/partners", destination: "/affiliates", permanent: true },
       { source: "/prices", destination: "/live", permanent: true },
       { source: "/news", destination: "/", permanent: true },
-      { source: "/waitlist", destination: "/", permanent: true },
     ];
   },
 };
