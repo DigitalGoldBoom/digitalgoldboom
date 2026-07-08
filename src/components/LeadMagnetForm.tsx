@@ -104,7 +104,7 @@ export default function LeadMagnetForm({
         <p style={{ color: "#F4F4F7", fontWeight: 600, fontSize: "1.05rem" }}>
           {isWaitlist
             ? "You’re on the list — we’ll email you the moment the full book is ready."
-            : "You’re in — your 5 free chapters are downloading now."}
+            : "You’re in — your 5 free chapters are downloading now, and you’re on the list for the full book."}
         </p>
         {!isWaitlist && download ? (
           <p className="mt-2 text-sm" style={{ color: "var(--v2-dim)" }}>
@@ -165,7 +165,7 @@ export default function LeadMagnetForm({
         <span className="text-sm leading-relaxed" style={{ color: "var(--v2-dim)" }}>
           {isWaitlist
             ? "Yes, add me to the waitlist and email me about the book. Unsubscribe anytime."
-            : "Yes, email me the free chapters and occasional updates. Unsubscribe anytime."}{" "}
+            : "Yes, email me the free chapters and tell me when the full book is ready. Unsubscribe anytime."}{" "}
           See our{" "}
           <a href="/privacy" className="v2-gold" style={{ textDecoration: "underline" }}>
             privacy policy

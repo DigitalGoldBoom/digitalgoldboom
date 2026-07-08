@@ -18,7 +18,6 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
     heading: "The Book",
     links: [
       { label: "Free Chapters", href: "/free" },
-      { label: "Join the Waitlist", href: "/waitlist" },
       { label: "Newsletter", href: "/newsletter" },
     ],
   },

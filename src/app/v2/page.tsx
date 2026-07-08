@@ -60,10 +60,9 @@ export default function V2Page() {
                 </p>
                 <div className="mt-9 flex flex-wrap items-center gap-3">
                   <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
-                  <Link href="/waitlist" className="v2-btn-ghost">Join the waitlist</Link>
                 </div>
                 <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                  Free · instant download · no payment
+                  Free · instant download · and first in line for the full book.
                 </p>
                 <p className="mt-2 text-xs" style={{ color: "var(--v2-faint)" }}>
                   Educational — not financial advice.
@@ -215,10 +214,9 @@ export default function V2Page() {
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-3">
                 <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
-                <Link href="/waitlist" className="v2-btn-ghost">Join the waitlist</Link>
               </div>
               <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                Free · instant download · the full book is coming.
+                Free · instant download · and first in line for the full book.
               </p>
             </div>
           </div>
@@ -272,14 +270,11 @@ export default function V2Page() {
             Get it Early. Get Informed. Get the Edge.
           </p>
           <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "48ch" }}>
-            Start with the first five chapters — free, delivered the moment you enter your email. The
-            complete book is on the way; join the waitlist to read it first.
+            Start with the first five chapters — free, delivered the moment you enter your email. You
+            get the chapters now, and you&rsquo;re first in line when the complete book is ready.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4">
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
-              <Link href="/waitlist" className="v2-btn-ghost">Join the waitlist</Link>
-            </div>
+            <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
             <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
               Free · instant download · no payment
             </span>

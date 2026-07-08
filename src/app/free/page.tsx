@@ -36,7 +36,8 @@ export default function FreeChaptersPage() {
                 >
                   The plain-English opening of <span style={{ color: "#F4F4F7" }}>Digital Gold Boom</span> by
                   Andrew Fletcher — former President &amp; CEO of Great Eagle Gold, now NatBridge
-                  Resources. Enter your email and start reading in seconds.
+                  Resources. Enter your email, start reading in seconds — and you&rsquo;re first in line
+                  when the full book is ready.
                 </p>
 
                 <div className="mt-8 max-w-[620px]">
