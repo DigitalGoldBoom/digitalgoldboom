@@ -133,7 +133,7 @@ export default function LeadMagnetForm({
           onChange={(e) => setFirstName(e.target.value)}
           placeholder="First name (optional)"
           disabled={status === "loading"}
-          className="v2-input sm:w-[38%]"
+          className="v2-input min-w-0 flex-1"
           autoComplete="given-name"
         />
         <label htmlFor="lm-email" className="sr-only">
@@ -148,7 +148,7 @@ export default function LeadMagnetForm({
           placeholder="Enter your email"
           required
           disabled={status === "loading"}
-          className="v2-input flex-1"
+          className="v2-input min-w-0 flex-[1.4]"
           autoComplete="email"
         />
       </div>
