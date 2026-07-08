@@ -14,12 +14,18 @@ import { track } from "@vercel/analytics";
  * (track gets only `source`).
  */
 export default function LeadMagnetForm({
-  source = "home_lead_magnet",
+  mode = "download",
+  source,
   className = "",
 }: {
+  /** "download" = instant 5-chapter delivery; "waitlist" = join the list, no download. */
+  mode?: "download" | "waitlist";
   source?: string;
   className?: string;
 }) {
+  const isWaitlist = mode === "waitlist";
+  const src = source ?? (isWaitlist ? "waitlist" : "home_lead_magnet");
+  const tag = isWaitlist ? "waitlist" : "free-chapters";
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
@@ -46,7 +52,7 @@ export default function LeadMagnetForm({
     e.preventDefault();
     setStatus("loading");
     setMessage("");
-    track("lead_magnet_submit", { source });
+    track("lead_magnet_submit", { source: src });
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
@@ -55,7 +61,8 @@ export default function LeadMagnetForm({
           email,
           firstName: firstName || undefined,
           consent,
-          source,
+          source: src,
+          tag,
           utm: Object.keys(utm.current).length ? utm.current : undefined,
         }),
       });
@@ -63,15 +70,15 @@ export default function LeadMagnetForm({
       if (!res.ok) {
         setStatus("error");
         setMessage(data.message ?? "Something went wrong. Try again.");
-        track("lead_magnet_submit_fail", { source });
+        track("lead_magnet_submit_fail", { source: src });
         return;
       }
-      track("lead_magnet_success", { source });
+      track("lead_magnet_success", { source: src });
       setDownload(data.download ?? "");
       setStatus("success");
       setEmail("");
       setFirstName("");
-      if (data.download && typeof window !== "undefined") {
+      if (!isWaitlist && data.download && typeof window !== "undefined") {
         const a = document.createElement("a");
         a.href = data.download;
         a.setAttribute("download", "");
@@ -79,12 +86,12 @@ export default function LeadMagnetForm({
         document.body.appendChild(a);
         a.click();
         a.remove();
-        track("lead_magnet_download", { source });
+        track("lead_magnet_download", { source: src });
       }
     } catch {
       setStatus("error");
       setMessage("Network error. Try again.");
-      track("lead_magnet_submit_fail", { source });
+      track("lead_magnet_submit_fail", { source: src });
     }
   }
 
@@ -95,9 +102,11 @@ export default function LeadMagnetForm({
         style={{ borderColor: "rgba(232,178,58,0.4)", background: "rgba(232,178,58,0.08)" }}
       >
         <p style={{ color: "#F4F4F7", fontWeight: 600, fontSize: "1.05rem" }}>
-          You&rsquo;re in — your 5 free chapters are downloading now.
+          {isWaitlist
+            ? "You’re on the list — we’ll email you the moment the full book is ready."
+            : "You’re in — your 5 free chapters are downloading now."}
         </p>
-        {download ? (
+        {!isWaitlist && download ? (
           <p className="mt-2 text-sm" style={{ color: "var(--v2-dim)" }}>
             Didn&rsquo;t start?{" "}
             <a href={download} download className="v2-gold" style={{ textDecoration: "underline" }}>
@@ -154,7 +163,10 @@ export default function LeadMagnetForm({
           style={{ accentColor: "#E8B23A" }}
         />
         <span className="text-sm leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-          Yes, email me the free chapters and occasional updates. Unsubscribe anytime. See our{" "}
+          {isWaitlist
+            ? "Yes, add me to the waitlist and email me about the book. Unsubscribe anytime."
+            : "Yes, email me the free chapters and occasional updates. Unsubscribe anytime."}{" "}
+          See our{" "}
           <a href="/privacy" className="v2-gold" style={{ textDecoration: "underline" }}>
             privacy policy
           </a>
@@ -167,7 +179,11 @@ export default function LeadMagnetForm({
         disabled={status === "loading"}
         className="v2-btn mt-5 w-full"
       >
-        {status === "loading" ? "Sending…" : "Get the first 5 chapters free"}
+        {status === "loading"
+          ? "Sending…"
+          : isWaitlist
+            ? "Join the waitlist"
+            : "Get the first 5 chapters free"}
       </button>
 
       {status === "error" ? (
@@ -176,7 +192,9 @@ export default function LeadMagnetForm({
         </p>
       ) : (
         <p className="mt-3 text-xs text-center" style={{ color: "var(--v2-faint)" }}>
-          Free chapters, instant download. Educational — not financial advice.
+          {isWaitlist
+            ? "No payment. We’ll email you when the full book is ready. Educational — not financial advice."
+            : "Free chapters, instant download. Educational — not financial advice."}
         </p>
       )}
     </form>

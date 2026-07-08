@@ -12,6 +12,8 @@ const Body = z.object({
   // Explicit permission-to-email flag (stored with a timestamp for ESP import later).
   consent: z.boolean().optional(),
   source: z.string().max(40).optional(),
+  // Which offer they took: "free-chapters" (download) or "waitlist".
+  tag: z.string().max(40).optional(),
   // Other forms' fields — preserved into the record's metadata so nothing is lost.
   name: z.string().max(80).optional(), // alias for firstName from older forms
   handle: z.string().max(80).optional(),
@@ -61,6 +63,7 @@ export async function POST(req: Request) {
       firstName: parsed.firstName ?? parsed.name,
       consent: parsed.consent,
       source: parsed.source,
+      tag: parsed.tag,
       utm: Object.keys(meta).length ? meta : undefined,
     });
     if (!stored) {

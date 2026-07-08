@@ -7,10 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Book3D from "@/components/Book3D";
 import NumberCounter from "@/components/NumberCounter";
-import BuyButton from "@/components/BuyButton";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
-
-const bookCheckout = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
 
 const STEPS = [
   { n: "01", t: "Verify", b: "A deposit is drilled, sampled and certified to institutional standard (NI 43-101) — the same proof a $10-billion mine is financed on." },
@@ -61,13 +58,14 @@ export default function V2Page() {
                 <p className="mt-8 max-w-[50ch] text-xl leading-relaxed" style={{ color: "var(--v2-dim)" }}>
                   For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span> That just ended &mdash; and almost no one has noticed yet.
                 </p>
-                <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
+                <div className="mt-9 flex flex-wrap items-center gap-3">
                   <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
-                  <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
-                    Free · instant download · no payment
-                  </span>
+                  <Link href="/waitlist" className="v2-btn-ghost">Join the waitlist</Link>
                 </div>
-                <p className="mt-3 text-xs" style={{ color: "var(--v2-faint)" }}>
+                <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
+                  Free · instant download · no payment
+                </p>
+                <p className="mt-2 text-xs" style={{ color: "var(--v2-faint)" }}>
                   Educational — not financial advice.
                 </p>
               </div>
@@ -215,12 +213,13 @@ export default function V2Page() {
                   </div>
                 ))}
               </div>
-              <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
-                <Link href="/book" className="v2-btn">Get the book — $37</Link>
-                <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
-                  Digital book · delivered instantly · 60-day money-back guarantee
-                </span>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
+                <Link href="/waitlist" className="v2-btn-ghost">Join the waitlist</Link>
               </div>
+              <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
+                Free · instant download · the full book is coming.
+              </p>
             </div>
           </div>
         </section>
@@ -272,18 +271,20 @@ export default function V2Page() {
           <p className="mt-5 mx-auto v2-gold" style={{ fontSize: "clamp(1rem,1.4vw,1.25rem)", fontWeight: 500, letterSpacing: "0.02em" }}>
             Get it Early. Get Informed. Get the Edge.
           </p>
-          <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "46ch" }}>
-            Digital Gold Boom is a one-time $37 purchase — the launch price, before it moves to its regular $97. You get the complete book, delivered digitally the moment you check out.
+          <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "48ch" }}>
+            Start with the first five chapters — free, delivered the moment you enter your email. The
+            complete book is on the way; join the waitlist to read it first.
           </p>
-          <div className="mt-10 flex flex-col items-center gap-3">
-            <BuyButton checkoutUrl={bookCheckout} label="Get the book — $37" event="v2_buy_click_final" className="v2-btn" />
+          <div className="mt-10 flex flex-col items-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
+              <Link href="/waitlist" className="v2-btn-ghost">Join the waitlist</Link>
+            </div>
             <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
-              Digital book · delivered instantly · 60-day money-back guarantee
+              Free · instant download · no payment
             </span>
           </div>
           <p className="mt-6 mx-auto text-xs leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
-            Secure checkout via LemonSqueezy.
-            <br />
             Educational content — not financial advice.
           </p>
         </section>

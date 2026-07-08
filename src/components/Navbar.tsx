@@ -115,13 +115,13 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Right — Buy CTA */}
+        {/* Right — free-chapters CTA */}
         <Link
-          href="/book"
+          href="/free"
           className="hidden items-center whitespace-nowrap rounded-full text-sm font-semibold text-[#0A0A0F] transition-opacity hover:opacity-90 lg:inline-flex lg:justify-self-end"
           style={{ padding: "13px 20px", background: CTA_GRADIENT }}
         >
-          Get the Book
+          Free Chapters
         </Link>
       </div>
 
@@ -140,12 +140,12 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="/book"
+              href="/free"
               onClick={() => setOpen(false)}
               className="mt-1 inline-flex items-center justify-center rounded-full text-sm font-semibold text-[#0A0A0F]"
               style={{ padding: "12px 18px", background: CTA_GRADIENT }}
             >
-              Get the Book
+              Free Chapters
             </Link>
           </div>
         </div>
