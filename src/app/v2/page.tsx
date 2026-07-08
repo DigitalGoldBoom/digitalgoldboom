@@ -62,9 +62,9 @@ export default function V2Page() {
                   For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span> That just ended &mdash; and almost no one has noticed yet.
                 </p>
                 <div className="mt-9 flex flex-wrap items-center gap-x-4 gap-y-3">
-                  <Link href="/book" className="v2-btn">Get the book — $37</Link>
+                  <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
                   <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
-                    Digital book · delivered instantly · 60-day money-back guarantee
+                    Free · instant download · no payment
                   </span>
                 </div>
                 <p className="mt-3 text-xs" style={{ color: "var(--v2-faint)" }}>

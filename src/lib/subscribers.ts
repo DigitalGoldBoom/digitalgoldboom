@@ -1,74 +1,77 @@
-import { createHash } from "node:crypto";
-import { Redis } from "@upstash/redis";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 /**
- * Owned email list — captured into ANDREW'S OWN storage (Upstash Redis), not a third-party ESP.
+ * Owned email list — captured into ANDREW'S OWN database (Supabase Postgres), not a third-party ESP.
  *
- * Why: Kit/ConvertKit CLOSED his account over digital-asset content. A list that lives inside a
- * SaaS can be shut off with it. So the list of record lives here, in storage Andrew controls and
- * can export any time — no company can take it away. A sending tool (Beehiiv, decided by dgb-cmo:
- * free ≤2,500, its AUP explicitly allows educational crypto/blockchain content) is OPTIONAL and
- * plugs in later; it is never the source of truth.
+ * Why Supabase, not an ESP: Kit/ConvertKit CLOSED his account over digital-asset content. A list
+ * that lives inside a sending SaaS can be shut off with it. So the list of record lives in a plain
+ * database Andrew owns — browsable as a table + one-click CSV export in the Supabase dashboard, and
+ * importable into ANY sending tool later (Beehiiv / Amazon SES / etc.). The store is the source of
+ * truth; the sender is swappable and plugs in on top.
  *
- * Same env the rate-limiter already uses (so if rate-limiting works in prod, this does too):
- *   UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN   (Upstash direct)
- *   KV_REST_API_URL        + KV_REST_API_TOKEN          (Vercel KV / marketplace)
+ * Server-only: uses the SERVICE_ROLE key, which bypasses Row-Level Security. Never import this into
+ * client code and never expose the service key to the browser.
+ *   SUPABASE_URL                 — the project URL (https://xxxx.supabase.co)
+ *   SUPABASE_SERVICE_ROLE_KEY    — the secret service_role key (writes bypass RLS)
  */
 
-const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
-const token =
-  process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
+const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
+const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const redis = url && token ? new Redis({ url, token }) : null;
+let _client: SupabaseClient | null = null;
+function client(): SupabaseClient | null {
+  if (!url || !serviceKey) return null;
+  if (!_client) {
+    _client = createClient(url, serviceKey, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+  }
+  return _client;
+}
 
-/** Whether durable owned-list storage is configured. If false, we must NOT fake success. */
-export const hasSubscriberStore = redis !== null;
-
-const SET_KEY = "dgb:subscribers"; // set of email addresses (dedupe)
-const LOG_KEY = "dgb:subscribers:log"; // ordered log for export (most-recent first)
+/** Whether durable owned-list storage is configured. If false, the caller must fail honestly. */
+export const hasSubscriberStore = Boolean(url && serviceKey);
 
 export type SubscriberInput = {
   email: string;
+  firstName?: string;
+  consent?: boolean;
   source?: string;
-  name?: string;
-  handle?: string;
-  wallet?: string;
-  company?: string;
   utm?: Record<string, string>;
+  tag?: string;
 };
 
 /**
- * Store a subscriber in the owned list. Idempotent on email (SADD dedupes). Returns true when the
- * record was persisted, false when no store is configured (caller must then fail honestly — never
- * pretend a signup was saved).
+ * Store a subscriber in the owned list. Idempotent on email: a duplicate is treated as success
+ * (they're already on the list), so re-signups never surface an error. Returns true when the record
+ * is safely persisted; throws on a genuine store error so the caller returns a retry (never a silent
+ * loss). Returns false only when no store is configured.
  */
 export async function saveSubscriber(sub: SubscriberInput): Promise<boolean> {
-  if (!redis) return false;
+  const db = client();
+  if (!db) return false;
   const email = sub.email.trim().toLowerCase();
-  const id = createHash("sha256").update(email).digest("hex").slice(0, 32);
-  const record = {
+  const consent = sub.consent === true;
+  const { error } = await db.from("subscribers").insert({
     email,
-    source: sub.source ?? "",
-    name: sub.name ?? "",
-    handle: sub.handle ?? "",
-    wallet: sub.wallet ?? "",
-    company: sub.company ?? "",
-    utm: sub.utm ? JSON.stringify(sub.utm) : "",
-    ts: new Date().toISOString(),
-  };
-  // One pipeline: add to the dedupe set, write the full record, and push a compact log line.
-  const p = redis.pipeline();
-  p.sadd(SET_KEY, email);
-  p.hset(`dgb:subscriber:${id}`, record);
-  p.lpush(LOG_KEY, JSON.stringify({ email, source: record.source, ts: record.ts }));
-  await p.exec();
+    first_name: sub.firstName?.trim() || null,
+    consent,
+    consent_at: consent ? new Date().toISOString() : null,
+    source: sub.source ?? null,
+    utm: sub.utm && Object.keys(sub.utm).length ? sub.utm : null,
+    tag: sub.tag ?? "free-chapters",
+  });
+  if (error) {
+    // 23505 = unique_violation: this email is already on the list. That's a success, not an error.
+    if (error.code === "23505") return true;
+    throw new Error(`supabase insert failed (${error.code ?? "?"})`);
+  }
   return true;
 }
 
 /**
- * Best-effort push to Beehiiv (the sender) IF configured. Never throws to the caller and never
- * blocks the owned-list save — Beehiiv is a mirror, not the source of truth. Uses the standard
- * publications create-subscription endpoint. Absent env → no-op.
+ * Best-effort mirror to Beehiiv (a possible future sender) IF configured. Never throws to the caller
+ * and never blocks the owned-list save — the database already has them. Absent env → no-op.
  */
 export async function pushToBeehiiv(email: string, source?: string): Promise<void> {
   const key = process.env.BEEHIIV_API_KEY;
@@ -86,6 +89,6 @@ export async function pushToBeehiiv(email: string, source?: string): Promise<voi
       }),
     });
   } catch {
-    // swallow — the owned list already has them; Beehiiv sync can be reconciled later
+    // swallow — the owned list already has them; the sender can be reconciled later
   }
 }

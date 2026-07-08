@@ -8,12 +8,14 @@ const LEAD_MAGNET_PATH = "/downloads/digital-gold-boom-first-5-chapters.pdf";
 
 const Body = z.object({
   email: z.string().email(),
+  firstName: z.string().max(80).optional(),
+  // Explicit permission-to-email flag (stored with a timestamp for ESP import later).
+  consent: z.boolean().optional(),
   source: z.string().max(40).optional(),
-  // Affiliate early-interest form fields.
+  // Other forms' fields — preserved into the record's metadata so nothing is lost.
+  name: z.string().max(80).optional(), // alias for firstName from older forms
   handle: z.string().max(80).optional(),
   wallet: z.string().max(120).optional(),
-  // Mining-industry early-reviewer form fields.
-  name: z.string().max(80).optional(),
   company: z.string().max(120).optional(),
   // First-touch attribution (optional).
   utm: z.record(z.string(), z.string()).optional(),
@@ -48,14 +50,18 @@ export async function POST(req: Request) {
   }
 
   try {
+    // Fold any non-core fields from other forms into the record's metadata so they're never lost.
+    const meta: Record<string, string> = { ...(parsed.utm ?? {}) };
+    if (parsed.handle) meta.handle = parsed.handle;
+    if (parsed.wallet) meta.wallet = parsed.wallet;
+    if (parsed.company) meta.company = parsed.company;
+
     const stored = await saveSubscriber({
       email: parsed.email,
+      firstName: parsed.firstName ?? parsed.name,
+      consent: parsed.consent,
       source: parsed.source,
-      name: parsed.name,
-      handle: parsed.handle,
-      wallet: parsed.wallet,
-      company: parsed.company,
-      utm: parsed.utm,
+      utm: Object.keys(meta).length ? meta : undefined,
     });
     if (!stored) {
       return NextResponse.json(
