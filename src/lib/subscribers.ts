@@ -3,11 +3,11 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 /**
  * Owned email list — captured into ANDREW'S OWN database (Supabase Postgres), not a third-party ESP.
  *
- * Why Supabase, not an ESP: Kit/ConvertKit CLOSED his account over digital-asset content (he was
- * later reinstated, but the lesson stands). A list that lives inside a sending SaaS can be shut off
- * with it. So the list of record lives in a plain database Andrew owns — browsable as a table +
- * one-click CSV export in the Supabase dashboard, and importable into ANY sending tool. The store is
- * the source of truth; the SENDER (Kit — see pushToKit below) is swappable and plugs in on top.
+ * Why Supabase, not just an ESP: a list that lives only inside a sending SaaS is only as portable as
+ * that SaaS allows. So the list of record lives in a plain database Andrew owns — browsable as a
+ * table + one-click CSV export in the Supabase dashboard, and importable into ANY sending tool. The
+ * store is the source of truth; the SENDER (Kit — see pushToKit below) plugs in on top and stays
+ * swappable.
  *
  * Server-only: uses the SERVICE_ROLE key, which bypasses Row-Level Security. Never import this into
  * client code and never expose the service key to the browser.
@@ -80,8 +80,8 @@ function redactEmails(text: string): string {
 /**
  * Mirror a new signup into Kit, the SENDER (sequences, automations, broadcasts).
  *
- * Best-effort by design: the owned list (Supabase, above) already has them, so a Kit outage — or a
- * Kit account suspension, which has happened before — must never fail a signup. Absent env → no-op.
+ * Best-effort by design: the owned list (Supabase, above) already has them, so a Kit outage must
+ * never fail a signup — Kit can be reconciled from the database later. Absent env → no-op.
  *
  *   KIT_API_KEY      — Kit v4 API key (Kit → Settings → Developer)
  *   KIT_FORM_ID      — numeric id of the Kit form to subscribe them to. This is what FIRES the
