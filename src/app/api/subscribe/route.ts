@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { subscribeRateLimited } from "@/lib/rate-limit";
-import { hasSubscriberStore, saveSubscriber, pushToBeehiiv } from "@/lib/subscribers";
+import { hasSubscriberStore, saveSubscriber, pushToKit } from "@/lib/subscribers";
 
 // The lead magnet delivered instantly on a successful signup — the first 5 chapters, free.
 const LEAD_MAGNET_PATH = "/downloads/digital-gold-boom-first-5-chapters.pdf";
@@ -80,9 +80,12 @@ export async function POST(req: Request) {
     );
   }
 
-  // Best-effort mirror to the sender (Beehiiv) if it's been connected. Never blocks or fails the
-  // signup — the owned list already has them.
-  await pushToBeehiiv(parsed.email, parsed.source);
+  // Best-effort mirror to the sender (Kit) — it runs the welcome sequence and broadcasts. Never
+  // fails the signup: the owned list in Supabase already has them and can re-sync Kit any time.
+  await pushToKit(parsed.email, {
+    firstName: parsed.firstName ?? parsed.name,
+    source: parsed.source,
+  });
 
   // Success: hand back the instant lead-magnet download so the client can reveal it.
   return NextResponse.json({ ok: true, download: LEAD_MAGNET_PATH });

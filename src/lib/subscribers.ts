@@ -3,11 +3,11 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 /**
  * Owned email list — captured into ANDREW'S OWN database (Supabase Postgres), not a third-party ESP.
  *
- * Why Supabase, not an ESP: Kit/ConvertKit CLOSED his account over digital-asset content. A list
- * that lives inside a sending SaaS can be shut off with it. So the list of record lives in a plain
- * database Andrew owns — browsable as a table + one-click CSV export in the Supabase dashboard, and
- * importable into ANY sending tool later (Beehiiv / Amazon SES / etc.). The store is the source of
- * truth; the sender is swappable and plugs in on top.
+ * Why Supabase, not an ESP: Kit/ConvertKit CLOSED his account over digital-asset content (he was
+ * later reinstated, but the lesson stands). A list that lives inside a sending SaaS can be shut off
+ * with it. So the list of record lives in a plain database Andrew owns — browsable as a table +
+ * one-click CSV export in the Supabase dashboard, and importable into ANY sending tool. The store is
+ * the source of truth; the SENDER (Kit — see pushToKit below) is swappable and plugs in on top.
  *
  * Server-only: uses the SERVICE_ROLE key, which bypasses Row-Level Security. Never import this into
  * client code and never expose the service key to the browser.
@@ -69,26 +69,75 @@ export async function saveSubscriber(sub: SubscriberInput): Promise<boolean> {
   return true;
 }
 
+const KIT_BASE = "https://api.kit.com/v4";
+
+// Subscriber emails must never reach logs (Vercel logs are public-adjacent). Kit echoes the address
+// back in its error bodies — scrub before logging. Same rule as the LemonSqueezy webhook.
+function redactEmails(text: string): string {
+  return text.replace(/[^\s@"']+@[^\s@"']+\.[^\s@"']+/g, "[email]");
+}
+
 /**
- * Best-effort mirror to Beehiiv (a possible future sender) IF configured. Never throws to the caller
- * and never blocks the owned-list save — the database already has them. Absent env → no-op.
+ * Mirror a new signup into Kit, the SENDER (sequences, automations, broadcasts).
+ *
+ * Best-effort by design: the owned list (Supabase, above) already has them, so a Kit outage — or a
+ * Kit account suspension, which has happened before — must never fail a signup. Absent env → no-op.
+ *
+ *   KIT_API_KEY      — Kit v4 API key (Kit → Settings → Developer)
+ *   KIT_FORM_ID      — numeric id of the Kit form to subscribe them to. This is what FIRES the
+ *                      welcome sequence; without it they land in Kit but no automation runs.
+ *   KIT_FREE_TAG_ID  — optional numeric tag id for free-chapter leads (segments them from buyers,
+ *                      who are tagged by KIT_BUYER_TAG_ID in the LemonSqueezy webhook).
  */
-export async function pushToBeehiiv(email: string, source?: string): Promise<void> {
-  const key = process.env.BEEHIIV_API_KEY;
-  const pubId = process.env.BEEHIIV_PUBLICATION_ID;
-  if (!key || !pubId) return;
+export async function pushToKit(
+  email: string,
+  opts: { firstName?: string; source?: string } = {},
+): Promise<void> {
+  const apiKey = process.env.KIT_API_KEY;
+  if (!apiKey) return;
+  const headers = { "content-type": "application/json", "X-Kit-Api-Key": apiKey };
+
   try {
-    await fetch(`https://api.beehiiv.com/v2/publications/${pubId}/subscriptions`, {
+    // v4: upsert the subscriber first — form/tag calls require them to exist.
+    const res = await fetch(`${KIT_BASE}/subscribers`, {
       method: "POST",
-      headers: { "content-type": "application/json", Authorization: `Bearer ${key}` },
+      headers,
       body: JSON.stringify({
-        email,
-        reactivate_existing: false,
-        send_welcome_email: false,
-        utm_source: source ?? "digitalgoldboom",
+        email_address: email,
+        first_name: opts.firstName?.trim() || undefined,
+        fields: { source: opts.source ?? "digitalgoldboom" },
       }),
     });
-  } catch {
-    // swallow — the owned list already has them; the sender can be reconciled later
+    if (!res.ok) {
+      console.error("[subscribe] Kit upsert failed", res.status, redactEmails(await res.text()));
+      return;
+    }
+
+    const formId = process.env.KIT_FORM_ID;
+    if (formId) {
+      const formRes = await fetch(`${KIT_BASE}/forms/${formId}/subscribers`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ email_address: email }),
+      });
+      if (!formRes.ok) {
+        console.error("[subscribe] Kit form add failed", formRes.status, redactEmails(await formRes.text()));
+      }
+    }
+
+    const tagId = process.env.KIT_FREE_TAG_ID;
+    if (tagId) {
+      const tagRes = await fetch(`${KIT_BASE}/tags/${tagId}/subscribers`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({ email_address: email }),
+      });
+      if (!tagRes.ok) {
+        console.error("[subscribe] Kit tag failed", tagRes.status, redactEmails(await tagRes.text()));
+      }
+    }
+  } catch (err) {
+    // swallow — the owned list already has them; Kit can be reconciled from Supabase at any time
+    console.error("[subscribe] Kit error", err instanceof Error ? err.message : err);
   }
 }
