@@ -111,7 +111,9 @@ export default function PixelShovelHome() {
             <PsWaitlistForm source="ps-home-dgb" />
           </div>
 
-          <div className="flex justify-center">
+          {/* Book first on phones. Stacked, it was landing UNDER the submit button — the thing
+              being offered arriving after the ask for an email. */}
+          <div className="order-first flex justify-center lg:order-none">
             <Book3D />
           </div>
         </div>

@@ -113,16 +113,109 @@ export default function Book3D() {
     // Reduced-motion: truly static — no animation at all.
     if (prefersReducedMotion()) return;
 
-    // Touch / no-mouse devices have no cursor to follow, so give the book a gentle CSS
-    // auto-rotate (GPU-only keyframes, ZERO per-frame JS) — it "moves" on mobile without the
-    // per-frame rAF that used to choke low-end phones.
-    if (noHover) {
-      box.classList.add("book3d-float");
-      return;
-    }
-
     let running = false;
     let onScreen = true;
+
+    const tickTouch = () => {
+      const c = current.current;
+      const t = target.current;
+      c.ry += (t.ry - c.ry) * 0.24;
+      c.rx += (t.rx - c.rx) * 0.24;
+      setT(Number(c.ry.toFixed(2)), Number(c.rx.toFixed(2)));
+      if (Math.abs(t.ry - c.ry) < 0.04 && Math.abs(t.rx - c.rx) < 0.04) {
+        running = false;
+        return;
+      }
+      raf.current = requestAnimationFrame(tickTouch);
+    };
+
+    // Touch / no-mouse devices have no cursor to follow. Until the book is touched it does a
+    // gentle CSS auto-rotate (GPU keyframes, zero per-frame JS). The first finger on it takes
+    // that over: the book then turns WITH the finger and STAYS where it is put — a thing you
+    // can pick up and look at, rather than a thing that plays an animation at you.
+    if (noHover) {
+      box.classList.add("book3d-float");
+
+      let dragging = false;
+      let axis: "x" | "y" | null = null;
+      let sx = 0;
+      let sy = 0;
+      let baseRy = 0;
+      let baseRx = 0;
+
+      const ensureTouch = () => {
+        if (!running && onScreen) {
+          running = true;
+          raf.current = requestAnimationFrame(tickTouch);
+        }
+      };
+
+      const onDown = (e: PointerEvent) => {
+        dragging = true;
+        axis = null;
+        sx = e.clientX;
+        sy = e.clientY;
+        baseRy = current.current.ry;
+        baseRx = current.current.rx;
+        // Hand the transform back to JS. The CSS float owns `transform` while the class is on,
+        // so it has to come off before a drag can set a pose that sticks.
+        box.classList.remove("book3d-float");
+        setT(baseRy, baseRx);
+        if (!interacted.current) {
+          interacted.current = true;
+          track("book3d_interaction");
+        }
+      };
+
+      const onDrag = (e: PointerEvent) => {
+        if (!dragging) return;
+        const dx = e.clientX - sx;
+        const dy = e.clientY - sy;
+        // Lock the axis on the first real movement. A finger that set off downward is scrolling
+        // the page, and stealing that gesture to spin a book is how a page becomes a trap.
+        if (!axis) {
+          if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+          axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+        }
+        if (axis === "y") return; // let the page scroll
+        target.current.ry = baseRy + dx * 0.55; // free spin: no clamp, it can turn right around
+        target.current.rx = Math.max(-MAX_RX, Math.min(MAX_RX, baseRx - dy * 0.18));
+        ensureTouch();
+      };
+
+      const onUp = () => {
+        dragging = false;
+        axis = null;
+      };
+
+      stage.style.touchAction = "pan-y"; // vertical = scroll the page, horizontal = turn the book
+      stage.style.cursor = "grab";
+      stage.addEventListener("pointerdown", onDown);
+      stage.addEventListener("pointermove", onDrag, { passive: true });
+      stage.addEventListener("pointerup", onUp);
+      stage.addEventListener("pointercancel", onUp);
+
+      const ioTouch = new IntersectionObserver(
+        (entries) => {
+          onScreen = entries.some((en) => en.isIntersecting);
+          if (!onScreen && raf.current) {
+            cancelAnimationFrame(raf.current);
+            running = false;
+          }
+        },
+        { threshold: 0 },
+      );
+      ioTouch.observe(box);
+
+      return () => {
+        stage.removeEventListener("pointerdown", onDown);
+        stage.removeEventListener("pointermove", onDrag);
+        stage.removeEventListener("pointerup", onUp);
+        stage.removeEventListener("pointercancel", onUp);
+        ioTouch.disconnect();
+        if (raf.current) cancelAnimationFrame(raf.current);
+      };
+    }
 
     // Pivot around the BOOK itself (Framer "3D Look" target = the holder): the book is at
     // rest when the cursor is over its centre and tilts TOWARD the cursor. This is why it now

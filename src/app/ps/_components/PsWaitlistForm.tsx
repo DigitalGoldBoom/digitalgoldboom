@@ -110,18 +110,12 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
         className="w-full max-w-[540px] rounded-[18px] border p-6 sm:p-7"
         style={{ borderColor: "rgba(0,255,0,0.45)", background: "rgba(0,255,0,0.06)" }}
       >
-        <p className="text-[19px] font-semibold leading-tight text-white">
-          Almost there. Check your inbox.
+        <p className="text-[19px] font-semibold leading-tight text-white">Check your inbox.</p>
+        <p className="mt-2 text-[15px] leading-relaxed text-[var(--ps-text-2)]">
+          Click the confirm button in the email and your chapters arrive.
         </p>
-        <p className="mt-3 text-[15px] leading-relaxed text-[var(--ps-text-2)]">
-          We sent a confirmation to{" "}
-          <strong className="break-all font-semibold text-white">{sentTo}</strong>. Click the button
-          inside it and your five chapters arrive straight away.
-        </p>
-        <p className="mt-3 text-[15px] leading-relaxed text-[var(--ps-text-3)]">
-          Not there? Look in <span className="text-white">spam</span> or{" "}
-          <span className="text-white">promotions</span>. A first email from a new sender often
-          lands there. Drag it to your inbox and everything after it comes straight through.
+        <p className="mt-2 text-[13px] text-[var(--ps-text-3)]">
+          Nothing yet? Check spam.
         </p>
       </div>
     );
@@ -191,13 +185,16 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
             />
           </svg>
         </span>
+        {/* This line is the permission the whole list runs on. It has to name what actually gets
+            sent — updates and offers, not only the free chapters — or the first sales email is a
+            surprise, and a surprise sales email is what a spam complaint is made of. */}
         <span className="text-[13px] leading-[1.5] text-[var(--ps-text-2)]">
-          Email me the free chapters and tell me when the full book is ready. Unsubscribe any time.{" "}
+          Email me the chapters, plus updates and offers.{" "}
           <a
             href="/privacy"
             className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
           >
-            Privacy policy
+            Unsubscribe any time
           </a>
           .
         </span>
@@ -207,6 +204,9 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
         {busy ? "Sending…" : "Get 5 free chapters"}
       </button>
 
+      {/* The reassurance line is gone: the consent row already says "no spam", and a form that
+          keeps reassuring you is a form that sounds like it has something to apologise for.
+          The slot stays reserved so an error appearing cannot shove the page down. */}
       <div className="mt-3 min-h-[20px]">
         {state === "err" ? (
           <p
@@ -217,11 +217,7 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
           >
             {msg}
           </p>
-        ) : (
-          <p className="text-[13px] text-[var(--ps-text-3)]">
-            No payment. No spam. The chapters land in your inbox after one confirming click.
-          </p>
-        )}
+        ) : null}
       </div>
     </form>
   );
