@@ -37,14 +37,18 @@ export default function PixelShovelHome() {
         style={{ background: "var(--ps-bg)" }}
       >
         <div className="ps-wrap flex w-full flex-col items-center gap-8 py-10">
-          {/* Wordmark */}
+          {/* Wordmark. NOT .ps-reveal: that class paints an element at opacity 0 and waits for JS
+              to observe it into view. On the page's own LARGEST IMAGE that means the brand is
+              invisible until hydration lands, and invisible for good if the observer misses it —
+              which is the "logo disappeared until I refreshed" bug. Above the fold, nothing may
+              depend on JavaScript to be seen. */}
           <Image
             src={PS_WORDMARK}
             alt="PixelShovel"
             width={1200}
             height={200}
             priority
-            className="ps-reveal h-auto w-full max-w-[1100px]"
+            className="h-auto w-full max-w-[1100px]"
           />
 
           {/* Sub-row: left tagline · right kicker */}

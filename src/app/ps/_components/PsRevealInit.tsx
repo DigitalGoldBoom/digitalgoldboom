@@ -30,7 +30,23 @@ export default function PsRevealInit() {
       { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
     );
     els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
+
+    // Failsafe. Everything wearing .ps-reveal starts at opacity 0, so anything this observer
+    // fails to catch stays INVISIBLE — content silently deleted from the page, with a refresh as
+    // the only cure. A short element that never satisfies the 15% threshold, an element mounted
+    // after this ran, a browser that throttles the callback: all end the same way. Sweeping the
+    // stragglers in costs one timer and removes the whole class of failure. Hiding content is
+    // never worth an animation.
+    const failsafe = window.setTimeout(() => {
+      document
+        .querySelectorAll<HTMLElement>(".ps-reveal:not(.is-in)")
+        .forEach((el) => el.classList.add("is-in"));
+    }, 2500);
+
+    return () => {
+      io.disconnect();
+      window.clearTimeout(failsafe);
+    };
   }, []);
 
   return null;
