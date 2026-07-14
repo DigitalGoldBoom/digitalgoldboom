@@ -169,20 +169,21 @@ export default function BuyPage() {
                 background: "linear-gradient(180deg, rgba(232,178,58,0.07), rgba(232,178,58,0.02))",
               }}
             >
-              {/* The reason is the payment setup, and only the payment setup. Nothing on this page
-                  comments on the state of the product — a product page that editorialises about its
-                  own product is not a product page. */}
-              <p className="v2-eyebrow mb-5">Checkout opening soon</p>
+              {/* State the fact, explain nothing. The page does not comment on the product (a
+                  product page that editorialises about its own product is not a product page), and
+                  it does not narrate our back-office either — nobody buying a book needs to hear
+                  about our admin, and explaining yourself unprompted reads as an apology. */}
+              <p className="v2-eyebrow mb-5">Opening shortly</p>
               <h2 className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
-                Checkout isn&rsquo;t open yet.
+                Checkout opens shortly.
               </h2>
               <p className="mt-4 max-w-[62ch] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                We&rsquo;re completing our payment setup, so orders can&rsquo;t be taken for a few
-                more days. Nothing is charged and no card details are collected in the meantime.
+                Orders aren&rsquo;t being taken just yet. Nothing is charged and no card details are
+                collected in the meantime.
               </p>
               <p className="mt-4 max-w-[62ch] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                Leave your email and we&rsquo;ll tell you the moment it opens. You&rsquo;ll get the
-                first five chapters straight away, free, while you wait.
+                Leave your email and you&rsquo;ll be first to know the moment it opens &mdash; and
+                you&rsquo;ll get the first five chapters straight away, free.
               </p>
 
               <div className="mt-8 max-w-[520px]">

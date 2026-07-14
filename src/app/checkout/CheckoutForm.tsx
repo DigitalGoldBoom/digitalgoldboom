@@ -33,10 +33,10 @@ export default function CheckoutForm() {
           real one and the only one: payment processing is still being set up. Nothing here comments
           on the product. */}
       <div className="co-pay-notice">
-        <p className="co-pay-title">Checkout is not open yet.</p>
+        <p className="co-pay-title">Checkout opens shortly.</p>
         <p className="co-pay-body">
-          We&rsquo;re completing our payment setup. The fields below are disabled — no card can be
-          entered, submitted, or stored, and nothing is charged. Once checkout opens, payment is
+          Orders aren&rsquo;t being taken yet. The fields below are disabled — no card can be
+          entered, submitted, or stored, and nothing is charged. When checkout opens, payment is
           handled entirely by our payment provider on their own secure checkout, so card details
           never touch this site.
         </p>
@@ -122,8 +122,7 @@ export default function CheckoutForm() {
 
         {error && (
           <p role="alert" className="co-error">
-            Checkout isn&rsquo;t open yet — our payment setup is still being completed. No card was
-            submitted and nothing was charged.
+            Checkout isn&rsquo;t open yet. No card was submitted and nothing was charged.
           </p>
         )}
       </form>
