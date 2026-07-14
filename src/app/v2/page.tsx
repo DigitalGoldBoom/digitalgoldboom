@@ -270,8 +270,8 @@ export default function V2Page() {
             Get it Early. Get Informed. Get the Edge.
           </p>
           <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "48ch" }}>
-            Start with the first five chapters — free, delivered the moment you enter your email. You
-            get the chapters now, and you&rsquo;re first in line when the complete book is ready.
+            Start with the first five chapters — free, sent to your inbox. Confirm the email we send
+            you and the chapters are yours, and you&rsquo;re first in line when the complete book is ready.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4">
             <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
