@@ -73,8 +73,14 @@ export default function PixelShovelHome() {
 
       {/* ——— Everything you know just changed + the book + free chapters ——— */}
       <section id="dgb" className="ps-section" style={{ background: "var(--ps-bg-soft)" }}>
-        <div className="ps-wrap grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
-          <div className="flex flex-col items-start gap-6">
+        {/* On a PHONE this reads: headline → the book → the offer → the form. The book lands the
+            moment the claim is made, while the reader is still holding it, and the ask comes after
+            they have seen the thing being offered. (It used to sit under the submit button: the
+            product arriving after the price.) On DESKTOP nothing moves — the book holds the right
+            column across both text rows, placed explicitly rather than by source order, which is
+            why the phone can reorder freely without touching the desktop layout. */}
+        <div className="ps-wrap flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-14">
+          <div className="flex flex-col items-start gap-6 lg:col-start-1 lg:row-start-1">
             {/* The book's own title gold — the cover sets the title in a pale-to-amber gradient,
                 so the eyebrow carries the same one rather than a flat swatch of it. */}
             <p
@@ -92,11 +98,18 @@ export default function PixelShovelHome() {
             <h2 className="text-[clamp(2rem,4.5vw,3.6rem)]">
               Everything You Think You Know About Gold Just Changed Forever
             </h2>
+          </div>
+
+          <div className="flex justify-center lg:col-start-2 lg:row-start-1 lg:row-span-2">
+            <Book3D />
+          </div>
+
+          <div className="flex flex-col items-start gap-6 lg:col-start-1 lg:row-start-2">
             <p className="max-w-[48ch] text-lg text-[var(--ps-text-2)]">
               Tokenization just started the biggest gold rush in history.
             </p>
             {/* Offer line (node-exact: green dot · Inter Display 34px · grey-blue) */}
-            <div className="flex items-center gap-2 pt-2">
+            <div className="flex items-center gap-2">
               <span
                 className="inline-block h-[11px] w-[11px] rounded-full"
                 style={{ background: "rgb(13,222,51)" }}
@@ -113,12 +126,6 @@ export default function PixelShovelHome() {
               </span>
             </div>
             <PsWaitlistForm source="ps-home-dgb" />
-          </div>
-
-          {/* Book first on phones. Stacked, it was landing UNDER the submit button — the thing
-              being offered arriving after the ask for an email. */}
-          <div className="order-first flex justify-center lg:order-none">
-            <Book3D />
           </div>
         </div>
       </section>

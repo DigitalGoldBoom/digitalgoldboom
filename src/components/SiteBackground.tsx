@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { createDotField } from "@/lib/dotField";
+import { isPixelShovelView } from "@/lib/pixelshovel";
 
 /**
  * SiteBackground — the ONE gold shimmer field for the whole site.
@@ -20,13 +22,22 @@ import { createDotField } from "@/lib/dotField";
  * they EASE in (fadeInField) over that already-correct base, so there is no visible pop.
  *
  * It sits at z-0 behind everything. Pages that should show it (home + the Vault pages) carry a
- * transparent base so it shows through; flat pages (funnels, /ps, the cinematic experiences) paint
- * their own opaque background over it and are unaffected.
+ * transparent base so it shows through.
+ *
+ * PIXELSHOVEL PAINTS OVER IT — so it does not run there. /ps lays an opaque black background on top
+ * of this canvas: the field was invisible on every PixelShovel page and STILL being animated, frame
+ * after frame, under an opaque sheet. A phone was compositing a full-screen canvas nobody could see
+ * while GSAP scrubbed a pinned 3D section on top of it, and that is a large part of why scrolling
+ * /ps stuttered. Unmounting it there changes nothing a visitor can see, on either site — the
+ * shimmer's look, grid and frame rate on the Digital Gold Boom pages are untouched.
  */
 export default function SiteBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pathname = usePathname();
+  const skip = isPixelShovelView(pathname);
 
   useEffect(() => {
+    if (skip) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     return createDotField(canvas, {
@@ -41,7 +52,11 @@ export default function SiteBackground() {
       fps: 30,
       sizeMode: "window", // fills the viewport regardless of layout flow
     });
-  }, []);
+  }, [skip]);
+
+  // Nothing at all on PixelShovel — not the canvas, not the gradient divs. It is all under an
+  // opaque sheet there, and an invisible layer still costs a phone real frames.
+  if (skip) return null;
 
   return (
     <div

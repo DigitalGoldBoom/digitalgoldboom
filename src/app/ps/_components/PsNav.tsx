@@ -11,9 +11,10 @@ import { PS_WORDMARK } from "./psAssets";
  * pill CTA right. Collapses to a hamburger drawer on tablet / phone.
  */
 
+// No "Home": the wordmark to its left already goes home, and a nav that spends a slot repeating
+// the logo is a nav that has nothing to say.
 const LINKS = [
-  { label: "Home", href: "/ps" },
-  { label: "Free Chapters", href: "/ps#dgb" },
+  { label: "Digital Gold Boom", href: "/ps#dgb" },
   { label: "Contact", href: "/ps/contact" },
 ];
 
