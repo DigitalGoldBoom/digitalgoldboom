@@ -8,7 +8,38 @@ import Link from "next/link";
 import Book3D from "@/components/Book3D";
 import NumberCounter from "@/components/NumberCounter";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
-import { FREE_CHAPTERS } from "@/lib/chapters";
+import StickyCTA from "@/components/StickyCTA";
+import { FREE_CHAPTERS_V2 } from "@/lib/chapters";
+import type { Metadata } from "next";
+
+/**
+ * /2 — the HOME PAGE REDESIGN, for Andrew to review side-by-side against the live `/`.
+ *
+ * The live home page is NOT touched. That was his instruction, in his words: "I don't want the
+ * current versions to be overwritten. That is really important." Same convention Session B used for
+ * /chapters2 and /chapters3 — put the alternative on a numbered route and let him judge the built
+ * thing rather than a description of it.
+ *
+ * What differs from `/`, and why (all four from the conversion-flow audit):
+ *  1. PROOF ABOVE THE ASK. The live hero's first CTA has zero proof above it — no number, no name,
+ *     nothing to believe. The author's credential now sits in the fold, in the skim layer.
+ *  2. THE CTAs STOP BOUNCING OFF-PAGE. This page already carries a full lead-magnet form at
+ *     #start-reading that NOTHING linked to — every button navigated to /free instead, paying a
+ *     page load to land on a second capture surface. The buttons now scroll to the form that's
+ *     already here.
+ *  3. A PHONE FOLD THAT ISN'T DEAD. 128px of padding under a fixed nav is gone; the book comes up.
+ *  4. TABLET EXISTS. Every grid used to jump grid-cols-1 → lg:, so 768–1023px got the phone stack
+ *     inside a 1320px shell.
+ * Plus the chapter rows use the copy-chief-passed lines and the inverted weight (the claim is the
+ * headline; the chapter title is the label), so the book's own numbers stop being the faintest text
+ * on the page.
+ *
+ * NOINDEX — this is a review route, not a second home page. It must never compete with `/` in search.
+ */
+export const metadata: Metadata = {
+  title: "Home — redesign preview",
+  robots: { index: false, follow: false },
+};
 
 const STEPS = [
   { n: "01", t: "Verify", b: "A deposit is drilled, sampled and certified to institutional standard (NI 43-101) — the same proof a $10-billion mine is financed on." },
@@ -34,7 +65,7 @@ function SectionLabel({ n, children }: { n: string; children: React.ReactNode })
   );
 }
 
-export default function V2Page() {
+export default function HomeRedesignPage() {
   // Preload the hero book-cover art — it's the LCP element but ships as a CSS background image
   // inside Book3D, which browsers fetch late at low priority. Preloading (hoisted into <head> in
   // the SSR HTML) starts the download immediately, in parallel with the page JS, so LCP lands far
@@ -43,15 +74,19 @@ export default function V2Page() {
   ReactDOM.preload("/book3d-framer/cover-texture.webp", { as: "image", fetchPriority: "high" });
 
   return (
-    <div className="v2 dgb-vault-bg relative overflow-clip">
+    <div className="rd2 v2 dgb-vault-bg relative">
       {/* Gold shimmer field lives in the root layout now (SiteBackground) — one continuous field
           for the whole site, so it never re-pops between pages. dgb-vault-bg makes this page's
           base transparent so that single field shows through. */}
       <main className="relative z-10">
         {/* ── HERO ─────────────────────────────────────────────── */}
+        {/* The phone hero was ~1,110px — 1.5 screens — with 128px of dead padding under a fixed nav,
+            so the book (the thing being offered) started BELOW the first screen on most phones. The
+            padding comes down and the book comes up: a social visitor should SEE the product before
+            he is asked for anything. */}
         <section className="relative min-h-[100svh] flex items-center">
-          <div className="mx-auto w-full max-w-[1320px] px-6 md:px-10 pt-32 pb-20 lg:pt-28">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
+          <div className="mx-auto w-full max-w-[1320px] px-6 md:px-10 pt-24 pb-16 md:pt-28 md:pb-20">
+            <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-8 lg:gap-8 items-center">
               <div>
                 <p className="v2-eyebrow mb-8">A shift in the gold industry</p>
                 <h1 className="v2-display" style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)" }}>
@@ -59,16 +94,29 @@ export default function V2Page() {
                   <br />
                   It&rsquo;s not <span className="v2-gold">bitcoin.</span>
                 </h1>
-                <p className="mt-8 max-w-[50ch] text-xl leading-relaxed" style={{ color: "var(--v2-dim)" }}>
+                <p className="mt-7 max-w-[50ch] text-lg leading-relaxed sm:text-xl" style={{ color: "var(--v2-dim)" }}>
                   For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span> That just ended &mdash; and almost no one has noticed yet.
                 </p>
+
+                {/* THE PROOF, ABOVE THE ASK — the redesign's central move on this page.
+                    The live home page's first CTA sits ~497px down a phone with NOTHING above it but
+                    an eyebrow, a claim and a promise: no number, no name, no reason to believe. The
+                    first hard fact lands 2,000px further on, and the author's credential — the
+                    strongest proof a book has — is 62%-opacity body prose six screens down.
+                    One line, in the skim layer, before he is asked for anything. */}
+                <p className="lm-principle mt-7" style={{ maxWidth: "48ch" }}>
+                  <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Andrew Fletcher</span> was
+                  President &amp; CEO of Great Eagle Gold &mdash; now NatBridge Resources, the first
+                  gold company built for this model. He has assessed hundreds of gold projects.
+                </p>
+
                 {/* Two doors, one primary. The free chapters are the offer that is real today, so
                     they keep the weight. The book sits beside it as a quiet second door: a visitor
                     who already wants it should never have to hunt for the price, and a payment
                     processor reviewing the site should reach the product page from the front door
                     rather than a URL handed to them. (Session B's call, at Andrew's request — kept.) */}
                 <div className="mt-9 flex flex-wrap items-center gap-3">
-                  <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
+                  <a href="#start-reading" className="v2-btn">Read the first 5 chapters — free</a>
                   <Link href="/buy" className="v2-btn-ghost">The full book — $37</Link>
                 </div>
                 {/* PRE-LAUNCH, said plainly. The book is still being written — the last chapters
@@ -103,7 +151,7 @@ export default function V2Page() {
           id="start-reading"
           className="scroll-mt-24 mx-auto w-full max-w-[1320px] px-6 md:px-10 py-20 md:py-28"
         >
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-20">
+          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1.02fr_0.98fr] md:gap-10 lg:gap-20">
             <div>
               <span className="lm-eyebrow">Free preview</span>
               <h2
@@ -117,7 +165,7 @@ export default function V2Page() {
               </p>
 
               <ol className="mt-8">
-                {FREE_CHAPTERS.map((c, i) => (
+                {FREE_CHAPTERS_V2.map((c, i) => (
                   <li key={c.title} className="lm-row">
                     <span className="lm-row-n" aria-hidden>
                       {String(i + 1).padStart(2, "0")}
@@ -144,7 +192,7 @@ export default function V2Page() {
         {/* ── $22T STAT ────────────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
           <SectionLabel n="00">The stakes</SectionLabel>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-10 lg:gap-20 items-center">
             <div className="v2-display font-mono v2-gold" style={{ fontSize: "clamp(5rem, 16vw, 12rem)", lineHeight: 0.85 }}>
               <NumberCounter start={0} end={22} prefix="$" suffix="T" />
             </div>
@@ -164,7 +212,7 @@ export default function V2Page() {
         {/* ── REFRAME ──────────────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
           <SectionLabel n="01">The reframe</SectionLabel>
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-8 lg:gap-16 items-start">
             <h2 className="v2-display" style={{ fontSize: "clamp(2.2rem, 5vw, 4.25rem)", maxWidth: "15ch" }}>
               Gold mining <span className="v2-gold" style={{ fontStyle: "italic", fontWeight: 300 }}>already</span> runs on verification, not extraction.
             </h2>
@@ -199,7 +247,7 @@ export default function V2Page() {
         {/* ── WHY NOW ──────────────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
           <SectionLabel n="03">Why now</SectionLabel>
-          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-[0.95fr_1.05fr] gap-10 md:gap-8 lg:gap-16 items-start">
             <h2 className="v2-display" style={{ fontSize: "clamp(2rem, 3.6vw, 3.25rem)", maxWidth: "18ch" }}>
               Why this is worth understanding <span className="v2-gold">now.</span>
             </h2>
@@ -245,7 +293,7 @@ export default function V2Page() {
                 ))}
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-3">
-                <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
+                <a href="#start-reading" className="v2-btn">Read the first 5 chapters — free</a>
               </div>
               <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
                 Free · sent to your inbox · and first in line for the full book.
@@ -306,7 +354,7 @@ export default function V2Page() {
             you and the chapters are yours, and you&rsquo;re first in line when the complete book is ready.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4">
-            <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
+            <a href="#start-reading" className="v2-btn">Read the first 5 chapters — free</a>
             <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
               Free · sent to your inbox · no payment
             </span>
@@ -316,6 +364,11 @@ export default function V2Page() {
           </p>
         </section>
       </main>
+
+      {/* The phone-only ask that follows the reader. This page runs ~7 screens on a phone and had
+          exactly one CTA the whole way down — a reader convinced by the author section had to
+          scroll-hunt back to the top to act. It disarms when the form is on screen. */}
+      <StickyCTA targetId="start-reading" label="Get the first 5 chapters" source="home2_sticky" />
     </div>
   );
 }

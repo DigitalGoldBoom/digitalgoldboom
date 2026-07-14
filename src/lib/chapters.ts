@@ -20,6 +20,49 @@ export type ChapterTeaser = { title: string; line: string };
 export const FREE_CHAPTERS: ChapterTeaser[] = [
   {
     title: "Gold's Legacy and Its Digital Future",
+    line: "The world wants gold more than ever. The capital that wants it most cannot hold it — purely because of how the metal is produced.",
+  },
+  {
+    title: "The Extraction S.P.I.R.A.L.™",
+    line: "Six forces compounding against every new mine. In Panama, a $10 billion mine vanished in 39 days.",
+  },
+  {
+    title: "Gold's First Principles",
+    line: "93% of gold is never consumed, only held. Its value is created the moment geology proves it is there — not when it is dug up.",
+  },
+  {
+    title: "Digital Alchemy",
+    line: "The rails are already proven: $6 billion of gold trades in token form today. Aim them at the gold still in the ground.",
+  },
+  {
+    title: "The Scorecard",
+    line: "Same deposit, same gold, same price. Run both models head to head and it is not close.",
+  },
+];
+
+/**
+ * FREE_CHAPTERS_V2 — the REDESIGN's chapter lines. Used ONLY by the versioned "2" routes
+ * (/2 and /free2). The live pages above are untouched; nothing here changes what is on the site
+ * today. Andrew reviews the "2" pages, and only then do we decide whether these replace the ones
+ * above.
+ *
+ * Why they differ: the author's note was "keep it to the main chapter objective — ch8 can show you
+ * that." Chapter 8's "Seven Chapters and the Case" states each chapter's argument in his own words,
+ * so each line now LEADS with what the chapter sets out to prove and CLOSES with the proof — the
+ * shape Ch 8 itself uses. The old lines reach for a hook first (the Panama figure, the 93%) and
+ * leave the objective implied.
+ *
+ * Graded by dgb-copy-chief: PASS 91/100, compliance gate clean. Two corrections it forced, worth
+ * knowing about because both were in the LIVE lines above:
+ *   · "93% of gold is never consumed" is wrong as written — the book's 93% is a share of ANNUAL
+ *     DEMAND (WGC 2024: 93% monetary / 7% industrial), not of all the gold that exists. Rescoped.
+ *   · "$6 billion of gold trades in token form" needs to say WHAT that is — receipts for bullion
+ *     already mined, refined and vaulted — or a reader blurs it with the book's own model. Plus an
+ *     as-of date, because it went $1.9B → $6B in twelve months and will read stale without one.
+ */
+export const FREE_CHAPTERS_V2: ChapterTeaser[] = [
+  {
+    title: "Gold's Legacy and Its Digital Future",
     line: "The asset modern capital wants most is the one it cannot hold — not because of what gold is, but because of how the metal is produced.",
   },
   {
