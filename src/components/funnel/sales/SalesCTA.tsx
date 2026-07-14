@@ -14,8 +14,12 @@ const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
  *   - the educational fine print ("Educational — not financial advice.")
  *
  * `fine` lets the close/final CTA pass the fuller compliance line (secure checkout via
- * LemonSqueezy). `subline` is the optional dated-urgency line
- * used on /s ("Read it before the first tokens trade on July 8, 2026.").
+ * LemonSqueezy). `subline` is the optional urgency line
+ * used on /s ("Read it before the first tokens trade.").
+ *
+ * EVERGREEN RULE: never bake a launch date into a subline. Trading begins when Kraken
+ * completes its listing review — a date that has already slipped once (the July 8, 2026
+ * line shipped live and went false). See C:\DGB-Brain EXPIRY-REGISTRY.
  */
 export default function SalesCTA({
   event,

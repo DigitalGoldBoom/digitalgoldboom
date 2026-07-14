@@ -41,18 +41,9 @@ export default function Footer() {
   const pathname = usePathname();
   // PixelShovel (/ps) has its own brand footer; /concept-* are internal design
   // previews that bring their own. The standard footer renders on every other page.
-  if (
-    isPixelShovelView(pathname) ||
-    pathname.startsWith("/concept") ||
-    pathname === "/film" ||
-    pathname.startsWith("/film/") ||
-    pathname === "/deposit" ||
-    pathname.startsWith("/deposit/") ||
-    pathname === "/deposit2" ||
-    pathname.startsWith("/deposit2/") ||
-    pathname === "/deposit3" ||
-    pathname.startsWith("/deposit3/")
-  ) {
+  // (The /film and /deposit* exceptions that used to sit here went with those routes: they are
+  // archived in web/_archived-routes/.)
+  if (isPixelShovelView(pathname) || pathname.startsWith("/concept")) {
     return null;
   }
 

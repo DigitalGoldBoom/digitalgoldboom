@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
+import { createElement, useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
 
 /**
  * Reveal — the house "reveal-on-scroll" motion for the /v1 + /s sales funnel.
@@ -76,19 +76,19 @@ export default function Reveal({
     return () => io.disconnect();
   }, [threshold]);
 
-  return (
-    <Tag
-      ref={ref}
-      className={className}
-      style={{
+  return createElement(
+    Tag,
+    {
+      ref,
+      className,
+      style: {
         ...style,
         opacity: shown ? 1 : 0,
         transform: shown ? "translateY(0)" : `translateY(${y}px)`,
         transition: `opacity 500ms cubic-bezier(0.22,0.61,0.36,1) ${delay}ms, transform 500ms cubic-bezier(0.22,0.61,0.36,1) ${delay}ms`,
         willChange: shown ? "auto" : "opacity, transform",
-      }}
-    >
-      {children}
-    </Tag>
+      },
+    },
+    children,
   );
 }

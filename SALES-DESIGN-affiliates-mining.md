@@ -15,7 +15,7 @@
 
 # PAGE 1 — `/affiliates`
 
-> **⚠️ CASH-ONLY REWORK — 2026-07-01 (supersedes the prior cash→NATG ladder spec).** Author decision: affiliates are paid **cash commission only — NO NATG tokens.** Tracking + payouts run on **LemonSqueezy's native, built-in affiliate program** (free; affiliates sign up through LS, get a unique link + their own dashboard, and are paid by wire on LS's schedule). The whole cash → 50%-NATG → 100%-NATG view-target ladder is **REMOVED**. The page's single job is now: get a good promoter to **sign up as a LemonSqueezy affiliate** to promote the $17 book and earn a cash commission on every sale they refer. The `/mining-industry` section of this file is unchanged.
+> **⚠️ CASH-ONLY REWORK — 2026-07-01 (supersedes the prior cash→NATG ladder spec).** Author decision: affiliates are paid **cash commission only — NO NATG tokens.** Tracking + payouts run on **LemonSqueezy's native, built-in affiliate program** (free; affiliates sign up through LS, get a unique link + their own dashboard, and are paid by wire on LS's schedule). The whole cash → 50%-NATG → 100%-NATG view-target ladder is **REMOVED**. The page's single job is now: get a good promoter to **sign up as a LemonSqueezy affiliate** to promote the book (the $37 early-reader launch price, rising to the regular $97) and earn a cash commission on every sale they refer. The `/mining-industry` section of this file is unchanged.
 
 ## Conversion goal + audience (design to THIS, not the book funnel)
 
@@ -75,7 +75,7 @@ This page now sits in the SAME clean lane as the book: it is a **referral REWARD
 - **Q: How much do I earn?** — You earn [WIRE: commission %, up to 30%] of the price on every copy sold through your link. The exact rate is shown when you sign up.
 - **Q: How are sales tracked?** — LemonSqueezy tracks every click and sale tied to your unique link, in your own dashboard. You don't have to manage anything.
 - **Q: How and when do I get paid?** — LemonSqueezy pays your commission balance by wire on its regular payout schedule, after its standard holding period. [VERIFY exact cadence + holding period + any minimum payout against current LS docs.]
-- **Q: Do I need to own crypto?** — No. This is a straightforward cash commission for selling a $17 book. No crypto, no wallet, nothing token-related.
+- **Q: Do I need to own crypto?** — No. This is a straightforward cash commission for selling a $37 book. No crypto, no wallet, nothing token-related.
 - **Q: What does it cost me?** — Nothing. Signing up as a LemonSqueezy affiliate is free.
 - **Q: What counts as a valid sale?** — A real purchase made through your link. LemonSqueezy handles the attribution and the standard rules; you'll see them when you sign up.
 

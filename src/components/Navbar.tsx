@@ -26,19 +26,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // PixelShovel is a separate site (pixelshovel.com) living under /ps with its own
-  // nav — never show the Digital Gold Boom navbar there. /film is the cinematic
-  // scroll sales page: no nav, no external link — its only exit is the buy CTA.
-  const isPixelShovel =
-    isPixelShovelView(pathname) ||
-    pathname === "/film" ||
-    pathname.startsWith("/film/") ||
-    pathname === "/deposit" ||
-    pathname.startsWith("/deposit/") ||
-    pathname === "/deposit2" ||
-    pathname.startsWith("/deposit2/") ||
-    pathname === "/deposit3" ||
-    pathname.startsWith("/deposit3/");
+  // PixelShovel is a separate site (pixelshovel.com) living under /ps with its own nav — never
+  // show the Digital Gold Boom navbar there. (The /film and /deposit* exceptions that used to sit
+  // here went with those routes: they are archived in web/_archived-routes/.)
+  const isPixelShovel = isPixelShovelView(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);

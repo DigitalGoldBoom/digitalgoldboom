@@ -16,7 +16,7 @@ Vercel. Nothing on the site charges anyone until you do this.
 | Piece | Where | What it does |
 |---|---|---|
 | Buy button | `src/components/BuyButton.tsx` | Opens LemonSqueezy's secure checkout overlay. Disabled until the checkout URL is set. |
-| Conversion page | `/book` | The full sales page ($17, 3D book, what you'll learn, FAQ). |
+| Conversion page | `/book` | The full sales page ($37 early-reader launch price, 3D book, what you'll learn, FAQ). |
 | Plain page | `/buy` | The clean, minimal product page — **this is the one to show LemonSqueezy for review.** |
 | Thank-you page | `/thank-you` | Where buyers land after paying. |
 | Purchase webhook | `src/app/api/lemonsqueezy/webhook/route.ts` | Tags each buyer into your email list automatically. |
@@ -33,7 +33,7 @@ Vercel. Nothing on the site charges anyone until you do this.
 
 1. Products → **New product**.
 2. Name: **Digital Gold Boom**. Type: **Digital / single payment**.
-3. Price: **$17** (one-time).
+3. Pricing model: **list price $97**, sold now at the **$37 early-reader launch price** (one-time). Set the product's regular price to **$97** and the current charge to **$37** — the real discount lives in LemonSqueezy (list $97 → launch $37), so the struck-through $97 shown on the sales pages is genuine. The $37 is offered in exchange for an honest review.
 4. Upload the book files so LemonSqueezy delivers them: **PDF, EPUB, and Kindle (MOBI)**.
    - Use the finished export **with Chapter 17 removed** (the version you're sending as final).
 5. Description: keep it as *information and analysis about the tokenization industry* (not "buy a token").
@@ -93,5 +93,6 @@ So every buyer is added to your email list, tagged as a buyer:
 ## Reminder for the site
 
 The homepage still shows other prices (e.g. "$39 after", a "$39 / $99 / $199-yr" value stack).
-Decide what those refer to (newsletter vs book) so the site isn't contradictory with the **$17**
-book price. That's a content decision, flagged separately.
+Decide what those refer to (newsletter vs book) so the site isn't contradictory with the book's
+**$37 early-reader launch price** (rising to the regular **$97**). That's a content decision,
+flagged separately.

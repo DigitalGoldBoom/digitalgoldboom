@@ -151,11 +151,42 @@
 
 ---
 
+## 7a. Pinterest (API v5) — CONNECTED (read-only)
+
+**Status:** ✅ Read-only connection live and verified 2026-07-01. Account confirmed via
+`GET /v5/user_account` (HTTP 200): username **andrewfletcherau80**, business **PixelShovel**,
+BUSINESS account, website digitalgoldboom.com.
+
+| Item | Value / State |
+|------|---------------|
+| Pinterest **App id** | `1586194` (not secret) |
+| Pinterest **App secret** | 🔒 **UNAVAILABLE — "trial access pending"** (Pinterest must approve the app before the secret unlocks) |
+| Current token | Read-only **trial token** (Production Limited), generated from the app dashboard. **Temporary — expires.** Stored in `web/.env.local` only. |
+| Scopes granted | `user_accounts:read`, `boards:read`, `pins:read` (read-only) |
+| Write access (post pins) | ❌ Not yet requested — needs Pinterest's next approval tier |
+
+**Code (in the live Next.js app, `web/`):**
+- `src/lib/pinterest.ts` — OAuth + API helpers (`buildAuthUrl`, `exchangeCodeForToken`,
+  `refreshAccessToken`, `getUserAccount`).
+- `GET /api/pinterest/connect` — starts the permanent OAuth handshake (blocked until App secret unlocks).
+- `GET /api/pinterest/callback` — swaps the code for tokens, displays them to paste into env.
+- `GET /api/pinterest/status` — "is it connected?" check (reads `PINTEREST_ACCESS_TOKEN`).
+- Env keys: see `.env.example` → Pinterest block.
+
+**Next steps (in order):**
+- [ ] Wait for Pinterest to approve trial access → App secret appears.
+- [ ] Once secret is set, run `/api/pinterest/connect` for a **permanent, auto-refreshing** token
+      (replaces the temporary trial token).
+- [ ] Request **write** access when we want to auto-post pins (add `pins:write` / `boards:write`).
+- [ ] TODO[later]: move token storage from env to Vercel KV so refresh is automatic.
+
+---
+
 ## 8. Future Integrations (Post-MVP)
 
 | Integration | Purpose | Priority |
 |-------------|---------|----------|
-| Stripe / Lemon Squeezy | Paid products | ✅ DONE — LemonSqueezy is the live checkout ($17 book) |
+| Stripe / Lemon Squeezy | Paid products | ✅ DONE — LemonSqueezy is the live checkout (book: $37 early-reader launch price, rising to the regular $97) |
 | Affiliate tracking | Book referrals | ✅ DECIDED — **LemonSqueezy native affiliate program** (LOCKED 2026-06-30 by dgb-cmo). Built into our existing checkout: set commission %, cookie window, auto/hand-approve affiliates, automatic tracking + payouts (PayPal/bank), only a 2% fee on referred sales — no new tool, no new subscription, no new code. Source: lemonsqueezy.com/marketing/affiliates (2026-06-30). The on-site `/affiliates` page is the human-facing recruit/explainer; the tracking engine is LS. |
 | NatGold API | Live token data | When available |
 | RSS feed output | Syndication | Phase 2 |

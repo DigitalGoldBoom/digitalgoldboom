@@ -80,7 +80,7 @@ export default function TokenLaunch() {
             style={{ fontSize: "clamp(1.9rem, 3.4vw, 2.6rem)", color: "#fff" }}
           >
             <span style={{ color: GOLD }}>You&rsquo;re Early!</span> The Official Digital Gold
-            Mining Token launches July 8, 2026 on Kraken.
+            Mining Token launches on Kraken.
           </h2>
 
           <div
@@ -93,8 +93,8 @@ export default function TokenLaunch() {
               countries.
             </p>
             <p>
-              Reservations closed 5.3&times; oversubscribed. The NatGold Token launches July 8,
-              2026 on Kraken.
+              Reservations closed 5.3&times; oversubscribed. Trading begins once Kraken completes
+              its standard listing review and onboarding.
             </p>
           </div>
         </div>

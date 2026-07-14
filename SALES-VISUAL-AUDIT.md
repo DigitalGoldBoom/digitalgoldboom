@@ -16,9 +16,9 @@
 
 Ranked by conversion/comprehension lift per unit of build + asset cost. The first three are the biggest wins; build these first.
 
-1. **`/book` HERO — replace the flat 3D-book-on-color with the "verified gold lit from within" field + Book3D in a shimmer ground.** `/book` is the ONE live page that takes the $17 sale today, and its hero is visually the weakest of all the buy surfaces (plain `--bg-contrast-deep` block, no shimmer, no gold light). Bringing the v2/SALES-SPEC "one big idea" treatment to this page is the single highest-ROI visual on the live site. *(ADD — /book Hero)*
+1. **`/book` HERO — replace the flat 3D-book-on-color with the "verified gold lit from within" field + Book3D in a shimmer ground.** `/book` is the ONE live page that takes the $37 sale today, and its hero is visually the weakest of all the buy surfaces (plain `--bg-contrast-deep` block, no shimmer, no gold light). Bringing the v2/SALES-SPEC "one big idea" treatment to this page is the single highest-ROI visual on the live site. *(ADD — /book Hero)*
 
-2. **`/book` "What you'll understand" — add a thin gold thread / lit-edge rhythm so the 6 learn-cards read as one map, not a flat grid.** This is the value-stack that justifies $17; a small motion/structure move (reveal-up + one accent move) lifts perceived completeness with near-zero asset cost. *(ADD — /book learn grid)*
+2. **`/book` "What you'll understand" — add a thin gold thread / lit-edge rhythm so the 6 learn-cards read as one map, not a flat grid.** This is the value-stack that justifies $37; a small motion/structure move (reveal-up + one accent move) lifts perceived completeness with near-zero asset cost. *(ADD — /book learn grid)*
 
 3. **`/mining-industry` HERO — one quiet, dignified documentary anchor (drill core / core-logging table, no people).** This page asks a credentialed professional to spend their time; a single piece of "we know this ground" texture earns the credibility the all-type hero currently asks for on faith. Reuses the `/v1` Beat-7 drill-core asset (no new production). *(ADD — /mining-industry Hero)*
 
@@ -49,7 +49,7 @@ Ranked by conversion/comprehension lift per unit of build + asset cost. The firs
 **LEAVE AS-IS.** This is the one-big-idea ground done right (`ShimmerDots` + radial gold top-glow + vertical darkening). It is exactly what the SALES-SPEC tells the new pages to reuse. Cover test: removing it would flatten the whole brand. Keep.
 
 ### Section: HERO — "Missed Bitcoin? Don't miss digital gold mining" + Book3D + email form
-**LEAVE AS-IS (visual) / REMOVE-FIX (claim).** The *visual* composition (Book3D in the field, the grid, the eye-path) is strong and needs no addition. But the headline is the brief's #1 named rejection trigger and the primary action is an email waitlist (not the $17 sale). Out of my lane to rewrite the words; flagged as a live compliance trip. Do not add visuals here — the fix is copy + swapping the email form for the book CTA.
+**LEAVE AS-IS (visual) / REMOVE-FIX (claim).** The *visual* composition (Book3D in the field, the grid, the eye-path) is strong and needs no addition. But the headline is the brief's #1 named rejection trigger and the primary action is an email waitlist (not the $37 sale). Out of my lane to rewrite the words; flagged as a live compliance trip. Do not add visuals here — the fix is copy + swapping the email form for the book CTA.
 
 ### Section: `$22T` count-up — "Verified gold, sitting in the ground"
 **LEAVE AS-IS.** This is the model section for compliant big-number drama: it's a *sourced industry fact* (gold in the ground), not a reader return, and the count-up earns it. The SALES-SPEC explicitly reuses this treatment. Don't touch. (The $22T number itself is price-perishable — owner's job, not a visual issue.)
@@ -71,8 +71,8 @@ Ranked by conversion/comprehension lift per unit of build + asset cost. The firs
 ### Section: THE BOOK — Book3D + 4 section cards (incl. "Cahuilla … $871M of tokenized value")
 **LEAVE AS-IS (visual) / REMOVE-FIX (one claim).** The Book3D + 2×2 section-card layout is good and needs no addition. But Section-03 card states "verified gold turned into **$871M of tokenized value** in six months" — a dollar-outcome figure the locked funnel copy deliberately strips from the public Cahuilla framing (SALES-SPEC pushback #1/#2). FIX the claim; the layout stays.
 
-### Section: PRICING — 3 options (Book $17 / Primer $99 / Updates $199)
-**REMOVE/FIX (offer, not visual).** The locked offer is **$17 book ONLY** for now (Primer + Updates come off). The 3-card pricing grid is fine *as a component*; it just shouldn't show three products. No visual ADD — if anything, simplify to one. (Owner's call; flagged.)
+### Section: PRICING — 3 options (Book $37 / Primer $99 / Updates $199)
+**REMOVE/FIX (offer, not visual).** The locked offer is **the $37 book ONLY** (early-reader launch price, rising to the regular $97) for now (Primer + Updates come off). The 3-card pricing grid is fine *as a component*; it just shouldn't show three products. No visual ADD — if anything, simplify to one. (Owner's call; flagged.)
 
 ### Section: FINAL CTA — "Understand it before Wall Street does" / "the thing to be early to" + email form
 **LEAVE AS-IS (visual) / REMOVE-FIX (claim).** Centered composition is correct. But "before Wall Street" + "the thing to be early to" are named investment-timing triggers, and the action is again an email form, not the sale. Flagged; copy owns it. No visual addition.
@@ -99,11 +99,11 @@ Ranked by conversion/comprehension lift per unit of build + asset cost. The firs
 
 ---
 
-# PAGE `/book` — the $17 sale page (LIVE, takes money today)
+# PAGE `/book` — the $37 sale page (LIVE, takes money today)
 
 > The most important live page for revenue, and visually the weakest of the buy surfaces: it uses the OLDER token system (`--bg-contrast-deep`, `card`, `eyebrow`, no shimmer, no gold light field) rather than the elevated v2 look the brief mandates for sales surfaces. This is where the highest-impact ADDs live.
 
-### Section: HERO — Book3D + "$17 · one-time" + BuyButton + trust ticks
+### Section: HERO — Book3D + "$37 · one-time" + BuyButton + trust ticks
 **ADD — wrap the hero in the v2 shimmer field + one gold light behind the headline; keep Book3D as the lit hero object.** *(PRIORITY #1)*
 - VISUAL CONCEPT: the same "verified gold, lit from within" ground as root, so the page a buyer lands on to pay feels unmistakably the premium brand — Book3D glowing in a dark shimmer field, one gold light source pointing the eye headline → price → button.
 - LAYOUT: keep the existing `[0.95fr_1.05fr]` grid and Book3D slot; swap the flat `--bg-contrast-deep` background for the v2 fixed `ShimmerDots` + radial gold top-glow stack; the gold price + BuyButton become the one bright focal point.
@@ -116,7 +116,7 @@ Ranked by conversion/comprehension lift per unit of build + asset cost. The firs
 
 ### Section: "What you'll understand by the end" — 6 learn-cards (3-col grid)
 **ADD — give the grid one accent rhythm: reveal-up stagger + a single gold lit-edge per card on scroll, so the six read as one complete map.** *(PRIORITY #2)*
-- VISUAL CONCEPT: the value-stack that justifies $17 should feel *cumulative*, not like a flat spec sheet. A subtle staggered reveal + one gold hairline accent per card (the repeated "one accent move") makes the completeness felt.
+- VISUAL CONCEPT: the value-stack that justifies $37 should feel *cumulative*, not like a flat spec sheet. A subtle staggered reveal + one gold hairline accent per card (the repeated "one accent move") makes the completeness felt.
 - LAYOUT: keep the 3-col grid; add a thin gold top-rule or left-edge to each `card` (matches v2 `.v2-tile` language) so the section has the one-accent discipline the rest of the brand uses.
 - IMAGERY: none. ROUTE: **code-only**. No icons needed — text carries each point; an icon per card would be decoration that fails the cover test.
 - MOTION: cards fade-up staggered 60ms on scroll-in (the house motion). Reduced-motion: final state, no transform.
@@ -133,7 +133,7 @@ Ranked by conversion/comprehension lift per unit of build + asset cost. The firs
 - IMAGERY: **author-supplied real photo** preferred (do NOT AI-generate a person). Fallback: a field/geology setting still, no identifiable face. ROUTE: **author-supplied** / **author-manual** placeholder.
 - MOTION: panel reveal-up; no gimmicks (trust beats want stillness). Reduced-motion: static.
 - RESPONSIVE: portrait + text side-by-side desktop; stack on tablet/phone, portrait ~64% width centered.
-- CONVERSION RATIONALE: a named, pictured author who "writes from inside the industry" is the credibility anchor for a $17 info product about a sensitive topic.
+- CONVERSION RATIONALE: a named, pictured author who "writes from inside the industry" is the credibility anchor for a $37 info product about a sensitive topic.
 - PERFORMANCE: one ≤250KB WebP, explicit dimensions, lazy.
 - ACCESSIBILITY: `alt="Andrew Fletcher, author"`; if placeholder, describe the scene, no people.
 - *Pushback:* only worth it IF a real photo (or an honest environment still) is available. Do not fabricate a person to fill the slot — an empty, well-set type block beats a fake face.

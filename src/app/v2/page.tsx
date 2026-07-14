@@ -15,6 +15,17 @@ const STEPS = [
   { n: "03", t: "Trade", b: "Priced off the gold industry's own math — spot price minus mining cost. The first tokens trade on Kraken once its listing review completes." },
 ];
 
+// What is actually inside the five free chapters, one line each. Same copy the /free page uses, so
+// the promise a reader is given is identical wherever they meet it. This is the whole point of the
+// opt-in block: show the contents, then ask. An email is cheap to ask for and expensive to waste.
+const CHAPTER_TEASERS = [
+  "What gold really is — and why central banks are quietly moving back onto it.",
+  "Why the six-thousand-year-old way of producing gold is finally breaking down.",
+  "Where gold's value actually comes from — and the part everyone assumed couldn't change.",
+  "The reframe: gold mining already runs on verification, not just extraction.",
+  "The model that reaches $22 trillion of already-verified gold — in plain English.",
+];
+
 const SECTIONS = [
   { n: "01", title: "The Inevitability of Digital Gold Mining", meta: "Chapters 1–8", body: "What gold is, why the old way of producing it is failing, where its value actually comes from, and the force large enough to move it — brought together into a single case." },
   { n: "02", title: "The NatGold Digital Gold Mining Ecosystem", meta: "Chapters 9–16", body: "Who built it and whether it actually works: the people, the proof, the method, the approval gate, the mint, the partners, the forecast, and the demand — ending on the honest challenges." },
@@ -76,34 +87,48 @@ export default function V2Page() {
           </div>
         </section>
 
-        {/* ── LEAD MAGNET — first 5 chapters free (email capture) ─── */}
-        <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 pb-8">
+        {/* ── LEAD MAGNET — first 5 chapters free (email capture) ───
+            Was a centred box that restated the hero's headline word for word and then asked for an
+            email, having shown nothing new in between: the second ask, with nothing earned since
+            the first. It now SHOWS the goods — the five chapters, by name — and the form sits
+            beside them. A reader who can see what is behind the door does not need persuading to
+            knock. Split, not centred, so the eye lands on the contents first and the field second. */}
+        <section id="start-reading" className="scroll-mt-24 mx-auto w-full max-w-[1320px] px-6 md:px-10 pb-8">
           <div
-            className="mx-auto max-w-[880px] rounded-[24px] border p-8 md:p-12 text-center"
+            className="grid grid-cols-1 items-center gap-10 rounded-[24px] border p-8 md:p-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16"
             style={{
               borderColor: "rgba(232,178,58,0.28)",
               background: "rgba(255,255,255,0.03)",
               boxShadow: "0 24px 60px rgba(0,0,0,0.45)",
             }}
           >
-            <p className="v2-eyebrow justify-center mb-5" style={{ display: "inline-flex" }}>
-              Start reading free
-            </p>
-            <h2
-              className="v2-display mx-auto"
-              style={{ fontSize: "clamp(1.9rem, 4vw, 3rem)", maxWidth: "20ch" }}
-            >
-              Read the first <span className="v2-gold">5 chapters</span> free.
-            </h2>
-            <p
-              className="mt-5 mx-auto text-lg leading-relaxed"
-              style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}
-            >
-              The plain-English opening of <span style={{ color: "#F4F4F7" }}>Digital Gold Boom</span> —
-              what gold really is, why the old way of producing it is breaking down, and the shift
-              almost no one has noticed yet. Enter your email and start reading now.
-            </p>
-            <div className="mt-8 mx-auto max-w-[560px]">
+            <div>
+              <h2 className="v2-display" style={{ fontSize: "clamp(1.9rem, 3.6vw, 2.9rem)", maxWidth: "16ch" }}>
+                Start with the first <span className="v2-gold">5 chapters.</span>
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "46ch" }}>
+                Free, in your inbox. Here is exactly what you get:
+              </p>
+
+              <ol className="mt-7 flex flex-col gap-4">
+                {CHAPTER_TEASERS.map((c, i) => (
+                  <li key={c} className="flex items-start gap-4">
+                    <span
+                      className="font-mono text-sm leading-[1.6] shrink-0"
+                      style={{ color: "var(--v2-gold)" }}
+                      aria-hidden
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="leading-[1.6]" style={{ color: "var(--v2-dim)" }}>
+                      {c}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="lg:pl-4">
               <LeadMagnetForm source="home_lead_magnet" />
             </div>
           </div>
