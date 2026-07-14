@@ -65,9 +65,15 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // The book (Ch 7) prints digitalgoldboom.com/partners — every reader who types it
-      // must land on the affiliate program, not a 404. Permanent: the book URL never changes.
+      // URLS PRINTED IN THE BOOK. These are ink: they cannot be changed after the fact, so the
+      // SITE has to answer them, forever, exactly as written. A 404 here is a reader who reached
+      // the last page, decided to act, typed the address in — and hit a wall.
+      //
+      // "An Invitation to Influencers, Advocates & Believers" → "Start at digitalgoldboom.com/partners"
       { source: "/partners", destination: "/affiliates", permanent: true },
+      // "An Invitation to the Mining Industry" → "Visit: digitalgoldboom.com/mining"
+      // This one was DEAD. The page lives at /mining-industry, and the book never said so.
+      { source: "/mining", destination: "/mining-industry", permanent: true },
       { source: "/prices", destination: "/live", permanent: true },
       { source: "/news", destination: "/", permanent: true },
     ];
