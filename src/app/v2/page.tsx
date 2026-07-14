@@ -163,11 +163,11 @@ export default function V2Page() {
           <SectionLabel n="01">The reframe</SectionLabel>
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-start">
             <h2 className="v2-display" style={{ fontSize: "clamp(2.2rem, 5vw, 4.25rem)", maxWidth: "15ch" }}>
-              Gold mining <span className="v2-gold" style={{ fontStyle: "italic", fontWeight: 300 }}>already</span> runs on verification, not extraction.
+              Gold mining <span className="v2-gold" style={{ fontStyle: "italic", fontWeight: 300 }}>already</span>{" "}runs on verification, not extraction.
             </h2>
             <div className="lg:pt-3">
               <p className="text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
-                <span style={{ color: "#F4F4F7", fontWeight: 600 }}>No billion-dollar gold investment happens without geological verification first.</span> Every deposit that ever made it into the system started with a geologist proving the gold exists. Verification is the backbone — extraction is the part everyone assumed was non-negotiable.
+                <span style={{ color: "#F4F4F7", fontWeight: 600 }}>No billion-dollar gold investment happens without geological verification first.</span>{" "}Every deposit that ever made it into the system started with a geologist proving the gold exists. Verification is the backbone — extraction is the part everyone assumed was non-negotiable.
               </p>
               <p className="mt-8" style={{ fontSize: "clamp(1.5rem, 2.6vw, 2.25rem)", fontWeight: 300, color: "#F4F4F7", letterSpacing: "-0.02em" }}>
                 It isn&rsquo;t. <span className="v2-gold">Not anymore.</span>
@@ -224,7 +224,7 @@ export default function V2Page() {
                 Tell all. Nothing held back.
               </p>
               <p className="mt-8 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}>
-                The first <span style={{ color: "#F4F4F7" }}>plain-English account</span> of digital gold mining — the whole story, start to finish. Written so a reader with no background in gold, blockchain, or investing can follow every step — detailed and carefully sourced, and clear about what&rsquo;s established today versus what&rsquo;s a forward-looking forecast.
+                The first <span style={{ color: "#F4F4F7" }}>plain-English account</span>{" "}of digital gold mining — the whole story, start to finish. Written so a reader with no background in gold, blockchain, or investing can follow every step — detailed and carefully sourced, and clear about what&rsquo;s established today versus what&rsquo;s a forward-looking forecast.
               </p>
               <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}>
                 By <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Andrew Fletcher</span> — former President &amp; CEO of Great Eagle Gold, now NatBridge Resources, which signed the first NatGold supply agreement.
@@ -266,7 +266,7 @@ export default function V2Page() {
                 Andrew Fletcher was President &amp; CEO of Great Eagle Gold — now <span style={{ color: "#F4F4F7", fontWeight: 600 }}>NatBridge Resources</span>, the first gold company built to align with NatGold&rsquo;s Digital Gold Mining Model. He signed the landmark supply agreement that delivers tokenization-ready gold deposits to back the NatGold Token (&ldquo;NATG&rdquo;), and has assessed hundreds of gold projects.
               </p>
               <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
-                In 2020 he walked away from a <span style={{ color: "#F4F4F7", fontWeight: 600 }}>$30 million gold deal in Colombia</span> after standing at the edge of a mercury-contaminated pit where workers, some of them teenagers, handled the material without protection. That day is where this book began.
+                In 2020 he walked away from a <span style={{ color: "#F4F4F7", fontWeight: 600 }}>$30 million gold deal in Colombia</span>{" "}after standing at the edge of a mercury-contaminated pit where workers, some of them teenagers, handled the material without protection. That day is where this book began.
               </p>
               <p className="mt-6 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
                 The two companies at the center cannot tell the whole story — one is heads-down building it, the other is publicly listed and limited in what it can say. <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Digital Gold Boom</span>{" "}is the one place it is told start to finish: a full analysis of why digital gold mining is the future of gold, and a complete breakdown of NatGold Digital&rsquo;s vision, team, technology, and how digital gold mining works.
@@ -291,16 +291,22 @@ export default function V2Page() {
 
         {/* ── FINAL CTA / OFFER ────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1100px] px-6 md:px-10 py-28 md:py-36 text-center">
+          {/* ⚠ THIS BLOCK WAS A COMPLIANCE LANDMINE, not just weak copy.
+              It read: "Understand the future of gold BEFORE WALL STREET DOES" over "GET IT EARLY.
+              Get Informed. GET THE EDGE." That is investment-edge language — be early, get the edge,
+              beat the institutions — and it sits on the home page, which is the first thing the
+              payment processor reviewing this store reads. It is precisely the register that gets a
+              merchant application rejected, and the book's own doctrine bans "be early" and "before
+              Wall Street" by name. We sell a book. We do not sell an edge.
+
+              The paragraph under it was 31 words across three clauses, and it ended by announcing
+              that the book was not ready — the one thing this site is no longer saying. */}
           <SectionLabel n="06">Read it for yourself</SectionLabel>
           <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(2.4rem, 6vw, 5rem)", maxWidth: "20ch" }}>
-            Understand the future of gold <span className="v2-gold">before Wall Street does.</span>
+            Don&rsquo;t take my word for it. <span className="v2-gold">Read the case.</span>
           </h2>
-          <p className="mt-5 mx-auto v2-gold" style={{ fontSize: "clamp(1rem,1.4vw,1.25rem)", fontWeight: 500, letterSpacing: "0.02em" }}>
-            Get it Early. Get Informed. Get the Edge.
-          </p>
-          <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "48ch" }}>
-            Start with the first five chapters — free, sent to your inbox. Confirm the email we send
-            you and the chapters are yours, and you&rsquo;re first in line when the complete book is ready.
+          <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "44ch" }}>
+            The first five chapters, free to your inbox. The full book is $37 at launch.
           </p>
           {/* One line, same rule as the hero. The advice disclaimer already sits in the footer of
               every page on this site and has a page of its own; a second copy of it eight pixels

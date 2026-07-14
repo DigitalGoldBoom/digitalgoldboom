@@ -73,15 +73,15 @@ export default function CheckoutPage() {
           {/* The flow, stated. Step 2 is where it currently stops, and the page says why. */}
           <nav className="co-steps" aria-label="Checkout progress">
             <span className="co-step co-step--on">
-              <span className="co-step-n">1</span> Your order
+              <span className="co-step-n">1</span>{" "}Your order
             </span>
             <span className="co-step-line" aria-hidden />
             <span className="co-step co-step--on">
-              <span className="co-step-n">2</span> Payment
+              <span className="co-step-n">2</span>{" "}Payment
             </span>
             <span className="co-step-line" aria-hidden />
             <span className="co-step">
-              <span className="co-step-n">3</span> Delivery
+              <span className="co-step-n">3</span>{" "}Delivery
             </span>
           </nav>
 
@@ -171,7 +171,7 @@ export default function CheckoutPage() {
 
               <p className="co-fine">
                 By completing this order you agree to our{" "}
-                <Link href="/terms">Terms &amp; refund policy</Link> and{" "}
+                <Link href="/terms">Terms &amp; refund policy</Link>{" "}and{" "}
                 <Link href="/privacy">Privacy policy</Link>. Digital Gold Boom is an educational book
                 about an industry. It is not financial, investment, or tax advice, and it does not
                 sell tokens or digital assets. Questions:{" "}

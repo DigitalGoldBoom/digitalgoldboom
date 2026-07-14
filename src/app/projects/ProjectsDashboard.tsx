@@ -195,7 +195,7 @@ function MintedSummary({
         <div className="lg:col-span-5">
           <h1 className="v2-display" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.6rem)' }}>
             Gold in the ground.<br />
-            <span className="v2-gold">Tokens</span> on the chain.
+            <span className="v2-gold">Tokens</span>{" "}on the chain.
           </h1>
           <p className="mt-4 text-base max-w-[52ch]" style={{ color: 'var(--v2-dim,#cfcfd6)' }}>
             Two gold deposits. So far, only parts of each have been tokenized. The number
@@ -390,11 +390,11 @@ function MintedSummary({
             <p className="mt-4 text-[11px] leading-relaxed" style={{ color: 'var(--v2-faint,#71717a)' }}>
               <span className="uppercase tracking-[0.14em] mr-2" style={{ color: 'var(--v2-dim,#a1a1aa)' }}>
                 Note
-              </span>
+              </span>{" "}
               NatGold&apos;s July 9, 2026 release states an aggregate of{' '}
               <span className="tabular-nums" style={{ fontFamily: mono }}>{fmtTokens(disclosureTotal)}</span>{' '}
               NATG minted (the per-property figures above are the company&apos;s). The contract&apos;s
-              own <span style={{ fontFamily: mono }}>totalSupply()</span> reports{' '}
+              own <span style={{ fontFamily: mono }}>totalSupply()</span>{" "}reports{' '}
               <span className="tabular-nums" style={{ fontFamily: mono }}>{fmtTokens(mintedOnChain)}</span> — a
               difference of {Math.abs(variance)} token{Math.abs(variance) === 1 ? '' : 's'}. We show the
               chain figure. It is the only one that can be independently verified.
@@ -770,7 +770,7 @@ export default function ProjectsDashboard({
         <Eyebrow>The Deposits Behind the Tokens</Eyebrow>
         <p className="text-base max-w-[62ch]" style={{ color: 'var(--v2-dim,#cfcfd6)' }}>
           Both deposits are drilled and independently reported. The token figures below are
-          what each deposit would generate <em>in full</em> at the published resource-tier
+          what each deposit would generate <em>in full</em>{" "}at the published resource-tier
           ratios &mdash; a projection, not tokens in existence. Every resource, grade and
           drilling figure traces to an NI 43-101 technical report or a company disclosure.
         </p>
@@ -789,13 +789,13 @@ export default function ProjectsDashboard({
 
       <footer className="mt-20 pt-6 border-t text-xs leading-relaxed space-y-3" style={{ borderColor: 'rgba(255,255,255,0.08)', color: 'var(--v2-faint,#71717a)' }}>
         <p>
-          <span className="uppercase tracking-[0.14em] mr-2" style={{ color: 'var(--v2-dim,#a1a1aa)' }}>Minted supply</span>
-          Read live from the NATG contract&apos;s <span style={{ fontFamily: mono }}>totalSupply()</span> on
+          <span className="uppercase tracking-[0.14em] mr-2" style={{ color: 'var(--v2-dim,#a1a1aa)' }}>Minted supply</span>{" "}
+          Read live from the NATG contract&apos;s <span style={{ fontFamily: mono }}>totalSupply()</span>{" "}on
           Ethereum mainnet, refreshed every 5 minutes. It is never hard-coded, and it supersedes
           any figure quoted in a press release.
         </p>
         <p>
-          <span className="uppercase tracking-[0.14em] mr-2" style={{ color: 'var(--v2-dim,#a1a1aa)' }}>Projected tokens</span>
+          <span className="uppercase tracking-[0.14em] mr-2" style={{ color: 'var(--v2-dim,#a1a1aa)' }}>Projected tokens</span>{" "}
           Forward-looking. What the full deposits would generate if tokenized in their entirety at
           the published Measured/Indicated/Inferred ratios. NatGold has not committed to tokenizing
           the remaining ground, and these tokens do not exist.
@@ -808,10 +808,10 @@ export default function ProjectsDashboard({
           company disclosures. Historical estimates are labelled.
         </p>
         <p>
-          <span className="uppercase tracking-[0.14em] mr-2" style={{ color: 'var(--v2-dim,#a1a1aa)' }}>Certification</span>
+          <span className="uppercase tracking-[0.14em] mr-2" style={{ color: 'var(--v2-dim,#a1a1aa)' }}>Certification</span>{" "}
           NatGold states that resources described as &ldquo;NatGold Certified&rdquo; are certified against
           its own tokenization-eligibility criteria and that this does{' '}
-          <strong style={{ color: 'var(--v2-dim,#a1a1aa)' }}>not</strong> signify compliance with the JORC
+          <strong style={{ color: 'var(--v2-dim,#a1a1aa)' }}>not</strong>{" "}signify compliance with the JORC
           Code, NI 43-101 or S-K 1300.
         </p>
       </footer>

@@ -79,7 +79,7 @@ export default function TokenLaunch() {
             className="font-bold leading-[1.15]"
             style={{ fontSize: "clamp(1.9rem, 3.4vw, 2.6rem)", color: "#fff" }}
           >
-            <span style={{ color: GOLD }}>You&rsquo;re Early!</span> The Official Digital Gold
+            <span style={{ color: GOLD }}>You&rsquo;re Early!</span>{" "}The Official Digital Gold
             Mining Token launches on Kraken.
           </h2>
 

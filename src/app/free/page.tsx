@@ -85,7 +85,7 @@ export default function FreeChaptersPage() {
                 <p>
                   The industry doesn&rsquo;t wait for the digging before it pays. Once geology proves
                   the gold is there, its value is bankable &mdash; that is what the billion was for.{" "}
-                  <span style={{ color: "#F4F4F7" }}>Verification is the value.</span> Digging it up is
+                  <span style={{ color: "#F4F4F7" }}>Verification is the value.</span>{" "}Digging it up is
                   just the expensive, destructive way of collecting it.
                 </p>
               </div>

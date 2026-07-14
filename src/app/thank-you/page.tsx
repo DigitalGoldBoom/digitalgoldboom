@@ -29,7 +29,7 @@ export default function ThankYouPage() {
           </h1>
 
           <p className="text-lg leading-relaxed mb-6" style={{ color: "var(--text-secondary)" }}>
-            Your payment went through and <strong>Digital Gold Boom</strong> is on its way. Check your
+            Your payment went through and <strong>Digital Gold Boom</strong>{" "}is on its way. Check your
             email for your download link (PDF, EPUB and Kindle) and your receipt.
           </p>
 

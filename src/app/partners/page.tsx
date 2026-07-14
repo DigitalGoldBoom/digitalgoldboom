@@ -160,7 +160,7 @@ export default function AffiliatesPage() {
             Haven&rsquo;t read it? <a href="/free" className="v2-gold">Start with the first five chapters, free</a> &mdash;
             nobody should carry a book they haven&rsquo;t read. This is a paid affiliate program: when
             someone buys the book through your link, you earn a commission on that sale. See our{" "}
-            <a href="/disclaimer" className="v2-gold">Disclaimer</a> and <a href="/terms" className="v2-gold">Terms</a>.
+            <a href="/disclaimer" className="v2-gold">Disclaimer</a>{" "}and <a href="/terms" className="v2-gold">Terms</a>.
           </p>
         </div>
       </section>
@@ -174,7 +174,7 @@ export default function AffiliatesPage() {
           It&rsquo;s not gold. It&rsquo;s not <span className="v2-gold">bitcoin.</span>
         </h2>
         <p className="mx-auto mt-6 max-w-[64ch] text-center text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-          It&rsquo;s the best of both — the rails Bitcoin created (the blockchain) carrying gold&rsquo;s 6,000 years of monetary trust. NatGold is the natural evolution of gold and Bitcoin in today&rsquo;s digital, values-conscious world. <span style={{ color: "#F4F4F7" }}>Digital Gold Boom</span> is the first plain-English account of it.
+          It&rsquo;s the best of both — the rails Bitcoin created (the blockchain) carrying gold&rsquo;s 6,000 years of monetary trust. NatGold is the natural evolution of gold and Bitcoin in today&rsquo;s digital, values-conscious world. <span style={{ color: "#F4F4F7" }}>Digital Gold Boom</span>{" "}is the first plain-English account of it.
         </p>
 
         {/* What is digital gold mining */}
@@ -249,7 +249,7 @@ export default function AffiliatesPage() {
       {/* ── THE COMMISSION ───────────────────────────────────── */}
       <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-20 md:py-28">
         <h2 className="v2-display text-center mx-auto" style={{ fontSize: "clamp(1.9rem, 4vw, 3.25rem)", maxWidth: "18ch" }}>
-          <span className="v2-gold">Half</span> of every sale you bring.
+          <span className="v2-gold">Half</span>{" "}of every sale you bring.
         </h2>
         <p className="mx-auto mt-5 max-w-[60ch] text-center text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
           Believing in something shouldn&rsquo;t cost you money. When the doors open, you keep half of

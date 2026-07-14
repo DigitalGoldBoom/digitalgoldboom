@@ -121,7 +121,7 @@ export default function LeadMagnetForm({
               button inside it and your five chapters arrive straight away.
             </p>
             <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-              <strong style={{ color: "#F4F4F7" }}>Not there?</strong> Look in <strong>spam</strong> or{" "}
+              <strong style={{ color: "#F4F4F7" }}>Not there?</strong>{" "}Look in <strong>spam</strong>{" "}or{" "}
               <strong>promotions</strong> — a first email from a new sender often lands there. When you
               find it, drag it into your inbox so everything after it comes straight through.
             </p>
