@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { isPixelShovelView } from "@/lib/pixelshovel";
 
 /**
  * Navbar — replica of the Digital Gold Boom Framer navbar.
@@ -29,8 +30,7 @@ export default function Navbar() {
   // nav — never show the Digital Gold Boom navbar there. /film is the cinematic
   // scroll sales page: no nav, no external link — its only exit is the buy CTA.
   const isPixelShovel =
-    pathname === "/ps" ||
-    pathname.startsWith("/ps/") ||
+    isPixelShovelView(pathname) ||
     pathname === "/film" ||
     pathname.startsWith("/film/") ||
     pathname === "/deposit" ||

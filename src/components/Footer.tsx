@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { isPixelShovelView } from "@/lib/pixelshovel";
 
 // Footer links — only routes that actually exist today (no dead links). Affiliates
 // and Mining Industry are surfaced here and in the navbar so they're reachable.
@@ -41,8 +42,7 @@ export default function Footer() {
   // PixelShovel (/ps) has its own brand footer; /concept-* are internal design
   // previews that bring their own. The standard footer renders on every other page.
   if (
-    pathname === "/ps" ||
-    pathname.startsWith("/ps/") ||
+    isPixelShovelView(pathname) ||
     pathname.startsWith("/concept") ||
     pathname === "/film" ||
     pathname.startsWith("/film/") ||
