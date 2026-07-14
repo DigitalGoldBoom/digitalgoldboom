@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { isPixelShovelView } from "@/lib/pixelshovel";
+import LeadMagnetForm from "@/components/LeadMagnetForm";
 
 // Footer links — only routes that actually exist today (no dead links). Affiliates
 // and Mining Industry are surfaced here and in the navbar so they're reachable.
@@ -47,6 +48,10 @@ export default function Footer() {
     return null;
   }
 
+  // The footer's last ask is suppressed on the pages that already END in this exact ask — two
+  // identical forms stacked back-to-back is not a second chance, it's a stutter.
+  const showAsk = pathname !== "/free" && pathname !== "/newsletter" && pathname !== "/waitlist";
+
   return (
     <footer
       className="relative z-10"
@@ -56,6 +61,37 @@ export default function Footer() {
         borderTop: "1px solid var(--border-on-dark)",
       }}
     >
+      {/* THE LAST ASK — the footer used to be the largest block on every page and carried zero
+          conversion path: it ended the page and handed the visitor ten exits. A reader who reaches
+          the bottom of a long page has read the whole argument and has nowhere to act. */}
+      {showAsk && (
+        <div style={{ borderBottom: "1px solid var(--border-on-dark)" }}>
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16 md:py-20">
+            <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+              <div>
+                <h2
+                  className="v2-display"
+                  style={{ fontSize: "clamp(1.75rem, 3.4vw, 2.75rem)", maxWidth: "18ch" }}
+                >
+                  Read the first five chapters. <span className="v2-gold">Free.</span>
+                </h2>
+                <p
+                  className="mt-4 text-base leading-relaxed"
+                  style={{ color: "var(--v2-dim)", maxWidth: "46ch" }}
+                >
+                  The opening case, in plain English — sent straight to your inbox.
+                </p>
+              </div>
+              <div className="lm-shell w-full">
+                <div className="lm-core">
+                  <LeadMagnetForm source="footer" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_2fr] gap-16 lg:gap-24">
           <div>
@@ -108,12 +144,14 @@ export default function Footer() {
                 >
                   {col.heading}
                 </p>
-                <ul className="space-y-3">
+                {/* Targets were ~20px tall with 12px between them — a fat thumb hits the wrong
+                    link. min-h-[44px] gives each its own honest tap box. */}
+                <ul className="-my-1">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <Link
                         href={link.href}
-                        className="block transition-colors duration-200"
+                        className="flex min-h-[44px] items-center transition-colors duration-200"
                         style={{ color: "var(--text-on-dark-secondary)", fontSize: "13.5px" }}
                       >
                         {link.label}

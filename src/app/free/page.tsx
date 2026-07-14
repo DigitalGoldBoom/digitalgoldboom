@@ -43,6 +43,13 @@ export default function FreeChaptersPage() {
                   By <span style={{ color: "var(--v2-dim)" }}>Andrew Fletcher</span> — former President
                   &amp; CEO of Great Eagle Gold, now NatBridge Resources.
                 </p>
+                {/* Pre-launch, stated where a reader would otherwise wonder why they cannot just buy
+                    it: the closing chapters cover a launch that has not happened yet. */}
+                <p className="mt-4 text-base leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "48ch" }}>
+                  The book isn&rsquo;t finished — its last chapters close on a launch that hasn&rsquo;t
+                  happened yet. These five are ready now, and you&rsquo;ll be first to hear when the
+                  rest is.
+                </p>
 
                 {/* Same enclosure as the home opt-in: the form is the one thing on the page that
                     is acted on, so it is the one thing that gets a container. */}

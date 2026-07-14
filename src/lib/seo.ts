@@ -217,14 +217,21 @@ export function generateBookSchema() {
     genre: 'Business & Finance',
     inLanguage: 'en',
     bookFormat: 'https://schema.org/EBook',
-    url: `${SITE_URL}/book`,
+    url: `${SITE_URL}/buy`,
     // Real, owner-set price. Still NO ratingValue/reviewCount/numberOfPages/ISBN (none verified).
+    //
+    // availability is PreOrder, NOT InStock, and the offer points at /buy, NOT /book.
+    // Both matter: /book is a redirect to the email form and cannot take money, and checkout is
+    // not live yet (pre-launch is deliberate — the author is holding until the token trades and
+    // Ch 17 lands). Declaring InStock at a URL that redirects tells Google and every AI crawler
+    // there is a $37 book someone can buy right now. There isn't. The price is real; the
+    // availability must tell the truth about it.
     offers: {
       '@type': 'Offer',
       price: '37.00',
       priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
-      url: `${SITE_URL}/book`,
+      availability: 'https://schema.org/PreOrder',
+      url: `${SITE_URL}/buy`,
     },
   };
 }

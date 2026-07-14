@@ -65,8 +65,15 @@ export default function V2Page() {
                 <div className="mt-9 flex flex-wrap items-center gap-3">
                   <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
                 </div>
+                {/* PRE-LAUNCH, said plainly. The book is still being written — the last chapters
+                    close on a launch that has not happened yet — so there is nothing to sell and
+                    no date to promise. Saying so is not a weakness: it explains why the five
+                    chapters are free, and it makes the email the only thing being asked for. */}
                 <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                  Free · sent to your inbox · and first in line for the full book.
+                  Free · sent to your inbox · read it before anyone else.
+                </p>
+                <p className="mt-2 text-sm" style={{ color: "var(--v2-faint)" }}>
+                  The full book lands after the launch. The first five chapters are ready now.
                 </p>
                 <p className="mt-2 text-xs" style={{ color: "var(--v2-faint)" }}>
                   Educational — not financial advice.

@@ -20,22 +20,22 @@ export type ChapterTeaser = { title: string; line: string };
 export const FREE_CHAPTERS: ChapterTeaser[] = [
   {
     title: "Gold's Legacy and Its Digital Future",
-    line: "The world wants gold more than ever. The capital that wants it most cannot hold it — purely because of how the metal is produced.",
+    line: "The asset modern capital wants most is the one it cannot hold — not because of what gold is, but because of how the metal is produced.",
   },
   {
     title: "The Extraction S.P.I.R.A.L.™",
-    line: "Six forces compounding against every new mine. In Panama, a $10 billion mine vanished in 39 days.",
+    line: "Six forces now compound against every new mine, and the public holds the veto — in Panama, a $10 billion mine vanished in 39 days. Higher gold prices only tighten the spiral.",
   },
   {
     title: "Gold's First Principles",
-    line: "93% of gold is never consumed, only held. Its value is created the moment geology proves it is there — not when it is dug up.",
+    line: "Only 7% of gold demand is industrial. The rest is bought to be held — so gold's worth rests on proof that it is real and scarce, which makes extraction a cost, not the value.",
   },
   {
     title: "Digital Alchemy",
-    line: "The rails are already proven: $6 billion of gold trades in token form today. Aim them at the gold still in the ground.",
+    line: "Six billion dollars of gold already trades in token form (February 2026) — but every token is a receipt for metal already mined, refined and vaulted. The rails are proven. Only the gold they point at has to change.",
   },
   {
     title: "The Scorecard",
-    line: "Same deposit, same gold, same price. Run both models head to head and it is not close.",
+    line: "Same deposit. Same gold. Same price. Run both models side by side on time, risk, money and damage — and it is not close.",
   },
 ];

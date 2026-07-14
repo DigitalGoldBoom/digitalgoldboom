@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { track } from "@vercel/analytics";
 
 /**
@@ -29,6 +29,12 @@ export default function LeadMagnetForm({
   className?: string;
 }) {
   const isWaitlist = mode === "waitlist";
+  // The form now renders more than once on a page (the section form AND the footer's last ask).
+  // Hard-coded element ids would collide, and a duplicate id silently breaks label→input focus —
+  // tap the label of the second form and the FIRST form's field is what focuses.
+  const uid = useId();
+  const firstId = `lm-first-${uid}`;
+  const emailId = `lm-email-${uid}`;
   const src = source ?? (isWaitlist ? "waitlist" : "home_lead_magnet");
   const tag = isWaitlist ? "waitlist" : "free-chapters";
   const [firstName, setFirstName] = useState("");
@@ -137,12 +143,12 @@ export default function LeadMagnetForm({
   return (
     <form onSubmit={handleSubmit} className={`w-full ${className}`}>
       <div className="flex flex-col gap-3">
-        <label htmlFor="lm-first" className="sr-only">
+        <label htmlFor={firstId} className="sr-only">
           First name
         </label>
         <input
           type="text"
-          id="lm-first"
+          id={firstId}
           name="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
@@ -152,12 +158,12 @@ export default function LeadMagnetForm({
           className="lm-field"
           autoComplete="given-name"
         />
-        <label htmlFor="lm-email" className="sr-only">
+        <label htmlFor={emailId} className="sr-only">
           Email address
         </label>
         <input
           type="email"
-          id="lm-email"
+          id={emailId}
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -169,6 +175,9 @@ export default function LeadMagnetForm({
         />
       </div>
 
+      {/* The privacy link used to live INSIDE this label. On a phone that meant a thumb aimed at
+          the consent row could navigate the visitor clean off the page mid-ask — a lead lost to a
+          mis-tap. The link now sits outside the label, on its own line, with its own tap box. */}
       <label className="lm-consent mt-5">
         <input
           type="checkbox"
@@ -191,13 +200,16 @@ export default function LeadMagnetForm({
         <span className="text-[13px] leading-[1.55]" style={{ color: "var(--v2-dim)" }}>
           {isWaitlist
             ? "Add me to the waitlist, plus updates and offers."
-            : "Email me the chapters, plus updates and offers."}{" "}
-          <a href="/privacy" className="v2-gold" style={{ textDecoration: "underline" }}>
-            Unsubscribe any time
-          </a>
-          .
+            : "Email me the chapters, plus updates and offers."}
         </span>
       </label>
+      <a
+        href="/privacy"
+        className="mt-1 inline-flex min-h-[32px] items-center text-[12px]"
+        style={{ color: "var(--v2-faint)", textDecoration: "underline" }}
+      >
+        Unsubscribe any time
+      </a>
 
       <button type="submit" disabled={status === "loading"} className="lm-submit mt-5">
         <span>

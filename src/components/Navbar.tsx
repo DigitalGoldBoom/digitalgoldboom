@@ -23,7 +23,10 @@ const LINKS = [
   { label: "Live Stats", href: "/live" },
 ];
 
-const CTA_GRADIENT = "linear-gradient(180deg, #F0BE47 0%, #C99214 100%)";
+// Sourced from the v2 token set (globals.css) rather than four loose hexes, so the nav can never
+// drift away from the rest of the site's gold.
+const CTA_GRADIENT =
+  "linear-gradient(180deg, color-mix(in srgb, var(--v2-gold) 92%, white) 0%, color-mix(in srgb, var(--v2-gold) 78%, black) 100%)";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -45,12 +48,14 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
+  // min-h-[44px] + grid place-items-center: the tap box clears the 44px floor without the label
+  // growing. Under that, a thumb misses — and on a phone the nav is nearly all thumb.
   const linkClass = (active: boolean) =>
     [
-      "whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-medium transition-colors duration-200",
+      "grid min-h-[44px] place-items-center whitespace-nowrap rounded-full px-4 text-sm font-medium transition-colors duration-200",
       active
-        ? "bg-[#131839] text-white"
-        : "text-[#6d7792] hover:bg-[#131839] hover:text-white",
+        ? "bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] text-white"
+        : "text-[var(--v2-faint)] hover:bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] hover:text-white",
     ].join(" ");
 
   if (isPixelShovel) return null;
@@ -69,7 +74,8 @@ export default function Navbar() {
       />
 
       <div className="pointer-events-auto relative mx-auto flex w-[92%] max-w-[1320px] items-center justify-between gap-4 py-[10px] lg:grid lg:grid-cols-[1fr_auto_1fr]">
-        {/* Left — PixelShovel wordmark */}
+        {/* Left — PixelShovel wordmark. Steps down on phone so the CTA has room to live in the
+            top bar beside it (see below) rather than being exiled into the hamburger. */}
         <Link href="/" className="shrink-0 lg:justify-self-start" aria-label="Digital Gold Boom — home">
           <Image
             src="/nav-framer/logo-wordmark.png"
@@ -79,24 +85,37 @@ export default function Navbar() {
             width={240}
             height={40}
             priority
-            className="h-8 w-auto sm:h-10"
+            className="h-7 w-auto sm:h-9 lg:h-10"
           />
         </Link>
 
-        {/* Center — pill of nav links */}
+        {/* Center — pill of nav links. Desktop only: on a phone the BROWSE links are what
+            collapses into the hamburger. Never the ask. */}
         <div
-          className="nav-blur-strong flex items-center gap-1 rounded-full p-1.5 lg:justify-self-center"
-          style={{
-            background: "rgba(10,13,31,0.8)",
-          }}
+          className="nav-blur-strong hidden items-center gap-1 rounded-full p-1.5 lg:flex lg:justify-self-center"
+          style={{ background: "rgba(10,13,31,0.8)" }}
         >
-          <div className="hidden items-center lg:flex">
-            {LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className={linkClass(isActive(l.href))}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
+          {LINKS.map((l) => (
+            <Link key={l.href} href={l.href} className={linkClass(isActive(l.href))}>
+              {l.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Right — the ask, then the menu.
+            The CTA used to be `hidden … lg:inline-flex`, so the site's ONE conversion action did
+            not render at all below 1024px — i.e. on every phone and every tablet, which is most of
+            the traffic. It now renders at every width; the label shortens on phone so the bar fits
+            at 320px. This was the single most expensive line of code on the site. */}
+        <div className="flex shrink-0 items-center gap-2 lg:justify-self-end">
+          <Link
+            href="/free"
+            className="inline-flex min-h-[44px] items-center whitespace-nowrap rounded-full px-4 text-[13px] font-semibold text-[#0A0A0F] transition-opacity hover:opacity-90 sm:px-5 sm:text-sm lg:px-[20px]"
+            style={{ background: CTA_GRADIENT }}
+          >
+            <span className="sm:hidden">Free chapters</span>
+            <span className="hidden sm:inline">Free Chapters</span>
+          </Link>
 
           {/* Hamburger — tablet / mobile */}
           <button
@@ -104,27 +123,21 @@ export default function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label="Open menu"
             aria-expanded={open}
-            className="flex items-center justify-center rounded-full px-4 py-3 text-white transition-colors hover:bg-[#131839] lg:hidden"
+            className="nav-blur-strong grid h-[44px] w-[44px] place-items-center rounded-full text-white transition-colors lg:hidden"
+            style={{ background: "rgba(10,13,31,0.8)" }}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
               <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </button>
         </div>
-
-        {/* Right — free-chapters CTA */}
-        <Link
-          href="/free"
-          className="hidden items-center whitespace-nowrap rounded-full text-sm font-semibold text-[#0A0A0F] transition-opacity hover:opacity-90 lg:inline-flex lg:justify-self-end"
-          style={{ padding: "13px 20px", background: CTA_GRADIENT }}
-        >
-          Free Chapters
-        </Link>
       </div>
 
       {/* Mobile / tablet dropdown */}
       {open && (
         <div className="pointer-events-auto mx-auto mt-3 flex w-[92%] max-w-[1320px] justify-end lg:hidden">
+          {/* Browse links only. The CTA is no longer duplicated in here — it lives in the top bar
+              at every width now, so repeating it would be a second copy of the same ask. */}
           <div className="flex w-[230px] flex-col gap-1.5 rounded-2xl p-3" style={{ background: "rgb(10,13,31)" }}>
             {LINKS.map((l) => (
               <Link
@@ -136,14 +149,6 @@ export default function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <Link
-              href="/free"
-              onClick={() => setOpen(false)}
-              className="mt-1 inline-flex items-center justify-center rounded-full text-sm font-semibold text-[#0A0A0F]"
-              style={{ padding: "12px 18px", background: CTA_GRADIENT }}
-            >
-              Free Chapters
-            </Link>
           </div>
         </div>
       )}
