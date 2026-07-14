@@ -6,9 +6,6 @@ import PsRotatingCube from "./_components/PsRotatingCube";
 import PsAboutScroll from "./_components/PsAboutScroll";
 import { PS_WORDMARK } from "./_components/psAssets";
 
-const CDN = "https://framerusercontent.com/images";
-const img = (id: string) => `${CDN}/${id}.png`;
-
 const TICKER = [
   "Gold's Digital Evolution",
   "Eco-Friendly Gold Asset Class",
@@ -17,14 +14,6 @@ const TICKER = [
   "Geologically Verified Gold Deposits",
   "Modernizing Gold",
   "The Digital Gold Boom",
-];
-
-const DGB_SQUARES = [
-  "3rHk1mHhqMNgP6lIzqxtMXNIfI",
-  "SIO3Vm8Mrg8BGvj66Le8b9dpMhI",
-  "eJQMgjmZnbvOG1D9uX8M4E81h2s",
-  "ipz8IN97Lh71ZewaRZ5KfjOa9MI",
-  "VNFzaWfCZRKGzAAu5LsZJmQ58kc",
 ];
 
 export default function PixelShovelHome() {
@@ -78,18 +67,18 @@ export default function PixelShovelHome() {
         </div>
       </section>
 
-      {/* ——— Everything you know is wrong + the book + waitlist ——— */}
+      {/* ——— Everything you know just changed + the book + free chapters ——— */}
       <section id="dgb" className="ps-section" style={{ background: "var(--ps-bg-soft)" }}>
         <div className="ps-wrap grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
           <div className="flex flex-col items-start gap-6">
             <p className="ps-eyebrow">Digital Gold Boom</p>
             <h2 className="text-[clamp(2rem,4.5vw,3.6rem)]">
-              Everything You Think You Know About Gold is Wrong
+              Everything You Think You Know About Gold Just Changed Forever
             </h2>
             <p className="max-w-[48ch] text-lg text-[var(--ps-text-2)]">
               Tokenization just started the biggest gold rush in history.
             </p>
-            {/* Join the Waitlist (node-exact: green dot · Inter Display 34px · grey-blue) */}
+            {/* Offer line (node-exact: green dot · Inter Display 34px · grey-blue) */}
             <div className="flex items-center gap-2 pt-2">
               <span
                 className="inline-block h-[18px] w-[18px] rounded-full"
@@ -103,7 +92,7 @@ export default function PixelShovelHome() {
                   fontFamily: "var(--font-ps-inter), sans-serif",
                 }}
               >
-                Join the Waitlist and Get it FREE
+                Read the First 5 Chapters FREE
               </span>
             </div>
             <PsWaitlistForm source="ps-home-dgb" />
@@ -117,21 +106,6 @@ export default function PixelShovelHome() {
 
       {/* ——— About: pinned 3D scroll card sequence (DIGITAL GOLD MINING) ——— */}
       <PsAboutScroll />
-
-      {/* ——— DGB image marquee ——— */}
-      <section className="overflow-hidden py-6" style={{ background: "var(--ps-bg-soft)" }}>
-        <div className="ps-marquee ps-marquee--slow gap-5">
-          {[...DGB_SQUARES, ...DGB_SQUARES].map((id, i) => (
-            <div
-              key={i}
-              className="relative aspect-square w-[clamp(180px,22vw,300px)] shrink-0 overflow-hidden rounded-[var(--ps-r-card)] border"
-              style={{ borderColor: "var(--ps-line)" }}
-            >
-              <Image src={img(id)} alt="" fill sizes="300px" className="object-cover" />
-            </div>
-          ))}
-        </div>
-      </section>
 
     </>
   );

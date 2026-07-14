@@ -84,9 +84,14 @@ export async function POST(req: Request) {
 
   // Best-effort mirror to the sender (Kit) — it runs the welcome sequence and broadcasts. Never
   // fails the signup: the owned list in Supabase already has them and can re-sync Kit any time.
+  //
+  // One Kit form per domain: PixelShovel forms send source="ps-…", so they fire KIT_PS_FORM_ID and
+  // show up separately in Kit's reporting. Both forms send from the same address (set in Kit).
+  const isPixelShovel = parsed.source?.startsWith("ps-") ?? false;
   await pushToKit(parsed.email, {
     firstName: parsed.firstName ?? parsed.name,
     source: parsed.source,
+    formId: isPixelShovel ? process.env.KIT_PS_FORM_ID : undefined,
   });
 
   // Success. No download link comes back: the chapters arrive only via Kit's confirmation email.

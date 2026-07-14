@@ -86,12 +86,17 @@ function redactEmails(text: string): string {
  *   KIT_API_KEY      — Kit v4 API key (Kit → Settings → Developer)
  *   KIT_FORM_ID      — numeric id of the Kit form to subscribe them to. This is what FIRES the
  *                      welcome sequence; without it they land in Kit but no automation runs.
+ *   KIT_PS_FORM_ID   — the PixelShovel form (see `formId` below).
  *   KIT_FREE_TAG_ID  — optional numeric tag id for free-chapter leads (segments them from buyers,
  *                      who are tagged by KIT_BUYER_TAG_ID in the LemonSqueezy webhook).
+ *
+ * `opts.formId` lets the caller pick WHICH Kit form fires — one form per domain (digitalgoldboom.com
+ * vs pixelshovel.com) so Kit reports where each lead came from, while both forms send from the same
+ * address (that is a Kit-side setting, not a code one). Falls back to KIT_FORM_ID.
  */
 export async function pushToKit(
   email: string,
-  opts: { firstName?: string; source?: string } = {},
+  opts: { firstName?: string; source?: string; formId?: string } = {},
 ): Promise<void> {
   const apiKey = process.env.KIT_API_KEY;
   if (!apiKey) return;
@@ -121,7 +126,7 @@ export async function pushToKit(
       return;
     }
 
-    const formId = process.env.KIT_FORM_ID;
+    const formId = opts.formId ?? process.env.KIT_FORM_ID;
     if (formId) {
       const formRes = await fetch(`${KIT_BASE}/forms/${formId}/subscribers`, {
         method: "POST",
