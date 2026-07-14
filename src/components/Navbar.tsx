@@ -59,16 +59,18 @@ export default function Navbar() {
   // min-h-[44px] + grid place-items-center: the tap box clears the 44px floor without the label
   // growing. Under that, a thumb misses — and on a phone the nav is nearly all thumb.
   //
-  // Colour: --v2-dim, not --v2-faint. Faint is 40% white, and 40% white on a translucent bar over a
-  // dark hero lands around 3.5:1 — under the 4.5:1 floor for text this size. The nav is the one
-  // element on every page that a visitor must be able to read without trying, and it was the hardest
-  // to read on the site. Dim (62%) clears the floor and still sits back from the active link.
+  // Nav links are the one text on every page a visitor must read WITHOUT TRYING, and they were the
+  // hardest text on the site to read: 40% white on a bar that is transparent until you scroll, which
+  // lands near 3.5:1 — under the 4.5:1 floor. 62% cleared the floor on paper and still looked washed
+  // out in situ, because contrast maths assumes a solid backdrop and this one is glass over a busy
+  // hero. So: 88% white. It is a navigation bar, not a footnote. The hover state and the active pill
+  // still separate cleanly above it.
   const linkClass = (active: boolean) =>
     [
       "grid min-h-[44px] place-items-center whitespace-nowrap rounded-full px-4 text-sm font-medium transition-colors duration-200",
       active
         ? "bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] text-white"
-        : "text-[var(--v2-dim)] hover:bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] hover:text-white",
+        : "text-[rgba(238,240,248,0.88)] hover:bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] hover:text-white",
     ].join(" ");
 
   if (isPixelShovel) return null;
