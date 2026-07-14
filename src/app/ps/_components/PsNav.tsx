@@ -30,7 +30,20 @@ export default function PsNav() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto flex w-[94%] max-w-[1320px] items-center justify-between gap-4 py-4">
+      {/* Translucent strip — invisible over the hero, fades in once the page scrolls under it, so
+          the white wordmark never has to sit on whatever content happens to be passing beneath.
+          Same behaviour as the Digital Gold Boom navbar. */}
+      <div
+        aria-hidden
+        className="nav-blur pointer-events-none absolute inset-0 transition-opacity duration-300"
+        style={{
+          opacity: scrolled ? 1 : 0,
+          background: "rgba(10,11,10,0.72)",
+          borderBottom: "1px solid var(--ps-line)",
+        }}
+      />
+
+      <div className="relative mx-auto flex w-[94%] max-w-[1320px] items-center justify-between gap-4 py-4">
         {/* Logo */}
         <Link
           href="/ps"

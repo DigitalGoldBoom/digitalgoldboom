@@ -79,7 +79,9 @@ export default function Navbar() {
           <Image
             src="/nav-framer/logo-wordmark.png"
             alt="PixelShovel"
-            width={180}
+            // The wordmark art is 4200×700 — a true 6:1. The box must hold that ratio or the
+            // letterforms squash (it was 4.5:1 against the older, padded export).
+            width={240}
             height={40}
             priority
             className="h-8 w-auto sm:h-10"
