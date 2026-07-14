@@ -798,3 +798,13 @@ body {
   .lm-submit:active:not(:disabled) { transform: none; }
   .lm-submit:hover:not(:disabled) .lm-submit-disc { transform: none; }
 }
+
+/* Chapter row: real title on top, the book's own one-line case beneath it. */
+.lm-row-h {
+  display: block;
+  color: #F4F4F7;
+  font-weight: 500;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}

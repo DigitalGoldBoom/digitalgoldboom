@@ -8,6 +8,7 @@ import Link from "next/link";
 import Book3D from "@/components/Book3D";
 import NumberCounter from "@/components/NumberCounter";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
+import { FREE_CHAPTERS } from "@/lib/chapters";
 
 const STEPS = [
   { n: "01", t: "Verify", b: "A deposit is drilled, sampled and certified to institutional standard (NI 43-101) — the same proof a $10-billion mine is financed on." },
@@ -15,16 +16,8 @@ const STEPS = [
   { n: "03", t: "Trade", b: "Priced off the gold industry's own math — spot price minus mining cost. The first tokens trade on Kraken once its listing review completes." },
 ];
 
-// What is actually inside the five free chapters, one line each. Same copy the /free page uses, so
-// the promise a reader is given is identical wherever they meet it. This is the whole point of the
-// opt-in block: show the contents, then ask. An email is cheap to ask for and expensive to waste.
-const CHAPTER_TEASERS = [
-  "What gold really is — and why central banks are quietly moving back onto it.",
-  "Why the six-thousand-year-old way of producing gold is finally breaking down.",
-  "Where gold's value actually comes from — and the part everyone assumed couldn't change.",
-  "The reframe: gold mining already runs on verification, not just extraction.",
-  "The model that reaches $22 trillion of already-verified gold — in plain English.",
-];
+// The five chapters come from src/lib/chapters.ts — one source, shared with /free, so the two
+// pages promising the same book can never again describe two different books.
 
 const SECTIONS = [
   { n: "01", title: "The Inevitability of Digital Gold Mining", meta: "Chapters 1–8", body: "What gold is, why the old way of producing it is failing, where its value actually comes from, and the force large enough to move it — brought together into a single case." },
@@ -111,12 +104,15 @@ export default function V2Page() {
               </p>
 
               <ol className="mt-8">
-                {CHAPTER_TEASERS.map((c, i) => (
-                  <li key={c} className="lm-row">
+                {FREE_CHAPTERS.map((c, i) => (
+                  <li key={c.title} className="lm-row">
                     <span className="lm-row-n" aria-hidden>
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="lm-row-t">{c}</span>
+                    <span>
+                      <span className="lm-row-h">{c.title}</span>
+                      <span className="lm-row-t">{c.line}</span>
+                    </span>
                   </li>
                 ))}
               </ol>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Book3D from "@/components/Book3D";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
+import { FREE_CHAPTERS } from "@/lib/chapters";
 import { generateMetadata as genMeta } from "@/lib/seo";
 
 export const metadata: Metadata = genMeta({
@@ -10,13 +11,9 @@ export const metadata: Metadata = genMeta({
   path: "free",
 });
 
-const POINTS = [
-  "What gold really is — and why central banks are quietly moving back onto it.",
-  "Why the six-thousand-year-old way of producing gold is finally breaking down.",
-  "Where gold's value actually comes from — and the part everyone assumed couldn't change.",
-  "The reframe: gold mining already runs on verification, not just extraction.",
-  "The model that reaches $22 trillion of already-verified gold — in plain English.",
-];
+// The five chapters come from src/lib/chapters.ts — the same source the home page reads, with the
+// chapters' real titles and the author's own one-line case for each (book, Ch 8). The invented
+// blurbs that used to sit here described a book that does not exist.
 
 export default function FreeChaptersPage() {
   return (
@@ -30,14 +27,21 @@ export default function FreeChaptersPage() {
                 <h1 className="v2-display" style={{ fontSize: "clamp(2.4rem, 6vw, 4.5rem)" }}>
                   Read the first <span className="v2-gold">5 chapters</span> free.
                 </h1>
+                {/* Was one 44-word sentence that opened on a book title, detoured through the
+                    author's CV, and only then said what to do — and it rendered "Digital Gold
+                    Boomby Andrew" because JSX ate the space at the line break. The offer comes
+                    first now, the credential stands on its own line, and the mechanics are one
+                    short sentence. */}
                 <p
                   className="mt-6 text-xl leading-relaxed"
-                  style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}
+                  style={{ color: "var(--v2-dim)", maxWidth: "48ch" }}
                 >
-                  The plain-English opening of <span style={{ color: "#F4F4F7" }}>Digital Gold Boom</span> by
-                  Andrew Fletcher — former President &amp; CEO of Great Eagle Gold, now NatBridge
-                  Resources. Enter your email, confirm it with one click, and the chapters are yours —
-                  and you&rsquo;re first in line when the full book is ready.
+                  The opening of the book, in plain English. Enter your email, click the confirm link
+                  we send, and the chapters are yours.
+                </p>
+                <p className="mt-4 text-base leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "48ch" }}>
+                  By <span style={{ color: "var(--v2-dim)" }}>Andrew Fletcher</span> — former President
+                  &amp; CEO of Great Eagle Gold, now NatBridge Resources.
                 </p>
 
                 {/* Same enclosure as the home opt-in: the form is the one thing on the page that
@@ -48,16 +52,19 @@ export default function FreeChaptersPage() {
                   </div>
                 </div>
 
-                <ul className="mt-10 space-y-3">
-                  {POINTS.map((p) => (
-                    <li key={p} className="flex items-start gap-3">
-                      <span className="v2-gold mt-1" aria-hidden>
-                        ✦
+                <ol className="mt-10 max-w-[560px]">
+                  {FREE_CHAPTERS.map((c, i) => (
+                    <li key={c.title} className="lm-row">
+                      <span className="lm-row-n" aria-hidden>
+                        {String(i + 1).padStart(2, "0")}
                       </span>
-                      <span style={{ color: "var(--v2-dim)" }}>{p}</span>
+                      <span>
+                        <span className="lm-row-h">{c.title}</span>
+                        <span className="lm-row-t">{c.line}</span>
+                      </span>
                     </li>
                   ))}
-                </ul>
+                </ol>
               </div>
 
               <div className="flex justify-center lg:justify-end order-first lg:order-none">
