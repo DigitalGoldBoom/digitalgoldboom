@@ -16,8 +16,16 @@ import { CHAPTERS_LIVE } from "@/lib/flags";
 
 // "Chapters" is built but not announced: it appears here only when CHAPTERS_LIVE is switched on
 // (src/lib/flags.ts). Until then /chapters is reachable by direct link and nothing else.
+// "The Book" points at /buy — the product page, with /checkout behind it.
+//
+// It is here because a purchase path that cannot be NAVIGATED to does not exist. The payment
+// processor reviewing this store follows the site the way a customer would: front door, nav, product,
+// checkout. Handing a reviewer a direct URL proves nothing about the flow, and a product page linked
+// from nowhere reads as one built for the review rather than for customers. It is also simply true
+// that anyone who already wants the book should never have to hunt for the price.
 const LINKS = [
   ...(CHAPTERS_LIVE ? [{ label: "Chapters", href: "/chapters" }] : []),
+  { label: "The Book", href: "/buy" },
   { label: "Projects", href: "/projects" },
   { label: "Mining", href: "/mining-industry" },
   { label: "Live Stats", href: "/live" },
