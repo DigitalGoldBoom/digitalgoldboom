@@ -4,7 +4,7 @@ import { PS_WORDMARK } from "./psAssets";
 
 const MENU = [
   { label: "Home", href: "/ps" },
-  { label: "Free Chapters", href: "/ps#dgb" },
+  { label: "Digital Gold Boom", href: "/ps#dgb" },
   { label: "Contact", href: "/ps/contact" },
   { label: "Cookie Policy", href: "/terms" },
   { label: "Privacy Policy", href: "/privacy" },
@@ -23,9 +23,13 @@ export default function PsFooter() {
           <h2 className="max-w-[16ch] text-[clamp(2rem,5vw,4.25rem)]">
             History&rsquo;s Biggest Gold Rush Just Started. Get Informed.
           </h2>
-          <Link href="/ps#dgb" className="ps-cta shrink-0">
+          {/* A PLAIN <a>, not next/link. The App Router does not reliably scroll to a hash when the
+              target is on the page you are already standing on — it treats it as a same-route
+              navigation and leaves you where you were, which is exactly why this button did
+              nothing. The browser's own hash handling has never had that problem. */}
+          <a href="/ps#dgb" className="ps-cta shrink-0">
             Get 5 Free Chapters
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -59,15 +63,27 @@ export default function PsFooter() {
 
           <div className="flex flex-col gap-3">
             <p className="ps-eyebrow">Menu</p>
-            {MENU.map((m) => (
-              <Link
-                key={m.label}
-                href={m.href}
-                className="text-[var(--ps-text-2)] transition-colors hover:text-white"
-              >
-                {m.label}
-              </Link>
-            ))}
+            {MENU.map((m) =>
+              // Hash targets get a plain <a>: next/link will not scroll to a hash on the page you
+              // are already standing on, which is the bug that made these do nothing.
+              m.href.includes("#") ? (
+                <a
+                  key={m.label}
+                  href={m.href}
+                  className="text-[var(--ps-text-2)] transition-colors hover:text-white"
+                >
+                  {m.label}
+                </a>
+              ) : (
+                <Link
+                  key={m.label}
+                  href={m.href}
+                  className="text-[var(--ps-text-2)] transition-colors hover:text-white"
+                >
+                  {m.label}
+                </Link>
+              ),
+            )}
           </div>
 
           <div className="flex flex-col items-start gap-4">

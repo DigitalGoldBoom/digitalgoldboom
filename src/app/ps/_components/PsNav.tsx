@@ -18,6 +18,40 @@ const LINKS = [
   { label: "Contact", href: "/ps/contact" },
 ];
 
+/**
+ * Any link carrying a #hash renders as a PLAIN <a>, never next/link.
+ *
+ * The App Router does not reliably scroll to a hash when the target is on the page you are already
+ * standing on: it treats it as a same-route navigation and leaves you exactly where you were. That
+ * is why "Get 5 Free Chapters" did nothing when clicked from the bottom of /ps. The browser's own
+ * hash handling has never had that problem. Real route changes (Contact) keep next/link and its
+ * prefetching.
+ */
+function NavItem({
+  href,
+  className,
+  onClick,
+  children,
+}: {
+  href: string;
+  className?: string;
+  onClick?: () => void;
+  children: React.ReactNode;
+}) {
+  if (href.includes("#")) {
+    return (
+      <a href={href} className={className} onClick={onClick}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={className} onClick={onClick}>
+      {children}
+    </Link>
+  );
+}
+
 export default function PsNav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -72,21 +106,21 @@ export default function PsNav() {
           }}
         >
           {LINKS.map((l) => (
-            <Link
+            <NavItem
               key={l.label}
               href={l.href}
               className="rounded-full px-4 py-2 text-sm font-medium text-[var(--ps-text-2)] transition-colors duration-200 hover:bg-white/8 hover:text-white"
             >
               {l.label}
-            </Link>
+            </NavItem>
           ))}
         </nav>
 
         {/* Desktop CTA (wrapper hides it on mobile — .ps-cta forces its own display) */}
         <div className="pointer-events-auto hidden lg:block">
-          <Link href="/ps#dgb" className="ps-cta">
+          <NavItem href="/ps#dgb" className="ps-cta">
             Get 5 Free Chapters
-          </Link>
+          </NavItem>
         </div>
 
         {/* Mobile hamburger */}
@@ -121,22 +155,22 @@ export default function PsNav() {
             style={{ background: "rgba(10,11,10,0.92)", borderColor: "var(--ps-line)" }}
           >
             {LINKS.map((l) => (
-              <Link
+              <NavItem
                 key={l.label}
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className="rounded-2xl px-4 py-3 text-base font-medium text-[var(--ps-text-2)] hover:bg-white/8 hover:text-white"
               >
                 {l.label}
-              </Link>
+              </NavItem>
             ))}
-            <Link
+            <NavItem
               href="/ps#dgb"
               onClick={() => setOpen(false)}
               className="ps-cta mt-2 justify-center"
             >
               Get 5 Free Chapters
-            </Link>
+            </NavItem>
           </nav>
         </div>
       )}

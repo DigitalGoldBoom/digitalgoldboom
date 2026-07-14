@@ -72,7 +72,14 @@ export default function PixelShovelHome() {
       </section>
 
       {/* ——— Everything you know just changed + the book + free chapters ——— */}
-      <section id="dgb" className="ps-section" style={{ background: "var(--ps-bg-soft)" }}>
+      {/* scroll-mt: the nav is FIXED, so a hash jump lands the section's top edge underneath it.
+          Without this the button "worked" and still looked broken — you arrived with the headline
+          hidden behind the bar. */}
+      <section
+        id="dgb"
+        className="ps-section scroll-mt-24"
+        style={{ background: "var(--ps-bg-soft)" }}
+      >
         {/* On a PHONE this reads: headline → the book → the offer → the form. The book lands the
             moment the claim is made, while the reader is still holding it, and the ask comes after
             they have seen the thing being offered. (It used to sit under the submit button: the

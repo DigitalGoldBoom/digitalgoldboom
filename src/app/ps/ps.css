@@ -587,29 +587,25 @@
    Without a hint, the browser re-rasterises those subtrees on frames where it
    only needed to move an existing layer. `will-change: transform` on the FIVE
    spinning wrappers (never on the 30 faces — a layer each would cost more memory
-   than it saves) hands the rotation to the GPU. `contain: layout paint` tells the
-   browser that nothing inside can affect anything outside, so a repaint inside
-   the cube cannot force the section around it to repaint too.
+   than it saves) hands the rotation to the GPU.
+
+   NO `contain: paint` HERE. It was tried and reverted: paint containment clips a
+   box to its own bounds, and every one of these things is 3D — the photo cube
+   rotates its faces out past the element, and the gold cube deliberately overlaps
+   up into the section above it. Containment sliced both of them off. Promotion
+   speeds the drawing up; containment changed what got drawn, which is a different
+   thing and the wrong one.
 
    Nothing here changes a pixel, a speed, or a frame rate. It changes only how the
    browser is allowed to spend its work.                                        */
-.ps-goldcube {
-  contain: layout paint;
-}
 .ps-goldcube-spin {
   will-change: transform;
-}
-.ps-about-stage {
-  contain: layout paint;
 }
 .ps-about-prism {
   will-change: transform;
 }
 .ps-cube {
   will-change: transform;
-}
-.ps-cube-scene {
-  contain: layout paint;
 }
 
 /* Off-screen, drop the hints again: a promoted layer that nobody is looking at is
