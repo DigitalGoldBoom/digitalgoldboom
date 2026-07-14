@@ -7,7 +7,40 @@ import { useEffect } from "react";
  * Adds `.is-in` when an element enters the viewport. If reduced-motion is on,
  * everything is revealed immediately (ps.css also force-shows it via CSS).
  */
+/**
+ * Pause the page's infinite CSS animations while they are off screen.
+ *
+ * The photo cube (6 image faces), the gold wireframe cube (5 nested cubes = 30 faces) and the
+ * marquees all spin forever. Left alone, a phone keeps compositing every one of them while the
+ * reader is three sections away, and every other frame on the page pays for it — which is what
+ * made scrolling feel slow. Pausing is invisible by definition (the reader cannot see what is off
+ * their screen) and the animation resumes exactly where it left off, so nothing about the look or
+ * the speed changes. The margin is generous so nothing is ever caught mid-resume on entry.
+ */
+function usePauseOffscreenAnimations() {
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+    const els = Array.from(
+      document.querySelectorAll<HTMLElement>(".ps-marquee, .ps-cube-scene, .ps-goldcube"),
+    );
+    if (!els.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          e.target.classList.toggle("ps-anim-paused", !e.isIntersecting);
+        }
+      },
+      { rootMargin: "300px 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
 export default function PsRevealInit() {
+  usePauseOffscreenAnimations();
+
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".ps-reveal"));
     if (!els.length) return;

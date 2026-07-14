@@ -9,6 +9,12 @@ import { PS_WORDMARK } from "./psAssets";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+// A phone's address bar sliding away fires a resize. By default ScrollTrigger answers a resize by
+// re-measuring every trigger mid-scroll, and a scrubbed, pinned 300svh section re-measured under
+// the reader's thumb is a visible lurch. The viewport did not really change — the browser chrome
+// did — so the honest answer is to ignore it. (The CSS is sized in svh for the same reason.)
+ScrollTrigger.config({ ignoreMobileResize: true });
+
 /**
  * PsAboutScroll — Framer "About / DIGITAL GOLD MINING": 300vh PINNED 3D scroll.
  * A gold wireframe cube spins up top; the 160px heading + a green scroll bullet fade

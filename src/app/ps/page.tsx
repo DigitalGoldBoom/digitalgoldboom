@@ -33,7 +33,7 @@ export default function PixelShovelHome() {
 
       {/* ——— Hero — centred wordmark, sub-row, rotating green-bordered cube ——— */}
       <section
-        className="relative z-10 flex min-h-[88vh] flex-col items-center justify-center px-5"
+        className="relative z-10 flex min-h-[88svh] flex-col items-center justify-center px-5"
         style={{ background: "var(--ps-bg)" }}
       >
         <div className="ps-wrap flex w-full flex-col items-center gap-8 py-10">

@@ -154,9 +154,14 @@
   }
 }
 
-/* About — pinned 3D scroll section */
+/* About — pinned 3D scroll section.
+   Sized in svh, NOT vh. On a phone, 1vh is measured against the viewport WITH the address bar
+   hidden, so the moment the bar slides away the section's height changes underneath a pinned,
+   scroll-scrubbed animation — the whole thing lurches. svh is the small (bar-visible) viewport
+   and never moves, so the scroll distance stays fixed for the length of the scroll. */
 .ps-about-section {
-  height: 300vh;
+  height: 300vh; /* fallback for browsers without svh */
+  height: 300svh;
   position: relative;
   z-index: 2; /* lift the whole section (incl. the cube) in front of the grey section above */
   background: var(--ps-bg);
@@ -165,6 +170,7 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100svh;
   overflow: visible; /* let the gold cube overlap up into the section above (not clipped) */
 }
 .ps-about-fadegroup {
@@ -554,4 +560,18 @@
   .ps-submit:active:not(:disabled) {
     transform: none;
   }
+}
+
+/* ── Off-screen animation pause ──────────────────────────────────────────────
+   The photo cube (6 image faces), the gold wireframe cube (5 nested cubes = 30
+   spinning faces) and the marquees all run infinite CSS animations. Nothing ever
+   stopped them, so a phone kept compositing every one of them while the reader was
+   three sections away — and every other frame on the page paid for it.
+
+   A PAUSE, not a downgrade: nothing about the look or the speed changes. The moment
+   an element scrolls back into view it resumes exactly where it left off. The reader
+   cannot see what is paused, by definition — it is off their screen.            */
+.ps-anim-paused,
+.ps-anim-paused * {
+  animation-play-state: paused !important;
 }
