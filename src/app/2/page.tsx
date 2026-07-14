@@ -95,7 +95,7 @@ export default function HomeRedesignPage() {
                   It&rsquo;s not <span className="v2-gold">bitcoin.</span>
                 </h1>
                 <p className="mt-7 max-w-[50ch] text-lg leading-relaxed sm:text-xl" style={{ color: "var(--v2-dim)" }}>
-                  For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span> That just ended &mdash; and almost no one has noticed yet.
+                  For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span>{" "}That just ended &mdash; and almost no one has noticed yet.
                 </p>
 
                 {/* THE PROOF, ABOVE THE ASK — the redesign's central move on this page.

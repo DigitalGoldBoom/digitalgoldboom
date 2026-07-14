@@ -60,7 +60,7 @@ export default function V2Page() {
                   It&rsquo;s not <span className="v2-gold">bitcoin.</span>
                 </h1>
                 <p className="mt-8 max-w-[50ch] text-xl leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-                  For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span> That just ended &mdash; and almost no one has noticed yet.
+                  For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span>{" "}That just ended &mdash; and almost no one has noticed yet.
                 </p>
                 {/* Two doors, one primary. The free chapters are the offer that is real today, so
                     they keep the weight. The book sits beside it as a quiet second door: a visitor
