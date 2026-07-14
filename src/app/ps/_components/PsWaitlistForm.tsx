@@ -18,7 +18,18 @@ import { track } from "@vercel/analytics";
  */
 const CHECK_ICON = "https://framerusercontent.com/images/AmSPZcDJDRerBarMeWXXOO7Ae90.svg";
 
+// Both pills share the Framer field styling — same fill, radius, type. Kept in one place so the
+// name field can never drift away from the email field it sits above.
+const PILL: React.CSSProperties = {
+  background: "rgb(33,33,33)",
+  border: "1px solid rgb(0,0,0)",
+  color: "rgb(225,227,233)",
+  fontFamily: "var(--font-ps-rethink), sans-serif",
+  fontWeight: 500,
+};
+
 export default function PsWaitlistForm({ source = "ps-home" }: { source?: string }) {
+  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [state, setState] = useState<"idle" | "loading" | "ok" | "err">("idle");
@@ -42,7 +53,7 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email || !consent || state === "loading") return;
+    if (!firstName.trim() || !email || !consent || state === "loading") return;
     setState("loading");
     setMsg("");
     track("ps_optin_submit", { source });
@@ -52,6 +63,7 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           email,
+          firstName: firstName.trim(),
           consent,
           source,
           tag: "free-chapters",
@@ -70,6 +82,7 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
       setSentTo(email);
       setState("ok");
       setEmail("");
+      setFirstName("");
     } catch {
       setState("err");
       setMsg("Network error. Please try again.");
@@ -102,32 +115,40 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
 
   return (
     <div className="flex w-full max-w-[530px] flex-col items-center gap-3">
-      <form onSubmit={onSubmit} className="relative w-full">
+      <form onSubmit={onSubmit} className="flex w-full flex-col gap-2.5">
         <input
-          type="email"
+          type="text"
           required
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          placeholder="First name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
           disabled={state === "loading"}
-          autoComplete="email"
-          aria-label="Email address"
-          className="h-[60px] w-full rounded-full pl-5 pr-[150px] text-[17px] outline-none"
-          style={{
-            background: "rgb(33,33,33)",
-            border: "1px solid rgb(0,0,0)",
-            color: "rgb(225,227,233)",
-            fontFamily: "var(--font-ps-rethink), sans-serif",
-            fontWeight: 500,
-          }}
+          autoComplete="given-name"
+          aria-label="First name"
+          className="h-[60px] w-full rounded-full px-5 text-[17px] outline-none"
+          style={PILL}
         />
-        <button
-          type="submit"
-          disabled={state === "loading" || !consent}
-          className="ps-cta absolute right-1.5 top-1.5 h-[48px] disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {state === "loading" ? "Sending…" : "Get 5 Free Chapters"}
-        </button>
+        <div className="relative w-full">
+          <input
+            type="email"
+            required
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={state === "loading"}
+            autoComplete="email"
+            aria-label="Email address"
+            className="h-[60px] w-full rounded-full pl-5 pr-[190px] text-[17px] outline-none"
+            style={PILL}
+          />
+          <button
+            type="submit"
+            disabled={state === "loading" || !consent}
+            className="ps-cta absolute right-1.5 top-1.5 h-[48px] disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {state === "loading" ? "Sending…" : "Get 5 Free Chapters"}
+          </button>
+        </div>
       </form>
 
       <label className="flex w-full cursor-pointer items-start gap-2.5">

@@ -7,13 +7,13 @@ import { PS_WORDMARK } from "./psAssets";
 
 /**
  * PsNav — PixelShovel top bar (clone of the Framer "Top Nav").
- * Logo left · centred translucent pill of links · "Get Digital Gold Boom Free"
+ * Logo left · centred translucent pill of links · "Get 5 Free Chapters"
  * pill CTA right. Collapses to a hamburger drawer on tablet / phone.
  */
 
 const LINKS = [
   { label: "Home", href: "/ps" },
-  { label: "Get Digital Gold Boom", href: "/ps#dgb" },
+  { label: "Free Chapters", href: "/ps#dgb" },
   { label: "About", href: "/ps#about" },
   { label: "Contact", href: "/ps#contact" },
 ];
@@ -72,7 +72,7 @@ export default function PsNav() {
         {/* Desktop CTA (wrapper hides it on mobile — .ps-cta forces its own display) */}
         <div className="pointer-events-auto hidden lg:block">
           <Link href="/ps#dgb" className="ps-cta">
-            Get Digital Gold Boom Free
+            Get 5 Free Chapters
           </Link>
         </div>
 
@@ -122,7 +122,7 @@ export default function PsNav() {
               onClick={() => setOpen(false)}
               className="ps-cta mt-2 justify-center"
             >
-              Get Digital Gold Boom Free
+              Get 5 Free Chapters
             </Link>
           </nav>
         </div>

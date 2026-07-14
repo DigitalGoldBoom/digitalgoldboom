@@ -5,7 +5,7 @@ import { PS_WORDMARK } from "./psAssets";
 const MENU = [
   { label: "Home", href: "/ps" },
   { label: "About", href: "/ps#about" },
-  { label: "Get Digital Gold Boom", href: "/ps#dgb" },
+  { label: "Free Chapters", href: "/ps#dgb" },
   { label: "Cookie Policy", href: "/terms" },
   { label: "Privacy Policy", href: "/privacy" },
 ];
@@ -24,7 +24,7 @@ export default function PsFooter() {
             History&rsquo;s Biggest Gold Rush Just Started. Get Informed.
           </h2>
           <Link href="/ps#dgb" className="ps-cta shrink-0">
-            Get Digital Gold Boom FREE
+            Get 5 Free Chapters
           </Link>
         </div>
       </div>

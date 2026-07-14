@@ -81,12 +81,12 @@ export default function PixelShovelHome() {
             {/* Offer line (node-exact: green dot · Inter Display 34px · grey-blue) */}
             <div className="flex items-center gap-2 pt-2">
               <span
-                className="inline-block h-[18px] w-[18px] rounded-full"
+                className="inline-block h-[11px] w-[11px] rounded-full"
                 style={{ background: "rgb(13,222,51)" }}
                 aria-hidden
               />
               <span
-                className="text-[clamp(1.4rem,2.4vw,2.125rem)] font-medium leading-[1.2]"
+                className="text-[clamp(1.05rem,1.5vw,1.35rem)] font-medium leading-[1.2]"
                 style={{
                   color: "rgb(167,173,190)",
                   fontFamily: "var(--font-ps-inter), sans-serif",
