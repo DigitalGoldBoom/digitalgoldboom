@@ -799,14 +799,79 @@ body {
   .lm-submit:hover:not(:disabled) .lm-submit-disc { transform: none; }
 }
 
-/* Chapter row: real title on top, the book's own one-line case beneath it. */
+/* Chapter row — WEIGHT INVERTED (2026-07-14).
+   It used to read: chapter title in white at 0.98rem, then the book's own one-line case beneath it
+   in --v2-dim (62% white) at the same size. That put every hard number the offer owns — the $10bn
+   mine gone in 39 days, the 7%, the $6bn already trading — in the faintest text on the page, which
+   is to say invisible to the ~80% of phone traffic that only skims. The proof is the reason to act;
+   the chapter title is a label. So the CASE is now the headline of the row and the TITLE is the
+   sub-label above it. Same words, same source of truth (lib/chapters.ts) — the hierarchy is what
+   was wrong, not the copy. */
 .lm-row-h {
   display: block;
-  color: #F4F4F7;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  color: var(--v2-faint);
   font-weight: 500;
-  font-size: 0.98rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   line-height: 1.4;
-  margin-bottom: 4px;
+  margin-bottom: 7px;
+}
+
+/* The row's real payload: the book's own claim, now at reading weight. */
+.lm-row-t {
+  display: block;
+  color: #E9EAF0;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+
+/* The principle line on /free — the page's load-bearing idea, promoted OUT of body prose and into
+   the skim layer. A gold rule on the leading edge gives it weight without inventing a new colour or
+   a new card; it reads as a pull-quote, which is what it is. */
+.lm-principle {
+  border-left: 2px solid var(--v2-gold);
+  padding: 2px 0 2px 20px;
+  max-width: 52ch;
+}
+.lm-principle p {
+  color: var(--v2-dim);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .lm-principle p { font-size: 1.125rem; }
+}
+
+/* ============================================================================
+   Sticky CTA — the phone-only ask that follows the reader (components/StickyCTA.tsx)
+   ========================================================================== */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(4, 6, 16, 0) 0%, rgba(4, 6, 16, 0.92) 38%);
+  transform: translateY(120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 380ms var(--ease-out), opacity 260ms var(--ease-out);
+}
+.sticky-cta[data-armed="true"] {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.sticky-cta .lm-submit { width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta { transition: opacity 200ms linear; transform: none; }
+  .sticky-cta[data-armed="false"] { opacity: 0; }
 }
 
 /* ============================================================================

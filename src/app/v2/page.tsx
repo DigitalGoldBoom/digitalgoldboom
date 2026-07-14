@@ -4,10 +4,10 @@
 // and LCP land far sooner.
 import ReactDOM from "react-dom";
 import Image from "next/image";
-import Link from "next/link";
 import Book3D from "@/components/Book3D";
 import NumberCounter from "@/components/NumberCounter";
 import LeadMagnetForm from "@/components/LeadMagnetForm";
+import StickyCTA from "@/components/StickyCTA";
 import { FREE_CHAPTERS } from "@/lib/chapters";
 
 const STEPS = [
@@ -48,22 +48,40 @@ export default function V2Page() {
           for the whole site, so it never re-pops between pages. dgb-vault-bg makes this page's
           base transparent so that single field shows through. */}
       <main className="relative z-10">
-        {/* ── HERO ─────────────────────────────────────────────── */}
-        <section className="relative min-h-[100svh] flex items-center">
-          <div className="mx-auto w-full max-w-[1320px] px-6 md:px-10 pt-32 pb-20 lg:pt-28">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
+        {/* ── HERO ─────────────────────────────────────────────────
+            The old hero asked before it proved: on a phone the first CTA sat ~497px down with
+            NOTHING above it but an eyebrow, a claim and a promise. The first hard fact on the page
+            was 2,100px further on, and the author's credential — the strongest proof a book has —
+            was 62%-opacity body prose six screens down.
+            One proof now sits ABOVE the first ask: who is telling you this, and why he'd know.
+            It costs one line and it is the cheapest credibility on the page.
+            The CTA also stopped bouncing off-page. It scrolls to the form that was ALREADY sitting
+            on this page at #start-reading — which nothing linked to. Every button navigated to
+            /free instead, paying a full page load to land the visitor on the worse-ordered of the
+            site's two capture surfaces. */}
+        <section className="relative flex min-h-[100svh] items-center">
+          <div className="mx-auto w-full max-w-[1320px] px-6 pb-16 pt-24 md:px-10 md:pb-20 md:pt-28">
+            <div className="grid grid-cols-1 items-center gap-10 md:gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
               <div>
-                <p className="v2-eyebrow mb-8">A shift in the gold industry</p>
+                <p className="v2-eyebrow mb-7">A shift in the gold industry</p>
                 <h1 className="v2-display" style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)" }}>
                   It&rsquo;s not gold.
                   <br />
                   It&rsquo;s not <span className="v2-gold">bitcoin.</span>
                 </h1>
-                <p className="mt-8 max-w-[50ch] text-xl leading-relaxed" style={{ color: "var(--v2-dim)" }}>
+                <p className="mt-7 max-w-[50ch] text-lg leading-relaxed sm:text-xl" style={{ color: "var(--v2-dim)" }}>
                   For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span> That just ended &mdash; and almost no one has noticed yet.
                 </p>
-                <div className="mt-9 flex flex-wrap items-center gap-3">
-                  <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
+
+                {/* THE PROOF — above the ask, in the skim layer, not buried in paragraph four. */}
+                <p className="lm-principle mt-7" style={{ maxWidth: "48ch" }}>
+                  <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Andrew Fletcher</span> was
+                  President &amp; CEO of Great Eagle Gold &mdash; now NatBridge Resources, the first
+                  gold company built for this model. He has assessed hundreds of gold projects.
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <a href="#start-reading" className="v2-btn">Read the first 5 chapters — free</a>
                 </div>
                 {/* PRE-LAUNCH, said plainly. The book is still being written — the last chapters
                     close on a launch that has not happened yet — so there is nothing to sell and
@@ -97,7 +115,7 @@ export default function V2Page() {
           id="start-reading"
           className="scroll-mt-24 mx-auto w-full max-w-[1320px] px-6 md:px-10 py-20 md:py-28"
         >
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-20">
+          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1.02fr_0.98fr] md:gap-10 lg:gap-20">
             <div>
               <span className="lm-eyebrow">Free preview</span>
               <h2
@@ -138,7 +156,7 @@ export default function V2Page() {
         {/* ── $22T STAT ────────────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
           <SectionLabel n="00">The stakes</SectionLabel>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-12 md:gap-10 lg:gap-20 items-center">
             <div className="v2-display font-mono v2-gold" style={{ fontSize: "clamp(5rem, 16vw, 12rem)", lineHeight: 0.85 }}>
               <NumberCounter start={0} end={22} prefix="$" suffix="T" />
             </div>
@@ -158,7 +176,7 @@ export default function V2Page() {
         {/* ── REFRAME ──────────────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
           <SectionLabel n="01">The reframe</SectionLabel>
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-8 lg:gap-16 items-start">
             <h2 className="v2-display" style={{ fontSize: "clamp(2.2rem, 5vw, 4.25rem)", maxWidth: "15ch" }}>
               Gold mining <span className="v2-gold" style={{ fontStyle: "italic", fontWeight: 300 }}>already</span> runs on verification, not extraction.
             </h2>
@@ -193,7 +211,7 @@ export default function V2Page() {
         {/* ── WHY NOW ──────────────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-24 md:py-32">
           <SectionLabel n="03">Why now</SectionLabel>
-          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-[0.95fr_1.05fr] gap-10 md:gap-8 lg:gap-16 items-start">
             <h2 className="v2-display" style={{ fontSize: "clamp(2rem, 3.6vw, 3.25rem)", maxWidth: "18ch" }}>
               Why this is worth understanding <span className="v2-gold">now.</span>
             </h2>
@@ -239,7 +257,7 @@ export default function V2Page() {
                 ))}
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-3">
-                <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
+                <a href="#start-reading" className="v2-btn">Read the first 5 chapters — free</a>
               </div>
               <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
                 Free · sent to your inbox · and first in line for the full book.
@@ -300,7 +318,7 @@ export default function V2Page() {
             you and the chapters are yours, and you&rsquo;re first in line when the complete book is ready.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4">
-            <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
+            <a href="#start-reading" className="v2-btn">Read the first 5 chapters — free</a>
             <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
               Free · sent to your inbox · no payment
             </span>
@@ -310,6 +328,12 @@ export default function V2Page() {
           </p>
         </section>
       </main>
+
+      {/* The phone-only ask that follows the reader. This page runs ~7 screens on a phone and had
+          exactly one CTA the whole way down — a reader convinced by the author section had to
+          scroll-hunt back to the top to act. It disarms when the form is on screen, so it never
+          covers the field it points at. */}
+      <StickyCTA targetId="start-reading" label="Get the first 5 chapters" source="home_sticky" />
     </div>
   );
 }

@@ -36,9 +36,10 @@ export default function StickyCTA({
 
     const sync = () => setArmed(pastHero && !targetVisible);
 
-    // Arm once the reader is past roughly one screen — i.e. the hero's own CTA is gone.
+    // Arm just past half a screen. Late enough that it never sits on top of the fold's own claim,
+    // early enough that the reader is never more than a thumb away from the ask.
     const onScroll = () => {
-      pastHero = window.scrollY > window.innerHeight * 0.9;
+      pastHero = window.scrollY > window.innerHeight * 0.55;
       sync();
     };
     onScroll();

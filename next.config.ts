@@ -77,11 +77,9 @@ const nextConfig: NextConfig = {
       // been live and linked, so it still has to answer; it is a redirect, not a second copy of
       // the page. (Nobody reading the book ever types it, so nobody sees the bounce.)
       { source: "/affiliates", destination: "/partners", permanent: true },
-      // PRE-LAUNCH: the book is not finished, so it is not for sale. /buy is archived and points
-      // at the one offer that IS real — the first five chapters, free. A greyed-out "Buy now" says
-      // "this site is broken"; no button at all says "not out yet, take the five chapters."
-      // Temporary (307), not permanent: this comes back when the book ships.
-      { source: "/buy", destination: "/free", permanent: false },
+      // NOTE: /buy is NOT redirected. It is the plain product page the payment processor reviews —
+      // a digital book, a price, what you get, a checkout. It stays live and reachable by direct
+      // URL (noindex, unlinked) while the site's public offer is the free chapters.
       { source: "/prices", destination: "/live", permanent: true },
       { source: "/news", destination: "/", permanent: true },
     ];
