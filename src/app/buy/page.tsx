@@ -13,10 +13,11 @@ export const metadata: Metadata = {
   title: "Digital Gold Boom (ebook) — $37",
   description:
     "Digital Gold Boom by Andrew Fletcher. A digital book (PDF, EPUB, Kindle) of information and analysis about the gold tokenization industry. $37, one-time payment, 60-day money-back guarantee.",
-  // Not indexed: the site's public offer during pre-launch is the free chapters, and this page must
-  // not compete with them in search. It stays reachable by direct link — which is what the payment
-  // processor's review needs.
-  robots: { index: false, follow: false },
+  // INDEXED. It used to be noindex, from when this was a secret pre-launch page reachable only by a
+  // URL handed to a reviewer. It is now the site's product page, linked from the nav and the footer:
+  // a real product, at a real price, with a refund policy behind it. A store that hides its product
+  // page from search is telling anyone who checks that the store is not really open — which is the
+  // opposite of what a merchant reviewer needs to conclude.
 };
 
 /**

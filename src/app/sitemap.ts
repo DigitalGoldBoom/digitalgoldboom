@@ -20,6 +20,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      // The product page. Second only to the home page: it is the one page on the site that sells
+      // something. It was noindex and absent from here, which told anyone who checked that the
+      // store was not really open.
+      url: `${BASE_URL}/buy`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
       // /free, NOT /book. /book is a redirect to this page, and a sitemap that advertises a
       // redirect spends the crawler's budget on a hop — while the page it lands on, the site's
       // main email-capture page, was not in the sitemap at all.
