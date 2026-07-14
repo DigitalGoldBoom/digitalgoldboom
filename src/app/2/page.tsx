@@ -124,14 +124,11 @@ export default function HomeRedesignPage() {
                     close on a launch that has not happened yet — so there is nothing to sell and
                     no date to promise. Saying so is not a weakness: it explains why the five
                     chapters are free, and it makes the email the only thing being asked for. */}
+                {/* ONE line — SITE-RULES 20. The advice disclaimer is in the footer of every page
+                    and has a page of its own; a second copy under the button buys nothing. And the
+                    "lands after the launch" line broke Rule 19: state the OFFER, never the ABSENCE. */}
                 <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                  Free · sent to your inbox · read it before anyone else.
-                </p>
-                <p className="mt-2 text-sm" style={{ color: "var(--v2-faint)" }}>
-                  The full book lands after the launch. The first five chapters are ready now.
-                </p>
-                <p className="mt-2 text-xs" style={{ color: "var(--v2-faint)" }}>
-                  Educational — not financial advice.
+                  Free, to your inbox &middot; the full book is $37 at launch
                 </p>
               </div>
 
@@ -297,7 +294,7 @@ export default function HomeRedesignPage() {
                 <a href="#start-reading" className="v2-btn">Read the first 5 chapters — free</a>
               </div>
               <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                Free · sent to your inbox · and first in line for the full book.
+                Free, to your inbox &middot; the full book is $37 at launch
               </p>
             </div>
           </div>
@@ -351,18 +348,14 @@ export default function HomeRedesignPage() {
             Get it Early. Get Informed. Get the Edge.
           </p>
           <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "48ch" }}>
-            Start with the first five chapters — free, sent to your inbox. Confirm the email we send
-            you and the chapters are yours, and you&rsquo;re first in line when the complete book is ready.
+            The first five chapters, free to your inbox. The full book is $37 at launch.
           </p>
           <div className="mt-10 flex flex-col items-center gap-4">
             <a href="#start-reading" className="v2-btn">Read the first 5 chapters — free</a>
             <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
-              Free · sent to your inbox · no payment
+              Free, to your inbox &middot; no payment
             </span>
           </div>
-          <p className="mt-6 mx-auto text-xs leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
-            Educational content — not financial advice.
-          </p>
         </section>
       </main>
 
