@@ -291,20 +291,25 @@ export default function V2Page() {
 
         {/* ── FINAL CTA / OFFER ────────────────────────────────── */}
         <section className="mx-auto w-full max-w-[1100px] px-6 md:px-10 py-28 md:py-36 text-center">
-          {/* ⚠ THIS BLOCK WAS A COMPLIANCE LANDMINE, not just weak copy.
-              It read: "Understand the future of gold BEFORE WALL STREET DOES" over "GET IT EARLY.
-              Get Informed. GET THE EDGE." That is investment-edge language — be early, get the edge,
-              beat the institutions — and it sits on the home page, which is the first thing the
-              payment processor reviewing this store reads. It is precisely the register that gets a
-              merchant application rejected, and the book's own doctrine bans "be early" and "before
-              Wall Street" by name. We sell a book. We do not sell an edge.
+          {/* THE EDGE LINE — author's call, 2026-07-15, and the reasoning is his: this sells
+              KNOWING, not owning. Nothing here promises a return, a price, or a position; it
+              promises that you will understand something before most people do, which is what a
+              book is for. "GET IT EARLY" went, because that one reads as get the ASSET early.
+              "Read about it early" cannot.
 
-              The paragraph under it was 31 words across three clauses, and it ended by announcing
-              that the book was not ready — the one thing this site is no longer saying. */}
+              The guardrail that stays: this register lives on the MARKETING pages and never on
+              /buy or /checkout. Those two are the store, and the store speaks plainly about a book,
+              a price, and a refund. A processor grades the store.
+
+              The paragraph under it used to run 31 words across three clauses and end by announcing
+              the book was not ready. It doesn't now. */}
           <SectionLabel n="06">Read it for yourself</SectionLabel>
           <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(2.4rem, 6vw, 5rem)", maxWidth: "20ch" }}>
-            Don&rsquo;t take my word for it. <span className="v2-gold">Read the case.</span>
+            Understand the future of gold <span className="v2-gold">before Wall Street does.</span>
           </h2>
+          <p className="mt-5 mx-auto v2-gold" style={{ fontSize: "clamp(1rem,1.4vw,1.25rem)", fontWeight: 500, letterSpacing: "0.02em" }}>
+            Read about it early. Get informed. Get the edge.
+          </p>
           <p className="mt-6 mx-auto text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "44ch" }}>
             The first five chapters, free to your inbox. The full book is $37 at launch.
           </p>
