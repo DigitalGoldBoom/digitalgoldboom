@@ -93,43 +93,41 @@ export default function V2Page() {
             the first. It now SHOWS the goods — the five chapters, by name — and the form sits
             beside them. A reader who can see what is behind the door does not need persuading to
             knock. Split, not centred, so the eye lands on the contents first and the field second. */}
-        <section id="start-reading" className="scroll-mt-24 mx-auto w-full max-w-[1320px] px-6 md:px-10 pb-8">
-          <div
-            className="grid grid-cols-1 items-center gap-10 rounded-[24px] border p-8 md:p-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16"
-            style={{
-              borderColor: "rgba(232,178,58,0.28)",
-              background: "rgba(255,255,255,0.03)",
-              boxShadow: "0 24px 60px rgba(0,0,0,0.45)",
-            }}
-          >
+        <section
+          id="start-reading"
+          className="scroll-mt-24 mx-auto w-full max-w-[1320px] px-6 md:px-10 py-20 md:py-28"
+        >
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:gap-20">
             <div>
-              <h2 className="v2-display" style={{ fontSize: "clamp(1.9rem, 3.6vw, 2.9rem)", maxWidth: "16ch" }}>
+              <span className="lm-eyebrow">Free preview</span>
+              <h2
+                className="v2-display mt-7"
+                style={{ fontSize: "clamp(2rem, 3.8vw, 3.1rem)", maxWidth: "14ch" }}
+              >
                 Start with the first <span className="v2-gold">5 chapters.</span>
               </h2>
-              <p className="mt-4 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "46ch" }}>
-                Free, in your inbox. Here is exactly what you get:
+              <p className="mt-5 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "42ch" }}>
+                Free, in your inbox. Exactly what you get:
               </p>
 
-              <ol className="mt-7 flex flex-col gap-4">
+              <ol className="mt-8">
                 {CHAPTER_TEASERS.map((c, i) => (
-                  <li key={c} className="flex items-start gap-4">
-                    <span
-                      className="font-mono text-sm leading-[1.6] shrink-0"
-                      style={{ color: "var(--v2-gold)" }}
-                      aria-hidden
-                    >
+                  <li key={c} className="lm-row">
+                    <span className="lm-row-n" aria-hidden>
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="leading-[1.6]" style={{ color: "var(--v2-dim)" }}>
-                      {c}
-                    </span>
+                    <span className="lm-row-t">{c}</span>
                   </li>
                 ))}
               </ol>
             </div>
 
-            <div className="lg:pl-4">
-              <LeadMagnetForm source="home_lead_magnet" />
+            {/* The form is the ONLY enclosed thing on the section — so the enclosure means
+                "this is the thing you act on" rather than being a box drawn around a box. */}
+            <div className="lm-shell">
+              <div className="lm-core">
+                <LeadMagnetForm source="home_lead_magnet" />
+              </div>
             </div>
           </div>
         </section>

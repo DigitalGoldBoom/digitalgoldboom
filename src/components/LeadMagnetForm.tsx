@@ -136,7 +136,7 @@ export default function LeadMagnetForm({
 
   return (
     <form onSubmit={handleSubmit} className={`w-full ${className}`}>
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col gap-3">
         <label htmlFor="lm-first" className="sr-only">
           First name
         </label>
@@ -149,7 +149,7 @@ export default function LeadMagnetForm({
           placeholder="First name"
           required
           disabled={status === "loading"}
-          className="v2-input min-w-0 flex-1"
+          className="lm-field"
           autoComplete="given-name"
         />
         <label htmlFor="lm-email" className="sr-only">
@@ -161,58 +161,72 @@ export default function LeadMagnetForm({
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
+          placeholder="you@email.com"
           required
           disabled={status === "loading"}
-          className="v2-input min-w-0 flex-[1.4]"
+          className="lm-field"
           autoComplete="email"
         />
       </div>
 
-      <label className="mt-4 flex items-start gap-3 text-left cursor-pointer">
+      <label className="lm-consent mt-5">
         <input
           type="checkbox"
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
           required
-          className="mt-1 h-4 w-4 shrink-0 accent-[var(--v2-gold)]"
-          style={{ accentColor: "#E8B23A" }}
+          className="lm-cb sr-only"
         />
-        <span className="text-sm leading-relaxed" style={{ color: "var(--v2-dim)" }}>
+        <span className="lm-box" aria-hidden>
+          <svg viewBox="0 0 16 16" className="lm-tick" fill="none" aria-hidden>
+            <path
+              d="M3.5 8.4l3 3 6-6.8"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+        <span className="text-[13px] leading-[1.55]" style={{ color: "var(--v2-dim)" }}>
           {isWaitlist
-            ? "Yes, add me to the waitlist and email me about the book. Unsubscribe anytime."
-            : "Yes, email me the free chapters and tell me when the full book is ready. Unsubscribe anytime."}{" "}
-          See our{" "}
+            ? "Add me to the waitlist, plus updates and offers."
+            : "Email me the chapters, plus updates and offers."}{" "}
           <a href="/privacy" className="v2-gold" style={{ textDecoration: "underline" }}>
-            privacy policy
+            Unsubscribe any time
           </a>
           .
         </span>
       </label>
 
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="v2-btn mt-5 w-full"
-      >
-        {status === "loading"
-          ? "Sending…"
-          : isWaitlist
-            ? "Join the waitlist"
-            : "Get the first 5 chapters free"}
+      <button type="submit" disabled={status === "loading"} className="lm-submit mt-5">
+        <span>
+          {status === "loading"
+            ? "Sending…"
+            : isWaitlist
+              ? "Join the waitlist"
+              : "Get the first 5 chapters"}
+        </span>
+        {/* The arrow lives in its own disc, flush to the pill's inner edge — it leans forward on
+            hover. A naked arrow beside a label is the tell of a button nobody designed. */}
+        <span className="lm-submit-disc" aria-hidden>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </span>
       </button>
 
-      {status === "error" ? (
-        <p role="status" aria-live="polite" className="mt-2 text-sm" style={{ color: "#ff8b8b" }}>
-          {message}
-        </p>
-      ) : (
-        <p className="mt-3 text-xs text-center" style={{ color: "var(--v2-faint)" }}>
-          {isWaitlist
-            ? "No payment. We’ll email you when the full book is ready. Educational — not financial advice."
-            : "No payment. We’ll email the chapters to you. Educational — not financial advice."}
-        </p>
-      )}
+      <div className="mt-3 min-h-[18px]">
+        {status === "error" ? (
+          <p role="status" aria-live="polite" className="text-[13px]" style={{ color: "#ff8b8b" }}>
+            {message}
+          </p>
+        ) : (
+          <p className="text-[11px]" style={{ color: "var(--v2-faint)" }}>
+            No payment. Educational — not financial advice.
+          </p>
+        )}
+      </div>
     </form>
   );
 }

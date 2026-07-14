@@ -40,8 +40,12 @@ export default function FreeChaptersPage() {
                   and you&rsquo;re first in line when the full book is ready.
                 </p>
 
-                <div className="mt-8 max-w-[620px]">
-                  <LeadMagnetForm source="free_page" />
+                {/* Same enclosure as the home opt-in: the form is the one thing on the page that
+                    is acted on, so it is the one thing that gets a container. */}
+                <div className="lm-shell mt-8 max-w-[520px]">
+                  <div className="lm-core">
+                    <LeadMagnetForm source="free_page" />
+                  </div>
                 </div>
 
                 <ul className="mt-10 space-y-3">
