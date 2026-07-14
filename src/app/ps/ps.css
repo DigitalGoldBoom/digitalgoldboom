@@ -399,3 +399,159 @@
     transition: none;
   }
 }
+
+/* ── Opt-in form ─────────────────────────────────────────────────────────────
+   The form is the page's one transaction, so it gets its own small system rather
+   than borrowing the marquee/CTA styles. Radius scale held across the block:
+   fields 14px, card 18px (--ps-r-card), submit full pill.                     */
+
+.ps-field-label {
+  font-family: var(--font-ps-manrope), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ps-text-3);
+}
+
+.ps-field {
+  width: 100%;
+  height: 56px;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--ps-line);
+  color: var(--ps-text);
+  font-family: var(--font-ps-rethink), sans-serif;
+  font-size: 16px; /* below 16px iOS zooms the whole page on focus */
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s var(--ps-ease), background 0.2s var(--ps-ease),
+    box-shadow 0.2s var(--ps-ease);
+}
+.ps-field::placeholder {
+  color: rgba(255, 255, 255, 0.34);
+  font-weight: 400;
+}
+.ps-field:hover:not(:disabled) {
+  border-color: var(--ps-line-strong);
+}
+.ps-field:focus-visible {
+  border-color: var(--ps-accent);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.18);
+}
+.ps-field:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+/* Chrome paints autofilled inputs baby-blue, which detonates a dark form. */
+.ps-field:-webkit-autofill,
+.ps-field:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--ps-text);
+  -webkit-box-shadow: 0 0 0 1000px rgb(24, 26, 24) inset;
+  caret-color: var(--ps-text);
+}
+
+/* Consent: the row is the target (min 44px), the box is drawn, not native. */
+.ps-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 44px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+.ps-consent-box {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 6px;
+  border: 1px solid var(--ps-line-strong);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgb(6, 20, 6);
+  transition: background 0.18s var(--ps-ease), border-color 0.18s var(--ps-ease),
+    box-shadow 0.18s var(--ps-ease);
+}
+.ps-consent:hover .ps-consent-box {
+  border-color: var(--ps-text-3);
+}
+.ps-consent-tick {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.16s var(--ps-ease), transform 0.16s var(--ps-ease);
+}
+.peer:checked ~ .ps-consent-box {
+  background: var(--ps-accent);
+  border-color: var(--ps-accent);
+}
+.peer:checked ~ .ps-consent-box .ps-consent-tick {
+  opacity: 1;
+  transform: none;
+}
+.peer:focus-visible ~ .ps-consent-box {
+  box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.25);
+  border-color: var(--ps-accent);
+}
+
+/* Submit: full width on phones (a thumb-sized target), content-width from sm up. */
+.ps-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 56px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: var(--ps-accent);
+  color: rgb(6, 20, 6);
+  font-family: var(--font-ps-rethink), sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.18s var(--ps-ease), box-shadow 0.18s var(--ps-ease),
+    filter 0.18s var(--ps-ease);
+}
+.ps-submit:hover:not(:disabled) {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(0, 255, 0, 0.18);
+}
+.ps-submit:active:not(:disabled) {
+  transform: scale(0.985);
+  box-shadow: none;
+}
+.ps-submit:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.3);
+}
+.ps-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+@media (min-width: 640px) {
+  .ps-submit {
+    width: auto;
+    min-width: 240px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-field,
+  .ps-consent-box,
+  .ps-consent-tick,
+  .ps-submit {
+    transition: none;
+  }
+  .ps-submit:hover:not(:disabled),
+  .ps-submit:active:not(:disabled) {
+    transform: none;
+  }
+}

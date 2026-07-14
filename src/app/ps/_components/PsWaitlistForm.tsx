@@ -1,38 +1,39 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { track } from "@vercel/analytics";
 
 /**
- * PsWaitlistForm — the PixelShovel opt-in: email in exchange for the first 5 chapters of Digital
- * Gold Boom. Node-exact clone of the Framer pill form (fill rgb(33,33,33), radius 100px, green CTA
- * on the right), wired to the same /api/subscribe route as the DGB site so every signup lands in the
- * ONE owned list (Supabase) and is mirrored into Kit.
+ * PsWaitlistForm — the PixelShovel opt-in: first name + email in exchange for the first five
+ * chapters of Digital Gold Boom. Posts to /api/subscribe, which stores the lead in the owned list
+ * (Supabase) and mirrors it into Kit; the chapters arrive only in Kit's double opt-in confirmation
+ * email, so the success state's whole job is to get the reader into their inbox.
  *
- * Delivery is BY EMAIL ONLY — no instant download. Kit's double opt-in confirmation email carries
- * the chapters, so the click that fetches them is what proves the address is real. The success panel
- * therefore points them at their inbox (spam included: a young sending domain often lands there).
+ * Design notes (deliberate departures from the Framer node it replaces):
+ *   - The CTA is BELOW the fields, not floating inside the email pill. Inside the pill it stole
+ *     ~150px of a ~330px phone input, leaving a slot too narrow to read your own address in.
+ *   - Labels sit above their inputs. Placeholder-as-label vanishes the moment you type, which is
+ *     exactly when a stranger filling a form most wants to check what they are being asked for.
+ *   - The consent row is a real target (the whole row is the label, ≥44px tall) with a visible
+ *     custom box — the 16px native checkbox was the hardest thing on the page to hit on a phone.
+ *   - Errors land inline, in place, with aria-live, rather than as a colour change on a footnote.
  *
- * `source` is prefixed "ps-" so the API routes it to the PixelShovel Kit form (KIT_PS_FORM_ID) —
- * same sender, separate list segment. PII-safe: the email never goes to analytics.
+ * Radius system, held to across the block: inputs 14px, card 18px (--ps-r-card), CTA full pill.
+ * Motion is limited to focus, press and reveal; all of it collapses under prefers-reduced-motion.
  */
-const CHECK_ICON = "https://framerusercontent.com/images/AmSPZcDJDRerBarMeWXXOO7Ae90.svg";
 
-// Both pills share the Framer field styling — same fill, radius, type. Kept in one place so the
-// name field can never drift away from the email field it sits above.
-const PILL: React.CSSProperties = {
-  background: "rgb(33,33,33)",
-  border: "1px solid rgb(0,0,0)",
-  color: "rgb(225,227,233)",
-  fontFamily: "var(--font-ps-rethink), sans-serif",
-  fontWeight: 500,
-};
+type State = "idle" | "loading" | "ok" | "err";
 
 export default function PsWaitlistForm({ source = "ps-home" }: { source?: string }) {
+  const uid = useId();
+  const nameId = `${uid}-name`;
+  const emailId = `${uid}-email`;
+  const errId = `${uid}-err`;
+
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
-  const [state, setState] = useState<"idle" | "loading" | "ok" | "err">("idle");
+  const [state, setState] = useState<State>("idle");
   const [msg, setMsg] = useState("");
   const [sentTo, setSentTo] = useState("");
   const utm = useRef<Record<string, string>>({});
@@ -51,9 +52,19 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
     }
   }, []);
 
+  const busy = state === "loading";
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!firstName.trim() || !email || !consent || state === "loading") return;
+    if (busy) return;
+
+    // Guard in the component, not just the markup: the consent box is what makes the mail legal.
+    if (!consent) {
+      setState("err");
+      setMsg("Please tick the box so we can email you the chapters.");
+      return;
+    }
+
     setState("loading");
     setMsg("");
     track("ps_optin_submit", { source });
@@ -72,7 +83,8 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
       });
       const data = (await res.json().catch(() => ({}))) as { message?: string };
       if (!res.ok) {
-        // Surface the server's own words — rate-limit, bad email, storage down all read differently.
+        // The API's own words: a rate-limit, a bad address and a store outage each need a
+        // different response from the reader, and one generic line tells them none of it.
         setState("err");
         setMsg(data.message ?? "Something went wrong. Please try again.");
         track("ps_optin_fail", { source });
@@ -95,98 +107,122 @@ export default function PsWaitlistForm({ source = "ps-home" }: { source?: string
       <div
         role="status"
         aria-live="polite"
-        className="w-full max-w-[530px] rounded-[var(--ps-r-card)] border p-6"
-        style={{ borderColor: "rgb(13,222,51)", background: "rgba(13,222,51,0.07)" }}
+        className="w-full max-w-[540px] rounded-[18px] border p-6 sm:p-7"
+        style={{ borderColor: "rgba(0,255,0,0.45)", background: "rgba(0,255,0,0.06)" }}
       >
-        <p className="text-[17px] font-semibold text-white">Almost there — check your inbox.</p>
-        <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgb(167,173,190)" }}>
+        <p className="text-[19px] font-semibold leading-tight text-white">
+          Almost there. Check your inbox.
+        </p>
+        <p className="mt-3 text-[15px] leading-relaxed text-[var(--ps-text-2)]">
           We sent a confirmation to{" "}
-          <strong style={{ color: "#fff", wordBreak: "break-all" }}>{sentTo}</strong>. Click the button
+          <strong className="break-all font-semibold text-white">{sentTo}</strong>. Click the button
           inside it and your five chapters arrive straight away.
         </p>
-        <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgb(167,173,190)" }}>
-          <strong style={{ color: "#fff" }}>Not there?</strong> Look in <strong>spam</strong> or{" "}
-          <strong>promotions</strong> — a first email from a new sender often lands there. Drag it to
-          your inbox so everything after it comes straight through.
+        <p className="mt-3 text-[15px] leading-relaxed text-[var(--ps-text-3)]">
+          Not there? Look in <span className="text-white">spam</span> or{" "}
+          <span className="text-white">promotions</span>. A first email from a new sender often
+          lands there. Drag it to your inbox and everything after it comes straight through.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="flex w-full max-w-[530px] flex-col items-center gap-3">
-      <form onSubmit={onSubmit} className="flex w-full flex-col gap-2.5">
-        <input
-          type="text"
-          required
-          placeholder="First name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          disabled={state === "loading"}
-          autoComplete="given-name"
-          aria-label="First name"
-          className="h-[60px] w-full rounded-full px-5 text-[17px] outline-none"
-          style={PILL}
-        />
-        <div className="relative w-full">
+    <form onSubmit={onSubmit} className="w-full max-w-[540px]" noValidate={false}>
+      {/* Two fields, side by side once there is room for both to stay legible. */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <label htmlFor={nameId} className="ps-field-label">
+            First name
+          </label>
           <input
+            id={nameId}
+            type="text"
+            required
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            disabled={busy}
+            autoComplete="given-name"
+            placeholder="Andrew"
+            className="ps-field"
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor={emailId} className="ps-field-label">
+            Email
+          </label>
+          <input
+            id={emailId}
             type="email"
             required
-            placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            disabled={state === "loading"}
+            disabled={busy}
             autoComplete="email"
-            aria-label="Email address"
-            className="h-[60px] w-full rounded-full pl-5 pr-[190px] text-[17px] outline-none"
-            style={PILL}
+            inputMode="email"
+            placeholder="you@example.com"
+            aria-describedby={state === "err" ? errId : undefined}
+            aria-invalid={state === "err" || undefined}
+            className="ps-field"
           />
-          <button
-            type="submit"
-            disabled={state === "loading" || !consent}
-            className="ps-cta absolute right-1.5 top-1.5 h-[48px] disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {state === "loading" ? "Sending…" : "Get 5 Free Chapters"}
-          </button>
         </div>
-      </form>
+      </div>
 
-      <label className="flex w-full cursor-pointer items-start gap-2.5">
+      {/* Consent — the whole row is the target, and the box is drawn big enough to hit. */}
+      <label className="ps-consent group mt-4">
         <input
           type="checkbox"
           checked={consent}
-          onChange={(e) => setConsent(e.target.checked)}
-          required
-          className="mt-0.5 h-4 w-4 shrink-0"
-          style={{ accentColor: "rgb(13,222,51)" }}
+          onChange={(e) => {
+            setConsent(e.target.checked);
+            if (state === "err") setState("idle");
+          }}
+          className="peer sr-only"
         />
-        <span
-          className="text-[12px] leading-relaxed"
-          style={{ color: "rgb(167,173,190)", fontFamily: "var(--font-ps-manrope), sans-serif" }}
-        >
-          Yes, email me the free chapters and tell me when the full book is ready. Unsubscribe
-          anytime. See our{" "}
-          <a href="/privacy" style={{ color: "rgb(13,222,51)", textDecoration: "underline" }}>
-            privacy policy
+        <span className="ps-consent-box" aria-hidden>
+          <svg viewBox="0 0 16 16" className="ps-consent-tick" fill="none" aria-hidden>
+            <path
+              d="M3.5 8.4l3 3 6-6.8"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+        <span className="text-[13px] leading-[1.5] text-[var(--ps-text-2)]">
+          Email me the free chapters and tell me when the full book is ready. Unsubscribe any time.{" "}
+          <a
+            href="/privacy"
+            className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
+          >
+            Privacy policy
           </a>
           .
         </span>
       </label>
 
-      <div className="flex items-center gap-1.5">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={CHECK_ICON} alt="" width={15} height={15} aria-hidden />
-        <span
-          className="text-[11px] font-medium"
-          style={{
-            color: state === "err" ? "#ff8b8b" : "rgb(167,173,190)",
-            fontFamily: "var(--font-ps-manrope), sans-serif",
-          }}
-          aria-live="polite"
-        >
-          {state === "err" ? msg : "No spam, just genuine updates!"}
-        </span>
+      <button type="submit" disabled={busy} className="ps-submit mt-5">
+        {busy ? "Sending…" : "Get 5 free chapters"}
+      </button>
+
+      <div className="mt-3 min-h-[20px]">
+        {state === "err" ? (
+          <p
+            id={errId}
+            role="alert"
+            aria-live="assertive"
+            className="text-[13px] font-medium text-[#ff8b8b]"
+          >
+            {msg}
+          </p>
+        ) : (
+          <p className="text-[13px] text-[var(--ps-text-3)]">
+            No payment. No spam. The chapters land in your inbox after one confirming click.
+          </p>
+        )}
       </div>
-    </div>
+    </form>
   );
 }

@@ -138,7 +138,7 @@ export default function LeadMagnetForm({
     <form onSubmit={handleSubmit} className={`w-full ${className}`}>
       <div className="flex flex-col sm:flex-row gap-3">
         <label htmlFor="lm-first" className="sr-only">
-          First name (optional)
+          First name
         </label>
         <input
           type="text"
@@ -146,7 +146,8 @@ export default function LeadMagnetForm({
           name="firstName"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          placeholder="First name (optional)"
+          placeholder="First name"
+          required
           disabled={status === "loading"}
           className="v2-input min-w-0 flex-1"
           autoComplete="given-name"
