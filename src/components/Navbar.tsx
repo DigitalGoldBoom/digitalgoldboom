@@ -58,12 +58,17 @@ export default function Navbar() {
 
   // min-h-[44px] + grid place-items-center: the tap box clears the 44px floor without the label
   // growing. Under that, a thumb misses — and on a phone the nav is nearly all thumb.
+  //
+  // Colour: --v2-dim, not --v2-faint. Faint is 40% white, and 40% white on a translucent bar over a
+  // dark hero lands around 3.5:1 — under the 4.5:1 floor for text this size. The nav is the one
+  // element on every page that a visitor must be able to read without trying, and it was the hardest
+  // to read on the site. Dim (62%) clears the floor and still sits back from the active link.
   const linkClass = (active: boolean) =>
     [
       "grid min-h-[44px] place-items-center whitespace-nowrap rounded-full px-4 text-sm font-medium transition-colors duration-200",
       active
         ? "bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] text-white"
-        : "text-[var(--v2-faint)] hover:bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] hover:text-white",
+        : "text-[var(--v2-dim)] hover:bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] hover:text-white",
     ].join(" ");
 
   if (isPixelShovel) return null;
@@ -101,7 +106,13 @@ export default function Navbar() {
             collapses into the hamburger. Never the ask. */}
         <div
           className="nav-blur-strong hidden items-center gap-1 rounded-full p-1.5 lg:flex lg:justify-self-center"
-          style={{ background: "rgba(10,13,31,0.8)" }}
+          // The pill is the thing the links sit on, and it was 80% opaque with no edge — over a
+          // busy hero it read as a smudge rather than a control. Denser fill + a hairline gives the
+          // links a surface of their own to be legible against, at every scroll position.
+          style={{
+            background: "rgba(10,13,31,0.92)",
+            border: "1px solid rgba(255,255,255,0.09)",
+          }}
         >
           {LINKS.map((l) => (
             <Link key={l.href} href={l.href} className={linkClass(isActive(l.href))}>
@@ -132,7 +143,13 @@ export default function Navbar() {
             aria-label="Open menu"
             aria-expanded={open}
             className="nav-blur-strong grid h-[44px] w-[44px] place-items-center rounded-full text-white transition-colors lg:hidden"
-            style={{ background: "rgba(10,13,31,0.8)" }}
+            // The pill is the thing the links sit on, and it was 80% opaque with no edge — over a
+          // busy hero it read as a smudge rather than a control. Denser fill + a hairline gives the
+          // links a surface of their own to be legible against, at every scroll position.
+          style={{
+            background: "rgba(10,13,31,0.92)",
+            border: "1px solid rgba(255,255,255,0.09)",
+          }}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
               <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />

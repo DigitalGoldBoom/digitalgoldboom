@@ -71,19 +71,15 @@ export default function V2Page() {
                   <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
                   <Link href="/buy" className="v2-btn-ghost">The full book — $37</Link>
                 </div>
-                {/* PRE-LAUNCH, framed as a reason to move rather than a status report. The old line
-                    ("the full book lands after the launch") volunteered that the product was not out
-                    — the first thing anyone reading the site was told, and the last thing that helps.
-                    This says the same thing as an offer: free now, $37 at launch. Nothing is claimed
-                    that is not true, and the reader is given a reason to act rather than to wait. */}
+                {/* ONE line. There were three stacked here — the delivery promise, the pre-launch
+                    framing, and the advice disclaimer — and three lines of small print under a
+                    button is a wall a reader steps around, not a reassurance they read. The offer
+                    and the price are the only things worth a reader's eye at the moment of the
+                    click; the advice disclaimer is on every page of this site already, in the
+                    footer, and has its own page. Repeating it under the CTA bought nothing and cost
+                    the two facts above it their weight. */}
                 <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                  Free · sent to your inbox · read it before anyone else.
-                </p>
-                <p className="mt-2 text-sm" style={{ color: "var(--v2-faint)" }}>
-                  Pre-launch: the first five chapters are free. At launch, the full book is $37.
-                </p>
-                <p className="mt-2 text-xs" style={{ color: "var(--v2-faint)" }}>
-                  Educational — not financial advice.
+                  Free, to your inbox &middot; the full book is $37 at launch
                 </p>
               </div>
 
@@ -306,15 +302,15 @@ export default function V2Page() {
             Start with the first five chapters — free, sent to your inbox. Confirm the email we send
             you and the chapters are yours, and you&rsquo;re first in line when the complete book is ready.
           </p>
+          {/* One line, same rule as the hero. The advice disclaimer already sits in the footer of
+              every page on this site and has a page of its own; a second copy of it eight pixels
+              above that footer is not compliance, it is clutter. */}
           <div className="mt-10 flex flex-col items-center gap-4">
             <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
             <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
-              Free · sent to your inbox · no payment
+              Free, to your inbox &middot; no payment
             </span>
           </div>
-          <p className="mt-6 mx-auto text-xs leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
-            Educational content — not financial advice.
-          </p>
         </section>
       </main>
     </div>
