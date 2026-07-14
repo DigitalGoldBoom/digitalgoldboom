@@ -27,6 +27,9 @@ export default function IndustryReviewForm() {
         body: JSON.stringify({
           email,
           source: "industry-feedback",
+          // tag:"mining" — see AffiliateInterestForm. A geologist offering to test the model is
+          // not a free-chapters lead and must never be mailed as one.
+          tag: "mining",
           name: name || undefined,
           company: company || undefined,
         }),

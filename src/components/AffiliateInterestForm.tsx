@@ -6,11 +6,13 @@ import { track } from "@vercel/analytics";
 type Status = "idle" | "submitting" | "success" | "error";
 
 /**
- * Optional, lowest-friction fallback for the CASH affiliate program: a promoter who'd rather be
- * walked through LemonSqueezy onboarding leaves their email and we send the steps. ONE field only
- * (email) — the NATG wallet + social-handle fields were removed (the program is cash-commission
- * only; no token, no wallet). POSTs to /api/subscribe with source:"affiliate-interest". Status comes
- * from the REAL response (never fake success on a non-2xx). dgb-conversion-analytics owns final wiring.
+ * The PRE-LAUNCH sign-up for the partner program — the only action /partners offers, because the
+ * program is not open and nobody can join, get a link, or earn today. ONE field (email): the
+ * program's tooling is deliberately unnamed on the page, and the vetting conversation happens by
+ * email, so there is nothing else worth asking a stranger for at this stage.
+ *
+ * POSTs to /api/subscribe with source:"affiliate-interest" and tag:"affiliate". Status comes from
+ * the REAL response (never fake success on a non-2xx). dgb-conversion-analytics owns final wiring.
  */
 export default function AffiliateInterestForm() {
   const [email, setEmail] = useState("");
@@ -25,7 +27,10 @@ export default function AffiliateInterestForm() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, source: "affiliate-interest" }),
+        // tag:"affiliate" — without it the API defaults everyone to "free-chapters", which buries
+        // a would-be promoter in the same bucket as a reader who wanted a free sample. These two
+        // people need completely different emails from you, so they cannot share a tag.
+        body: JSON.stringify({ email, source: "affiliate-interest", tag: "affiliate" }),
       });
       const data = (await res.json().catch(() => ({}))) as { message?: string };
       if (!res.ok) {
@@ -45,9 +50,9 @@ export default function AffiliateInterestForm() {
   if (status === "success") {
     return (
       <div className="rounded-[20px] border p-6 text-center" style={{ borderColor: "var(--v2-gold)", background: "var(--v2-gold-soft)" }}>
-        <p className="font-semibold" style={{ color: "#F4F4F7" }}>Done — check your inbox.</p>
+        <p className="font-semibold" style={{ color: "#F4F4F7" }}>You&rsquo;re on the list.</p>
         <p className="mt-2 text-sm" style={{ color: "var(--v2-dim)" }}>
-          We&apos;ll send you the steps to sign up as a LemonSqueezy affiliate. No spam.
+          We&rsquo;ll come back to you before the doors open, with exactly what happens next.
         </p>
       </div>
     );

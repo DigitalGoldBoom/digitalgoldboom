@@ -9,50 +9,49 @@ import { generateMetadata as genMeta, generateFAQSchema } from "@/lib/seo";
    Advocates & Believers" → "Start at digitalgoldboom.com/partners"). Ink cannot be edited, so the
    canonical page answers the printed address directly rather than bouncing the reader through a
    redirect to a word the book never used. /affiliates redirects here.
-   Paid affiliate program on LemonSqueezy's native affiliate feature: earn a cash commission on
-   every sale you refer. NO NATG token, no wallet, no tiers, no view-targets. Ported to the v2
-   register. The real LemonSqueezy affiliate signup link is set in NEXT_PUBLIC_LS_AFFILIATE_URL once
-   the program is enabled in the store; until then the CTA renders a safe disabled state and the
-   one-field email fallback captures promoters who want to be walked through it. */
 
-const affiliateUrl = process.env.NEXT_PUBLIC_LS_AFFILIATE_URL;
+   PRE-LAUNCH. The program is not open: nobody can join, get a link, or earn today. Every CTA on the
+   page therefore points at ONE action — put your name down — and nothing on it may imply otherwise.
+   Cash commission on book sales; NO NATG token, no wallet, no tiers, no view-targets.
+
+   The payment/affiliate tooling is never NAMED on this page. A reader who has just closed the book
+   on "I would rather grow this with the people who believe in it than pay strangers to shout about
+   it" does not care which company processes the payout, and naming it turns the warm end of a book
+   into an admin form. The vendor is an implementation detail; it can change without a word of this
+   page changing, which is the point. */
 
 export const metadata: Metadata = genMeta({
-  title: "Affiliate Program — Earn a Commission on Every Sale",
+  title: "Partner With Us — Help Carry Digital Gold Boom",
   description:
-    "Promote Digital Gold Boom and earn a cash commission on every copy your link sells. Sign up as a LemonSqueezy affiliate, get your own link, tracked automatically, paid by wire. Free to join.",
+    "Ideas like this don't spread on their own. Put your name down to help carry Digital Gold Boom, and keep 50% of every copy your link sells. Pre-launch: partners are approved before their link goes live.",
   path: "/partners",
   keywords: ["Digital Gold Boom affiliate", "book affiliate program", "refer and earn", "cash commission affiliate"],
 });
 
-// Primary CTA → LemonSqueezy affiliate signup. Real link when the program is enabled; safe disabled
-// state until then (never ship a dead [WIRE] link).
-function AffiliateCTA({ children = "Become an affiliate", className = "v2-btn" }: { children?: React.ReactNode; className?: string }) {
-  if (!affiliateUrl) {
-    return (
-      <button type="button" disabled aria-disabled className={className} title="Opens when the program is enabled">
-        Affiliate sign-up opens at launch
-      </button>
-    );
-  }
+// One action on the whole page: put your name down. Every CTA is the same anchor to the same form,
+// because there is exactly one thing a visitor can do today.
+function AffiliateCTA({ children = "Put your name down", className = "v2-btn" }: { children?: React.ReactNode; className?: string }) {
   return (
-    <a href={affiliateUrl} target="_blank" rel="noopener noreferrer" className={className}>
+    <a href="#join" className={className}>
       {children} &rarr;
     </a>
   );
 }
 
 const facts = [
-  { h: "50% per sale", p: "You earn half of every sale your link makes — US$18.50 on each $37 copy, the same on the first sale and the thousandth." },
-  { h: "Tracked for you", p: "Every click and sale through your unique link is counted automatically in your own dashboard. Nothing to manage." },
-  { h: "No tiers, no targets", p: "One flat rate for everyone. No thresholds to hit, no ladder to climb, no minimums before you earn." },
+  { h: "50% per sale", p: "You keep half of every copy your link sells — US$18.50 on each $37 sale, the same on the first and the thousandth." },
+  { h: "Tracked for you", p: "Every click and every sale your link makes is counted automatically. Nothing for you to manage." },
+  { h: "No tiers, no targets", p: "One flat rate for everyone. No thresholds to hit, no ladder to climb, no minimum before you earn." },
 ];
 
+// The pre-launch path, honestly told. Vetting is stated up front rather than buried: it is the
+// reason the program is worth being in, and a partner who would not pass should find that out on
+// this page, not after they have built a post around it.
 const steps = [
-  { n: "01", h: "Sign up as an affiliate", p: "Create your free affiliate account with LemonSqueezy. Takes a couple of minutes." },
-  { n: "02", h: "Get your link", p: "LemonSqueezy gives you a unique link and your own dashboard to track clicks and sales." },
-  { n: "03", h: "Share it where your people are", p: "Post your link anywhere you reach an audience — social, newsletter, video, bio." },
-  { n: "04", h: "Get paid", p: "Every sale through your link earns you a commission, paid out by wire from LemonSqueezy." },
+  { n: "01", h: "Put your name down", p: "Tell us who you are and where your people are. It takes a minute." },
+  { n: "02", h: "We get to know you", p: "Every partner is approved before their link goes live. This is a small program on purpose." },
+  { n: "03", h: "You get the kit", p: "Footage, images and copy you can post as they are — so making something good is the easy part." },
+  { n: "04", h: "The doors open", p: "Your link goes live, every sale it makes is tracked, and half of it is yours." },
 ];
 
 const toolkit = [
@@ -117,11 +116,13 @@ const premarketStats = [
 ];
 
 const faqs = [
+  { question: "Is the program open?", answer: "Not yet. You're putting your name down to be considered. We'll email you when your link is ready, and tell you exactly what happens next." },
   { question: "How much do I earn?", answer: "50% of every sale your link makes — US$18.50 on each $37 copy. The same flat rate on your first sale and your thousandth." },
-  { question: "How are sales tracked and paid?", answer: "The program runs on LemonSqueezy. Every click and sale tied to your unique link is tracked automatically in your own dashboard, and your balance is paid out by wire on LemonSqueezy's regular schedule. Nothing to manage." },
+  { question: "How are sales tracked and paid?", answer: "Every click and every sale tied to your unique link is counted automatically, and your balance is paid out on a regular schedule. Nothing for you to manage." },
+  { question: "Why do you approve people first?", answer: "Because one bad post can put the whole shopfront at risk. Every partner signs a short, plain media policy: no investment talk, no promises about what anything will be worth, and you say clearly that you earn a commission. Say what the book says, and you'll never come near the line." },
   { question: "Do I need to own any digital assets?", answer: "No. This is a straightforward cash commission for selling a book. No wallet, nothing token-related." },
-  { question: "What does it cost me?", answer: "Nothing. Signing up is free." },
-  { question: "What counts as a valid sale?", answer: "A real purchase made through your link. LemonSqueezy handles the attribution and the standard rules; you'll see them when you sign up." },
+  { question: "What does it cost me?", answer: "Nothing. It's free to put your name down and free to be a partner." },
+  { question: "Do I need a big audience?", answer: "No. A hundred people who trust you beat a hundred thousand who don't. What matters is that the book belongs in front of your world." },
 ];
 
 export default function AffiliatesPage() {
@@ -131,19 +132,31 @@ export default function AffiliatesPage() {
 
       {/* ── HERO ─────────────────────────────────────────────── */}
       <section className="relative pt-32 pb-20 md:pt-36 md:pb-28">
+        {/* The reader arriving here has just closed the book on "I would rather grow this with the
+            people who believe in it than pay strangers to shout about it." The old hero met them
+            with a commission table. This one answers the sentence they arrived on, in the voice
+            they have been reading for 400 pages, and only then talks about money. */}
         <div className="mx-auto max-w-[900px] px-6 text-center">
-          <p className="v2-eyebrow mb-7 justify-center">Share the book, earn a commission</p>
+          <p className="v2-eyebrow mb-7 justify-center">The invitation, continued</p>
           <h1 className="v2-display mx-auto" style={{ fontSize: "clamp(2.4rem, 6vw, 4.25rem)", maxWidth: "18ch" }}>
-            Promote the book. <span className="v2-gold">Earn cash</span> on every sale you refer.
+            Ideas like this don&rsquo;t spread <span className="v2-gold">on their own.</span>
           </h1>
           <p className="mx-auto mt-8 max-w-[58ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-            Get your own link and earn <span style={{ color: "#F4F4F7", fontWeight: 600 }}>50% on every copy</span> of Digital Gold Boom it sells — US$18.50 a sale. Tracked automatically, paid by wire.
+            They spread through people who care enough to pass them on. If you finished the book and
+            felt that this <span style={{ color: "#F4F4F7" }}>ought to exist</span>, there is a way to
+            help carry it &mdash; and to be paid properly for doing it.
+          </p>
+          <p className="mx-auto mt-5 max-w-[58ch] text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
+            The program isn&rsquo;t open yet. Put your name down and you&rsquo;re first through the
+            door when it is.
           </p>
           <div className="mt-10 flex justify-center">
             <AffiliateCTA />
           </div>
           <p className="mx-auto mt-6 max-w-[64ch] text-xs leading-relaxed" style={{ color: "var(--v2-faint)" }}>
-            This is a paid affiliate program: when someone buys the book through your link, you earn a commission on that sale. See our{" "}
+            Haven&rsquo;t read it? <a href="/free" className="v2-gold">Start with the first five chapters, free</a> &mdash;
+            nobody should carry a book they haven&rsquo;t read. This is a paid affiliate program: when
+            someone buys the book through your link, you earn a commission on that sale. See our{" "}
             <a href="/disclaimer" className="v2-gold">Disclaimer</a> and <a href="/terms" className="v2-gold">Terms</a>.
           </p>
         </div>
@@ -233,10 +246,12 @@ export default function AffiliatesPage() {
       {/* ── THE COMMISSION ───────────────────────────────────── */}
       <section className="mx-auto w-full max-w-[1320px] px-6 md:px-10 py-20 md:py-28">
         <h2 className="v2-display text-center mx-auto" style={{ fontSize: "clamp(1.9rem, 4vw, 3.25rem)", maxWidth: "18ch" }}>
-          <span className="v2-gold">50%</span> on every sale you refer.
+          <span className="v2-gold">Half</span> of every sale you bring.
         </h2>
         <p className="mx-auto mt-5 max-w-[60ch] text-center text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-          You keep half of every copy your link sells — US$18.50 on each $37 sale, the same on the first and the thousandth. No tiers to chase, no targets to hit.
+          Believing in something shouldn&rsquo;t cost you money. When the doors open, you keep half of
+          every copy your link sells &mdash; US$18.50 on each $37 sale, the same on the first and the
+          thousandth. No tiers to chase, no targets to hit.
         </p>
         <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
           {facts.map((f) => (
@@ -339,33 +354,26 @@ export default function AffiliatesPage() {
       <section id="join" className="scroll-mt-24 mx-auto w-full max-w-[560px] px-6 py-20 md:py-28 text-center">
         <div className="rounded-[24px] p-8 md:p-10" style={{ border: "1px solid rgba(232,178,58,0.4)", background: "linear-gradient(180deg, rgba(232,178,58,0.07), rgba(232,178,58,0.02))" }}>
           <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(1.7rem, 3.4vw, 2.5rem)", maxWidth: "16ch" }}>
-            Get your link and start earning.
+            Put your name down.
           </h2>
           <p className="mx-auto mt-4 max-w-[46ch] leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-            Sign up as a LemonSqueezy affiliate, grab your unique link, and earn a commission on every copy you sell. Free to join, tracked automatically, paid by wire.
+            The program isn&rsquo;t open yet. Leave your email and you&rsquo;re first in line when it
+            is &mdash; we&rsquo;ll come back to you with exactly what happens next. Free, and nothing
+            is owed either way.
           </p>
-          <div className="mt-8 flex justify-center"><AffiliateCTA className="v2-btn w-full sm:w-auto" /></div>
-
-          <div className="my-7 flex items-center gap-4">
-            <span className="h-px flex-1" style={{ background: "var(--v2-line)" }} />
-            <span className="font-mono text-xs" style={{ color: "var(--v2-faint)" }}>or</span>
-            <span className="h-px flex-1" style={{ background: "var(--v2-line)" }} />
+          <div className="mt-8">
+            <AffiliateInterestForm />
           </div>
-
-          <p className="mb-4 text-sm" style={{ color: "var(--v2-dim)" }}>
-            Prefer we walk you through it? Leave your email and we&apos;ll send the steps.
-          </p>
-          <AffiliateInterestForm />
         </div>
       </section>
 
       {/* ── FINAL CTA ────────────────────────────────────────── */}
       <section className="mx-auto w-full max-w-[700px] px-6 py-24 text-center">
         <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(2rem, 4.5vw, 3.25rem)", maxWidth: "18ch" }}>
-          Help people find the book. <span className="v2-gold">Earn for every copy you sell.</span>
+          Movements are shaped by the people who <span className="v2-gold">show up early.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-[50ch] text-lg" style={{ color: "var(--v2-dim)" }}>
-          If your audience would want Digital Gold Boom, your link turns that into a commission on every sale.
+          This is early. If you want to help build it, the door is open.
         </p>
         <div className="mt-9 flex justify-center"><AffiliateCTA /></div>
       </section>
