@@ -8,6 +8,19 @@
    Pattern: Funnel 3-Step Conversion
    ================================================================ */
 :root {
+  /* Brand gold, GLOBAL. These same names are also declared inside .v2 (same values) — but the
+     navbar, the footer and any page outside the .v2 scope have no .v2 ancestor, so a token that
+     only lives there resolves to nothing for them. That is not theoretical: the navbar's gold CTA
+     builds its gradient with color-mix(... var(--v2-gold) ...), and with the token undefined the
+     whole background computed to `none` — the site's ONE conversion button was rendering as bare
+     text on dark, on every page including home. Declaring them at the root fixes it everywhere and
+     costs nothing: .v2 still overrides with identical values. */
+  --v2-gold: #E8B23A;
+  --v2-gold-soft: rgba(232, 178, 58, 0.14);
+  --v2-line: rgba(255, 255, 255, 0.09);
+  --v2-dim: rgba(231, 231, 238, 0.62);
+  --v2-faint: rgba(231, 231, 238, 0.4);
+
   /* Surfaces */
   --bg-canvas: #FAFAF9;          /* warm stone primary canvas */
   --bg-surface: #FFFFFF;         /* card/panel */
@@ -1040,4 +1053,414 @@ body {
   .chp-reveal { opacity: 1; transform: none; transition: none; }
   .chp-img, .chp-frame { transition: none; }
   .chp-row:hover .chp-img { transform: scale(1.01); }
+}
+
+/* ============================================================================
+   /chapters2 — DESIGN OPTION B: "The Prospectus"
+   ----------------------------------------------------------------------------
+   Series-B institutional register: a SOLID ink canvas (the site's shimmer field is covered, by
+   request), a Swiss grid, a sticky index rail, hairlines instead of boxes, mono labels, and one
+   huge ghosted numeral per chapter. The gold is the same brand gold as .v2 — restated here
+   because those tokens are scoped to .v2, not global.
+   ========================================================================== */
+.c2 {
+  position: relative;
+  --gold: #E8B23A;
+  --ink: #06070C;
+  --line: rgba(255, 255, 255, 0.10);
+  --dim: rgba(231, 231, 238, 0.60);
+  --faint: rgba(231, 231, 238, 0.36);
+  color: #EDEDF2;
+}
+/* the solid canvas: fixed, opaque, covering the site's shimmer. Two very low radial washes keep
+   it from reading as a flat black rectangle without ever becoming an "effect". */
+.c2-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(1100px 700px at 78% -8%, rgba(232, 178, 58, 0.07), transparent 62%),
+    radial-gradient(900px 620px at 10% 108%, rgba(232, 178, 58, 0.045), transparent 60%),
+    var(--ink);
+}
+.c2-wrap { width: 92%; max-width: 1280px; margin: 0 auto; }
+.c2-gold { color: var(--gold); }
+
+.c2-label {
+  display: block;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* hero */
+.c2-hero { padding: 150px 0 90px; }
+.c2-h1 {
+  margin-top: 26px;
+  font-size: clamp(2.4rem, 6.2vw, 5.2rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: #FFF;
+}
+.c2-hero-grid {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+@media (min-width: 900px) { .c2-hero-grid { grid-template-columns: 1.15fr 1fr; gap: 72px; } }
+.c2-standfirst { font-size: 1.2rem; line-height: 1.62; color: #DCDCE4; max-width: 56ch; }
+.c2-chainnote { color: var(--dim); line-height: 1.68; max-width: 48ch; }
+.c2-cta-row { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* square-ish buttons: a pill reads consumer, this reads institutional */
+.c2-btn, .c2-btn-ghost {
+  display: inline-flex; align-items: center; min-height: 48px;
+  padding: 0 26px; border-radius: 4px;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.01em;
+  transition: background 220ms var(--ease-out), border-color 220ms var(--ease-out), color 220ms var(--ease-out);
+}
+.c2-btn { background: var(--gold); color: #08080d; }
+.c2-btn:hover { background: #F5C960; }
+.c2-btn-ghost { border: 1px solid var(--line); color: #EDEDF2; }
+.c2-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* the deck fact strip */
+.c2-facts {
+  margin-top: 72px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 760px) { .c2-facts { grid-template-columns: repeat(3, 1fr); } }
+.c2-facts > div { padding: 26px 0; }
+@media (min-width: 760px) {
+  .c2-facts > div { padding: 26px 32px; border-left: 1px solid var(--line); }
+  .c2-facts > div:first-child { padding-left: 0; border-left: 0; }
+}
+.c2-facts dt {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint);
+}
+.c2-facts dd { margin-top: 10px; font-size: 2rem; font-weight: 300; letter-spacing: -0.03em; color: #FFF; }
+.c2-facts dd.c2-fact-text { font-size: 1.02rem; line-height: 1.5; color: var(--dim); max-width: 30ch; }
+
+/* body: sticky rail + column */
+.c2-body { display: grid; grid-template-columns: 1fr; gap: 0; padding-bottom: 40px; }
+@media (min-width: 1120px) { .c2-body { grid-template-columns: 250px 1fr; gap: 72px; } }
+
+.c2-rail { display: none; }
+@media (min-width: 1120px) {
+  .c2-rail {
+    display: block;
+    position: sticky;
+    top: 110px;
+    align-self: start;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+}
+.c2-rail::-webkit-scrollbar { width: 2px; }
+.c2-rail::-webkit-scrollbar-thumb { background: var(--line); }
+.c2-rail-sect + .c2-rail-sect { margin-top: 28px; }
+.c2-rail-label {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint);
+  padding-bottom: 10px; border-bottom: 1px solid var(--line); margin-bottom: 10px;
+}
+.c2-rail-item {
+  display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: baseline;
+  padding: 7px 0;
+  color: var(--faint);
+  transition: color 200ms var(--ease-out);
+}
+.c2-rail-item:hover { color: #EDEDF2; }
+.c2-rail-n { font-family: var(--font-plex-mono), ui-monospace, monospace; font-size: 11px; letter-spacing: 0.08em; }
+.c2-rail-t {
+  font-size: 12.5px; line-height: 1.35;
+  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+}
+.c2-rail-item.is-active { color: var(--gold); }
+.c2-rail-item.is-active .c2-rail-t { -webkit-line-clamp: 2; }
+
+/* section header */
+.c2-sect { padding: 90px 0 20px; }
+.c2-sect-title {
+  margin-top: 18px;
+  font-size: clamp(1.8rem, 3.6vw, 2.9rem);
+  font-weight: 300; line-height: 1.08; letter-spacing: -0.035em; color: #FFF;
+  max-width: 22ch;
+}
+.c2-sect-intro { margin-top: 22px; max-width: 66ch; color: var(--dim); line-height: 1.7; }
+
+/* a chapter */
+.c2-block { padding: 64px 0 0; }
+.c2-head { position: relative; display: flex; align-items: center; gap: 20px; }
+.c2-rule { flex: 1; height: 1px; background: var(--line); }
+.c2-ghost {
+  position: absolute; right: -6px; top: -46px;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: clamp(70px, 9vw, 120px); font-weight: 700; line-height: 1;
+  color: rgba(255, 255, 255, 0.035);
+  pointer-events: none; user-select: none;
+}
+.c2-title {
+  margin-top: 26px;
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  font-weight: 300; line-height: 1.1; letter-spacing: -0.035em; color: #FFF;
+  max-width: 24ch;
+}
+.c2-claim {
+  margin-top: 22px;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  line-height: 1.5; color: var(--gold);
+  max-width: 48ch;
+}
+.c2-grid { margin-top: 34px; display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; }
+@media (min-width: 900px) { .c2-grid { grid-template-columns: 1.1fr 1fr; gap: 48px; } }
+/* square corners: a document, not an app card */
+.c2-figure {
+  position: relative; overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+  filter: saturate(0.92) contrast(1.03);
+}
+.c2-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.c2-summary { color: var(--dim); line-height: 1.75; font-size: 1.02rem; max-width: 46ch; }
+
+/* the handoff, as a ledger line */
+.c2-handoff {
+  margin-top: 46px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: grid; grid-template-columns: 1fr; gap: 8px;
+}
+@media (min-width: 760px) { .c2-handoff { grid-template-columns: 150px 1fr; gap: 24px; align-items: baseline; } }
+.c2-handoff-label {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--faint);
+}
+.c2-handoff p { color: var(--gold); font-size: 1.02rem; line-height: 1.6; max-width: 60ch; }
+
+/* mid-page offer + close */
+.c2-mid {
+  margin-top: 72px; padding: 44px 0;
+  border-top: 1px solid var(--gold); border-bottom: 1px solid var(--line);
+}
+.c2-mid-h { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 300; letter-spacing: -0.03em; color: #FFF; }
+.c2-mid-p { margin: 12px 0 26px; color: var(--dim); line-height: 1.6; max-width: 54ch; }
+.c2-closing { margin-top: 80px; color: var(--dim); font-size: 1.05rem; line-height: 1.7; max-width: 60ch; }
+.c2-end { margin: 90px 0 140px; padding-top: 48px; border-top: 1px solid var(--line); }
+.c2-end-h { font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-weight: 300; letter-spacing: -0.035em; color: #FFF; max-width: 20ch; }
+.c2-end-p { margin-top: 18px; color: var(--dim); line-height: 1.7; max-width: 52ch; }
+
+/* ============================================================================
+   /chapters3 — DESIGN OPTION C: "The Pinned Film"
+   ----------------------------------------------------------------------------
+   The picture is pinned to one half of the screen; the argument runs past it. Solid ink canvas,
+   no shimmer. Below the split breakpoint nothing can be pinned, so the same chapters become
+   full-bleed cinematic cards instead — the picture behind the words.
+   ========================================================================== */
+.c3 {
+  position: relative;
+  --gold: #E8B23A;
+  --ink: #05060A;
+  --line: rgba(255, 255, 255, 0.10);
+  --dim: rgba(231, 231, 238, 0.62);
+  --faint: rgba(231, 231, 238, 0.34);
+  color: #EDEDF2;
+}
+.c3-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 800px at 15% 0%, rgba(232, 178, 58, 0.06), transparent 60%),
+    var(--ink);
+}
+.c3-gold { color: var(--gold); }
+.c3-kicker {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--faint);
+}
+
+/* hero — one screen, nothing but the claim */
+.c3-hero {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 120px 6vw 80px;
+}
+.c3-hero-inner { max-width: 900px; }
+.c3-h1 {
+  margin-top: 24px;
+  font-size: clamp(2.5rem, 7vw, 5.6rem);
+  font-weight: 300; line-height: 1.0; letter-spacing: -0.045em; color: #FFF;
+}
+.c3-standfirst {
+  margin-top: 32px; max-width: 60ch;
+  font-size: clamp(1.05rem, 1.5vw, 1.28rem); line-height: 1.62; color: var(--dim);
+}
+.c3-cta-row { margin-top: 38px; display: flex; flex-wrap: wrap; gap: 12px; }
+.c3-cta-center { justify-content: center; }
+.c3-btn, .c3-btn-ghost {
+  display: inline-flex; align-items: center; min-height: 50px;
+  padding: 0 28px; border-radius: 999px;
+  font-size: 15px; font-weight: 600;
+  transition: transform 220ms var(--ease-out), background 220ms var(--ease-out), border-color 220ms var(--ease-out);
+}
+.c3-btn { background: var(--gold); color: #08080d; }
+.c3-btn:hover { transform: translateY(-2px); background: #F5C960; }
+.c3-btn-ghost { border: 1px solid var(--line); color: #EDEDF2; }
+.c3-btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.c3-scroll-cue {
+  margin-top: 54px;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
+}
+
+/* ── the split ─────────────────────────────────────────────── */
+.c3-split { display: block; }
+@media (min-width: 1024px) {
+  .c3-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: start;
+  }
+}
+
+/* pinned pane — desktop only */
+.c3-pin { display: none; }
+@media (min-width: 1024px) {
+  .c3-pin {
+    display: block;
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    padding: 92px 0 40px 5vw;
+  }
+}
+.c3-stage {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  background: #0A0B12;
+}
+.c3-stage-img {
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 900ms var(--ease-out), transform 1600ms var(--ease-out);
+}
+.c3-stage-img.is-on { opacity: 1; transform: scale(1); }
+/* the veil keeps the numeral and bar legible over any frame, and sinks the picture back so the
+   words on the other half stay the loudest thing on screen */
+.c3-stage-veil {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5,6,10,0.35) 0%, rgba(5,6,10,0.05) 35%, rgba(5,6,10,0.85) 100%);
+  pointer-events: none;
+}
+.c3-stage-meta {
+  position: absolute; left: 28px; bottom: 26px;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.c3-stage-num {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 74px; font-weight: 700; line-height: 1; color: var(--gold);
+  text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+}
+.c3-stage-of {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 14px; letter-spacing: 0.14em; color: var(--faint);
+}
+.c3-bar { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255,255,255,0.08); }
+.c3-bar span {
+  display: block; height: 100%; width: 100%;
+  background: var(--gold);
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 120ms linear;
+}
+
+/* scrolling pane */
+.c3-story { padding: 0 6vw; }
+@media (min-width: 1024px) { .c3-story { padding: 0 5vw 0 4vw; } }
+
+.c3-sect { padding: 120px 0 40px; max-width: 46ch; }
+.c3-sect-title {
+  margin-top: 18px;
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  font-weight: 300; line-height: 1.08; letter-spacing: -0.04em; color: #FFF;
+}
+.c3-sect-intro { margin-top: 22px; color: var(--dim); line-height: 1.72; }
+
+.c3-ch { padding: 70px 0; max-width: 48ch; }
+@media (min-width: 1024px) { .c3-ch { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; padding: 40px 0; } }
+.c3-ch-title {
+  margin-top: 16px;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 300; line-height: 1.1; letter-spacing: -0.035em; color: #FFF;
+}
+.c3-ch-claim {
+  margin-top: 20px;
+  font-size: clamp(1.05rem, 1.4vw, 1.24rem); line-height: 1.5;
+  color: var(--gold);
+}
+.c3-ch-summary { margin-top: 20px; color: var(--dim); line-height: 1.78; font-size: 1.02rem; }
+.c3-ch-handoff {
+  margin-top: 34px; padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: rgba(232, 178, 58, 0.85);
+  font-size: 0.97rem; line-height: 1.6; font-style: italic;
+}
+.c3-ch-handoff span { font-style: normal; margin-right: 4px; }
+
+/* the in-flow picture: phone/tablet only, where nothing can be pinned */
+.c3-ch-fig { position: relative; margin-bottom: 26px; border-radius: 3px; overflow: hidden; border: 1px solid var(--line); }
+@media (min-width: 1024px) { .c3-ch-fig { display: none; } }
+.c3-ch-img { display: block; width: 100%; height: auto; }
+.c3-ch-fig figcaption {
+  position: absolute; left: 16px; bottom: 8px;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 40px; font-weight: 700; color: var(--gold);
+  text-shadow: 0 2px 24px rgba(0,0,0,0.75);
+}
+/* keeps the numeral readable whatever the frame */
+.c3-ch-fig::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(5,6,10,0.8) 100%);
+  pointer-events: none;
+}
+
+/* mid-page offer */
+.c3-mid { margin: 40px 0; padding: 40px 0; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--line); max-width: 48ch; }
+.c3-mid-h { font-size: clamp(1.35rem, 2.4vw, 1.8rem); font-weight: 300; letter-spacing: -0.03em; color: #FFF; }
+.c3-mid-p { margin: 12px 0 24px; color: var(--dim); line-height: 1.6; }
+
+/* close */
+.c3-end { padding: 140px 6vw 150px; text-align: center; }
+.c3-closing { margin: 0 auto; max-width: 56ch; color: var(--dim); line-height: 1.72; }
+.c3-end-h {
+  margin: 30px auto 0; max-width: 18ch;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 300; line-height: 1.1; letter-spacing: -0.04em; color: #FFF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c3-stage-img { transition: opacity 1ms linear; transform: none; }
+  .c3-stage-img.is-on { transform: none; }
+  .c3-btn:hover { transform: none; }
 }
