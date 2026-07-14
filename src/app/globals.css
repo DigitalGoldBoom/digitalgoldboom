@@ -808,3 +808,171 @@ body {
   line-height: 1.4;
   margin-bottom: 4px;
 }
+
+/* ============================================================================
+   /chapters — the chain page
+   ----------------------------------------------------------------------------
+   The book's front matter says the chapters are a chain: each answers the question the one before
+   it raised. The page says it visually — a gold thread runs down the gutter and the author's own
+   handoff question sits ON the thread between chapters. Everything here is built from the v2
+   tokens (gold / line / dim / faint); no new colours are invented.
+   ========================================================================== */
+
+/* the thread. Only on wide screens, where it runs down the empty gutter between the two columns —
+   on a narrow screen it would run straight through the text, so it is off and the nodes carry it. */
+.chp-chain { position: relative; }
+.chp-chain::before {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  transform: translateX(-0.5px);
+  background: linear-gradient(180deg, transparent, rgba(232,178,58,0.26) 5%, rgba(232,178,58,0.26) 95%, transparent);
+  z-index: 0;
+  display: none;
+}
+@media (min-width: 1024px) { .chp-chain::before { display: block; } }
+.chp-chain > * { position: relative; z-index: 1; }
+
+/* scroll reveal — opacity/transform only, never layout */
+.chp-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+  will-change: opacity, transform;
+}
+.chp-reveal.is-in { opacity: 1; transform: none; }
+
+/* section header — a huge ghosted numeral behind the words */
+.chp-sect-ghost {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: clamp(170px, 26vw, 340px);
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.028);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* chapter picture */
+.chp-frame {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid var(--v2-line);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  transition: border-color 400ms var(--ease-out), box-shadow 400ms var(--ease-out);
+}
+.chp-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.01);
+  transition: transform 900ms var(--ease-out);
+}
+/* darkens the foot of the picture so the chapter numeral always reads, whatever the image */
+.chp-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(4, 4, 10, 0.78) 100%);
+  pointer-events: none;
+}
+.chp-frame-num {
+  position: absolute;
+  left: 20px; bottom: 10px;
+  z-index: 1;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: clamp(2rem, 4.4vw, 3.1rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--v2-gold);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.7);
+}
+.chp-row:hover .chp-frame {
+  border-color: rgba(232, 178, 58, 0.45);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(232, 178, 58, 0.14);
+}
+.chp-row:hover .chp-img { transform: scale(1.05); }
+@media (hover: none) { .chp-row:hover .chp-img { transform: scale(1.01); } }
+
+/* chapter words */
+.chp-eyebrow {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--v2-faint);
+}
+.chp-claim {
+  border-left: 2px solid var(--v2-gold);
+  padding-left: 18px;
+  color: #F4F4F7;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+
+/* the link in the chain: the question this chapter hands to the next */
+.chp-handoff, .chp-end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.chp-handoff p, .chp-end p {
+  max-width: 48ch;
+  margin: 0;
+  font-style: italic;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: rgba(232, 178, 58, 0.82);
+  background: rgba(6, 7, 16, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(232, 178, 58, 0.22);
+  border-radius: 999px;
+  padding: 13px 26px;
+}
+.chp-end { padding: 40px 0 8px; }
+.chp-end p {
+  font-style: normal;
+  color: var(--v2-dim);
+  border-color: var(--v2-line);
+}
+.chp-arrow { color: var(--v2-gold); font-style: normal; }
+/* the bead on the thread */
+.chp-node {
+  width: 9px; height: 9px;
+  transform: rotate(45deg);
+  background: var(--v2-gold);
+  box-shadow: 0 0 0 5px rgba(232, 178, 58, 0.10), 0 0 22px rgba(232, 178, 58, 0.55);
+}
+
+/* the one mid-page offer, at the end of Section 1 */
+.chp-mid {
+  max-width: 620px;
+  margin: 40px auto 8px;
+  padding: 40px 32px;
+  text-align: center;
+  border-radius: 24px;
+  border: 1px solid rgba(232, 178, 58, 0.3);
+  background: rgba(6, 7, 16, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.chp-mid-h { font-size: clamp(1.4rem, 2.8vw, 1.9rem); }
+.chp-mid-p { margin-top: 12px; color: var(--v2-dim); line-height: 1.6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chp-reveal { opacity: 1; transform: none; transition: none; }
+  .chp-img, .chp-frame { transition: none; }
+  .chp-row:hover .chp-img { transform: scale(1.01); }
+}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { isPixelShovelView } from "@/lib/pixelshovel";
+import { CHAPTERS_LIVE } from "@/lib/flags";
 
 /**
  * Navbar — replica of the Digital Gold Boom Framer navbar.
@@ -13,7 +14,10 @@ import { isPixelShovelView } from "@/lib/pixelshovel";
  * and on the current page. Collapses to a hamburger dropdown on tablet/mobile.
  */
 
+// "Chapters" is built but not announced: it appears here only when CHAPTERS_LIVE is switched on
+// (src/lib/flags.ts). Until then /chapters is reachable by direct link and nothing else.
 const LINKS = [
+  ...(CHAPTERS_LIVE ? [{ label: "Chapters", href: "/chapters" }] : []),
   { label: "Projects", href: "/projects" },
   { label: "Mining", href: "/mining-industry" },
   { label: "Live Stats", href: "/live" },
