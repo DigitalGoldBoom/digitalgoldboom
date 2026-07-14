@@ -43,6 +43,17 @@ const emailLimiter = redis
     })
   : null;
 
+// The contact form gets its OWN window. Sharing the signup's would let a burst of contact
+// messages lock a genuine reader out of the opt-in (and vice versa) — two different forms,
+// two different budgets. Tighter, because a human writes one message, not five.
+const contactIpLimiter = redis
+  ? new Ratelimit({ redis, limiter: Ratelimit.slidingWindow(3, "10 m"), prefix: "rl:contact:ip" })
+  : null;
+
+const contactEmailLimiter = redis
+  ? new Ratelimit({ redis, limiter: Ratelimit.slidingWindow(2, "10 m"), prefix: "rl:contact:email" })
+  : null;
+
 // In-memory fallback (dev / store not yet provisioned). Same shape as the old
 // stopgap; trimmed so the map can't grow unbounded.
 const WINDOW_MS = 10 * 60 * 1000;
@@ -81,6 +92,24 @@ export async function subscribeRateLimited(
     const [byIp, byEmail] = await Promise.all([
       ipLimiter.limit(ip),
       emailLimiter.limit(emailKey),
+    ]);
+    return !byIp.success || !byEmail.success;
+  } catch (err) {
+    console.error("[rate-limit] store error — failing open", err);
+    return false;
+  }
+}
+
+/** Same contract as subscribeRateLimited, for the contact form's own window. */
+export async function contactRateLimited(ip: string, email: string): Promise<boolean> {
+  const emailKey = createHash("sha256").update(email.trim().toLowerCase()).digest("hex");
+  if (!contactIpLimiter || !contactEmailLimiter) {
+    return memLimited(`c-ip:${ip}`, 3) || memLimited(`c-email:${emailKey}`, 2);
+  }
+  try {
+    const [byIp, byEmail] = await Promise.all([
+      contactIpLimiter.limit(ip),
+      contactEmailLimiter.limit(emailKey),
     ]);
     return !byIp.success || !byEmail.success;
   } catch (err) {

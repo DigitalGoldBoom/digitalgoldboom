@@ -4,8 +4,8 @@ import { PS_WORDMARK } from "./psAssets";
 
 const MENU = [
   { label: "Home", href: "/ps" },
-  { label: "About", href: "/ps#about" },
   { label: "Free Chapters", href: "/ps#dgb" },
+  { label: "Contact", href: "/ps/contact" },
   { label: "Cookie Policy", href: "/terms" },
   { label: "Privacy Policy", href: "/privacy" },
 ];
@@ -72,7 +72,7 @@ export default function PsFooter() {
 
           <div className="flex flex-col items-start gap-4">
             <p className="ps-eyebrow">Careers</p>
-            <Link href="/contact" className="ps-ghost">
+            <Link href="/ps/contact" className="ps-ghost">
               Join our Team
             </Link>
           </div>

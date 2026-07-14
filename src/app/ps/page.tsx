@@ -71,7 +71,20 @@ export default function PixelShovelHome() {
       <section id="dgb" className="ps-section" style={{ background: "var(--ps-bg-soft)" }}>
         <div className="ps-wrap grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
           <div className="flex flex-col items-start gap-6">
-            <p className="ps-eyebrow">Digital Gold Boom</p>
+            {/* The book's own title gold — the cover sets the title in a pale-to-amber gradient,
+                so the eyebrow carries the same one rather than a flat swatch of it. */}
+            <p
+              className="ps-eyebrow"
+              style={{
+                background: "linear-gradient(180deg, #FBE08A 0%, #E9A23C 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                width: "fit-content",
+              }}
+            >
+              Digital Gold Boom
+            </p>
             <h2 className="text-[clamp(2rem,4.5vw,3.6rem)]">
               Everything You Think You Know About Gold Just Changed Forever
             </h2>

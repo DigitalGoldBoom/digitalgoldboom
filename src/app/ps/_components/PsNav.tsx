@@ -14,8 +14,7 @@ import { PS_WORDMARK } from "./psAssets";
 const LINKS = [
   { label: "Home", href: "/ps" },
   { label: "Free Chapters", href: "/ps#dgb" },
-  { label: "About", href: "/ps#about" },
-  { label: "Contact", href: "/ps#contact" },
+  { label: "Contact", href: "/ps/contact" },
 ];
 
 export default function PsNav() {
