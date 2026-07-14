@@ -4,7 +4,10 @@ import { subscribeRateLimited } from "@/lib/rate-limit";
 import { hasSubscriberStore, saveSubscriber, pushToKit } from "@/lib/subscribers";
 
 // The lead magnet delivered instantly on a successful signup — the first 5 chapters, free.
-const LEAD_MAGNET_PATH = "/downloads/digital-gold-boom-first-5-chapters.pdf";
+// This is the build from C:\DGB-Book\output\kindle\dist. Per that folder's DELIVERABLES.md the
+// reader-facing filename is fixed ("Capital Letters And Spaces") and the <a download> attribute
+// on the form means this filename is what the reader sees when the file lands on their machine.
+const LEAD_MAGNET_PATH = "/downloads/Digital Gold Boom 5 Chapters.pdf";
 
 const Body = z.object({
   email: z.string().email(),
@@ -88,5 +91,7 @@ export async function POST(req: Request) {
   });
 
   // Success: hand back the instant lead-magnet download so the client can reveal it.
-  return NextResponse.json({ ok: true, download: LEAD_MAGNET_PATH });
+  // encodeURI: the filename carries spaces (a reader-facing name, fixed by DELIVERABLES.md), and
+  // a raw space in an href is not a valid URL.
+  return NextResponse.json({ ok: true, download: encodeURI(LEAD_MAGNET_PATH) });
 }
