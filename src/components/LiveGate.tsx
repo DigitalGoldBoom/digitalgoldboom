@@ -15,6 +15,8 @@ export default function LiveGate({ children }: { children: React.ReactNode }) {
   // direct /live visit — it only lifts once we confirm this visitor already unlocked. Promoted in
   // the book, so it must never flash the dashboard before the gate.
   const [locked, setLocked] = useState(true);
+  // false until localStorage has been read — see the note by `showGate` below.
+  const [ready, setReady] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [msg, setMsg] = useState("");
@@ -23,6 +25,7 @@ export default function LiveGate({ children }: { children: React.ReactNode }) {
     try {
       if (localStorage.getItem(KEY) === "1") setLocked(false);
     } catch {}
+    setReady(true);
   }, []);
 
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -52,7 +55,18 @@ export default function LiveGate({ children }: { children: React.ReactNode }) {
     }
   }
 
+  // `locked` starts TRUE (server render + first paint) so a direct /live visit is never able to flash
+  // the dashboard before the gate — the page is promoted in the book, so that leak must not happen.
+  // But it means a visitor who ALREADY unlocked gets the gate thrown in their face for the split
+  // second before this effect reads localStorage. That is the "bad bug" Andrew saw: he has given his
+  // email, and the site still slams a modal at him on every visit.
+  //
+  // `ready` is the third state the component was missing: WE DO NOT KNOW YET. Until localStorage has
+  // been read, the content stays blurred (so nothing leaks) but NO overlay is drawn (so nobody who
+  // has already paid gets asked again). One tick later we know, and either it clears or the gate
+  // appears. The gate is now only ever shown to someone we have actually established is locked out.
   const hidden = locked;
+  const showGate = ready && locked;
 
   return (
     <div className="relative">
@@ -63,7 +77,7 @@ export default function LiveGate({ children }: { children: React.ReactNode }) {
         {children}
       </div>
 
-      {hidden && (
+      {showGate && (
         <div className="fixed inset-0 z-40 flex items-center justify-center px-6" style={{ background: "rgba(8,8,13,0.72)" }}>
           <div className="v2-tile w-full max-w-[460px] p-8 md:p-10 text-center" style={{ background: "rgba(13,13,21,0.94)" }}>
             <p className="v2-eyebrow mb-5" style={{ justifyContent: "center" }}>Live data</p>
