@@ -102,7 +102,7 @@ export default function BuyPage() {
                 <BuyButton
                   checkoutUrl={checkoutUrl}
                   label={`Buy now — $${PRICE}`}
-                  fallbackHref="#reserve"
+                  fallbackHref="/checkout"
                   event="book_buy_click_plain"
                 />
               </div>

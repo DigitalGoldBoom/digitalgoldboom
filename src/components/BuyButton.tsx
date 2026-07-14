@@ -49,7 +49,7 @@ export default function BuyButton({
   checkoutUrl,
   label = "Get the book — $37",
   unavailableLabel,
-  fallbackHref = "/buy#reserve",
+  fallbackHref = "/checkout",
   className = "btn-primary",
   event = "book_buy_click",
   eventProps,
