@@ -1,0 +1,363 @@
+/* ================================================================
+   /s — THE FILM PAGE ("the page is the film")
+   Scoped under .sfilm (which sits inside .v2 for the brand tokens).
+   Two world variables drive everything:
+     --daylight      0 (night) → 1 (dawn)  — the day arc
+     --seam-progress 0 → 1                 — the gold thread
+   Their @property initial values ARE the reduced-motion / no-JS
+   state: a readable dusk mid-grade with a static seam.
+   ================================================================ */
+
+@property --daylight {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0.35;
+}
+@property --seam-progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --dust-opacity {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+@property --seam-visible {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.sfilm {
+  background: #08080d;
+  /* The page's one easing family (entrances). Scrubbed tweens are ease:none. */
+  --film-ease: cubic-bezier(0.16, 1, 0.3, 1); /* expo.out */
+}
+
+/* ── THE DAY ARC — exactly two fixed alpha overlays, compositor-only ── */
+.sfilm-night-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(10, 12, 24, 0.5), rgba(8, 8, 13, 0.72));
+  opacity: calc(1 - var(--daylight));
+}
+.sfilm-dawn-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background:
+    radial-gradient(90% 60% at 50% 0%, rgba(232, 140, 58, 0.16), transparent 60%),
+    linear-gradient(180deg, rgba(232, 178, 58, 0.06), transparent 70%);
+  opacity: var(--daylight);
+}
+
+/* ── THE SEAM — desktop/tablet rail (transform-only div fill) ── */
+.sfilm-seam {
+  position: fixed;
+  left: 28px;
+  top: 96px;
+  bottom: 32px;
+  width: 2px;
+  pointer-events: none;
+  z-index: 40;
+  /* The film ends at S7: the rail fades (reversibly) once scroll passes it. */
+  opacity: var(--seam-visible, 1);
+  transition: opacity 0.3s var(--film-ease);
+}
+@media (max-width: 1023px) and (min-width: 768px) {
+  .sfilm-seam { left: 20px; }
+}
+.sfilm-seam-track {
+  position: absolute;
+  inset: 0 auto 0 0.5px;
+  width: 1px;
+  background: rgba(232, 178, 58, 0.12);
+}
+.sfilm-seam-fill {
+  position: absolute;
+  inset: 0;
+  background: rgba(232, 178, 58, 0.8);
+  transform: scaleY(var(--seam-progress));
+  transform-origin: top;
+}
+/* Growing tip: an 8px gradient fade so the end reads as a thread, not a bar. */
+.sfilm-seam-fill::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(180deg, rgba(232, 178, 58, 0.8), transparent);
+}
+.sfilm-seam-node {
+  position: absolute;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(232, 178, 58, 0.35);
+  background: transparent;
+  transition: background 0.3s var(--film-ease), border-color 0.3s var(--film-ease);
+}
+.sfilm-seam-node[data-passed="true"] {
+  background: var(--v2-gold);
+  border-color: var(--v2-gold);
+}
+@keyframes sfilmNodePulse {
+  0% { scale: 1; }
+  50% { scale: 1.4; }
+  100% { scale: 1; }
+}
+.sfilm-seam-node[data-pulse="true"] {
+  animation: sfilmNodePulse 0.3s var(--film-ease) 1;
+}
+@keyframes sfilmSeamTipPulse {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+.sfilm-seam-fill[data-pulse="true"] {
+  animation: sfilmSeamTipPulse 0.4s var(--film-ease) 1;
+}
+
+/* ── THE SEAM — phone top-bar variant ── */
+.sfilm-seam-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  pointer-events: none;
+  z-index: 60; /* above the floating nav pill so progress is always readable */
+  background: rgba(232, 178, 58, 0.12);
+  opacity: var(--seam-visible, 1);
+  transition: opacity 0.3s var(--film-ease);
+}
+.sfilm-seam-bar-fill {
+  position: absolute;
+  inset: 0;
+  background: rgba(232, 178, 58, 0.8);
+  transform: scaleX(var(--seam-progress));
+  transform-origin: left;
+}
+.sfilm-seam-bar-tick {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 6px;
+  background: rgba(232, 178, 58, 0.35);
+  transition: background 0.3s var(--film-ease);
+}
+.sfilm-seam-bar-tick[data-passed="true"] { background: var(--v2-gold); }
+
+/* Show rail on ≥768px, bar on phones. */
+.sfilm-seam { display: none; }
+.sfilm-seam-bar { display: block; }
+@media (min-width: 768px) {
+  .sfilm-seam { display: block; }
+  .sfilm-seam-bar { display: none; }
+}
+
+/* Reduced-motion descent: ship the plate pre-cropped at its mid frame. */
+@media (prefers-reduced-motion: reduce) {
+  .sfilm-descent-plate { transform: scale(1.15); }
+}
+
+/* ── Reduced motion: static seam hairline, everything visible ── */
+@media (prefers-reduced-motion: reduce) {
+  .sfilm-seam-fill { transform: none; opacity: 0.2; }
+  .sfilm-seam-fill::after { display: none; }
+  .sfilm-seam-node { opacity: 0.35; border-color: rgba(232, 178, 58, 0.5); }
+  .sfilm-seam-bar-fill { transform: none; opacity: 0.2; }
+}
+
+/* ── GOLD DUST canvas layer ── */
+.sfilm-dust {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: var(--dust-opacity);
+}
+
+/* ── HERO load choreography — CSS-driven so the LCP paints fast; no JS wait.
+      Budget ≤900ms total. Reduced-motion neutralised by the global reset. ── */
+@keyframes sfilmRise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sfilmPanelRise {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+[data-film-intro] { animation: sfilmRise 0.45s var(--film-ease) both; }
+[data-film-intro="1"] { animation-delay: 0s; animation-duration: 0.3s; }
+[data-film-intro="2"] { animation-delay: 0.1s; animation-duration: 0.6s; transform-origin: bottom; }
+[data-film-intro="3"] { animation-delay: 0.35s; }
+[data-film-intro="4"] { animation-delay: 0.44s; }
+[data-film-intro="5"] { animation-delay: 0.53s; }
+[data-film-intro="6"] { animation-delay: 0.62s; }
+[data-film-intro="panel"] { animation: sfilmPanelRise 0.5s var(--film-ease) 0.45s both; }
+
+/* ── VIDEO PANEL (ModulePanel) chrome ── */
+.sfilm-panel {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border: 1px solid var(--v2-line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+  transition: border-color 0.3s var(--film-ease);
+}
+.sfilm-panel[data-active="true"] { border-color: rgba(232, 178, 58, 0.4); }
+.sfilm-panel-tick {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(232, 178, 58, 0.5);
+  border-style: solid;
+  border-width: 0;
+  z-index: 3;
+}
+.sfilm-panel-tick[data-corner="tl"] { top: 8px; left: 8px; border-top-width: 1px; border-left-width: 1px; }
+.sfilm-panel-tick[data-corner="tr"] { top: 8px; right: 8px; border-top-width: 1px; border-right-width: 1px; }
+.sfilm-panel-tick[data-corner="bl"] { bottom: 8px; left: 8px; border-bottom-width: 1px; border-left-width: 1px; }
+.sfilm-panel-tick[data-corner="br"] { bottom: 8px; right: 8px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* ── STICKY BUY pill (phone; desktop variant sized up) ── */
+.sfilm-sticky {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 45; /* below the global Navbar (50) so the open mobile menu covers it */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.25s var(--film-ease), transform 0.25s var(--film-ease);
+}
+.sfilm-sticky[data-shown="true"] {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+@media (min-width: 768px) {
+  .sfilm-sticky { right: 24px; bottom: 24px; }
+}
+/* Phone: compact 48px pill (v2-btn is 54px by default). */
+@media (max-width: 767px) {
+  .sfilm-sticky .v2-btn { min-height: 48px; padding: 0 22px; font-size: 14px; }
+}
+.sfilm-sticky-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(8, 8, 13, 0.75);
+  color: var(--v2-faint);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+.sfilm-sticky-dismiss:hover { color: #f4f4f7; }
+@media (prefers-reduced-motion: reduce) {
+  .sfilm-sticky { transform: none; }
+}
+
+/* ── S2: the $22T stat — the page's ONLY gold number ── */
+.sfilm-trillion {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--v2-gold);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-size: clamp(2.5rem, 7.5vw, 6rem);
+  overflow-wrap: break-word;
+}
+
+/* Masked word-landing ("FOUND. VERIFIED. STUCK." / the S4 verdict) */
+.sfilm-mask-line { overflow: hidden; display: inline-block; vertical-align: bottom; }
+
+/* ── S4 timeline ── */
+.sfilm-timeline-path {
+  stroke: rgba(232, 178, 58, 0.75);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: var(--draw, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sfilm-timeline-path { --draw: 0; }
+}
+
+/* ── Transcript disclosure (SEO copy twin) ── */
+.sfilm-transcript summary {
+  cursor: pointer;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--v2-faint);
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+}
+.sfilm-transcript summary::-webkit-details-marker { display: none; }
+.sfilm-transcript summary::before { content: "+"; color: var(--v2-gold); }
+.sfilm-transcript[open] summary::before { content: "–"; }
+.sfilm-transcript p {
+  color: var(--v2-dim);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+
+/* Scroll cue — fades out permanently on first scroll (instant under RM) */
+.sfilm-cue { transition: opacity 0.4s var(--film-ease); }
+.sfilm-cue[data-gone="true"] { opacity: 0; }
+
+/* Sticky-pill disclosure chip (designer §3.5 final): one unit with the pill */
+.sfilm-sticky-note {
+  align-self: flex-end;
+  pointer-events: none;
+  white-space: nowrap;
+  font-size: 11px;
+  color: var(--v2-dim);
+  background: rgba(8, 8, 13, 0.72);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+/* S7 primary — the page's biggest button */
+.sfilm-cta-primary { min-height: 64px; padding: 0 40px; font-size: 17px; }
+
+/* ── Section base ── */
+.sfilm section { position: relative; }
+.sfilm .sfilm-contain {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1320px;
+  padding-inline: 24px;
+}
+@media (min-width: 768px) {
+  .sfilm .sfilm-contain { padding-inline: 40px; }
+}
+
+/* Give phones a hair more left padding under the seam-less layout;
+   desktop content clears the 28px rail via the container's side padding. */

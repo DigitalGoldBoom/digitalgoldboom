@@ -248,7 +248,7 @@ export default function V1Funnel() {
                 Why this is worth understanding now.
               </Reveal>
               <Reveal as="p" delay={120} className="mt-7 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "52ch" }}>
-                Three long-running shifts have lined up at once: central banks are holding gold at multi-decade highs, real-world assets are being represented digitally at institutional scale, and a younger generation wants gold without the environmental cost of mining it. The model is no longer theoretical. The first deposits have been submitted, and the first tokens are set to trade on <span className="v2-gold">July 8, 2026.</span>
+                Three long-running shifts have lined up at once: central banks are holding gold at multi-decade highs, real-world assets are being represented digitally at institutional scale, and a younger generation wants gold without the environmental cost of mining it. The model is no longer theoretical. The first deposits have been submitted, and trading begins <span className="v2-gold">once Kraken completes its listing review.</span>
               </Reveal>
             </div>
             <Reveal delay={120}>
@@ -413,7 +413,7 @@ export default function V1Funnel() {
             Understand it for the price of a <span className="v2-gold">paperback.</span>
           </Reveal>
           <Reveal as="p" delay={120} className="mx-auto mt-7 text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "50ch" }}>
-            Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, I&rsquo;m asking the first readers for an honest review. You get the complete book, delivered digitally the moment you check out — and the chance to understand this model before the first tokens trade on July 8, 2026.
+            Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, I&rsquo;m asking the first readers for an honest review. You get the complete book, delivered digitally the moment you check out — and the chance to understand this model before the first tokens trade.
           </Reveal>
           <Reveal as="p" delay={150} className="mx-auto mt-5 text-base" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
             If the book is not worth your time, email us within 60 days for a full refund. No questions asked.

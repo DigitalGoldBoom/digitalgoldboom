@@ -4,7 +4,11 @@ import VaultShell from "@/components/VaultShell";
 import AffiliateInterestForm from "@/components/AffiliateInterestForm";
 import { generateMetadata as genMeta, generateFAQSchema } from "@/lib/seo";
 
-/* /affiliates — CASH-ONLY rework (per SALES-DESIGN-affiliates-mining.md, 2026-07-01).
+/* /partners — CASH-ONLY rework (per SALES-DESIGN-affiliates-mining.md, 2026-07-01).
+   Lives at /partners because that is the URL PRINTED IN THE BOOK ("An Invitation to Influencers,
+   Advocates & Believers" → "Start at digitalgoldboom.com/partners"). Ink cannot be edited, so the
+   canonical page answers the printed address directly rather than bouncing the reader through a
+   redirect to a word the book never used. /affiliates redirects here.
    Paid affiliate program on LemonSqueezy's native affiliate feature: earn a cash commission on
    every sale you refer. NO NATG token, no wallet, no tiers, no view-targets. Ported to the v2
    register. The real LemonSqueezy affiliate signup link is set in NEXT_PUBLIC_LS_AFFILIATE_URL once
@@ -17,7 +21,7 @@ export const metadata: Metadata = genMeta({
   title: "Affiliate Program — Earn a Commission on Every Sale",
   description:
     "Promote Digital Gold Boom and earn a cash commission on every copy your link sells. Sign up as a LemonSqueezy affiliate, get your own link, tracked automatically, paid by wire. Free to join.",
-  path: "/affiliates",
+  path: "/partners",
   keywords: ["Digital Gold Boom affiliate", "book affiliate program", "refer and earn", "cash commission affiliate"],
 });
 

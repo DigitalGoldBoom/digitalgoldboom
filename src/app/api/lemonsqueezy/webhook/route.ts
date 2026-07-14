@@ -18,11 +18,17 @@ function verifySignature(rawBody: string, signatureHeader: string | null, secret
 
 const KIT_BASE = "https://api.kit.com/v4";
 
+// Buyer emails must never reach logs (PII rule — Vercel logs are public-adjacent).
+// Kit error bodies can echo the address back; scrub before logging.
+function redactEmails(text: string): string {
+  return text.replace(/[^\s@"']+@[^\s@"']+\.[^\s@"']+/g, "[email]");
+}
+
 async function tagBuyer(email: string, name?: string) {
   const apiKey = process.env.KIT_API_KEY;
   const tagId = process.env.KIT_BUYER_TAG_ID; // v4 numeric tag id (optional)
   if (!apiKey) {
-    console.log(`[ls-webhook] buyer ${email} (no Kit key set — skipped tagging)`);
+    console.log("[ls-webhook] buyer received (no Kit key set — skipped tagging)");
     return;
   }
   try {
@@ -37,7 +43,7 @@ async function tagBuyer(email: string, name?: string) {
       }),
     });
     if (!subRes.ok) {
-      console.error("[ls-webhook] Kit upsert failed", subRes.status, await subRes.text());
+      console.error("[ls-webhook] Kit upsert failed", subRes.status, redactEmails(await subRes.text()));
       return;
     }
     if (tagId) {
@@ -46,7 +52,7 @@ async function tagBuyer(email: string, name?: string) {
         headers: { "content-type": "application/json", "X-Kit-Api-Key": apiKey },
         body: JSON.stringify({ email_address: email }),
       });
-      if (!tagRes.ok) console.error("[ls-webhook] Kit tag failed", tagRes.status, await tagRes.text());
+      if (!tagRes.ok) console.error("[ls-webhook] Kit tag failed", tagRes.status, redactEmails(await tagRes.text()));
     }
   } catch (err) {
     console.error("[ls-webhook] Kit error", err);

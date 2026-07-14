@@ -24,7 +24,7 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
   },
   {
     heading: "Partners",
-    links: [{ label: "Affiliate Program", href: "/affiliates" }],
+    links: [{ label: "Affiliate Program", href: "/partners" }],
   },
   {
     heading: "Legal",

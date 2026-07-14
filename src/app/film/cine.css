@@ -1,0 +1,279 @@
+/* /film — cinematic scroll page. Design tokens per the DGB standard:
+   near-black rgba(0,2,18) · gold accent · cards rgba(0,2,18,0.55) r20 white-glow
+   · Rethink Sans display / Inter body · film grain · few words per screen. */
+
+.cine-root {
+  --cine-bg: rgb(0, 2, 18);
+  --cine-card: rgba(0, 2, 18, 0.55);
+  --cine-glow: 0px 0px 3px 2px rgba(255, 255, 255, 0.25);
+  --cine-gold: #e8b64c;
+  --cine-gold-deep: #c99214;
+  --cine-white: #f4f2ec;
+  --cine-dim: rgba(244, 242, 236, 0.66);
+  background: var(--cine-bg);
+  color: var(--cine-white);
+  font-family: var(--font-body), Inter, system-ui, sans-serif;
+}
+
+.cine-root ::selection {
+  background: rgba(232, 182, 76, 0.35);
+}
+
+/* ---------- type ---------- */
+
+.cine-display {
+  font-family: var(--font-display), "Rethink Sans", system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.cine-h1 {
+  font-size: clamp(1.9rem, 5.2vw, 4.4rem);
+}
+
+.cine-h2 {
+  font-size: clamp(1.5rem, 4vw, 3.2rem);
+}
+
+.cine-line {
+  font-size: clamp(1.15rem, 2.6vw, 2rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--cine-white);
+}
+
+.cine-kicker {
+  font-family: var(--font-display), "Rethink Sans", sans-serif;
+  font-size: clamp(0.7rem, 1.1vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cine-gold);
+}
+
+.cine-note {
+  font-size: 0.75rem;
+  color: rgba(244, 242, 236, 0.5);
+}
+
+/* ---------- scrub sections ---------- */
+
+.cine-scrub {
+  position: relative;
+}
+
+.cine-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.cine-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cine-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* soft vignette so text always reads over footage */
+.cine-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 42%, rgba(0, 2, 18, 0.55) 100%),
+    linear-gradient(180deg, rgba(0, 2, 18, 0.35) 0%, transparent 28%, transparent 68%, rgba(0, 2, 18, 0.6) 100%);
+}
+
+.cine-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: clamp(1.25rem, 5vw, 4rem);
+  pointer-events: none;
+}
+
+.cine-step {
+  grid-area: 1 / 1;
+  max-width: 56rem;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* ---------- cards ---------- */
+
+.cine-card {
+  background: var(--cine-card);
+  border-radius: 20px;
+  box-shadow: var(--cine-glow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: clamp(1.1rem, 2.4vw, 1.8rem);
+}
+
+.cine-stat-value {
+  font-family: var(--font-display), "Rethink Sans", sans-serif;
+  font-size: clamp(1.5rem, 3.4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--cine-gold);
+  line-height: 1.1;
+}
+
+.cine-stat-label {
+  margin-top: 0.5rem;
+  font-size: clamp(0.85rem, 1.4vw, 1rem);
+  color: var(--cine-dim);
+  line-height: 1.45;
+}
+
+/* ---------- CTA ---------- */
+
+.cine-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.95rem 2.1rem;
+  border-radius: 999px;
+  font-family: var(--font-display), "Rethink Sans", sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: rgb(20, 12, 0);
+  background: linear-gradient(180deg, #f0be47 0%, #c99214 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 8px 30px rgba(232, 182, 76, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.cine-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.28),
+    0 10px 38px rgba(232, 182, 76, 0.5);
+}
+
+/* sticky buy bar — appears from beat 5 onward */
+.cine-stickybar {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  transform: translate(-50%, 140%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border-radius: 999px;
+  background: rgba(0, 2, 18, 0.82);
+  box-shadow: var(--cine-glow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+  pointer-events: none;
+  max-width: calc(100vw - 1.5rem);
+}
+
+.cine-stickybar[data-shown="true"] {
+  transform: translate(-50%, 0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cine-stickybar .cine-btn {
+  padding: 0.65rem 1.4rem;
+  font-size: 0.95rem;
+}
+
+.cine-stickybar-note {
+  font-size: 0.68rem;
+  color: rgba(244, 242, 236, 0.55);
+  line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+  .cine-stickybar-note {
+    display: none;
+  }
+}
+
+/* ---------- finale fit: the whole close must fit one phone viewport ---------- */
+
+@media (max-width: 520px), (max-height: 760px) {
+  .cine-finale {
+    gap: 0.75rem !important;
+  }
+  .cine-finale-book {
+    transform: scale(0.66);
+    transform-origin: center;
+    margin: -5.5rem -3rem;
+  }
+  .cine-finale li {
+    font-size: 0.82rem !important;
+    line-height: 1.35 !important;
+  }
+  .cine-finale ul {
+    gap: 0.55rem !important;
+    margin-top: 0.75rem !important;
+  }
+}
+
+/* ---------- film grain ---------- */
+
+.cine-grain {
+  position: fixed;
+  inset: -100px;
+  z-index: 55;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cine-grain {
+    animation: cine-grain-shift 0.9s steps(4) infinite;
+  }
+}
+
+@keyframes cine-grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-28px, 16px); }
+  50% { transform: translate(18px, -30px); }
+  75% { transform: translate(-12px, -8px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ---------- reduced motion: posters + static text ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .cine-step {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .cine-scrub {
+    height: auto !important;
+  }
+  .cine-sticky {
+    position: relative;
+  }
+}

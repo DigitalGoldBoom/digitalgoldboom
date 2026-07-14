@@ -1,0 +1,337 @@
+/* /deposit — Sutéra-style technical hero, reworked for digital gold mining.
+   Light premium warm-grey stage, mono technical labels, thin wires + framed
+   panels, crosshair grid, a single rotating 3D deposit as the centrepiece.
+   Monochrome near-black on grey with a restrained gold accent. */
+
+.dep-root {
+  --paper: #e7e4de;      /* warm premium grey — matches the deposit clip bg */
+  --paper-2: #efece6;
+  --ink: #14130f;        /* near-black */
+  --ink-2: #4b483f;      /* muted label ink */
+  --line: rgba(20, 19, 15, 0.42);
+  --line-soft: rgba(20, 19, 15, 0.14);
+  --gold: #9a6b12;       /* deep matte gold for accents (readable on light) */
+  --panel: rgba(247, 245, 240, 0.9);
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --font-disp: var(--font-deposit-disp), "Space Grotesk", system-ui, sans-serif;
+
+  position: relative;
+  min-height: 100svh;
+  background: radial-gradient(120% 90% at 50% 40%, var(--paper-2) 0%, var(--paper) 70%);
+  color: var(--ink);
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+/* ---------- the deposit stage ---------- */
+
+.dep-stage {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 640px;
+}
+
+/* centrepiece: a transparent 3D canvas — the deposit floats seamlessly on the
+   stage (no rectangle, no background) and spins as a perfect loop */
+.dep-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* big: the canvas is larger than the viewport so the deposit reads large and
+     OVERFLOWS the edges of the screen (not shrunk to fit). The canvas is wide
+     enough that the model never clips against the canvas's own bounds. */
+  width: min(100vmin, 1040px);
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  z-index: 12; /* the deposit floats ON TOP of the text/panels */
+  pointer-events: none;
+}
+.dep-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+/* lightweight transparent still — the mobile / weak-device / reduced-motion path */
+.dep-poster-3d {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* ---------- crosshair grid ---------- */
+
+.dep-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.dep-cross {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+}
+.dep-cross::before,
+.dep-cross::after {
+  content: "";
+  position: absolute;
+  background: var(--line);
+}
+.dep-cross::before { left: 50%; top: 0; width: 1px; height: 100%; transform: translateX(-50%); }
+.dep-cross::after { top: 50%; left: 0; height: 1px; width: 100%; transform: translateY(-50%); }
+
+/* faint centre vertical + horizontal rules like the reference */
+.dep-rule-v, .dep-rule-h {
+  position: absolute;
+  background: var(--line-soft);
+  z-index: 0;
+  pointer-events: none;
+}
+.dep-rule-v { top: 0; bottom: 0; width: 1px; left: 50%; }
+.dep-rule-h { left: 0; right: 0; height: 1px; top: 50%; }
+
+/* ---------- type ---------- */
+
+.dep-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.45;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.dep-label .g { color: var(--gold); }
+.dep-mut { color: var(--ink-2); }
+
+.dep-headline {
+  position: absolute;
+  left: clamp(1.25rem, 3.5vw, 3.5rem);
+  top: clamp(4.5rem, 12vh, 8rem);
+  z-index: 5;
+  font-family: var(--font-disp);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 12ch;
+}
+.dep-headline .g { color: var(--gold); }
+
+/* ---------- top chrome ---------- */
+
+.dep-top {
+  position: absolute;
+  inset: clamp(1rem, 2.4vw, 1.6rem) clamp(1.25rem, 3.5vw, 3.5rem) auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  z-index: 6;
+}
+.dep-wordmark {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+.dep-center-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dep-pill {
+  border: 1px solid var(--ink);
+  padding: 5px 12px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--panel);
+}
+.dep-globe {
+  width: 34px;
+  height: 34px;
+  opacity: 0.85;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dep-globe { animation: dep-spin 14s linear infinite; }
+}
+@keyframes dep-spin { to { transform: rotate(360deg); } }
+.dep-clock { text-align: right; }
+
+/* ---------- connector node + wire + label ---------- */
+
+.dep-node {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.dep-node-sq {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--ink);
+  border: 3px solid var(--paper);
+  outline: 1px solid var(--ink);
+  transform: translate(-50%, -50%);
+}
+.dep-wire {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: visible;
+}
+.dep-wire path {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.dep-node-label {
+  position: absolute;
+  max-width: 22ch;
+}
+
+/* ---------- framed panels ---------- */
+
+.dep-panel {
+  position: absolute;
+  z-index: 5;
+  width: min(23rem, 34vw);
+  background: var(--panel);
+  border: 1px solid var(--ink);
+  backdrop-filter: blur(2px);
+}
+.dep-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(20, 19, 15, 0.1);
+  border-bottom: 1px solid var(--line);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.dep-panel-head .x { opacity: 0.5; }
+.dep-panel-body {
+  padding: 12px 12px 14px;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+.dep-panel-body .g { color: var(--gold); }
+.dep-arrow { color: var(--gold); }
+
+/* natgold etymology panel (upper-right) */
+.dep-panel-natgold { top: clamp(6rem, 20vh, 12rem); right: clamp(1.25rem, 3.5vw, 3.5rem); }
+
+/* method panel (lower-right) */
+.dep-panel-method { bottom: clamp(1.25rem, 4vh, 2.5rem); right: clamp(1.25rem, 3.5vw, 3.5rem); }
+.dep-cta {
+  display: inline-block;
+  margin-top: 10px;
+  border: 1px solid var(--ink);
+  background: var(--gold);
+  color: #fff;
+  padding: 7px 14px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.dep-cta:hover { background: #7f570d; }
+
+/* ---------- the four moves (bottom-left) ---------- */
+
+.dep-threads {
+  position: absolute;
+  left: clamp(1.25rem, 3.5vw, 3.5rem);
+  bottom: clamp(1.25rem, 4vh, 2.5rem);
+  z-index: 5;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.dep-threads-diagram {
+  width: 74px;
+  height: 96px;
+  border: 1px solid var(--line);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 10px, var(--line-soft) 10px 11px),
+    repeating-linear-gradient(90deg, transparent 0 10px, var(--line-soft) 10px 11px);
+  flex: none;
+}
+.dep-threads-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  margin-bottom: 10px;
+}
+.dep-thread-row { margin-bottom: 9px; }
+.dep-thread-row .n { color: var(--ink-2); }
+.dep-thread-row .hatch {
+  display: inline-block;
+  height: 7px;
+  width: 96px;
+  margin-left: 6px;
+  vertical-align: middle;
+  background: repeating-linear-gradient(-45deg, var(--ink) 0 1px, transparent 1px 4px);
+  opacity: 0.55;
+}
+.dep-thread-row .t { display: block; font-size: 12px; margin-top: 2px; }
+
+/* ---------- grain ---------- */
+.dep-grain {
+  position: fixed;
+  inset: -50px;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- responsive: stack on phones/tablets, drop wires ---------- */
+@media (max-width: 900px) {
+  .dep-root { overflow-x: hidden; }
+  .dep-wire, .dep-node-sq, .dep-rule-v, .dep-rule-h, .dep-grid { display: none; }
+
+  .dep-stage {
+    height: auto;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 0 2.5rem;
+  }
+  /* stacked reading order */
+  .dep-top { order: 1; }
+  .dep-video, .dep-poster { order: 2; }
+  .dep-headline { order: 3; }
+  .dep-node { order: 4; }
+  .dep-panel-natgold { order: 5; }
+  .dep-panel-method { order: 6; }
+  .dep-threads { order: 7; }
+
+  .dep-top { position: static; inset: auto; padding: 0 1.25rem; }
+  .dep-center-tab { display: none; }
+
+  .dep-video, .dep-poster {
+    position: static; transform: none;
+    /* as big as possible: full-width, near-square so the deposit fills the screen */
+    width: 100vw; aspect-ratio: 1 / 1; margin: 0.25rem auto 0;
+    -webkit-mask-image: radial-gradient(ellipse 80% 84% at 50% 50%, #000 76%, transparent 97%);
+    mask-image: radial-gradient(ellipse 80% 84% at 50% 50%, #000 76%, transparent 97%);
+  }
+  .dep-headline {
+    position: static; padding: 1rem 1.25rem 0.5rem; max-width: none;
+    font-size: clamp(2.6rem, 13vw, 4rem);
+  }
+  .dep-node { position: static; inset: auto; padding: 0 1.25rem; margin-top: 1.2rem; }
+  .dep-node-label { position: static !important; inset: auto !important; max-width: none; }
+  .dep-panel { position: static; inset: auto; width: auto; margin: 1.25rem 1.25rem 0; }
+  .dep-threads { position: static; left: auto; bottom: auto; margin: 1.75rem 1.25rem 0; }
+}

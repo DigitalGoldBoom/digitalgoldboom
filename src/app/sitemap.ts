@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${BASE_URL}/affiliates`,
+      url: `${BASE_URL}/partners`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.7,

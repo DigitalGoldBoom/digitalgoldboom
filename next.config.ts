@@ -69,11 +69,14 @@ const nextConfig: NextConfig = {
       // SITE has to answer them, forever, exactly as written. A 404 here is a reader who reached
       // the last page, decided to act, typed the address in — and hit a wall.
       //
-      // "An Invitation to Influencers, Advocates & Believers" → "Start at digitalgoldboom.com/partners"
-      { source: "/partners", destination: "/affiliates", permanent: true },
       // "An Invitation to the Mining Industry" → "Visit: digitalgoldboom.com/mining"
-      // This one was DEAD. The page lives at /mining-industry, and the book never said so.
+      // This one was DEAD: the page lives at /mining-industry and the book never said so.
       { source: "/mining", destination: "/mining-industry", permanent: true },
+      // The partner/affiliate page now lives at /partners — the address the book prints, so the
+      // printed link resolves directly instead of bouncing. /affiliates was the old URL and has
+      // been live and linked, so it still has to answer; it is a redirect, not a second copy of
+      // the page. (Nobody reading the book ever types it, so nobody sees the bounce.)
+      { source: "/affiliates", destination: "/partners", permanent: true },
       { source: "/prices", destination: "/live", permanent: true },
       { source: "/news", destination: "/", permanent: true },
     ];
