@@ -99,12 +99,20 @@ export async function pushToKit(
 
   try {
     // v4: upsert the subscriber first — form/tag calls require them to exist.
+    //
+    // state MUST be "inactive". Kit only sends a form's incentive email (the one carrying the
+    // free-chapters download) when an UNCONFIRMED subscriber is added to a double opt-in form —
+    // "Adding subscribers to double opt-in forms will trigger sending an Incentive Email."
+    // Creating them with Kit's default state marks them already-confirmed, so Kit sees nothing to
+    // confirm and the download email never goes out. That silently broke the whole lead magnet.
+    // The form add below is what flips them to active, once they click the button in that email.
     const res = await fetch(`${KIT_BASE}/subscribers`, {
       method: "POST",
       headers,
       body: JSON.stringify({
         email_address: email,
         first_name: opts.firstName?.trim() || undefined,
+        state: "inactive",
         fields: { source: opts.source ?? "digitalgoldboom" },
       }),
     });
