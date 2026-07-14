@@ -71,15 +71,16 @@ export default function V2Page() {
                   <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
                   <Link href="/buy" className="v2-btn-ghost">The full book — $37</Link>
                 </div>
-                {/* PRE-LAUNCH, said plainly. The book is still being written — the last chapters
-                    close on a launch that has not happened yet — so there is nothing to sell and
-                    no date to promise. Saying so is not a weakness: it explains why the five
-                    chapters are free, and it makes the email the only thing being asked for. */}
+                {/* PRE-LAUNCH, framed as a reason to move rather than a status report. The old line
+                    ("the full book lands after the launch") volunteered that the product was not out
+                    — the first thing anyone reading the site was told, and the last thing that helps.
+                    This says the same thing as an offer: free now, $37 at launch. Nothing is claimed
+                    that is not true, and the reader is given a reason to act rather than to wait. */}
                 <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
                   Free · sent to your inbox · read it before anyone else.
                 </p>
                 <p className="mt-2 text-sm" style={{ color: "var(--v2-faint)" }}>
-                  The full book lands after the launch. The first five chapters are ready now.
+                  Pre-launch: the first five chapters are free. At launch, the full book is $37.
                 </p>
                 <p className="mt-2 text-xs" style={{ color: "var(--v2-faint)" }}>
                   Educational — not financial advice.
