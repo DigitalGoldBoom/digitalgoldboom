@@ -98,17 +98,18 @@ export default function HomeRedesignPage() {
                   For six thousand years, unlocking gold&rsquo;s value meant one thing: <span style={{ color: "#F4F4F7" }}>digging it out of the ground.</span>{" "}That just ended &mdash; and almost no one has noticed yet.
                 </p>
 
-                {/* THE PROOF, ABOVE THE ASK — the redesign's central move on this page.
-                    The live home page's first CTA sits ~497px down a phone with NOTHING above it but
-                    an eyebrow, a claim and a promise: no number, no name, no reason to believe. The
-                    first hard fact lands 2,000px further on, and the author's credential — the
-                    strongest proof a book has — is 62%-opacity body prose six screens down.
-                    One line, in the skim layer, before he is asked for anything. */}
-                <p className="lm-principle mt-7" style={{ maxWidth: "48ch" }}>
-                  <span style={{ color: "#F4F4F7", fontWeight: 600 }}>Andrew Fletcher</span>{" "}was
-                  President &amp; CEO of Great Eagle Gold &mdash; now NatBridge Resources, the first
-                  gold company built for this model. He has assessed hundreds of gold projects.
-                </p>
+                {/* REMOVED (author, 2026-07-15): an author-credential paragraph used to sit here,
+                    between the subhead and the CTA. He rejected it outright — "I don't like that
+                    addition at all, it's just confusing" — and he is right. Dropping a CV into the
+                    middle of the argument interrupts it to introduce a person the reader has not
+                    asked about yet. The hero makes a claim; the next thing should carry the claim
+                    forward, not change the subject.
+
+                    The problem it was trying to solve is still real and still open: the first CTA
+                    on this page has NO proof above it — no number, no name, nothing to believe —
+                    and the first hard fact does not land for another ~2,000px on a phone. The fix
+                    is a proof that belongs to the ARGUMENT (a figure, a receipt), not a biography.
+                    Do not simply re-add the bio here. */}
 
                 {/* Two doors, one primary. The free chapters are the offer that is real today, so
                     they keep the weight. The book sits beside it as a quiet second door: a visitor
