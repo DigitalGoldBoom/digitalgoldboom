@@ -8,7 +8,7 @@ export const metadata: Metadata = genMeta({
   title: "Read the First 5 Chapters Free — Digital Gold Boom",
   description:
     "Start reading Digital Gold Boom free. The first five chapters — the plain-English opening on gold, why the old way of producing it is breaking down, and the shift almost no one has noticed. Sent straight to your inbox.",
-  path: "free",
+  path: "/free",
 });
 
 // The five chapters come from src/lib/chapters.ts — the same source the home page reads, with the

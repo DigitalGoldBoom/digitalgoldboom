@@ -79,7 +79,7 @@ export default function Footer() {
                 marginBottom: 24,
               }}
             >
-              The complete map of a new asset class. Not a pitch.
+              The complete map of a new asset class.
             </p>
             <p
               className="font-mono"

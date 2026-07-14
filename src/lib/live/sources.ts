@@ -2,6 +2,8 @@
 // All routes under /api/live/* return this shape; the page-level fetch hits the
 // aggregator and hands back a fully typed bundle the dashboard can consume.
 
+import { fetchNatgSupply } from './onchain';
+
 export type LiveValue = {
   value: number;
   unit: string;
@@ -24,6 +26,8 @@ export type LiveBundle = {
   btcMcap?: LiveValue;
   usDebt?: LiveValue;
   rwaMcap?: LiveValue;
+  /** Total NATG minted, read live from the Ethereum contract. */
+  natgMinted?: LiveValue;
   /** ISO timestamp of when the aggregator finished assembling the bundle. */
   assembledAt: string;
   /** Map of source key -> error message for any leg that failed. */
@@ -286,13 +290,14 @@ export async function fetchRwaMcap(): Promise<LiveValue> {
 export async function fetchLiveBundle(): Promise<LiveBundle> {
   const errors: Record<string, string> = {};
 
-  const [snapshot, paxg, xaut, btcMcap, usDebt, rwaMcap] = await Promise.allSettled([
+  const [snapshot, paxg, xaut, btcMcap, usDebt, rwaMcap, natgMinted] = await Promise.allSettled([
     fetchNatGoldSnapshot(),
     fetchPaxg(),
     fetchXaut(),
     fetchBtcMcap(),
     fetchUsDebt(),
     fetchRwaMcap(),
+    fetchNatgSupply(),
   ]);
 
   const bundle: LiveBundle = {
@@ -329,6 +334,11 @@ export async function fetchLiveBundle(): Promise<LiveBundle> {
   else
     errors.rwaMcap =
       rwaMcap.reason instanceof Error ? rwaMcap.reason.message : 'rwaMcap failed';
+
+  if (natgMinted.status === 'fulfilled') bundle.natgMinted = natgMinted.value;
+  else
+    errors.natgMinted =
+      natgMinted.reason instanceof Error ? natgMinted.reason.message : 'natgMinted failed';
 
   return bundle;
 }

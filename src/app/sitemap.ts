@@ -20,10 +20,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${BASE_URL}/book`,
+      // /free, NOT /book. /book is a redirect to this page, and a sitemap that advertises a
+      // redirect spends the crawler's budget on a hop — while the page it lands on, the site's
+      // main email-capture page, was not in the sitemap at all.
+      url: `${BASE_URL}/free`,
       lastModified: currentDate,
       changeFrequency: 'monthly' as const,
       priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/projects`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/newsletter`,

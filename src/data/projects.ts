@@ -1,15 +1,37 @@
 // Projects data — the verified source of truth for the public Projects dashboard
 // (Cahuilla + Friday). Every figure traces to the QP-reviewed NI 43-101 source
-// files in C:\DGB-Book\knowledge\{cahuilla,friday}\source-files\ or to the named
-// company press release. Presented AS THE BOOK FRAMES IT (author decision
-// 2026-06-30 — both deposits are in NatGold's tokenization pipeline; NatGold
-// program eligibility governs). `sourceTag` marks provenance ('report' = the
-// NI 43-101; 'release' = a company press release; 'book' = the book's framing).
+// files in _knowledge/{cahuilla,friday}/source-files/ or to the named company
+// press release. `sourceTag` marks provenance ('report' = the NI 43-101;
+// 'release' = a company press release; 'book' = the book's framing).
 //
-// Token amounts are FIXED counts; each project's live value = tokens × live BIV
-// (the same NatGold BIV feed the /live dashboard uses).
+// ── MINTED vs PROJECTED — the distinction this file exists to protect ───────
+// MINTED  = NATG that actually exists on the Ethereum blockchain today. Read
+//           live from the contract (lib/live/onchain.ts), never hard-coded.
+//           Only SLICES of each property have been tokenized so far.
+// PROJECTED = what the FULL deposits would generate if tokenized in their
+//           entirety at the published resource-tier ratios. A forward-looking
+//           figure. It must never be presented as tokens that exist.
+//
+// Conflating those two is exactly the disclosure failure the BCSC forced
+// NatBridge Resources to publicly correct on 2026-07-09. Keep them separate.
+//
+// Live value = tokens × live BIV (the same NatGold BIV feed /live uses).
 
 export type SourceTag = 'report' | 'release' | 'book';
+
+/** One completed tokenization event — a specific parcel/claim minted on-chain. */
+export type MintedTranche = {
+  /** The exact ground that was tokenized (e.g. "Patented claims 45 & 46"). */
+  parcel: string;
+  /** NATG generated and minted from this tranche (per company disclosure). */
+  tokens: number;
+  /** ISO date the tokenization completed. */
+  date: string;
+  /** Who the interest was acquired from for tokenization. */
+  acquiredFrom: string;
+  /** Plain-language note on what is NOT included in this tranche. */
+  remainder: string;
+};
 
 /** A resource category that backs the minted tokens (used by the pipeline section). */
 export type TokenBacking = {
@@ -47,7 +69,14 @@ export type Project = {
   location: string;
   status: string;
   verified: boolean; // true = current QP-verified resource; false = historical-estimate-backed
-  // ---- PIPELINE SUMMARY (hero block: token amount + the categories backing it) ----
+  // ---- MINTED ON-CHAIN (what actually exists today) ----
+  minted: {
+    /** Sum of this project's tranches, per company disclosure. */
+    tokens: number;
+    tranches: MintedTranche[];
+  };
+  // ---- PROJECTED (hero block: FULL-deposit token amount + backing categories) ----
+  // NOT minted. What the whole deposit would generate if fully tokenized.
   pipeline: {
     totalTokens: number;
     natgoldPct: number;
@@ -84,8 +113,33 @@ export type Project = {
 // override the dollar value with tokens × LIVE BIV from the NatGold feed.
 export const BIV_ANCHOR_USD = 3518;
 
-/** Combined pipeline headline: 247,498 (Cahuilla) + 314,204 (Friday) = 561,702. */
-export const COMBINED_TOKENS = 561_702;
+/**
+ * PROJECTED total if BOTH deposits were tokenized in full:
+ * 247,498 (Cahuilla) + 314,204 (Friday) = 561,702. Forward-looking — NOT minted.
+ */
+export const PROJECTED_TOKENS = 561_702;
+
+/**
+ * The aggregate NatGold states in its July 9 2026 release: 57,200 + 49,600.
+ *
+ * ⚠️ The contract reports 106,799 — one token fewer. Verified by direct
+ * totalSupply() read on 2026-07-14. We display the CHAIN figure as the minted
+ * total and disclose this one-token variance rather than paper over it.
+ * The per-property splits below are the company's; only the chain total is ours.
+ */
+export const MINTED_TOKENS_PER_DISCLOSURE = 106_800;
+
+/** NATG smart contract — the single source of truth for minted supply. */
+export const NATG_CONTRACT_ADDRESS = '0x59c323346F4f62aE18289F346501389392cf5939';
+
+/**
+ * Program allocations skimmed off every tokenization, per the July 9 2026
+ * release (stated across both completed tokenizations).
+ */
+export const MINTED_ALLOCATIONS = {
+  contingencyFund: { pct: 5, tokens: 5_340 },
+  socialGiveback: { pct: 2, tokens: 2_136 },
+} as const;
 
 export const PROJECTS: Project[] = [
   // =========================================================================
@@ -98,6 +152,25 @@ export const PROJECTS: Project[] = [
     location: 'Orogrande Mining District, Idaho County, central Idaho, USA',
     status: 'Current NI 43-101 Mineral Resource — Measured, Indicated & Inferred (QP-verified)',
     verified: true,
+    // Source: NatGold Digital press release, July 9 2026 (full text mirrored at
+    // _knowledge/natgold/site-mirror/press-releases/press-release-2026-07-09-*.md).
+    // NOTE — an unresolved conflict sits in this file: the Mar 12 2026 definitive
+    // agreement (see `deal` below) describes FIVE patented claims at Friday; the
+    // July 9 release calls Alaska 4 "the first of four patented claims". We do not
+    // guess. The UI states only what is minted and that the rest is not.
+    minted: {
+      tokens: 49_600,
+      tranches: [
+        {
+          parcel: 'Patented claim “Alaska 4”, Friday Gold Mine',
+          tokens: 49_600,
+          date: '2026-07-09',
+          acquiredFrom: 'Sovereon Gold Corp.',
+          remainder:
+            'The first claim at Friday to be tokenized. The remaining patented claims were not included and have not been minted.',
+        },
+      ],
+    },
     pipeline: {
       totalTokens: 314_204,
       natgoldPct: 73,
@@ -137,13 +210,10 @@ export const PROJECTS: Project[] = [
       '90 holes used in the resource estimate — 55 core + 35 reverse-circulation. Coarse native gold + electrum favorable for gravity; pit shell uses 85% metallurgical recovery.',
     royalties:
       'On the 5 patented claims: 3% NSR Idaho Gold Corp. (capped US$1M), 1% NSR Del Steiner (capped US$1M), and a 2%→3% NSR (Premium).',
-    figures: [
-      { src: '/projects/friday/drillmap.png', caption: 'Friday drill-hole map', kind: 'drillmap' },
-      { src: '/projects/friday/geology.png', caption: 'Friday geology', kind: 'geology' },
-      { src: '/projects/friday/soils.png', caption: 'Friday soil geochemistry', kind: 'soils' },
-      { src: '/projects/friday/longsection.png', caption: 'Friday long-section', kind: 'section' },
-      { src: '/projects/friday/photo.png', caption: 'Friday Gold Project', kind: 'photo' },
-    ],
+    // Figures pulled 2026-07-14 pending an art redo (author call). The dashboard
+    // hides the "Figures & maps" block entirely while this is empty — repopulate
+    // to bring it back. Source images remain in /public/projects/friday/.
+    figures: [],
   },
 
   // =========================================================================
@@ -156,6 +226,22 @@ export const PROJECTS: Project[] = [
     location: 'Northwest Imperial County, California, USA',
     status: 'In the NatGold tokenization pipeline (NatBridge Resources Ltd., CSE: NATB)',
     verified: false,
+    // Source: NatGold Digital press release, July 9 2026. NatGold issued NO
+    // standalone release for the June 30 Cahuilla tokenization — the July 9
+    // release and two NatBridge releases are the only citable records of it.
+    minted: {
+      tokens: 57_200,
+      tranches: [
+        {
+          parcel: 'Patented mining claims 45 & 46, Cahuilla Gold Project',
+          tokens: 57_200,
+          date: '2026-06-30',
+          acquiredFrom: 'NatBridge Resources Ltd. (CSE: NATB)',
+          remainder:
+            'Two parcels only — the first tokenization NatGold completed. The balance of the Cahuilla deposit has not been minted.',
+        },
+      ],
+    },
     pipeline: {
       totalTokens: 247_498,
       natgoldPct: 73,
@@ -190,9 +276,7 @@ export const PROJECTS: Project[] = [
       'Explored by Newmont, Homestake, Kennecott and Teras over multiple campaigns since 1988. More than $26 million spent proving the gold is there.',
     drilling:
       '131 holes for 73,766 ft (22,484 m) by CGC-Teras / Teras (2011–17) — 116 RC + 15 diamond core — plus earlier Kennecott RC drilling (1993–96). Strike ~2.7 km, width 400–700 m.',
-    figures: [
-      { src: '/projects/cahuilla/drillmap.png', caption: 'Cahuilla drill-hole map', kind: 'drillmap' },
-      { src: '/projects/cahuilla/photo.png', caption: 'Cahuilla Gold Project', kind: 'photo' },
-    ],
+    // Figures pulled 2026-07-14 pending an art redo (author call). See Friday above.
+    figures: [],
   },
 ];
