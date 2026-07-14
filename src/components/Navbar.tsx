@@ -70,7 +70,7 @@ export default function Navbar() {
       "grid min-h-[44px] place-items-center whitespace-nowrap rounded-full px-4 text-sm font-medium transition-colors duration-200",
       active
         ? "bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] text-white"
-        : "text-[rgba(238,240,248,0.88)] hover:bg-[var(--v2-surface-2,rgba(255,255,255,0.08))] hover:text-white",
+        : "text-white hover:bg-[var(--v2-surface-2,rgba(255,255,255,0.08))]",
     ].join(" ");
 
   if (isPixelShovel) return null;
