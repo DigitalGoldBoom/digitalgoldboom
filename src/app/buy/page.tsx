@@ -169,18 +169,20 @@ export default function BuyPage() {
                 background: "linear-gradient(180deg, rgba(232,178,58,0.07), rgba(232,178,58,0.02))",
               }}
             >
-              <p className="v2-eyebrow mb-5">Pre-launch</p>
+              {/* The reason is the payment setup, and only the payment setup. Nothing on this page
+                  comments on the state of the product — a product page that editorialises about its
+                  own product is not a product page. */}
+              <p className="v2-eyebrow mb-5">Checkout opening soon</p>
               <h2 className="text-2xl font-bold" style={{ color: "var(--text-primary)" }}>
-                The book isn&rsquo;t finished yet — and that&rsquo;s on purpose.
+                Checkout isn&rsquo;t open yet.
               </h2>
               <p className="mt-4 max-w-[62ch] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                Its closing chapters cover a launch that has not happened. Writing them before it
-                does would mean guessing, and this is not a book that guesses. So the book is not on
-                sale today: there is nothing to take your money for yet.
+                We&rsquo;re completing our payment setup, so orders can&rsquo;t be taken for a few
+                more days. Nothing is charged and no card details are collected in the meantime.
               </p>
               <p className="mt-4 max-w-[62ch] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                What is ready is the first five chapters — the whole case, start to finish. Read
-                them free now, and you&rsquo;ll be the first told when the rest lands.
+                Leave your email and we&rsquo;ll tell you the moment it opens. You&rsquo;ll get the
+                first five chapters straight away, free, while you wait.
               </p>
 
               <div className="mt-8 max-w-[520px]">

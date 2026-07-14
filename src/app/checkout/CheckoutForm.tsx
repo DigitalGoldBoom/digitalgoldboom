@@ -29,13 +29,16 @@ export default function CheckoutForm() {
 
   return (
     <div>
-      {/* The truth, before the fields — not after someone has tried them. */}
+      {/* The truth, before the fields — not after someone has tried them. The reason given is the
+          real one and the only one: payment processing is still being set up. Nothing here comments
+          on the product. */}
       <div className="co-pay-notice">
-        <p className="co-pay-title">Payments are not enabled on this store yet.</p>
+        <p className="co-pay-title">Checkout is not open yet.</p>
         <p className="co-pay-body">
-          The checkout below is shown for review. The fields are disabled and no card can be
-          entered, submitted, or stored. When the store goes live, payment is handled entirely by
-          our payment provider on their own secure checkout — card details never touch this site.
+          We&rsquo;re completing our payment setup. The fields below are disabled — no card can be
+          entered, submitted, or stored, and nothing is charged. Once checkout opens, payment is
+          handled entirely by our payment provider on their own secure checkout, so card details
+          never touch this site.
         </p>
       </div>
 
@@ -119,8 +122,8 @@ export default function CheckoutForm() {
 
         {error && (
           <p role="alert" className="co-error">
-            Payment processing is not enabled on this store. No card was submitted and nothing was
-            charged.
+            Checkout isn&rsquo;t open yet — our payment setup is still being completed. No card was
+            submitted and nothing was charged.
           </p>
         )}
       </form>
