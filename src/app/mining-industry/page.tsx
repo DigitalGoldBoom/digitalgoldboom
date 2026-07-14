@@ -24,13 +24,16 @@ const why = [
   { h: "Get in at the start", p: "This is a new industry in its first chapter. Connecting now means understanding it — and helping steer it — before the wider market catches on." },
 ];
 
+// The book is NOT given away here. This page used to promise the complete book to anyone who
+// filled the form in; that offer is withdrawn, so no step, no card and no button may imply it.
 const steps = [
   { n: "01", h: "Introduce yourself", p: "Tell us who you are and your angle in the industry." },
-  { n: "02", h: "Get the full book", p: "We send you the complete book, so you can understand the model in depth." },
+  { n: "02", h: "We come back to you", p: "A real person reads it and replies — not an autoresponder." },
   { n: "03", h: "Connect", p: "Share your read, your questions, and your expertise directly with the people building this." },
   { n: "04", h: "Move it forward", p: "Stay close as digital gold mining takes shape, and contribute where it fits." },
 ];
 
+// Describes what the book IS, for someone deciding whether to read it. It does not promise a copy.
 const reading = [
   { h: "A complete, finished book", p: "The whole model, start to finish — not a pitch deck." },
   { h: "Sourced, and honest about it", p: "Established figures trace to a primary record you can check; forward-looking forecasts are clearly flagged as forecasts." },
@@ -113,7 +116,8 @@ export default function MiningIndustryPage() {
         <div className="rounded-[24px] p-8 md:p-10" style={{ border: "1px solid rgba(232,178,58,0.3)", background: "rgba(255,255,255,0.018)" }}>
           <h2 className="v2-display mx-auto" style={{ fontSize: "clamp(1.7rem, 3.4vw, 2.4rem)", maxWidth: "18ch" }}>Connect with the people building this.</h2>
           <p className="mx-auto mt-4 max-w-[50ch] leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-            Put your name down. We&apos;ll send you the full book and a direct line to the team moving digital gold mining forward.
+            Put your name down and you get a direct line to the team moving digital gold mining
+            forward.
           </p>
           <div className="mt-8 text-left">
             <IndustryReviewForm />

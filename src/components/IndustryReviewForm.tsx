@@ -58,7 +58,7 @@ export default function IndustryReviewForm() {
           Thank you — you&apos;re connected.
         </p>
         <p className="mt-2 text-sm" style={{ color: "var(--text-secondary)" }}>
-          We&apos;ll be in touch with your copy of the book and a way to stay involved.
+          A real person will read it and be in touch.
         </p>
       </div>
     );
