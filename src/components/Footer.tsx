@@ -18,6 +18,10 @@ const COLUMNS: { heading: string; links: { label: string; href: string }[] }[] =
   {
     heading: "The Book",
     links: [
+      // The book itself was missing from the column called "The Book". A store whose product cannot
+      // be reached from the footer is not a store — and the payment processor reviewing this site
+      // navigates it the way a customer does, not from a list of URLs.
+      { label: "Buy the book — $37", href: "/buy" },
       { label: "Free Chapters", href: "/free" },
       { label: "Newsletter", href: "/newsletter" },
     ],
