@@ -108,7 +108,7 @@ export default function LeadMagnetForm({
       >
         {isWaitlist ? (
           <p className="text-center" style={{ color: "#F4F4F7", fontWeight: 600, fontSize: "1.05rem" }}>
-            You&rsquo;re on the list — we&rsquo;ll email you the moment the full book is ready.
+            You&rsquo;re on the list — we&rsquo;ll be in touch.
           </p>
         ) : (
           <>

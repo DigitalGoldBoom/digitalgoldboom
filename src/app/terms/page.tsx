@@ -38,7 +38,12 @@ const blocks: LegalBlock[] = [
   {
     h: "Affiliate and share-to-earn program",
     p: [
-      "If you take part in our affiliate or share-to-earn program, separate program rules apply in addition to these terms. Key points: the program opens at launch; rewards are paid only on genuine, verified results (a completed referred sale, or a share that meets the stated, verified view thresholds); token-based rewards depend on the NATG token being live and may change; and we may decline or reverse rewards tied to fake, bot, misleading, or policy-breaking activity. Full program rules are provided to participants before the program opens.",
+      // NO TOKEN REWARDS. This clause used to promise "token-based rewards" in the NATG token, and
+      // /partners said the opposite ("no wallet, nothing token-related") — two pages of the same
+      // site flatly contradicting each other on how people get paid. The program pays a CASH
+      // commission on book sales. Nothing else. A store that pays commissions in a crypto token is
+      // a different business, in a different risk class, from one that sells an ebook.
+      "If you take part in our affiliate program, separate program rules apply in addition to these terms. Key points: the program opens at launch; commission is paid in cash, only on a genuine, completed referred sale of the book; there are no token rewards and no wallet is required; and we may decline or reverse commission tied to fake, bot, misleading, or policy-breaking activity. Full program rules are provided to participants before the program opens.",
     ],
   },
   {

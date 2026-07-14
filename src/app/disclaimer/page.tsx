@@ -51,7 +51,9 @@ const blocks: LegalBlock[] = [
   {
     h: "Affiliate disclosure",
     p: [
-      "We run an affiliate and share-to-earn program. That means people who share or promote the book may earn a commission or a reward (including, in future, rewards paid in the NATG token) when their link leads to a sale or their post meets the program’s requirements. This is a material connection under U.S. FTC guidelines.",
+      // Cash only. See the note in terms/page.tsx: the token-reward clause was a mistake and the
+      // pages contradicted each other.
+      "We run an affiliate program. That means people who promote the book may earn a cash commission when their link leads to a sale of the book. There are no token rewards. This is a material connection under U.S. FTC guidelines.",
       "If you arrived here through someone’s affiliate link or post, that person may be compensated. It costs you nothing extra, and it does not change the price you pay. Anyone promoting the book should clearly disclose that they may earn from it.",
     ],
   },

@@ -22,7 +22,10 @@ const blocks: LegalBlock[] = [
     p: ["We only collect what we need to run the site, the newsletter, the book sale, and the affiliate program:"],
     ul: [
       "Email address — when you join the newsletter, the launch waitlist, or the affiliate early-interest list.",
-      "Optional details you choose to give — your name, social handle, or wallet address (for future token rewards). These are optional.",
+      // No wallet field. We never ask for one, because there are no token rewards — the affiliate
+      // program pays a cash commission on book sales. Collecting a crypto wallet address would say
+      // otherwise, in the one document a reader trusts to tell them what we take.
+      "Optional details you choose to give — your name, or your company and role. These are optional.",
       "Purchase information — when you buy the book, our payment provider (LemonSqueezy) processes your payment and shares limited order details (such as your email and order status) with us. We never see or store your full card details.",
       "Usage data — privacy-friendly, aggregate analytics about how pages are used (via Vercel Analytics), and standard server logs (such as IP address) used for security and to prevent abuse.",
     ],

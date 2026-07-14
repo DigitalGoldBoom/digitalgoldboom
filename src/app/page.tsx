@@ -7,7 +7,7 @@ import { generateMetadata as genMeta, generateBookSchema } from "@/lib/seo";
 export const metadata: Metadata = genMeta({
   title: "Digital Gold Boom — Decoding the Biggest Gold Rush in History",
   description:
-    "The plain-English guide to digital gold mining and the tokenization of in-ground verified gold. It's not gold, it's not Bitcoin — understand it before the token launches.",
+    "The plain-English guide to digital gold mining and the tokenization of in-ground verified gold. It's not gold, it's not Bitcoin — the plain-English account of how gold that is verified in the ground gets tokenized, and why that changes everything.",
   path: "",
 });
 

@@ -183,7 +183,7 @@ export default function AffiliatesPage() {
             What is digital gold mining?
           </h3>
           <p style={{ color: "var(--v2-dim)", fontSize: "1rem", lineHeight: 1.7 }}>
-            A brand-new industry launching <span style={{ color: "#F4F4F7" }}>July 2026</span>. A multi-patent-pending process that tokenizes geologically verified gold deposits into the first gold-backed digital asset — <span style={{ color: "#F4F4F7" }}>NatGold Tokens (NATG)</span> — removing the heavy financial, environmental, and social costs of traditional mining, while unlocking gold&rsquo;s value on the blockchain.
+            A brand-new industry. A multi-patent-pending process that tokenizes geologically verified gold deposits into the first gold-backed digital asset — <span style={{ color: "#F4F4F7" }}>NatGold Tokens (NATG)</span> — removing the heavy financial, environmental, and social costs of traditional mining, while unlocking gold&rsquo;s value on the blockchain.
           </p>
         </div>
 

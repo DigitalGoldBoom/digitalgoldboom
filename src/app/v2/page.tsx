@@ -245,7 +245,7 @@ export default function V2Page() {
                 <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
               </div>
               <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                Free · sent to your inbox · and first in line for the full book.
+                Free, to your inbox · the full book is $37 at launch
               </p>
             </div>
           </div>
