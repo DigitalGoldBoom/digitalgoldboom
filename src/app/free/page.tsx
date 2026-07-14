@@ -6,7 +6,7 @@ import { generateMetadata as genMeta } from "@/lib/seo";
 export const metadata: Metadata = genMeta({
   title: "Read the First 5 Chapters Free — Digital Gold Boom",
   description:
-    "Start reading Digital Gold Boom free. The first five chapters — the plain-English opening on gold, why the old way of producing it is breaking down, and the shift almost no one has noticed. Instant download.",
+    "Start reading Digital Gold Boom free. The first five chapters — the plain-English opening on gold, why the old way of producing it is breaking down, and the shift almost no one has noticed. Sent straight to your inbox.",
   path: "free",
 });
 

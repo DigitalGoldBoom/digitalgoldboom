@@ -12,7 +12,7 @@ import LeadMagnetForm from "@/components/LeadMagnetForm";
 const STEPS = [
   { n: "01", t: "Verify", b: "A deposit is drilled, sampled and certified to institutional standard (NI 43-101) — the same proof a $10-billion mine is financed on." },
   { n: "02", t: "Tokenize", b: "Verified ounces are recorded digitally by geological confidence. Each NATG token references one ounce of in-ground gold." },
-  { n: "03", t: "Trade", b: "Priced off the gold industry's own math — spot price minus mining cost. The first tokens are set to trade on Kraken from July 8, 2026." },
+  { n: "03", t: "Trade", b: "Priced off the gold industry's own math — spot price minus mining cost. The first tokens trade on Kraken once its listing review completes." },
 ];
 
 const SECTIONS = [
@@ -62,7 +62,7 @@ export default function V2Page() {
                   <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
                 </div>
                 <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                  Free · instant download · and first in line for the full book.
+                  Free · sent to your inbox · and first in line for the full book.
                 </p>
                 <p className="mt-2 text-xs" style={{ color: "var(--v2-faint)" }}>
                   Educational — not financial advice.
@@ -173,7 +173,7 @@ export default function V2Page() {
             </h2>
             <div className="lg:pt-2">
               <p className="text-lg leading-relaxed" style={{ color: "var(--v2-dim)", maxWidth: "54ch" }}>
-                Three long-running shifts have lined up at once: central banks are holding gold at multi-decade highs, real-world assets are being represented digitally at institutional scale, and a younger generation wants gold without the environmental cost of mining it. The model is no longer theoretical — the first deposits have been submitted, and the first tokens are set to trade on <span style={{ color: "#F4F4F7" }}>July 8, 2026.</span>
+                Three long-running shifts have lined up at once: central banks are holding gold at multi-decade highs, real-world assets are being represented digitally at institutional scale, and a younger generation wants gold without the environmental cost of mining it. The model is no longer theoretical — the first deposits have been submitted, and trading begins <span style={{ color: "#F4F4F7" }}>once Kraken completes its listing review.</span>
               </p>
               <p className="mt-8" style={{ fontSize: "clamp(1.25rem, 2vw, 1.625rem)", fontWeight: 300, color: "#F4F4F7", letterSpacing: "-0.01em", maxWidth: "30ch" }}>
                 A real development inside a multi-trillion-dollar industry — <span className="v2-gold">about to be tested in public.</span>
@@ -216,7 +216,7 @@ export default function V2Page() {
                 <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
               </div>
               <p className="mt-4 text-sm" style={{ color: "var(--v2-faint)" }}>
-                Free · instant download · and first in line for the full book.
+                Free · sent to your inbox · and first in line for the full book.
               </p>
             </div>
           </div>
@@ -276,7 +276,7 @@ export default function V2Page() {
           <div className="mt-10 flex flex-col items-center gap-4">
             <Link href="/free" className="v2-btn">Read the first 5 chapters — free</Link>
             <span className="text-sm" style={{ color: "var(--v2-faint)" }}>
-              Free · instant download · no payment
+              Free · sent to your inbox · no payment
             </span>
           </div>
           <p className="mt-6 mx-auto text-xs leading-relaxed" style={{ color: "var(--v2-faint)", maxWidth: "52ch" }}>
