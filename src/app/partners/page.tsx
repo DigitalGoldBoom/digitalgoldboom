@@ -39,7 +39,10 @@ function AffiliateCTA({ children = "Put your name down", className = "v2-btn" }:
 }
 
 const facts = [
-  { h: "50% per sale", p: "You keep half of every copy your link sells — US$18.50 on each $37 sale, the same on the first and the thousandth." },
+  // NO DOLLAR AMOUNT. "US$18.50 a sale" was the arithmetic on the sticker price with the payment
+  // and platform fees pretended away — a number nobody would ever actually receive. Quote the rate,
+  // which is true, and never a figure a partner could hold us to and be disappointed by.
+  { h: "50% per sale", p: "You keep half of every copy your link sells — the same rate on your first sale and your thousandth." },
   { h: "Tracked for you", p: "Every click and every sale your link makes is counted automatically. Nothing for you to manage." },
   { h: "No tiers, no targets", p: "One flat rate for everyone. No thresholds to hit, no ladder to climb, no minimum before you earn." },
 ];
@@ -117,7 +120,7 @@ const premarketStats = [
 
 const faqs = [
   { question: "Is the program open?", answer: "Not yet. You're putting your name down to be considered. We'll email you when your link is ready, and tell you exactly what happens next." },
-  { question: "How much do I earn?", answer: "50% of every sale your link makes — US$18.50 on each $37 copy. The same flat rate on your first sale and your thousandth." },
+  { question: "How much do I earn?", answer: "50% of every sale your link makes. The same flat rate on your first sale and your thousandth." },
   { question: "How are sales tracked and paid?", answer: "Every click and every sale tied to your unique link is counted automatically, and your balance is paid out on a regular schedule. Nothing for you to manage." },
   { question: "Why do you approve people first?", answer: "Because one bad post can put the whole shopfront at risk. Every partner signs a short, plain media policy: no investment talk, no promises about what anything will be worth, and you say clearly that you earn a commission. Say what the book says, and you'll never come near the line." },
   { question: "Do I need to own any digital assets?", answer: "No. This is a straightforward cash commission for selling a book. No wallet, nothing token-related." },
@@ -250,8 +253,8 @@ export default function AffiliatesPage() {
         </h2>
         <p className="mx-auto mt-5 max-w-[60ch] text-center text-lg leading-relaxed" style={{ color: "var(--v2-dim)" }}>
           Believing in something shouldn&rsquo;t cost you money. When the doors open, you keep half of
-          every copy your link sells &mdash; US$18.50 on each $37 sale, the same on the first and the
-          thousandth. No tiers to chase, no targets to hit.
+          every copy your link sells &mdash; the same rate on the first and the thousandth. No tiers
+          to chase, no targets to hit.
         </p>
         <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
           {facts.map((f) => (
