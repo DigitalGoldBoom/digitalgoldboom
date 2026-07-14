@@ -14,8 +14,10 @@ type BuyButtonProps = {
   /** LemonSqueezy product checkout URL (from NEXT_PUBLIC_LS_*_CHECKOUT_URL). */
   checkoutUrl?: string;
   label?: string;
-  /** Shown (disabled) when no checkoutUrl is set yet. Defaults to the label. */
+  /** Label used when there is no checkout yet. Defaults to `label` — the button looks the same. */
   unavailableLabel?: string;
+  /** Where the button goes when there is no checkout. Never a dead button. */
+  fallbackHref?: string;
   className?: string;
   /** Vercel analytics event name fired on click. */
   event?: string;
@@ -30,9 +32,15 @@ type BuyButtonProps = {
  * handles payment, tax, fraud, and delivers the book file + receipt. (Verified against LS docs:
  * lemon.js + an <a class="lemonsqueezy-button"> opens the overlay; ?embed=1 forces the modal.)
  *
- * Ready-to-connect: the checkout URL comes from NEXT_PUBLIC_LS_CHECKOUT_URL, passed in by the
- * page. Until the store is approved and that value is set, the button renders DISABLED — no dead
- * checkout link can ship by accident.
+ * Ready-to-connect: the checkout URL comes from NEXT_PUBLIC_LS_CHECKOUT_URL, passed in by the page.
+ * Until the store is approved and that value exists, the button CANNOT open a checkout — no store,
+ * no checkout link, for anyone. It used to render disabled in that state. That was wrong: a dead
+ * button is the worst thing a visitor (or a merchant reviewer) can click. It reads as a broken
+ * site, and it burns the one moment someone was willing to act.
+ *
+ * So there is no disabled state. Without a checkout the button becomes a LINK to `fallbackHref` —
+ * the truthful next step, which today is the pre-launch panel on /buy. It never collects a card, it
+ * never imitates a payment form, and it never promises a purchase it cannot complete.
  *
  * React note (LS docs): lemon.js may init before this mounts, so we call window.createLemonSqueezy()
  * on mount and on script load to (re)bind the overlay to this button.
@@ -41,6 +49,7 @@ export default function BuyButton({
   checkoutUrl,
   label = "Get the book — $37",
   unavailableLabel,
+  fallbackHref = "/buy#reserve",
   className = "btn-primary",
   event = "book_buy_click",
   eventProps,
@@ -52,15 +61,13 @@ export default function BuyButton({
 
   if (!checkoutUrl) {
     return (
-      <button
-        type="button"
+      <a
+        href={fallbackHref}
         className={className}
-        disabled
-        aria-disabled="true"
-        title="Available soon"
+        onClick={() => track("book_buy_click_prelaunch")}
       >
         {unavailableLabel ?? children ?? label}
-      </button>
+      </a>
     );
   }
 
