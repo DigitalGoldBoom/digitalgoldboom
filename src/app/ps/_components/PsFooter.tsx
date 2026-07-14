@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-
-// Full white PixelShovel wordmark (same as nav/hero).
-const WORDMARK = "https://framerusercontent.com/images/nzBDrjjIcc9jVr8kaHG51L3wTGc.png";
+import { PS_WORDMARK } from "./psAssets";
 
 const MENU = [
   { label: "Home", href: "/ps" },
@@ -36,7 +34,7 @@ export default function PsFooter() {
         <div className="ps-wrap grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="flex flex-col gap-4">
             <Image
-              src={WORDMARK}
+              src={PS_WORDMARK}
               alt="PixelShovel"
               width={180}
               height={30}

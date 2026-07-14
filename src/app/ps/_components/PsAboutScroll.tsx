@@ -5,6 +5,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { PS_WORDMARK } from "./psAssets";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -16,7 +17,6 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
  * wordmark, giant faint number watermark. Reduced-motion → static 2×2 grid.
  */
 
-const WORDMARK = "https://framerusercontent.com/images/nzBDrjjIcc9jVr8kaHG51L3wTGc.png";
 const CARDS = [
   { n: "01", title: "We Educate.", body: "Making digital gold mining simple to understand. We help the world see gold's future clearly." },
   { n: "02", title: "We Influence.", body: "Creating media and technology that advance the Digital Gold Boom. Turning ideas into influence and opportunity." },
@@ -45,7 +45,7 @@ const CUBE6 = [
 function Card({ n, title, body }: { n: string; title: string; body: string }) {
   return (
     <div className="ps-about-card">
-      <Image src={WORDMARK} alt="PixelShovel" width={130} height={22} className="h-[18px] w-auto self-start opacity-80" />
+      <Image src={PS_WORDMARK} alt="PixelShovel" width={132} height={22} className="h-[18px] w-auto self-start opacity-80" />
       <h3 className="ps-about-card-title">{title}</h3>
       <p className="ps-about-card-body">{body}</p>
       <span className="ps-about-card-num" aria-hidden>{n}</span>

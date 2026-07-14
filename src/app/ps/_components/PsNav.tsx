@@ -3,14 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { PS_WORDMARK } from "./psAssets";
 
 /**
  * PsNav — PixelShovel top bar (clone of the Framer "Top Nav").
  * Logo left · centred translucent pill of links · "Get Digital Gold Boom Free"
  * pill CTA right. Collapses to a hamburger drawer on tablet / phone.
  */
-
-const WORDMARK = "https://framerusercontent.com/images/nzBDrjjIcc9jVr8kaHG51L3wTGc.png";
 
 const LINKS = [
   { label: "Home", href: "/ps" },
@@ -41,9 +40,9 @@ export default function PsNav() {
           onClick={() => setOpen(false)}
         >
           <Image
-            src={WORDMARK}
+            src={PS_WORDMARK}
             alt="PixelShovel"
-            width={170}
+            width={168}
             height={28}
             priority
             className="h-6 w-auto md:h-7"

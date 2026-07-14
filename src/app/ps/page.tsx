@@ -4,6 +4,7 @@ import Book3D from "@/components/Book3D";
 import PsWaitlistForm from "./_components/PsWaitlistForm";
 import PsRotatingCube from "./_components/PsRotatingCube";
 import PsAboutScroll from "./_components/PsAboutScroll";
+import { PS_WORDMARK } from "./_components/psAssets";
 
 const CDN = "https://framerusercontent.com/images";
 const img = (id: string) => `${CDN}/${id}.png`;
@@ -49,10 +50,10 @@ export default function PixelShovelHome() {
         <div className="ps-wrap flex w-full flex-col items-center gap-8 py-10">
           {/* Wordmark */}
           <Image
-            src={img("nzBDrjjIcc9jVr8kaHG51L3wTGc")}
+            src={PS_WORDMARK}
             alt="PixelShovel"
-            width={900}
-            height={150}
+            width={1200}
+            height={200}
             priority
             className="ps-reveal h-auto w-full max-w-[1100px]"
           />
