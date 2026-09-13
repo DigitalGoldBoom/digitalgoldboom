@@ -1,14 +1,14 @@
 # Sales Copy — V3 (VSL-derived long-form landing page)
 
 > **Route:** `/v3` — a long-form variant to split-test alongside `/v1` (long) and `/s` (short).
-> **Product:** the book (Digital Gold Boom) at the **$37 early-reader launch price** (rising to the regular **$97**). Single CTA → LemonSqueezy checkout. **12-month money-back guarantee.**
+> **Product:** the book (Digital Gold Boom) at the **$37 early-reader launch price** (rising to the regular **$97**). Single CTA → Whop checkout. **12-month money-back guarantee.**
 > **Design:** build in the **v2 design system** (reference `src/app/v2/page.tsx` — `v2-*` classes, ShimmerDots, bento tiles). Do NOT reuse `/long` components.
 > **Source:** adapted from the VSL script v5 (`C:\DGB-Book\_video-production\DGB-VSL-script.md`) — its 15-beat architecture, narrative spine (the book's self-assembling chain / Read-This-First / Ch 8 logic), proof-stacking, flat-authority voice, and withheld-offer structure — translated to a scannable WEB page (read, not spoken; no "watch/listen" verbs).
 > **Status:** DRAFT — routes to dgb-copy-chief (grade) + dgb-fact-verifier (numbers) next. Builder ≠ breaker; not self-certified.
 
 > **Structure facts (corrected):** the book is **2 sections, 17 chapters** — Section 1 The Inevitability of Digital Gold Mining (Ch 1–8), Section 2 The NatGold Digital Gold Mining Ecosystem (Ch 9–17), ending on the honest challenges. NOT four sections.
 
-> **HARD COMPLIANCE (the key V3 adaptation):** the VSL is a video that runs hot (esp. its Beat 8 "be early or late" and the Beat 15 "late capital pays full price"). The WEB BUY PAGE must stay LemonSqueezy-compliant: NO "be early to invest," no returns/FOMO-as-money, no "join investors," no token-buy language, no countdown. Sell UNDERSTANDING of the industry, not upside. Disclosures (educational/not financial advice + author's stake) by every CTA.
+> **HARD COMPLIANCE (the key V3 adaptation):** the VSL is a video that runs hot (esp. its Beat 8 "be early or late" and the Beat 15 "late capital pays full price"). The WEB BUY PAGE must stay Whop-compliant: NO "be early to invest," no returns/FOMO-as-money, no "join investors," no token-buy language, no countdown. Sell UNDERSTANDING of the industry, not upside. Disclosures (educational/not financial advice + author's stake) by every CTA.
 
 > **Tone laws (pass/fail):** no exclamation points; named people not "experts"; every term defined inline; "you" present; report-don't-sell (calm flat authority). Spine hook holds the open loop — mechanism not resolved in the hero.
 
@@ -89,7 +89,7 @@
 - **Eyebrow:** Why this is different
 - **Headline:** Leave the gold in the ground, and the fight ends.
 - **Body:** Gold mining is one of the most combative industries on earth — every new mine pits the company against the community, the jobs against the river. Someone always loses, so someone always fights back, and that fight is what kills mines: it shut down a ten-billion-dollar mine in thirty-nine days. Leave the gold where it is and the source of the fight is gone. The miner can monetize a verified asset without the cost or risk of digging. The government collects a royalty with no ruin to clean up after. The community keeps its water and still earns from the gold beneath it. The land stays whole. No one has to lose for gold to be worth what it is.
-- *VSL map:* the everyone-wins / positive-sum differentiator (Ch 5 stakeholder + Ch 8). **Major de-risk:** the VSL's Beat 8 climax — "the only question left is whether you are early or late" — and its "this is unstoppable / be early" energy are REMOVED entirely. That is the single hottest early-mover-investment line in the script and is exactly the LemonSqueezy trigger. The page lands the beat on the *structural* point (no enemy, everyone wins) and stops there. No "early or late," no inevitability-as-buy-signal.
+- *VSL map:* the everyone-wins / positive-sum differentiator (Ch 5 stakeholder + Ch 8). **Major de-risk:** the VSL's Beat 8 climax — "the only question left is whether you are early or late" — and its "this is unstoppable / be early" energy are REMOVED entirely. That is the single hottest early-mover-investment line in the script and is exactly the Whop trigger. The page lands the beat on the *structural* point (no enemy, everyone wins) and stops there. No "early or late," no inevitability-as-buy-signal.
 
 ---
 
@@ -149,7 +149,7 @@
 - **Body:** Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97, in exchange for an honest review — and it is the whole map of a six-thousand-year-old asset changing form, written by the person who ran a gold company at the center of it. You get the complete book, delivered digitally the moment you check out.
 - **Guarantee:** Take a full year with it. Read every page, twice if you like. If it does not change the way you see gold and where this is heading, ask any time in the next twelve months and you get every cent back — and keep the book. The risk is entirely ours.
 - **CTA:** Get the book — $37
-- **Fine print:** Secure checkout via LemonSqueezy. Educational content — not financial advice.
+- **Fine print:** Secure checkout via Whop. Educational content — not financial advice.
 - *VSL map:* the calm risk-reversal close and the "price of a book vs a research report" value frame. **Major de-risk:** the VSL's entire evergreen-urgency close — "early has always been cheaper," "its value nearly doubled while people reserved," "late capital pays full price," "position yourself before the crowd arrives" — is REMOVED. Every one of those is a price-appreciation / early-mover-investment cue. The page closes on the guarantee and the value-of-understanding frame only. No urgency device, real or manufactured (and no dated catalyst — V3 carries no July 8 line, since its whole frame is understanding, not timing).
 
 ---
@@ -170,7 +170,7 @@
 - Carrying cost: ~$7,726 drained on a $100k position over 20 years in a ~0.40% gold ETF (Ch 13).
 - Team: former U.S. SEC chief of staff (Mark Radke); former Barrick chief innovation officer (Michelle Ash) (Ch 9). Ten patent-pending applications under USPTO examination (Ch 9/11/14) — **never "patented."**
 - Author bio: President of Great Eagle Gold, now NatBridge Resources; 200+ projects; Chocó 2020 (preface, Ch 9, Disclosures). Author's stake + "not financial advice" (Disclosures — mandatory keep).
-- $37 early-reader launch price (rising to the regular $97); 12-month money-back guarantee; LemonSqueezy (offer table).
+- $37 early-reader launch price (rising to the regular $97); 12-month money-back guarantee; Whop (offer table).
 
 **[NEEDS VERIFICATION] — open flags (route to dgb-fact-verifier):**
 1. `[VERIFY]` **$22T** figure + as-of framing intact at publish (Feb 26 2026, $5,194/oz).

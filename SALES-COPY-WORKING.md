@@ -33,7 +33,7 @@ The VSL (sales video) is separate and **not** part of this work.
 
 ## 2. ⚠️ COMPLIANCE — read before touching a single line
 
-We are getting the book approved for payment processing with **LemonSqueezy**. LemonSqueezy is a **Merchant of Record** — they take legal responsibility for every sale, so they **review the store and the copy** before approving. Their compliance team reads sales pages hunting for anything that looks like an **investment pitch, a "get rich" promise, or a crypto/token sale.**
+We are getting the book approved for payment processing with **Whop**. Whop is a **Merchant of Record** — they take legal responsibility for every sale, so they **review the store and the copy** before approving. Their compliance team reads sales pages hunting for anything that looks like an **investment pitch, a "get rich" promise, or a crypto/token sale.**
 
 **The product is an information product — a BOOK about the digital gold mining *industry*. It is NOT an investment, NOT a token, NOT financial advice. We sell KNOWLEDGE, not upside.** Every line must respect that.
 
@@ -51,9 +51,9 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 - ✅ (author-stake line REMOVED per author directive 2026-07-02 — the stake disclosure lives in the book only; do NOT add it to website or video copy. This supersedes the earlier "author's honest disclosure" rule on this line.)
 - ✅ Clear product + delivery: a **digital book**, delivered instantly on checkout.
 - ✅ A plain **refund/guarantee** line (processors want clear refund terms). [confirm window — see flags]
-- ✅ "Secure checkout via LemonSqueezy."
+- ✅ "Secure checkout via Whop."
 
-> **CONFIRMED BY LEMONSQUEEZY (2026-06-30, email from Monalisa, LS support):** *"As a platform supporting digital content, we allow the sale of eBooks and informational products like yours. Since you are selling purely information and analysis about the tokenization industry — and are not selling the digital assets or tokens directly — your product aligns with our Terms of Service and Prohibited Products list."* → Our "sell the knowledge, not the asset" framing is the approved approach. The compliance rules above are exactly what keeps us inside that line — hold them.
+> **CONFIRMED BY Whop (2026-06-30, email from Monalisa, LS support):** *"As a platform supporting digital content, we allow the sale of eBooks and informational products like yours. Since you are selling purely information and analysis about the tokenization industry — and are not selling the digital assets or tokens directly — your product aligns with our Terms of Service and Prohibited Products list."* → Our "sell the knowledge, not the asset" framing is the approved approach. The compliance rules above are exactly what keeps us inside that line — hold them.
 >
 > **They asked for two things to submit the application:** (1) a **sample/preview of the ebook**, (2) the **pricing model**. Both prepared — see the build note + pricing model below.
 
@@ -135,7 +135,7 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 - **Body:** Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, I'm asking the first readers for an honest review. You get the complete book, delivered digitally the moment you check out.
 - **Guarantee:** If the book is not worth your time, email us within 12 months for a full refund. No questions asked.
 - **CTA:** Get the book — $37
-- **Fine print:** Secure checkout via LemonSqueezy. Educational content — not financial advice.
+- **Fine print:** Secure checkout via Whop. Educational content — not financial advice.
 
 ---
 
@@ -157,15 +157,15 @@ We are getting the book approved for payment processing with **LemonSqueezy**. L
 
 | Item | Price | CTA | Notes |
 |---|---|---|---|
-| **Digital Gold Boom (the book)** | **$37 one-time** (early-reader launch price, rising to the regular **$97**) | Get the book — $37 | Digital delivery, instant. **12-month money-back guarantee.** Offered at $37 in exchange for an honest review; list price $97 set in LemonSqueezy. The ONLY product on these sales pages for now. |
+| **Digital Gold Boom (the book)** | **$37 one-time** (early-reader launch price, rising to the regular **$97**) | Get the book — $37 | Digital delivery, instant. **12-month money-back guarantee.** Offered at $37 in exchange for an honest review; list price $97 set in Whop. The ONLY product on these sales pages for now. |
 | **Industry Intelligence newsletter** | **$199 / year → tiering up to $999 / year** | — | **PLANNED product #2** — recurring subscription. **Founding-member pricing:** starts at $199/yr and steps up toward $999/yr as the member base passes set thresholds (**early members lock $199 for life** — confirm grandfathering in LS). Add AFTER the book is approved. See compliance note below. |
 | ~~The Primer ($99)~~ | — | — | OFF the page for now. |
 
 **Why one product first:** direct-response rule — one page, one decision, one button converts best, and a single clean info-product is the easiest thing for the processor to approve. Add the newsletter (and any other upsell) as a separate step once the book clears.
 
-**Newsletter compliance note (carries the same LS rule):** sellable as an information/analysis subscription ONLY. It must stay **industry news + analysis** ("industry intelligence") and must NOT give buy/sell or investment guidance, price targets, picks, signals, or any promise of returns — that would turn it into regulated financial advice. Same disclosures apply (educational, not financial advice + author's stake). Describe it to LemonSqueezy the same way the book was described before listing it.
+**Newsletter compliance note (carries the same LS rule):** sellable as an information/analysis subscription ONLY. It must stay **industry news + analysis** ("industry intelligence") and must NOT give buy/sell or investment guidance, price targets, picks, signals, or any promise of returns — that would turn it into regulated financial advice. Same disclosures apply (educational, not financial advice + author's stake). Describe it to Whop the same way the book was described before listing it.
 
-**Newsletter pricing model (founding-member / tiered):** $199/yr now, stepping up toward $999/yr as the member base passes set thresholds. Two rules: (1) frame the rising price as **early-member pricing for the newsletter** — never as "get in early on the opportunity"/investment timing (that re-introduces the trigger we stripped from the book page); (2) the threshold price-rise must be **real** (driven by real member counts), not a fake countdown. **Author decision (locked):** early members **lock their $199/yr rate for life** (as long as they stay subscribed). Mechanic: LemonSqueezy keeps each subscriber on the billing price they joined on (their plan variant) — new price for new members, existing members unchanged. That IS the grandfathering; no extra work beyond setting a new price/variant at each threshold.
+**Newsletter pricing model (founding-member / tiered):** $199/yr now, stepping up toward $999/yr as the member base passes set thresholds. Two rules: (1) frame the rising price as **early-member pricing for the newsletter** — never as "get in early on the opportunity"/investment timing (that re-introduces the trigger we stripped from the book page); (2) the threshold price-rise must be **real** (driven by real member counts), not a fake countdown. **Author decision (locked):** early members **lock their $199/yr rate for life** (as long as they stay subscribed). Mechanic: Whop keeps each subscriber on the billing price they joined on (their plan variant) — new price for new members, existing members unchanged. That IS the grandfathering; no extra work beyond setting a new price/variant at each threshold.
 
 ### Newsletter pricing tiers — TO DISPLAY on the page
 The page must **show the tier ladder**. Price **scales with TOTAL member count**: as the whole membership crosses thresholds, the price for NEW members steps up ($199 → … → $999). Each member stays locked at their join price.
@@ -196,7 +196,7 @@ Nothing below is approved as fact yet. Confirm each, then delete the flag.
 4. **The "$1B case study" (Cahuilla)** — given the real-world resource status, confirm how this is described on a *public sales page* before publishing.
 5. **Author bio** — "200+ projects," "first NatGold supply agreement," company names — confirm exact wording.
 6. **Convergence numbers** ($13T / $2T / 1.8B) — source each or cut the cards.
-7. **Refund window** — **12 months** (author-set). Confirm it's operationally honored + set in LemonSqueezy.
+7. **Refund window** — **12 months** (author-set). Confirm it's operationally honored + set in Whop.
 8. **Any surviving "$469M / 17,466 / 162"** — only as reported facts, never as "join them and invest."
 
 ---
@@ -206,7 +206,7 @@ Nothing below is approved as fact yet. Confirm each, then delete the flag.
 1. **Structure first, copy second.** You can wire Page B and adjust Page A layout now; paste copy from sections 4–5 as it locks.
 2. **Every CTA → checkout for the book (the $37 early-reader launch price, rising to the regular $97).** Remove all email-capture / waitlist forms from these two sales pages. (Email capture can live elsewhere, not on the buy pages.)
 3. **Do not publish any line still carrying a `[VERIFY]` flag.** Leave it as placeholder text or hold the section.
-4. **Keep the compliance lines** (educational disclaimer + author stake + LemonSqueezy checkout) on both pages.
+4. **Keep the compliance lines** (educational disclaimer + author stake + Whop checkout) on both pages.
 5. **Split test:** serve Page A and Page B and track checkout conversion per page. (Confirm the test tool with Andrew.)
 6. **Questions / changes:** edit this file inline and flag Andrew. This is the working doc — keep it current.
 
@@ -217,7 +217,7 @@ Nothing below is approved as fact yet. Confirm each, then delete the flag.
 - **v1.3 — 2026-07-02** — HERO VIDEO SCRIPT (~95s, first fold of /s) added to `SALES-COPY-COLD-S-2026-07-02.md` — upgraded from the author's draft; three MUST-STRIP lines removed ("biggest gold rush", "before Wall Street", "love money"), token-venue ad reframed as news (July 8 beat marked EXPIRING with post-launch swap), SEC/Barrick people named (Radke, Ash), $22T + Donlin $1B proof beat added. BEAT 3B (team + patents + $469M reservations) added to the /s page by author decision under the reported-fact framing + press-release link. Fact-verifier still pending author prose sign-off.
 - **v1.2 — 2026-07-02** — COLD-TRAFFIC page rewritten fresh under the forensic-read rule (full Ch 1–17 + front matter read this session) → `SALES-COPY-COLD-S-2026-07-02.md`. Built for viral-content arrivals: message-match hero (3 swap variants keyed to the viral hook families), one-breath loop-deepener + $22T callout, insider-credibility beat, "last chapter argues against the book" trust beat, $37→$97 close. $469M/17,466/162 kept OFF the cold page (compliance). July 8 urgency line marked EXPIRING (remove after launch). Chapter count = 17/2 sections (the FRESH 2026-07-01 file still says "23 chapters" in two closes — do not ship those lines). Routed to dgb-copy-chief; fact-verifier waits for author sign-off.
 - **v0.1 — 2026-06-30** — First working draft. Compliance pivot (sell the book, not the investment); $17-only offer; long + short beat maps and draft copy; fact-flags listed. Copy NOT yet fact-verified or final-graded.
-- **v0.2 — 2026-06-30** — LemonSqueezy confirmed the framing (info/analysis about the industry, not selling tokens). Guarantee set to **12 months**. Added **newsletter ($199/yr)** as planned product #2 with its compliance note (analysis-only, no investment advice). LS asked for a sample + pricing model to submit (both prepared).
+- **v0.2 — 2026-06-30** — Whop confirmed the framing (info/analysis about the industry, not selling tokens). Guarantee set to **12 months**. Added **newsletter ($199/yr)** as planned product #2 with its compliance note (analysis-only, no investment advice). LS asked for a sample + pricing model to submit (both prepared).
 - **v0.3 — 2026-06-30** — Newsletter pricing = **founding-member tiered**: $199/yr stepping up toward $999/yr at member thresholds. Added pricing-framing compliance rule (early-member pricing, not invest-early) + grandfathering operational TODO. Open Q to author: do early members lock $199 for life, or move up over time?
 - **v0.4 — 2026-06-30** — Author decision: early newsletter members **lock $199/yr for life**. Clean sample PDF built for LS (no watermark, placeholder Foreword + ISBN-TODO removed).
 - **v1.1 — 2026-07-01** — Copy structure CORRECTED: book is 2 sections / 17 ch (not 4) — "what's inside" fixed on /v1 + /s, the erroneous Cahuilla "case-study section" removed. Clarified: **Cahuilla + Friday Gold Mines are the two real projects in Ch 15** (Section 2) — author decision: NAME BOTH on the public pages as compliant proof (no $/outcome). Added them to /v1 (Why-now) + /s. **V3 written** (VSL-based long, from `_video-production/DGB-VSL-script.md` v5) → `SALES-COPY-v3.md`, de-risked for compliance, names both projects. Three versions to compare: /v1, /s, /v3. NOT yet copy-chief-graded / fact-verified (V3 has 7 open flags). Design specs need re-sync to the corrected structure + a V3 spec.

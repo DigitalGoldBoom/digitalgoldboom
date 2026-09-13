@@ -5,7 +5,7 @@ import "./cine.css";
 
 /**
  * /film — the cinematic 3D-scroll page: six Seedance clips scrubbed as canvas
- * frame sequences, nine beats, one product — the book at $37 via LemonSqueezy.
+ * frame sequences, nine beats, one product — the book at $37 via Whop.
  * The hero of the story is THE NEW INDUSTRY; the NatGold Token ("NATG") is
  * named, never sold. No nav, no footer, no external link — the only way out
  * is the buy button.

@@ -15,17 +15,17 @@
 
 # PAGE 1 — `/affiliates`
 
-> **⚠️ CASH-ONLY REWORK — 2026-07-01 (supersedes the prior cash→NATG ladder spec).** Author decision: affiliates are paid **cash commission only — NO NATG tokens.** Tracking + payouts run on **LemonSqueezy's native, built-in affiliate program** (free; affiliates sign up through LS, get a unique link + their own dashboard, and are paid by wire on LS's schedule). The whole cash → 50%-NATG → 100%-NATG view-target ladder is **REMOVED**. The page's single job is now: get a good promoter to **sign up as a LemonSqueezy affiliate** to promote the book (the $37 early-reader launch price, rising to the regular $97) and earn a cash commission on every sale they refer. The `/mining-industry` section of this file is unchanged.
+> **⚠️ CASH-ONLY REWORK — 2026-07-01 (supersedes the prior cash→NATG ladder spec).** Author decision: affiliates are paid **cash commission only — NO NATG tokens.** Tracking + payouts run on **Whop's native, built-in affiliate program** (free; affiliates sign up through LS, get a unique link + their own dashboard, and are paid by wire on LS's schedule). The whole cash → 50%-NATG → 100%-NATG view-target ladder is **REMOVED**. The page's single job is now: get a good promoter to **sign up as a Whop affiliate** to promote the book (the $37 early-reader launch price, rising to the regular $97) and earn a cash commission on every sale they refer. The `/mining-industry` section of this file is unchanged.
 
 ## Conversion goal + audience (design to THIS, not the book funnel)
 
 - **Audience:** potential affiliates / promoters — creators, finance/crypto social accounts, newsletter writers, anyone with a following who could share the book. Fast-scrolling, skeptical of "earn money" pitches (they've seen a hundred affiliate programs); they convert on *legit, specific, low-friction*.
-- **Conversion goal:** ONE action — **become a LemonSqueezy affiliate** (click through to the LS affiliate signup, `[WIRE: LS affiliate signup link]`). LS is where the account, the unique link, and the dashboard live — so the real conversion is the click to LS, not an on-site form. **Optional lighter-touch variant:** a ONE-field (email) interest capture *before* LS onboarding for promoters who want to be walked through it — lowest friction, secondary to the LS click (see §A6).
+- **Conversion goal:** ONE action — **become a Whop affiliate** (click through to the Whop affiliate signup, `[WIRE: Whop affiliate signup link]`). LS is where the account, the unique link, and the dashboard live — so the real conversion is the click to LS, not an on-site form. **Optional lighter-touch variant:** a ONE-field (email) interest capture *before* LS onboarding for promoters who want to be walked through it — lowest friction, secondary to the LS click (see §A6).
 - **The emotional job:** "this is a real, clean commission program from a serious operator — I get my own link, it tracks itself, and I get paid. Worth my audience." Legit and straightforward, never get-rich hype.
 
 ## ⚠️ COMPLIANCE LANE (cash referral reward — read before designing)
 
-This page now sits in the SAME clean lane as the book: it is a **referral REWARD program** — earn a cash commission for sales you drive — run on LemonSqueezy's own affiliate feature. The hard line:
+This page now sits in the SAME clean lane as the book: it is a **referral REWARD program** — earn a cash commission for sales you drive — run on Whop's own affiliate feature. The hard line:
 
 - It is a **commission for sales referred**, stated as a **percentage of the sale**. NEVER framed as an investment, returns, yield, income projection, "passive income," "earn $X/month," or any token/price upside. No NATG anywhere on this page.
 - State the reward as **"earn [WIRE: commission %, up to 30%] of every sale you refer"** — a percentage of sales, NOT a dollar income you "could make." No "you could earn $___" projections.
@@ -40,55 +40,55 @@ This page now sits in the SAME clean lane as the book: it is a **referral REWARD
 
 ## 🟡 READY-TO-PASTE CASH-ONLY COPY BLOCK (the whole page)
 
-> Plain, calm brand voice — no exclamation points, named/specific, report-don't-sell. `[WIRE]` = LemonSqueezy generates/owns the value once the program is enabled. Drop straight into the page; the section specs below say where each block sits.
+> Plain, calm brand voice — no exclamation points, named/specific, report-don't-sell. `[WIRE]` = Whop generates/owns the value once the program is enabled. Drop straight into the page; the section specs below say where each block sits.
 
 **HERO**
 - **Eyebrow:** Share the book, earn a commission
 - **Headline:** Promote the book. <gold>Earn cash</gold> on every sale you refer.
-- **Subhead:** Sign up as a LemonSqueezy affiliate, get your own link, and earn a commission on every copy of Digital Gold Boom it sells. Tracked automatically. Paid by wire, straight from LemonSqueezy.
-- **CTA:** Become an affiliate → `[WIRE: LS affiliate signup link]`
-- **Disclosure (small, under CTA):** This is a paid affiliate program: when someone buys the book through your link, you earn a commission on that sale. Tracking and payouts are handled by LemonSqueezy. See our [Disclaimer](/disclaimer) and [Terms](/terms).
+- **Subhead:** Sign up as a Whop affiliate, get your own link, and earn a commission on every copy of Digital Gold Boom it sells. Tracked automatically. Paid by wire, straight from Whop.
+- **CTA:** Become an affiliate → `[WIRE: Whop affiliate signup link]`
+- **Disclosure (small, under CTA):** This is a paid affiliate program: when someone buys the book through your link, you earn a commission on that sale. Tracking and payouts are handled by Whop. See our [Disclaimer](/disclaimer) and [Terms](/terms).
 
 **THE COMMISSION (replaces "Three ways to earn")**
 - **Eyebrow:** How the commission works
 - **Headline:** One link. One rate. <gold>Paid on every sale.</gold>
-- **Body:** You earn [WIRE: commission %, up to 30%] of the price on every copy of the book your link sells — the same rate on the first sale and the thousandth. There are no tiers to chase and no targets to hit. LemonSqueezy tracks each sale to your link and adds your commission to your balance.
+- **Body:** You earn [WIRE: commission %, up to 30%] of the price on every copy of the book your link sells — the same rate on the first sale and the thousandth. There are no tiers to chase and no targets to hit. Whop tracks each sale to your link and adds your commission to your balance.
 - **3 clean facts (earn-structure diagram, NOT a ladder):**
   - **Your rate** — [WIRE: commission %] of every sale, flat.
-  - **Tracked for you** — every sale through your link is counted automatically by LemonSqueezy.
-  - **Paid by wire** — your balance is paid out on LemonSqueezy's regular schedule [VERIFY cadence], direct to your account.
-- **Caption:** The exact commission rate and payout details are set in LemonSqueezy and shown to you when you sign up.
+  - **Tracked for you** — every sale through your link is counted automatically by Whop.
+  - **Paid by wire** — your balance is paid out on Whop's regular schedule [VERIFY cadence], direct to your account.
+- **Caption:** The exact commission rate and payout details are set in Whop and shown to you when you sign up.
 
 **HOW IT WORKS (4 steps)**
-1. **Sign up as an affiliate** — Create your free affiliate account with LemonSqueezy. Takes a couple of minutes.
-2. **Get your link** — LemonSqueezy gives you a unique link and your own dashboard to track clicks and sales.
+1. **Sign up as an affiliate** — Create your free affiliate account with Whop. Takes a couple of minutes.
+2. **Get your link** — Whop gives you a unique link and your own dashboard to track clicks and sales.
 3. **Share it where your people are** — Post your link anywhere you reach an audience — social, newsletter, video, bio.
-4. **Get paid** — Every sale through your link earns you a commission, paid out by wire from LemonSqueezy.
+4. **Get paid** — Every sale through your link earns you a commission, paid out by wire from Whop.
 
 **AFFILIATE TOOLKIT (gated — unchanged perk, cash framing)**
 - **Eyebrow:** Affiliate toolkit
 - **Headline:** We give you everything to post with.
 - **Body:** The hardest part of sharing is making something good. Sign up and get a kit of ready-made mining footage, images, captions, and post templates — so your posts do the work for you.
-- **CTA:** Become an affiliate → `[WIRE: LS affiliate signup link]`
+- **CTA:** Become an affiliate → `[WIRE: Whop affiliate signup link]`
 
 **FAQ**
 - **Q: How much do I earn?** — You earn [WIRE: commission %, up to 30%] of the price on every copy sold through your link. The exact rate is shown when you sign up.
-- **Q: How are sales tracked?** — LemonSqueezy tracks every click and sale tied to your unique link, in your own dashboard. You don't have to manage anything.
-- **Q: How and when do I get paid?** — LemonSqueezy pays your commission balance by wire on its regular payout schedule, after its standard holding period. [VERIFY exact cadence + holding period + any minimum payout against current LS docs.]
+- **Q: How are sales tracked?** — Whop tracks every click and sale tied to your unique link, in your own dashboard. You don't have to manage anything.
+- **Q: How and when do I get paid?** — Whop pays your commission balance by wire on its regular payout schedule, after its standard holding period. [VERIFY exact cadence + holding period + any minimum payout against current Whop docs.]
 - **Q: Do I need to own crypto?** — No. This is a straightforward cash commission for selling a $37 book. No crypto, no wallet, nothing token-related.
-- **Q: What does it cost me?** — Nothing. Signing up as a LemonSqueezy affiliate is free.
-- **Q: What counts as a valid sale?** — A real purchase made through your link. LemonSqueezy handles the attribution and the standard rules; you'll see them when you sign up.
+- **Q: What does it cost me?** — Nothing. Signing up as a Whop affiliate is free.
+- **Q: What counts as a valid sale?** — A real purchase made through your link. Whop handles the attribution and the standard rules; you'll see them when you sign up.
 
 **SIGNUP (the conversion event)**
 - **Heading:** Get your link and start earning.
-- **Body:** Sign up as a LemonSqueezy affiliate, grab your unique link, and earn a commission on every copy you sell. Free to join, tracked automatically, paid by wire.
-- **Primary CTA:** Become an affiliate → `[WIRE: LS affiliate signup link]`
+- **Body:** Sign up as a Whop affiliate, grab your unique link, and earn a commission on every copy you sell. Free to join, tracked automatically, paid by wire.
+- **Primary CTA:** Become an affiliate → `[WIRE: Whop affiliate signup link]`
 - **Optional lighter-touch (one field):** *Prefer we walk you through it? Leave your email and we'll send the steps.* [single email field → existing `/api/subscribe`, `source:"affiliate-interest"`]
 
 **FINAL CTA**
 - **Headline:** Help people find the book. Earn for every copy you sell.
 - **Body:** If your audience would want Digital Gold Boom, your link turns that into a commission on every sale.
-- **CTA:** Become an affiliate → `[WIRE: LS affiliate signup link]`
+- **CTA:** Become an affiliate → `[WIRE: Whop affiliate signup link]`
 
 ---
 
@@ -98,7 +98,7 @@ This page now sits in the SAME clean lane as the book: it is a **referral REWARD
 
 **VERDICT: ADD (register port + one focal lift) + COPY SWAP to cash-only — high priority.**
 
-**VISUAL CONCEPT** — Same calm composition, lifted to the premium brand register and re-pointed at the cash program. The `<h1>` becomes `v2-display` scale with the gold accent on "Earn cash"; the eyebrow becomes `v2-eyebrow` (the gold tick-line lead-in); one soft gold light sits behind the headline (the VaultShell radial is already there — nudge a second, tighter glow behind the CTA so the button is the brightest pixel). The CTA now goes OUT to LemonSqueezy, not to an on-page `#join`.
+**VISUAL CONCEPT** — Same calm composition, lifted to the premium brand register and re-pointed at the cash program. The `<h1>` becomes `v2-display` scale with the gold accent on "Earn cash"; the eyebrow becomes `v2-eyebrow` (the gold tick-line lead-in); one soft gold light sits behind the headline (the VaultShell radial is already there — nudge a second, tighter glow behind the CTA so the button is the brightest pixel). The CTA now goes OUT to Whop, not to an on-page `#join`.
 
 **LAYOUT** — Keep centered, `max-w-[860px]`. Eye-path: eyebrow → big headline (gold "Earn cash" is the hook) → one-line sub (own link, tracked, paid by wire) → **CTA button (brightest element) → LS signup** → disclosure (small, calm). Replace the bespoke `<h1>` inline styles with `v2-display`; replace `eyebrow` with `v2-eyebrow`; CTA ports to `v2-btn` for the sharper gold fill — keep that one button style across the page.
 
@@ -130,9 +130,9 @@ This page now sits in the SAME clean lane as the book: it is a **referral REWARD
 
 **LAYOUT** — Three equal `v2-tile`s in a row (stacked on phone), connected by one thin gold hairline through their centers. Each tile carries a short label + one plain line:
 1. **Your rate** — [WIRE: commission %] of every sale, flat.
-2. **Tracked for you** — every sale through your link counted automatically by LemonSqueezy.
-3. **Paid by wire** — your balance paid out on LemonSqueezy's schedule [VERIFY], direct to your account.
-Heading above: "One link. One rate. Paid on every sale." Caption below: the exact rate + payout details are set in LemonSqueezy and shown at signup. **No `StatusChip`s** (nothing is "not live" anymore — the program opens when the book is on sale).
+2. **Tracked for you** — every sale through your link counted automatically by Whop.
+3. **Paid by wire** — your balance paid out on Whop's schedule [VERIFY], direct to your account.
+Heading above: "One link. One rate. Paid on every sale." Caption below: the exact rate + payout details are set in Whop and shown at signup. **No `StatusChip`s** (nothing is "not live" anymore — the program opens when the book is on sale).
 
 **IMAGERY** —
 - ROUTE: **visual-strategist / code-only** — three tiles + a flat gold connector, all text drawn in HTML (no baked text). **NOT a chart. NOT a ladder. NOT a returns/price line.** It is a labelled, flat reward *structure*.
@@ -182,7 +182,7 @@ Heading above: "One link. One rate. Paid on every sale." Caption below: the exac
 
 **VERDICT: LEAVE AS-IS (visual) + register port + retarget the CTA to LS.**
 
-**RATIONALE** — The locked-card pattern still does the "sign up to unlock" job honestly without faking contents — the correct conversion move (curiosity gap → CTA). The only changes are mechanical: port card type to the v2 register, and point the CTA at the LS signup (`[WIRE: LS affiliate signup link]`) instead of an on-page `#join`. Copy stays as in the block above (drop any "view targets" phrasing — the kit now just helps you post well, full stop).
+**RATIONALE** — The locked-card pattern still does the "sign up to unlock" job honestly without faking contents — the correct conversion move (curiosity gap → CTA). The only changes are mechanical: port card type to the v2 register, and point the CTA at the LS signup (`[WIRE: Whop affiliate signup link]`) instead of an on-page `#join`. Copy stays as in the block above (drop any "view targets" phrasing — the kit now just helps you post well, full stop).
 
 **PUSHBACK (minor):** the toolkit is a genuine sign-up driver. When `dgb-cinematographer` delivers real B-roll, REVISIT: a single muted ≤6s B-roll loop behind a "preview" frame (kit still gated) would lift sign-up — spec as a follow-up once the asset exists. Do not build on a placeholder.
 
@@ -194,7 +194,7 @@ Heading above: "One link. One rate. Paid on every sale." Caption below: the exac
 
 A `<dl>` is the right scannable, SEO-friendly pattern and does the objection-clearing work. The current Q&As are about NATG, view-target verification, and wallets — all now obsolete. Swap to the FAQ block above (earnings = % of sale; tracking = LS dashboard; payout = LS wire on its schedule; no crypto needed; free to join; valid-sale = real purchase through your link). Recommend the engineer make it an accessible accordion (collapsed by default on mobile) to shorten the scroll to the signup CTA.
 
-> **[VERIFY] — LS payout facts:** the "how/when do I get paid" answer must match current LemonSqueezy docs. Per LS docs as read 2026-07-01, affiliate commissions are held ~30 days then paid **bi-monthly (around the 14th and 28th)** by wire, in many countries, minus minor processing/FX fees — i.e. **the brief's "paid monthly by wire" is close but not exact (it's bi-monthly).** State LS's actual cadence and holding period; do not invent a number. Merchant also sets commission %, cookie/attribution type, and any minimum payout in the LS dashboard — confirm the configured values before they appear as copy.
+> **[VERIFY] — LS payout facts:** the "how/when do I get paid" answer must match current Whop docs. Per Whop docs as read 2026-07-01, affiliate commissions are held ~30 days then paid **bi-monthly (around the 14th and 28th)** by wire, in many countries, minus minor processing/FX fees — i.e. **the brief's "paid monthly by wire" is close but not exact (it's bi-monthly).** State LS's actual cadence and holding period; do not invent a number. Merchant also sets commission %, cookie/attribution type, and any minimum payout in the LS dashboard — confirm the configured values before they appear as copy.
 
 ---
 
@@ -204,7 +204,7 @@ A `<dl>` is the right scannable, SEO-friendly pattern and does the objection-cle
 
 **VERDICT: REWORK — make the primary action the LS-signup click; demote the form to an optional ONE-field fallback. This is THE conversion moment; make it the visual climax.**
 
-**VISUAL CONCEPT** — The page's gold thread *resolves here* in a lit "destination panel" (the `.cta-card` / `v2-tile` lit-edge language) on the deepest dark ground, brightest gold glow behind it. Inside the panel: the heading, one line, and the **primary `v2-btn` → LemonSqueezy signup** as the single brightest element. Below it, small and clearly secondary, the optional one-field email capture for promoters who want to be walked through onboarding.
+**VISUAL CONCEPT** — The page's gold thread *resolves here* in a lit "destination panel" (the `.cta-card` / `v2-tile` lit-edge language) on the deepest dark ground, brightest gold glow behind it. Inside the panel: the heading, one line, and the **primary `v2-btn` → Whop signup** as the single brightest element. Below it, small and clearly secondary, the optional one-field email capture for promoters who want to be walked through onboarding.
 
 **LAYOUT** — Centered `max-w-[520px]`, wrapped in a gold-top-ruled panel (the one repeated accent). Order: heading (v2 register) → one-line body → **primary CTA button → LS signup** → a thin divider → "Prefer we walk you through it?" + a **single email input + small submit** (the optional fallback). The big LS button dominates; the email line is visibly the lighter option.
 
@@ -212,7 +212,7 @@ A `<dl>` is the right scannable, SEO-friendly pattern and does the objection-cle
 
 **MOTION** — Panel + contents reveal-up on scroll-in; one-shot subtle glow pulse on the panel edge when the thread arrives (≤1 cycle, then settle). **Reduced-motion:** static, panel pre-lit.
 
-**CONVERSION RATIONALE** — The real account/link/dashboard live on LemonSqueezy, so the highest-intent path is a direct click to LS — make that the brightest, most obvious action. Keeping a single-field email fallback (no handle, no wallet) catches promoters who want hand-holding without adding friction to the main path. Terminating the page spine at this panel tells the eye "this is the action."
+**CONVERSION RATIONALE** — The real account/link/dashboard live on Whop, so the highest-intent path is a direct click to LS — make that the brightest, most obvious action. Keeping a single-field email fallback (no handle, no wallet) catches promoters who want hand-holding without adding friction to the main path. Terminating the page spine at this panel tells the eye "this is the action."
 
 **RESPONSIVE** — Panel full-width on phone with comfortable padding; the LS button full-width and first in the thumb zone; the optional email input ≥44px tall, clearly below and lighter. Inputs and buttons meet touch-target size.
 
@@ -223,14 +223,14 @@ A `<dl>` is the right scannable, SEO-friendly pattern and does the objection-cle
 > **CONVERSION (non-visual) — FORM CHANGES (for the engineer + `dgb-conversion-analytics`):**
 > 1. **Remove the wallet field entirely** — it existed only for NATG payouts, which are gone. Leaving it would confuse and add friction.
 > 2. **Reduce the fallback to ONE field (email).** Drop the social-handle field too, or hide it behind an "(optional)" disclosure — the lowest-friction capture is email alone (brief requirement).
-> 3. **Re-point the primary CTA to `[WIRE: LS affiliate signup link]`** (external), and update the form's success copy away from "the program opens at launch / full rules" toward "we'll send you the steps to sign up."
+> 3. **Re-point the primary CTA to `[WIRE: Whop affiliate signup link]`** (external), and update the form's success copy away from "the program opens at launch / full rules" toward "we'll send you the steps to sign up."
 > 4. Keep the `track()` event but rename to reflect the new action (e.g. `affiliate_ls_signup_click` for the button, `affiliate_walkthrough_request` for the email). Final wiring is `dgb-conversion-analytics`.
 
 ---
 
 ## SECTION A7 — FINAL CTA  (maps to: lines 327–342)
 
-**VERDICT: COPY SWAP + LEAVE AS-IS (visual)** + register port + inherit the page-wide gold glow. Composition is already correct (centered, one repeated CTA, warm closing line). Replace the old "next gold rush / you found it early" copy with the cash-only close in the block above (find the book an audience → earn on every sale). CTA points to `[WIRE: LS affiliate signup link]`.
+**VERDICT: COPY SWAP + LEAVE AS-IS (visual)** + register port + inherit the page-wide gold glow. Composition is already correct (centered, one repeated CTA, warm closing line). Replace the old "next gold rush / you found it early" copy with the cash-only close in the block above (find the book an audience → earn on every sale). CTA points to `[WIRE: Whop affiliate signup link]`.
 
 > **COMPLIANCE / COPY (hard line):** the new close drops "next gold rush" and "early" — those leaned investment-timing. Keep it about *promoting and earning a commission*, never *getting in early on an opportunity*.
 
@@ -242,7 +242,7 @@ A `<dl>` is the right scannable, SEO-friendly pattern and does the objection-cle
 - **One accent move, repeated:** the flat gold thread (commission strip → step connector → resolves at the signup panel). It is the page's spine and its only "big" visual. **It must stay flat** — no rising/ladder/returns shape anywhere (that was the old NATG idea). Everything else stays calm dark + type.
 - **Section rhythm:** keep the existing alternating `--bg-canvas` / `--bg-surface` / `--bg-contrast` / `--bg-contrast-deep` bands; the v2 scope darkens them correctly.
 - **Scroll behavior:** house motion = reveal-up 60ms stagger on scroll-in; the thread draws on scroll; everything reduced-motion-safe.
-- **CTA discipline:** one CTA style (`v2-btn`), repeated (hero → toolkit → signup → final). **All point OUT to `[WIRE: LS affiliate signup link]`** — except the single optional email fallback in §A6, which posts on-site.
+- **CTA discipline:** one CTA style (`v2-btn`), repeated (hero → toolkit → signup → final). **All point OUT to `[WIRE: Whop affiliate signup link]`** — except the single optional email fallback in §A6, which posts on-site.
 
 ## `/affiliates` — ASSET LIST
 
@@ -259,9 +259,9 @@ A `<dl>` is the right scannable, SEO-friendly pattern and does the objection-cle
 
 ## `/affiliates` — OPEN QUESTIONS / PUSHBACK (A)
 
-1. **`[WIRE: LS affiliate signup link]` is the load-bearing dependency.** Every primary CTA on the page points to it, and LemonSqueezy only generates that URL once the affiliate program is **enabled** in the LS store dashboard. Enable the program and drop the real link in before this page can go live. (No on-site account/link building needed — LS owns all of it.)
+1. **`[WIRE: Whop affiliate signup link]` is the load-bearing dependency.** Every primary CTA on the page points to it, and Whop only generates that URL once the affiliate program is **enabled** in the LS store dashboard. Enable the program and drop the real link in before this page can go live. (No on-site account/link building needed — LS owns all of it.)
 2. **Commission % is a [WIRE] value.** The page says "[WIRE: commission %, up to 30%] of every sale." LS lets the merchant set this (flat or %, plus cookie/attribution type and any minimum payout). Set it in LS, then paste the real number — never publish a guessed rate.
-3. **Payout cadence is [VERIFY], not "monthly."** Per LS docs (read 2026-07-01) it's a ~30-day hold then **bi-monthly** wire payouts (≈14th/28th), minus minor fees. The brief said "monthly" — close but not exact. Match LS's current published terms in the FAQ.
+3. **Payout cadence is [VERIFY], not "monthly."** Per Whop docs (read 2026-07-01) it's a ~30-day hold then **bi-monthly** wire payouts (≈14th/28th), minus minor fees. The brief said "monthly" — close but not exact. Match LS's current published terms in the FAQ.
 4. **Optional one-field email capture — keep or cut?** The brief allows a lightweight email-interest capture *before* LS onboarding, one field only. Spec keeps it as a clearly-secondary fallback under the LS button. If the owner wants the absolute lowest-friction page, the LS click alone is enough — the email fallback is optional. Owner's call.
 5. **Toolkit B-roll** is a real future conversion lift but blocked on assets — deferred, not dropped.
 6. **NATG cleanup is global, not just visual.** Removing the ladder also means: delete the wallet field, the NATG `StatusChip`s, the "launching with the token" captions, and the page `metadata` description/keywords (currently sell "earn NATG" / "50% commission … purchase back in NATG"). Re-point all of it to the cash program. Flag (don't run): a `dgb-copy-chief` grade can follow if the author wants a conversion-power pass on the new copy.
@@ -442,7 +442,7 @@ This page is **not** a sale and **not** a token offer, so it's the lowest direct
 
 | | `/affiliates` | `/mining-industry` |
 |---|---|---|
-| **Conversion goal** | Sign up as a LemonSqueezy affiliate (click out to LS) | Become an early reviewer (contact/capture) |
+| **Conversion goal** | Sign up as a Whop affiliate (click out to LS) | Become an early reviewer (contact/capture) |
 | **Audience** | Promoters/creators with an audience (skeptical of "earn money" pitches) | Gold/mining pros (most skeptical on the site) |
 | **Design temperature** | Legit, clean, low-friction; one FLAT gold thread (no climbing) | Sober, documentary, peer-to-peer, restraint = conversion |
 | **Top visual move** | Flat cash-commission structure (replaces the NATG ladder) | Documentary drill-core hero anchor |

@@ -12,7 +12,7 @@ import type { SectionToken } from "./filmBus";
  * destination prop (the standing outbound event, same handler, before nav).
  */
 
-const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
+const checkoutUrl = process.env.NEXT_PUBLIC_WHOP_CHECKOUT_URL;
 
 export default function FilmCTA({
   section,
@@ -62,7 +62,7 @@ export default function FilmCTA({
         label={label}
         className={className}
         event={`${section}_outbound_buy`}
-        eventProps={{ destination: "lemonsqueezy" }}
+        eventProps={{ destination: "Whop" }}
       />
     </span>
   );

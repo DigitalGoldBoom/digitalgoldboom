@@ -5,7 +5,7 @@
 > **How this was made:** written by `dgb-funnel-copywriter` after a forensic read of the whole book → graded by `dgb-copy-chief` (conversion) → checked by `dgb-fact-verifier` (numbers). This file is the words to ship.
 > **Routes:** long → **`/v1`** · short → **`/s`**. Do NOT touch root until approved.
 > **Design:** build in the **v2 design system, elevated** — see `dgb-funnel-designer` for the visual/motion/3D build spec (separate deliverable). Desktop / tablet / mobile all required.
-> **Offer:** the book at the **$37 early-reader launch price** (rising to the regular **$97**), single CTA → LemonSqueezy checkout. 12-month money-back guarantee. No email/waitlist, no Primer/Updates on these pages.
+> **Offer:** the book at the **$37 early-reader launch price** (rising to the regular **$97**), single CTA → Whop checkout. 12-month money-back guarantee. No email/waitlist, no Primer/Updates on these pages.
 > **Compliance:** sells INFORMATION about the industry — not investment/tokens/advice. Keep "Educational — not financial advice" by every CTA (author-stake line REMOVED per author directive 2026-07-02 — disclosure lives in the book only).
 
 ---
@@ -76,7 +76,7 @@
 - Body: Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, I'm asking the first readers for an honest review. You get the complete book, delivered digitally the moment you check out — and the chance to understand this model before the first tokens trade on July 8, 2026.
 - Guarantee: If the book is not worth your time, email us within 12 months for a full refund. No questions asked.
 - CTA: Get the book — $37
-- Fine print: Secure checkout via LemonSqueezy. Educational content — not financial advice.
+- Fine print: Secure checkout via Whop. Educational content — not financial advice.
 
 ---
 

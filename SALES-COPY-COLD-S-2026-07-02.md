@@ -2,7 +2,7 @@
 
 > **Status:** BUILDER DRAFT — written by `dgb-funnel-copywriter` from a full forensic read this session (Ch 1–17 + Read This First + Ch 8 + preface + disclosures + live brief). Routed to `dgb-copy-chief` for the conversion grade. Fact-verifier runs after the author signs off on the prose (per standing rule).
 > **Traffic:** COLD social — arrives from viral content promoting the industry and the book. The page continues the video's open question; it never restarts the story.
-> **Offer:** the book at the $37 early-reader launch price (rising to the regular $97). One product, one button → LemonSqueezy checkout. 12-month money-back guarantee. No email capture, no waitlist.
+> **Offer:** the book at the $37 early-reader launch price (rising to the regular $97). One product, one button → Whop checkout. 12-month money-back guarantee. No email capture, no waitlist.
 > **Compliance:** sells INFORMATION about the industry — never an investment, token, or advice. "Educational — not financial advice" stays by every CTA (author-stake line REMOVED per author directive 2026-07-02 — disclosure lives in the book only).
 
 ---
@@ -62,7 +62,7 @@ The visitor just watched a video that opened a question and clicked to get the a
 - Body: Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, the first readers are asked for an honest review. The complete book is delivered digitally the moment you check out.
 - Guarantee: If the book is not worth your time, email within 12 months for a full refund. No questions asked.
 - CTA: Get the book — $37
-- Fine print: Secure checkout via LemonSqueezy. Educational content — not financial advice.
+- Fine print: Secure checkout via Whop. Educational content — not financial advice.
 
 ---
 
@@ -103,10 +103,10 @@ Sourced to the book this session (confirm to primary source at fact-verifier gat
 10b. Michelle Ash, chair of NatBridge Resources, former Chief Innovation Officer of Barrick Gold (world's largest gold miner at the time) — Ch 3 / Ch 9. [NEEDS VERIFICATION — exact current title]
 10c. Ten non-provisional patent APPLICATIONS in full examination at the USPTO — Ch 9 / Ch 11 (LANDMINE #5: never "patented"; always "applications in examination" or "patent-pending").
 10d. $469 million reserved / 17,466 people / 162 countries, before a single token traded, NO money changed hands — Ch 16, sourced to NatGold Digital closing press release, "NatGold Digital Closes Pre-Market Token Reservation Program with Global Demand Exceeding US$469M," PRNewswire + natgold.com, February 26, 2026 (LANDMINE #1: "reserved," never "raised/paid/invested"). Page links directly to this release as the source. COMPLIANCE: allowed ONLY in the reported-fact framing with the "what it does and does not prove" line attached — never as a reason for the reader to buy anything but the book.
-11. $37 early-reader price rising to $97; 12-month guarantee — live brief (offer locked). [NEEDS VERIFICATION — operational: set in LemonSqueezy and honored]
+11. $37 early-reader price rising to $97; 12-month guarantee — live brief (offer locked). [NEEDS VERIFICATION — operational: set in Whop and honored]
 12. July 8, 2026 first trading date — Ch 16/17 endnotes (used ONLY in the expiring line).
 
-Deliberately excluded (landmine avoidance): $124T, BIV as a price, any returns/"be early"/"before Wall Street" language. ($469M/17,466/162 and the patent applications were ADDED 2026-07-02 by author decision, in Beat 3B, under the reported-fact framing + press-release link — the compliant treatment. If LemonSqueezy ever pushes back on the page, Beat 3B's demand paragraph is the first thing to pull; the team + patents sentences carry no risk and stay.)
+Deliberately excluded (landmine avoidance): $124T, BIV as a price, any returns/"be early"/"before Wall Street" language. ($469M/17,466/162 and the patent applications were ADDED 2026-07-02 by author decision, in Beat 3B, under the reported-fact framing + press-release link — the compliant treatment. If Whop ever pushes back on the page, Beat 3B's demand paragraph is the first thing to pull; the team + patents sentences carry no risk and stay.)
 
 ---
 
@@ -295,7 +295,7 @@ FINE PRINT: Educational — not financial advice.
 
 ## HERO VIDEO — VERSION C: "A NEW INDUSTRY" (~86s, muted-safe, EVERGREEN) — CHAMPION CANDIDATE
 
-> The hero of this version is the INDUSTRY, not the thesis (V1) or the author (VB). Author appears only at 1:02 as the witness who wrote the record. This frame is also the compliance frame itself — LemonSqueezy approved "information and analysis about the industry"; a video whose subject is the industry being born IS the product. Fully evergreen.
+> The hero of this version is the INDUSTRY, not the thesis (V1) or the author (VB). Author appears only at 1:02 as the witness who wrote the record. This frame is also the compliance frame itself — Whop approved "information and analysis about the industry"; a video whose subject is the industry being born IS the product. Fully evergreen.
 
 ```
 [0:00–0:05]  HOOK

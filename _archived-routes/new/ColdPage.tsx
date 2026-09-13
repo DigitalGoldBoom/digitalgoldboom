@@ -17,7 +17,7 @@ import SWitness from "@/components/funnel/new/SWitness";
 import SClose from "@/components/funnel/new/SClose";
 import type { ColdVariant } from "@/components/funnel/new/variants";
 
-const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
+const checkoutUrl = process.env.NEXT_PUBLIC_WHOP_CHECKOUT_URL;
 
 /**
  * /new — the cold-traffic TEXT-ONLY sales page: "the descent to the proof".

@@ -482,7 +482,7 @@ export default function V3Funnel() {
                 event="v3_final_buy"
                 align="center"
                 regular="97"
-                fine="Secure checkout via LemonSqueezy. Educational content, not financial advice."
+                fine="Secure checkout via Whop. Educational content, not financial advice."
               />
             </div>
           </Reveal>

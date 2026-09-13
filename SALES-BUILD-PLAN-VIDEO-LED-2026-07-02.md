@@ -219,7 +219,7 @@ Frame: 16:9 reserved aspect box (zero CLS forever), 1px `--v2-line` border warmi
 - Full-bleed dawn mountain (baked warm). Interim until the render: the S1 mountain composite + a static warm gradient overlay (flagged, §7).
 - Contained column enters once at "top 75%": eyebrow → headline → panel → offer body → guarantee (check icon) → **primary CTA (lg, the page's biggest button)** → fine print; y 20→0 opacity, 500ms `expo.out`, stagger 80ms. CTA interactive from first paint of the section.
 - Price anchor micro-strip: "$37 today · ~~$97~~ regular" — static, quiet (`--v2-faint`), REAL price step only, no countdown, nothing animated.
-- Fine print exactly: "Secure checkout via LemonSqueezy. Educational content — not financial advice."
+- Fine print exactly: "Secure checkout via Whop. Educational content — not financial advice."
 - **Phone:** mountain as background at 40% + darkening overlay; text contrast ≥4.5:1 verified over the image; CTA full-width.
 - **Reduced-motion:** static warm composite, all content visible.
 

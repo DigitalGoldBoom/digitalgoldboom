@@ -34,7 +34,7 @@
 > 🚩 At migration time, vet the new tool's Acceptable-Use rules for **crypto/investment/fundraising
 > content** (Kit reviews such accounts case-by-case; Mailchimp has banned crypto senders). Not a
 > today problem — flagged for the migration decision.
-- Why Kit: the live code already talks to Kit (`/api/subscribe`, the LemonSqueezy webhook tags
+- Why Kit: the live code already talks to Kit (`/api/subscribe`, the Whop webhook tags
   buyers into Kit); it's author-grade and sells direct. Free up to 10,000 subscribers.
 - **Cost path (money-smart, DECIDED 2026-06-30):** START on Kit **FREE** ($0, up to 10,000 subs) —
   it captures emails and runs ONE simple welcome automation, which covers the newsletter welcome.
@@ -43,7 +43,7 @@
   only when it earns. Source: kit.com/pricing (fetched 2026-06-30). NOTE: free-plan exact sequence
   allowance reported inconsistently across sources (0 vs 1 sequence) — confirm inside the account.
 - Why NOT Beehiiv: its only real edge was a built-in referral/virality engine — now moot, because
-  the affiliate program runs on **LemonSqueezy's native affiliate system** (see §8), so we don't
+  the affiliate program runs on **Whop's native affiliate system** (see §8), so we don't
   need referral baked into the email tool.
 
 ---
@@ -114,7 +114,7 @@
 **Options:**
 - Direct PDF download (no gate) — simpler, less friction
 - Email-gated download — builds list, trackable
-- Gumroad / Lemon Squeezy — handles delivery, payments if needed later
+- Gumroad / Whop — handles delivery, payments if needed later
 
 **Setup tasks:**
 - [ ] Create book download landing page
@@ -186,8 +186,8 @@ BUSINESS account, website digitalgoldboom.com.
 
 | Integration | Purpose | Priority |
 |-------------|---------|----------|
-| Stripe / Lemon Squeezy | Paid products | ✅ DONE — LemonSqueezy is the live checkout (book: $37 early-reader launch price, rising to the regular $97) |
-| Affiliate tracking | Book referrals | ✅ DECIDED — **LemonSqueezy native affiliate program** (LOCKED 2026-06-30 by dgb-cmo). Built into our existing checkout: set commission %, cookie window, auto/hand-approve affiliates, automatic tracking + payouts (PayPal/bank), only a 2% fee on referred sales — no new tool, no new subscription, no new code. Source: lemonsqueezy.com/marketing/affiliates (2026-06-30). The on-site `/affiliates` page is the human-facing recruit/explainer; the tracking engine is LS. |
+| Stripe / Whop | Paid products | ✅ DONE — Whop is the live checkout (book: $37 early-reader launch price, rising to the regular $97) |
+| Affiliate tracking | Book referrals | ✅ DECIDED — **Whop native affiliate program** (LOCKED 2026-06-30 by dgb-cmo). Built into our existing checkout: set commission %, cookie window, auto/hand-approve affiliates, automatic tracking + payouts (PayPal/bank), only a 2% fee on referred sales — no new tool, no new subscription, no new code. Source: Whop.com/marketing/affiliates (2026-06-30). The on-site `/affiliates` page is the human-facing recruit/explainer; the tracking engine is LS. |
 | NatGold API | Live token data | When available |
 | RSS feed output | Syndication | Phase 2 |
 | Podcast player | If audio content | Later |

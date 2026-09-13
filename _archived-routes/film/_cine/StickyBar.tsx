@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 import BuyButton from "@/components/BuyButton";
 
-const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
+const checkoutUrl = process.env.NEXT_PUBLIC_WHOP_CHECKOUT_URL;
 
 /**
  * StickyBar — the docked "Get the book — $37" pill. Appears once the reader
@@ -66,7 +66,7 @@ export default function StickyBar({
         label="Get the book — $37"
         className="cine-btn"
         event="film_sticky_outbound_buy"
-        eventProps={{ destination: "lemonsqueezy" }}
+        eventProps={{ destination: "Whop" }}
       />
     </div>
   );

@@ -7,8 +7,8 @@ import BuyButton from "@/components/BuyButton";
 
 /**
  * Stack — three SEPARATE purchase options (not a bundle). The book is live (links to /book);
- * the Primer and the yearly Updates are "ready to connect" — their LemonSqueezy checkout URLs
- * (NEXT_PUBLIC_LS_PRIMER_CHECKOUT_URL / NEXT_PUBLIC_LS_NEWSLETTER_CHECKOUT_URL) get set later;
+ * the Primer and the yearly Updates are "ready to connect" — their Whop checkout URLs
+ * (NEXT_PUBLIC_WHOP_CHECKOUT_URL / NEXT_PUBLIC_WHOP_CHECKOUT_URL) get set later;
  * until then their buttons show "Coming soon". Prices are real and owner-set.
  */
 const OPTIONS = [
@@ -29,7 +29,7 @@ const OPTIONS = [
     price: "$99",
     note: "one-time",
     kind: "buy" as const,
-    checkoutUrl: process.env.NEXT_PUBLIC_LS_PRIMER_CHECKOUT_URL,
+    checkoutUrl: process.env.NEXT_PUBLIC_WHOP_CHECKOUT_URL,
     cta: "Get the Primer",
     event: "primer_buy_click",
   },
@@ -40,7 +40,7 @@ const OPTIONS = [
     price: "$199",
     note: "per year",
     kind: "buy" as const,
-    checkoutUrl: process.env.NEXT_PUBLIC_LS_NEWSLETTER_CHECKOUT_URL,
+    checkoutUrl: process.env.NEXT_PUBLIC_WHOP_CHECKOUT_URL,
     cta: "Subscribe",
     event: "newsletter_buy_click",
   },
@@ -137,7 +137,7 @@ export default function Stack() {
         </div>
 
         <p data-reveal className="mt-6 text-center text-tt" style={{ fontSize: "0.8125rem" }}>
-          Secure checkout via LemonSqueezy · Educational — not financial advice.
+          Secure checkout via Whop · Educational — not financial advice.
         </p>
       </div>
     </section>

@@ -9,7 +9,7 @@ import Reveal from "@/components/funnel/sales/Reveal";
 import { StepFlow, ConvergenceDiagram, ProcessTimeline, SpiralAccent } from "./visuals";
 
 /* COPY IS LOCKED — pasted verbatim from SALES-COPY-FINAL-v1-s.md (PAGE /v1). Do not rewrite.
-   Built on the v2 design system, elevated. One product, one CTA → LemonSqueezy ($37 book). */
+   Built on the v2 design system, elevated. One product, one CTA → Whop ($37 book). */
 
 const STEPS = [
   { n: "01", t: "Verify", b: "Independent geologists prove the gold exists in the ground, to the institutional standards (NI 43-101, JORC, S-K 1300) the industry already trusts." },
@@ -424,7 +424,7 @@ export default function V1Funnel() {
                 event="v1_final_buy"
                 align="center"
                 regular="97"
-                fine="Secure checkout via LemonSqueezy. Educational content — not financial advice."
+                fine="Secure checkout via Whop. Educational content — not financial advice."
               />
             </div>
           </Reveal>

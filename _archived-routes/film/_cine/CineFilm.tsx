@@ -15,12 +15,12 @@ import StickyBar from "./StickyBar";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
+const checkoutUrl = process.env.NEXT_PUBLIC_WHOP_CHECKOUT_URL;
 
 /**
  * CineFilm — /film. Nine beats, six Seedance clips scrubbed as canvas frame
  * sequences: scrolling IS the story. One case, beat by beat, then ONE product:
- * the book at $37 (early-reader, rising to $97) via LemonSqueezy.
+ * the book at $37 (early-reader, rising to $97) via Whop.
  *
  * Locked doctrine honored throughout: the hero is THE NEW INDUSTRY; the
  * NatGold Token ("NATG") is named, never sold; "reserved", never "raised";
@@ -373,7 +373,7 @@ function LoopBackdrop() {
 /**
  * Beat 9 — the finale. The comet's gold glow dissolves onto the book, five
  * "what's inside" lines reveal one per scroll step beside it, then the offer
- * stack and the single LemonSqueezy CTA.
+ * stack and the single Whop CTA.
  */
 const INSIDE_LINES = [
   "Why digital gold mining is inevitable — the full case, built argument by argument.",
@@ -493,7 +493,7 @@ function FinaleBeat({
                 label="Get the book — $37"
                 className="cine-btn"
                 event="film_finale_outbound_buy"
-                eventProps={{ destination: "lemonsqueezy" }}
+                eventProps={{ destination: "Whop" }}
               />
             </div>
             <p className="cine-note">Educational — not financial advice.</p>

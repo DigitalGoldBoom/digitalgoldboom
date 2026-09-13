@@ -39,7 +39,7 @@ The through-line in three repeating moves, used everywhere:
 
 **The one accent move, repeated.** Every section has exactly ONE gold element that is the brightest pixel and points to the next action: a lit edge, a single gold rule (`h-px` gold), a glowing number, or the gold CTA. Trains the eye; never two gold focal points competing.
 
-**CTA system (compliance-anchored).** Primary CTA = `.v2-btn` (solid gold, `#08080d` text), label exactly **"Get the book — $37"** (the early-reader launch price, rising to the regular $97), → LemonSqueezy checkout (`BuyButton` component, `checkoutUrl` env, `unavailableLabel="Coming soon"`, with a `track()` event per placement). Directly under EVERY CTA, persistent and visible: **"Digital book · delivered instantly · 12-month money-back guarantee"** and the fine print **"Educational — not financial advice."** These lines are non-negotiable furniture, styled `--v2-faint`, never hidden behind a hover or accordion.
+**CTA system (compliance-anchored).** Primary CTA = `.v2-btn` (solid gold, `#08080d` text), label exactly **"Get the book — $37"** (the early-reader launch price, rising to the regular $97), → Whop checkout (`BuyButton` component, `checkoutUrl` env, `unavailableLabel="Coming soon"`, with a `track()` event per placement). Directly under EVERY CTA, persistent and visible: **"Digital book · delivered instantly · 12-month money-back guarantee"** and the fine print **"Educational — not financial advice."** These lines are non-negotiable furniture, styled `--v2-faint`, never hidden behind a hover or accordion.
 
 **Scroll behavior.** Reveal-on-scroll is the house motion: each block fades up `translateY(16px)→0`, `opacity 0→1`, 500ms, `cubic-bezier(0.22,0.61,0.36,1)`, staggered 60ms per child, triggered at ~15% in view via IntersectionObserver (one shared hook). Runs ONCE per element. `prefers-reduced-motion`: everything renders in final state, no transform, no fade.
 
@@ -195,7 +195,7 @@ SECTION: Why now  (copy beat: BEAT 6 · component: ConvergenceV1)
 
 **MOTION** — The three strands draw inward and meet at the node (scroll-linked stroke animation), the node pulses gold once on convergence. The date line fades up last. Reduced-motion: diagram static in converged state.
 
-**CONVERSION RATIONALE** — "Why now" is the urgency beat — but the urgency must be *understanding before a public event*, not "buy before it moons." Converging trends + a real, dated, public milestone (July 8) gives honest time-pressure that LemonSqueezy compliance allows.
+**CONVERSION RATIONALE** — "Why now" is the urgency beat — but the urgency must be *understanding before a public event*, not "buy before it moons." Converging trends + a real, dated, public milestone (July 8) gives honest time-pressure that Whop compliance allows.
 
 **RESPONSIVE** — Desktop: full convergence diagram. Tablet: simplified to 3 stacked force-tiles + a single down-arrow to the date. Phone: 3 stacked tiles, date line as a bold gold band; drop the animated strands for a static gold node.
 
@@ -313,7 +313,7 @@ SECTION: Close  (copy beat: BEAT 11 · component: FinalCTAV1)
 
 **VISUAL CONCEPT** — The resolution. Centered, the core glow at its brightest — "Understand it for the price of a paperback." The gold CTA is the single brightest, largest interactive thing on the page; everything funnels here. The guarantee removes the last risk; the July 8 date gives the honest reason to act now.
 
-**LAYOUT** — Centered narrow column (`max-w-[1100px]`, big `py-28 md:py-36`): `<h2>` "Understand it for the price of a paperback." → body ($37 one-time early-reader launch price rising to the regular $97, instant digital delivery, before July 8) → guarantee line → **primary CTA "Get the book — $37"** → under-CTA delivery/guarantee line → fine print (LemonSqueezy secure checkout, educational not advice, author stake). The CTA is centered and large.
+**LAYOUT** — Centered narrow column (`max-w-[1100px]`, big `py-28 md:py-36`): `<h2>` "Understand it for the price of a paperback." → body ($37 one-time early-reader launch price rising to the regular $97, instant digital delivery, before July 8) → guarantee line → **primary CTA "Get the book — $37"** → under-CTA delivery/guarantee line → fine print (Whop secure checkout, educational not advice, author stake). The CTA is centered and large.
 
 **IMAGERY** — None photoreal. The page's core glow concentrates behind the CTA; optionally a faint `Book3D` echo or gold ring behind the button. ROUTE: **code-only**.
 
@@ -394,7 +394,7 @@ SECTION: Hook + one-breath explanation + buy  (copy beats: /s BEAT 1–5 · comp
 
 ## OPEN QUESTIONS / PUSHBACK
 
-1. **Cahuilla framing (Beat 7 / Beat 9 card) — [VERIFY, hardest one].** I designed the case-study section with **process imagery only** — drill core, staged timeline, **no dollar "value created," no resource size, no investment outcome** — because the copy flags real-world resource sensitivity and the LemonSqueezy line is "no investment claim." **Recommendation:** ship it figure-free as spec'd; only add a single sourced figure if the author explicitly confirms it's safe for a public page. Do not let an engineer add a "value created" number.
+1. **Cahuilla framing (Beat 7 / Beat 9 card) — [VERIFY, hardest one].** I designed the case-study section with **process imagery only** — drill core, staged timeline, **no dollar "value created," no resource size, no investment outcome** — because the copy flags real-world resource sensitivity and the Whop line is "no investment claim." **Recommendation:** ship it figure-free as spec'd; only add a single sourced figure if the author explicitly confirms it's safe for a public page. Do not let an engineer add a "value created" number.
 
 2. **Note: the live `/v2` page still carries non-compliant copy/visuals** ("Missed Bitcoin?", "You're early," "$469M / 17,466 / 162 reserved," "$871M of tokenized value," "before Wall Street," the email waitlist). This spec is for **/v1 and /s only** and deliberately drops ALL of those — no "join investors" social-proof tiles, no "you're early," no $871M Cahuilla value, no email capture. The engineers must **not** copy those v2 sections over. Flagging because v2 is the visual reference and the temptation to reuse its stat-tile section is real — that section is a compliance trip on these pages.
 

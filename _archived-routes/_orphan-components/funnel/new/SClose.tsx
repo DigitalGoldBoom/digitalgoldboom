@@ -122,7 +122,7 @@ export default function SClose({
               </div>
             </div>
             <p data-reveal className="mt-4 text-xs leading-relaxed" style={{ color: "var(--v2-faint)" }}>
-              Secure checkout via LemonSqueezy. Educational content — not financial advice.
+              Secure checkout via Whop. Educational content — not financial advice.
             </p>
           </div>
         </div>

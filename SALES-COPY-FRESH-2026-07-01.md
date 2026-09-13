@@ -37,7 +37,7 @@ gold means digging → the digging is what's breaking → the value was never th
 - Headline: Understand it for the price of a paperback.
 - CTA: Get the book — $37
 - Under CTA: 23 chapters · every statistic sourced · delivered instantly on checkout · 12-month money-back guarantee
-- Fine print: Educational — not financial advice. Secure checkout via LemonSqueezy.
+- Fine print: Educational — not financial advice. Secure checkout via Whop.
 
 ---
 
@@ -107,7 +107,7 @@ gold means digging → the digging is what's breaking → the value was never th
 - Body: Digital Gold Boom is a one-time $37 — the early-reader launch price, before it moves to its regular $97. In return, the first readers are asked for an honest review. You get the complete 23-chapter book, every statistic sourced, delivered the moment you check out.
 - Guarantee: If the book isn't worth your time, email within 12 months for a full refund. No questions asked.
 - CTA: Get the book — $37
-- Fine print: Secure checkout via LemonSqueezy. Educational content — not financial advice.
+- Fine print: Secure checkout via Whop. Educational content — not financial advice.
 
 ---
 
@@ -166,7 +166,7 @@ gold means digging → the digging is what's breaking → the value was never th
 - Headline: Read it while it's still quiet.
 - CTA: Get the book — $37
 - Guarantee: Complete 23-chapter book, delivered instantly. If it's not worth your time, email within 12 months for a full refund.
-- Fine print: Secure checkout via LemonSqueezy. Educational — not financial advice.
+- Fine print: Secure checkout via Whop. Educational — not financial advice.
 
 ---
 
@@ -289,7 +289,7 @@ Offer / $-figures flagged (not source-checked this session):
 - "digital gold mining" definition + NatGold description. [VERIFY]
 - "200+ projects." [VERIFY]
 - Cahuilla/Friday public-page framing. [VERIFY]
-- 12-month guarantee (operationally honored + set in LemonSqueezy). [VERIFY]
+- 12-month guarantee (operationally honored + set in Whop). [VERIFY]
 
 Deliberately EXCLUDED (landmine avoidance): $124T never multiplied into a daily flow; BIV not used as a "price"; resources vs reserves not collapsed; no "raised/funded" for $469M; no inevitability-as-settled-fact; no returns/"get rich"/"be early"/"before Wall Street" language.
 

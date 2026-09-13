@@ -45,7 +45,7 @@ If copy and design ever disagree: the copy's MESSAGE wins, the design's STRUCTUR
 
 ## 3. Compliance (a rejected store converts zero — hold this on EVERY page)
 
-The book is a LemonSqueezy-approved **information product** about the industry — NOT an investment, token, or financial advice.
+The book is a Whop-approved **information product** about the industry — NOT an investment, token, or financial advice.
 - No investment/returns/FOMO claims or visuals: no price-up/gain charts, no "join thousands of investors", no moon/rocket/lambo, no countdown timers (July 8 2026 is stated as fact, never a ticking clock).
 - Do NOT reintroduce the old `/v2` triggers ("$469M / 17,466 reserved", "$871M tokenized value", "you're early", "before Wall Street", email waitlist, 3-product grid) — they were removed this session.
 - Visual STYLE can be as bold/web3 as it wants; the CLAIMS stay compliant.
@@ -56,7 +56,7 @@ The book is a LemonSqueezy-approved **information product** about the industry �
 ## 4. Per-page detail
 
 ### `/v1` (long) + `/s` (short) — NEW BUILD
-- Sell ONE product: the book at the **$37 early-reader launch price** (rising to the regular **$97**). Single CTA → **LemonSqueezy checkout**. **12-month money-back guarantee.** No email/waitlist, no Primer/Updates.
+- Sell ONE product: the book at the **$37 early-reader launch price** (rising to the regular **$97**). Single CTA → **Whop checkout**. **12-month money-back guarantee.** No email/waitlist, no Primer/Updates.
 - Build from `SALES-COPY-FINAL-v1-s.md` + `SALES-DESIGN-SPEC-v1-s.md`.
 - **Assets (10 new — page NOT blocked on them):** 5 author-manual photoreal (incl. hero gold-mass — author produces; do NOT generate), 5 visual-strategist figures (no price/return charts), author portrait = real photo only. **Ship-now path:** use existing `Book3D` as the interim hero; leave clean swap points.
 - **`[VERIFY]` before publish (in the copy file):** Cahuilla framing (figure-free), final chapter count/edition scope, $22T always with its "as of Feb 26 2026, $5,194/oz" line, NatGold definition + author bio + July 8 2026 date.
@@ -64,7 +64,7 @@ The book is a LemonSqueezy-approved **information product** about the industry �
 ### `/affiliates` — CASH-ONLY REWORK (replaces the live NATG version)
 - Build from the `/affiliates` section of `SALES-DESIGN-affiliates-mining.md` (design + ready-to-paste copy).
 - **Cash commission only.** Remove the old NATG token ladder AND the dead **wallet field**. The earn structure is one flat strip: **Your rate · Tracked for you · Paid by wire.**
-- Tracking/payouts = **LemonSqueezy native affiliate program** (free). Every primary CTA points to the LS affiliate **signup link** → `[WIRE: LS affiliate signup link]` (LS generates it once the author enables the program). Commission % → `[WIRE: rate, up to 30%]` (author sets in LS). Payout cadence: match LS's current published terms (≈30-day hold, then bi-monthly ~14th & 28th) — NOT "monthly."
+- Tracking/payouts = **Whop native affiliate program** (free). Every primary CTA points to the Whop affiliate **signup link** → `[WIRE: Whop affiliate signup link]` (LS generates it once the author enables the program). Commission % → `[WIRE: rate, up to 30%]` (author sets in LS). Payout cadence: match LS's current published terms (≈30-day hold, then bi-monthly ~14th & 28th) — NOT "monthly."
 - The live `affiliates/page.tsx` + `AffiliateInterestForm.tsx` + its `metadata` still carry old NATG copy/wallet field — replace them in this rework.
 
 ### `/mining-industry` — CONVERSION PASS
@@ -84,7 +84,7 @@ The book is a LemonSqueezy-approved **information product** about the industry �
 1. Scaffold `/v1` + `/s` on the v2 system; build section-by-section from their copy + design files.
 2. Build the `/affiliates` cash-only rework + `/mining-industry` pass.
 3. Build the remaining visual ADDs (`/newsletter` hero).
-4. Wire every CTA correctly: book pages → LemonSqueezy checkout; `/affiliates` → LS affiliate signup link.
+4. Wire every CTA correctly: book pages → Whop checkout; `/affiliates` → Whop affiliate signup link.
 5. **Acceptance (every page):** all three breakpoints clean · reduced-motion fallback on every animation · CWV budget met · no compliance trips (§3) · no `[VERIFY]`/`[WIRE]` item live unresolved · book pages = single CTA, no email/waitlist.
 6. Split-test `/v1` vs `/s` on checkout conversion (confirm the tool with the author).
 
@@ -92,7 +92,7 @@ The book is a LemonSqueezy-approved **information product** about the industry �
 
 ## 6. Needs the AUTHOR (not the build session)
 
-- **Enable the LemonSqueezy affiliate program** + set the commission % → unblocks the `/affiliates` signup link.
+- **Enable the Whop affiliate program** + set the commission % → unblocks the `/affiliates` signup link.
 - Confirm **Cahuilla framing** + **final chapter count/edition** (so "what's inside" + the sample/PDF match).
 - Supply the **author photo** + the **5 photoreal hero images** (author-manual route).
 - **Deploy** decision (nothing is live until pushed).

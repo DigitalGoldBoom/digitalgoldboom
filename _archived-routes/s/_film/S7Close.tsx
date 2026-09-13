@@ -127,7 +127,7 @@ export default function S7Close({
         </div>
 
         <p data-s7-enter className="mt-7 max-w-[56ch] text-xs leading-relaxed" style={{ color: "var(--v2-dim)" }}>
-          Secure checkout via LemonSqueezy. Educational content — not financial advice.
+          Secure checkout via Whop. Educational content — not financial advice.
         </p>
       </div>
     </section>

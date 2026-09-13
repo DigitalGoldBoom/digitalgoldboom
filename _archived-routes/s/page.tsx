@@ -5,7 +5,7 @@ import "./film.css";
 /**
  * /s — the VIDEO-LED sales page for cold social traffic ("the page is the
  * film"): seven sections, four chaptered video modules (placeholders until the
- * masters ship), one product — the book at $37 via LemonSqueezy.
+ * masters ship), one product — the book at $37 via Whop.
  * Root (/) is untouched and still renders /v2.
  *
  * noindex: A/B variant + copy not yet fact-verified — indexing is the author's

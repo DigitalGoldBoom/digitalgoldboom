@@ -7,7 +7,7 @@ import "./cold.css";
  * /new — the cold-traffic TEXT-ONLY sales page ("the descent to the proof").
  * Copy: web/SALES-COPY-COLD-2026-07-06.md (PASS 95/100, gate clean).
  * Design: web/SALES-DESIGN-BRIEF-COLD-2026-07-06.md.
- * ONE product: the book at $37 early-reader (regular $97) via LemonSqueezy.
+ * ONE product: the book at $37 early-reader (regular $97) via Whop.
  *
  * noindex: the copy's 23 flagged numbers have not been through
  * dgb-fact-verifier yet — indexing is the author's call at launch
