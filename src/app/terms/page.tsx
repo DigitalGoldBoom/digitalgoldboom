@@ -26,13 +26,13 @@ const blocks: LegalBlock[] = [
   {
     h: "Purchases and payment",
     p: [
-      "The book is a digital product sold and delivered through our payment provider, LemonSqueezy, who acts as the merchant of record. Prices are shown at checkout. After payment you receive a download link and receipt by email, usually within a few minutes. Because it is a digital product, you get instant access.",
+      "The book is a digital product sold and delivered through our payment provider, Whop, who acts as the merchant of record. Prices are shown at checkout. After payment you receive a download link and receipt by email, usually within a few minutes. Because it is a digital product, you get instant access.",
     ],
   },
   {
     h: "Refund policy",
     p: [
-      `We offer a 60-day money-back guarantee on the book. If it isn’t for you, email ${LEGAL.contactEmail} within 60 days of purchase and we’ll refund you in full — no complicated hoops. Refunds are issued to your original payment method via LemonSqueezy.`,
+      `We offer a 60-day money-back guarantee on the book. If it isn’t for you, email ${LEGAL.contactEmail} within 60 days of purchase and we’ll refund you in full — no complicated hoops. Refunds are issued to your original payment method via Whop.`,
     ],
   },
   {

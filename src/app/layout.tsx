@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/Navbar";
@@ -65,14 +64,8 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics />
-        {/* LemonSqueezy affiliate tracking — site-wide so a referral is credited no matter
-            which page the visitor lands on or converts from. */}
-        <Script id="ls-affiliate-config" strategy="beforeInteractive">
-          {`window.lemonSqueezyAffiliateConfig = { store: "digitalgoldboom" };`}
-        </Script>
-        {/* lazyOnload: affiliate tracking only needs to be present before a checkout click, not
-            during first paint — keep it off the critical load path so it never competes with LCP. */}
-        <Script src="https://lmsqueezy.com/affiliate.js" strategy="lazyOnload" />
+        {/* Affiliate tracking: Whop credits referrals on its own hosted checkout, so no site-wide
+            tracking script is needed here. */}
       </body>
     </html>
   );

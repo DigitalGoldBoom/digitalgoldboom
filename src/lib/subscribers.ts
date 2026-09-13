@@ -72,7 +72,7 @@ export async function saveSubscriber(sub: SubscriberInput): Promise<boolean> {
 const KIT_BASE = "https://api.kit.com/v4";
 
 // Subscriber emails must never reach logs (Vercel logs are public-adjacent). Kit echoes the address
-// back in its error bodies — scrub before logging. Same rule as the LemonSqueezy webhook.
+// back in its error bodies — scrub before logging.
 function redactEmails(text: string): string {
   return text.replace(/[^\s@"']+@[^\s@"']+\.[^\s@"']+/g, "[email]");
 }
@@ -88,7 +88,7 @@ function redactEmails(text: string): string {
  *                      welcome sequence; without it they land in Kit but no automation runs.
  *   KIT_PS_FORM_ID   — the PixelShovel form (see `formId` below).
  *   KIT_FREE_TAG_ID  — optional numeric tag id for free-chapter leads (segments them from buyers,
- *                      who are tagged by KIT_BUYER_TAG_ID in the LemonSqueezy webhook).
+ *                      who get KIT_BUYER_TAG_ID once a Whop purchase webhook is wired up).
  *
  * `opts.formId` lets the caller pick WHICH Kit form fires — one form per domain (digitalgoldboom.com
  * vs pixelshovel.com) so Kit reports where each lead came from, while both forms send from the same

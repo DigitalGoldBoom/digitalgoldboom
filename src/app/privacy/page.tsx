@@ -26,7 +26,7 @@ const blocks: LegalBlock[] = [
       // program pays a cash commission on book sales. Collecting a crypto wallet address would say
       // otherwise, in the one document a reader trusts to tell them what we take.
       "Optional details you choose to give — your name, or your company and role. These are optional.",
-      "Purchase information — when you buy the book, our payment provider (LemonSqueezy) processes your payment and shares limited order details (such as your email and order status) with us. We never see or store your full card details.",
+      "Purchase information — when you buy the book, our payment provider (Whop) processes your payment and shares limited order details (such as your email and order status) with us. We never see or store your full card details.",
       "Usage data — privacy-friendly, aggregate analytics about how pages are used (via Vercel Analytics), and standard server logs (such as IP address) used for security and to prevent abuse.",
     ],
   },
@@ -56,7 +56,7 @@ const blocks: LegalBlock[] = [
     h: "Who we share it with",
     p: ["We do not sell your personal information. We share it only with the service providers that help us run the site, and only as needed:"],
     ul: [
-      "LemonSqueezy — payment processing and order/receipt delivery.",
+      "Whop — payment processing and order/receipt delivery.",
       "Kit (formerly ConvertKit) — our email/newsletter platform.",
       "Vercel — website hosting and privacy-friendly analytics.",
       "Authorities — only if required by law.",

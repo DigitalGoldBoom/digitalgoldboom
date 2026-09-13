@@ -16,11 +16,12 @@ const nextConfig: NextConfig = {
   // (When asset filenames are content-hashed later, this can go back to long immutable.)
   async headers() {
     // Content-Security-Policy scoped to exactly the origins this site uses:
-    // - scripts: self + LemonSqueezy (lemon.js checkout overlay) + Vercel analytics
+    // - scripts: self + Vercel analytics
     // - styles/fonts: self + inline (next/font is self-hosted; many inline styles in the design)
     // - images: self + the Framer image CDN (PixelShovel assets) + data/blob
-    // - connect: self (/api) + LemonSqueezy + Vercel vitals
-    // - frames: LemonSqueezy checkout overlay only
+    // - connect: self (/api) + Vercel vitals
+    // - checkout: Whop's HOSTED checkout is a plain link (a navigation), so it needs no script,
+    //   frame, or connect allowance here. If Whop is ever embedded on-page, add its origins then.
     // - clickjacking + injection locked down (frame-ancestors, base-uri, object-src none)
     const csp = [
       "default-src 'self'",
@@ -28,17 +29,15 @@ const nextConfig: NextConfig = {
       "object-src 'none'",
       // 'wasm-unsafe-eval' — Three.js KTX2/basis texture transcoder for the /deposit 3D hero.
       // 'unsafe-eval' is added ONLY in development (React dev tooling needs it); never in prod.
-      // lmsqueezy.com (not a lemonsqueezy.com subdomain — LemonSqueezy's separate short domain)
-      // serves the affiliate tracking script (affiliate.js) used site-wide for referral attribution.
-      `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://app.lemonsqueezy.com https://lmsqueezy.com https://va.vercel-scripts.com`,
+      `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""} https://va.vercel-scripts.com`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://framerusercontent.com https://app.framerstatic.com",
       "font-src 'self' data:",
       // blob: — Three.js/GLTFLoader loads embedded GLB textures via blob URLs (the /deposit 3D hero)
-      "connect-src 'self' blob: https://*.lemonsqueezy.com https://lmsqueezy.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+      "connect-src 'self' blob: https://vitals.vercel-insights.com https://va.vercel-scripts.com",
       "worker-src 'self' blob:",
-      "frame-src https://*.lemonsqueezy.com",
-      "form-action 'self' https://*.lemonsqueezy.com",
+      "frame-src 'none'",
+      "form-action 'self'",
       "frame-ancestors 'self'",
       "upgrade-insecure-requests",
     ].join("; ");

@@ -7,7 +7,7 @@ import { BOOK_ON_SALE } from "@/lib/flags";
 import "./checkout.css";
 
 const PRICE = "37.00";
-const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
+const checkoutUrl = process.env.NEXT_PUBLIC_WHOP_CHECKOUT_URL;
 
 export const metadata: Metadata = {
   title: "Checkout — Digital Gold Boom",
@@ -28,8 +28,8 @@ export const metadata: Metadata = {
  * land here — and a form that LOOKED live while silently swallowing a card number would be a
  * different thing entirely. Disabled and declared is honest. Live-looking and dead is not.
  *
- * Once NEXT_PUBLIC_LS_CHECKOUT_URL exists, this page redirects straight to the processor's own
- * hosted checkout: the only thing that ever handles a card is the processor, never this site.
+ * Once NEXT_PUBLIC_WHOP_CHECKOUT_URL exists, this page sends the buyer straight to Whop's own
+ * hosted checkout: the only thing that ever handles a card is Whop, never this site.
  */
 
 const ASSURANCES = [

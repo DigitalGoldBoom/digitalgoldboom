@@ -68,7 +68,7 @@ export default function ContactPage() {
 
           <p className="mt-10 text-sm leading-relaxed" style={{ color: "var(--text-tertiary)" }}>
             Already bought the book and didn&rsquo;t get your download link? Check your spam or
-            promotions folder for the receipt from LemonSqueezy first — then email us and
+            promotions folder for the receipt from Whop first — then email us and
             we&rsquo;ll sort it out.
           </p>
         </div>

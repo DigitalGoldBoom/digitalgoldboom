@@ -7,7 +7,7 @@ import VaultShell from "@/components/VaultShell";
 import { BOOK_ON_SALE } from "@/lib/flags";
 
 const PRICE = "37";
-const checkoutUrl = process.env.NEXT_PUBLIC_LS_CHECKOUT_URL;
+const checkoutUrl = process.env.NEXT_PUBLIC_WHOP_CHECKOUT_URL;
 
 export const metadata: Metadata = {
   title: "Digital Gold Boom (ebook) — $37",
@@ -29,14 +29,13 @@ export const metadata: Metadata = {
  * a working support address; and no investment, token, or returns promotion anywhere near the
  * money. Every one of those is on this page, and each links to the page that governs it.
  *
- * WHAT THIS PAGE DOES NOT DO. There is no checkout yet — the store is not approved, so no checkout
- * link exists for anyone. The site therefore does not imitate one. No fake payment form, no field
- * that takes a card, no "processing" screen. Faking a payment flow is the fastest way to fail the
- * very review this page exists for, quite apart from being a lie told to a stranger. Instead the
- * buy button leads to the honest next step below: the book is finished after the launch it
- * describes; join the list and read the first five chapters now.
+ * WHAT THIS PAGE DOES NOT DO. While there is no Whop checkout URL, the site does not imitate one.
+ * No fake payment form, no field that takes a card, no "processing" screen. Faking a payment flow
+ * is the fastest way to fail the very review this page exists for, quite apart from being a lie
+ * told to a stranger. Instead the buy button leads to the honest next step below: join the list
+ * and read the first five chapters now.
  *
- * The moment NEXT_PUBLIC_LS_CHECKOUT_URL is set in Vercel, BOOK_ON_SALE flips by itself and this
+ * The moment NEXT_PUBLIC_WHOP_CHECKOUT_URL is set in Vercel, BOOK_ON_SALE flips by itself and this
  * same page becomes a live checkout. Nothing here needs rewriting.
  */
 

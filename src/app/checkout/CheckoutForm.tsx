@@ -21,8 +21,8 @@ import { track } from "@vercel/analytics";
  * entirely, and it is the one thing this page must never become: /checkout is a live public URL, so
  * a real person can land here. Disabled and declared is honest. Live-looking and dead is not.
  *
- * When NEXT_PUBLIC_LS_CHECKOUT_URL is set, this component is not rendered at all — /buy hands the
- * buyer to the processor's own hosted checkout, which is the only thing that ever takes a card.
+ * When NEXT_PUBLIC_WHOP_CHECKOUT_URL is set, this component is not rendered at all — /buy hands the
+ * buyer to Whop's own hosted checkout, which is the only thing that ever takes a card.
  */
 export default function CheckoutForm() {
   const [error, setError] = useState(false);

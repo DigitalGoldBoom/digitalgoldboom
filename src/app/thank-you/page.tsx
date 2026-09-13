@@ -42,7 +42,7 @@ export default function ThankYouPage() {
             </p>
             <ul className="text-sm space-y-2" style={{ color: "var(--text-tertiary)" }}>
               <li>• Give it a couple of minutes — it&rsquo;s usually instant.</li>
-              <li>• Check your spam / promotions folder for the receipt from LemonSqueezy.</li>
+              <li>• Check your spam / promotions folder for the receipt from Whop.</li>
               <li>
                 • Still nothing? Email{" "}
                 <a href="mailto:fletcher@digitalgoldboom.com" style={{ color: "var(--accent-gold)" }}>
